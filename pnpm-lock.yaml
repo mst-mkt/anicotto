@@ -24,6 +24,9 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20250129.0
         version: 4.20250129.0
+      '@mst-mkt/js-config':
+        specifier: npm:@jsr/mst-mkt__js-config@^0.0.3
+        version: '@jsr/mst-mkt__js-config@0.0.3'
       '@opennextjs/cloudflare':
         specifier: ^0.3.10
         version: 0.3.10(wrangler@3.106.0(@cloudflare/workers-types@4.20250129.0))
@@ -919,6 +922,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@jsr/mst-mkt__js-config@0.0.3':
+    resolution: {integrity: sha512-SkSi+vAtDRwZ8PMUkTRTDqtIO8pXEIYo/vUh/UTMQJ5CXCJ8C4I23k25T4hooFvae+K+pZKINOmMTwKuHcLBiA==, tarball: https://npm.jsr.io/~/11/@jsr/mst-mkt__js-config/0.0.3.tgz}
 
   '@next/env@15.1.6':
     resolution: {integrity: sha512-d9AFQVPEYNr+aqokIiPLNK/MTyt3DWa/dpKveiAaVccUadFbhFEvY6FXYX2LJO2Hv7PHnLBu2oWwB4uBuHjr/w==}
@@ -3931,6 +3937,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@jsr/mst-mkt__js-config@0.0.3': {}
 
   '@next/env@15.1.6': {}
 
