@@ -17,6 +17,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      ts-pattern:
+        specifier: ^5.6.2
+        version: 5.6.2
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -2533,6 +2536,9 @@ packages:
 
   ts-morph@23.0.0:
     resolution: {integrity: sha512-FcvFx7a9E8TUe6T3ShihXJLiJOiqyafzFKUO4aqIHDUCIvADdGNShcbc2W5PMr3LerXRv7mafvFZ9lRENxJmug==}
+
+  ts-pattern@5.6.2:
+    resolution: {integrity: sha512-d4IxJUXROL5NCa3amvMg6VQW2HVtZYmUTPfvVtO7zJWGYLJ+mry9v2OmYm+z67aniQoQ8/yFNadiEwtNS9qQiw==}
 
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
@@ -5786,6 +5792,8 @@ snapshots:
     dependencies:
       '@ts-morph/common': 0.24.0
       code-block-writer: 13.0.3
+
+  ts-pattern@5.6.2: {}
 
   tslib@1.14.1: {}
 
