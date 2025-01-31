@@ -15,6 +15,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^0.4.3",
     "better-auth": "^1.1.15",
     "kysely-d1": "^0.3.0",
     "neverthrow": "^8.1.1",
@@ -29,7 +30,6 @@
     "@biomejs/biome": "1.9.4",
     "@cloudflare/workers-types": "^4.20250129.0",
     "@mst-mkt/js-config": "npm:@jsr/mst-mkt__js-config@^0.0.3",
-    "@opennextjs/cloudflare": "^0.3.10",
     "@tailwindcss/postcss": "^4.0.1",
     "@types/node": "^22.12.0",
     "@types/react": "^19.0.8",
