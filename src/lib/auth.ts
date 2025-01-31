@@ -5,12 +5,10 @@ import { ANNICT_API_V1_BASEURL, ANNICT_OAUTH_BASEURL } from '../constants/annict
 import { getDb } from './db'
 import { envVariables } from './env-variables'
 
-const db = await getDb()
-
 export const auth = betterAuth({
   secret: envVariables.BETTER_AUTH_SECRET,
   baseURL: envVariables.BETTER_AUTH_URL,
-  database: new D1Dialect({ database: db }),
+  database: new D1Dialect({ database: getDb() }),
   plugins: [
     genericOAuth({
       config: [

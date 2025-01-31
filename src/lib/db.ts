@@ -1,6 +1,6 @@
 import { getCloudflareContext } from '@opennextjs/cloudflare'
 
-export const getDb = async () => {
-  const { env } = await getCloudflareContext()
+export const getDb = () => {
+  const { env } = getCloudflareContext()
   return env.Database
 }

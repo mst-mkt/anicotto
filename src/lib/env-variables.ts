@@ -1,7 +1,7 @@
 import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { url, minLength, object, pipe, safeParse, string } from 'valibot'
 
-const { env } = await getCloudflareContext()
+const { env } = getCloudflareContext()
 
 const envVariablesSchema = object({
   // Annict Oauth
