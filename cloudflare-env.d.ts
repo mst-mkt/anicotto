@@ -2,7 +2,7 @@ interface CloudflareEnv {
   // Database
   Database: D1Database;
 
-  // Annict Oauth
+  // Annict OAuth
   ANNICT_CLIENT_ID: string;
   ANNICT_CLIENT_SECRET: string;
 

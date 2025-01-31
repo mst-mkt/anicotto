@@ -4,7 +4,7 @@ import { url, minLength, object, pipe, safeParse, string } from 'valibot'
 const { env } = getCloudflareContext()
 
 const envVariablesSchema = object({
-  // Annict Oauth
+  // Annict OAuth
   ANNICT_CLIENT_ID: pipe(string(), minLength(1)),
   ANNICT_CLIENT_SECRET: pipe(string(), minLength(1)),
 
