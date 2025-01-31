@@ -1,4 +1,7 @@
 import { toNextJsHandler } from 'better-auth/next-js'
-import { auth } from '../../../../lib/auth'
 
-export const { GET, POST } = toNextJsHandler(auth.handler)
+export const { GET, POST } = await (async () => {
+  // Error on `getCloudflareContext` unless dynamic import
+  const { auth } = await import('../../../../lib/auth')
+  return toNextJsHandler(auth.handler)
+})()

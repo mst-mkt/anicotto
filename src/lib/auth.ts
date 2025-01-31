@@ -1,6 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { genericOAuth } from 'better-auth/plugins'
 import { D1Dialect } from 'kysely-d1'
+import { headers } from 'next/headers'
 import { ANNICT_API_V1_BASEURL, ANNICT_OAUTH_BASEURL } from '../constants/annict'
 import { getDb } from './db'
 import { envVariables } from './env-variables'
@@ -27,3 +28,7 @@ export const auth = betterAuth({
     }),
   ],
 })
+
+export const getSession = async () => {
+  return await auth.api.getSession({ headers: await headers() })
+}
