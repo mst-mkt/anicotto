@@ -1,9 +1,6 @@
 NEXTJS_ENV=development
+BASE_URL=http://localhost:3000
 
 # Annict OAuth
 ANNICT_CLIENT_ID=
 ANNICT_CLIENT_SECRET=
-
-# Better Auth
-BETTER_AUTH_SECRET=0m0EhVxs8IKdT1wiPfnLwLKt3gEboVfL
-BETTER_AUTH_URL=http://localhost:3000

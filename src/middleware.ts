@@ -1,10 +1,11 @@
-import { type MiddlewareConfig, type NextRequest, NextResponse } from 'next/server'
+import { type MiddlewareConfig, NextResponse } from 'next/server'
 import { auth } from './lib/auth'
+import { envVariables } from './lib/env-variables'
 
-export const middleware = async (request: NextRequest) => {
-  const session = await auth.api.getSession({ headers: request.headers })
+export const middleware = async () => {
+  const session = await auth()
 
-  if (session === null) return NextResponse.redirect(new URL('/login', request.url))
+  if (session === null) return NextResponse.redirect(new URL('/login', envVariables.BASE_URL))
 }
 
 export const config = {

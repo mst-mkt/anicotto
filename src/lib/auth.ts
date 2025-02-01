@@ -1,34 +1,43 @@
-import { betterAuth } from 'better-auth'
-import { genericOAuth } from 'better-auth/plugins'
-import { D1Dialect } from 'kysely-d1'
-import { headers } from 'next/headers'
-import { ANNICT_API_V1_BASEURL, ANNICT_OAUTH_BASEURL } from '../constants/annict'
-import { getDb } from './db'
+import NextAuth from 'next-auth'
+import { AnnictProvider } from './auth-provider'
 import { envVariables } from './env-variables'
+import 'next-auth/jwt'
 
-export const auth = betterAuth({
-  secret: envVariables.BETTER_AUTH_SECRET,
-  baseURL: envVariables.BETTER_AUTH_URL,
-  database: new D1Dialect({ database: getDb() }),
-  plugins: [
-    genericOAuth({
-      config: [
-        {
-          providerId: 'annict',
-          clientId: envVariables.ANNICT_CLIENT_ID,
-          clientSecret: envVariables.ANNICT_CLIENT_SECRET,
-          redirectURI: `${envVariables.BETTER_AUTH_URL}/api/auth/oauth2/callback/annict`,
-          responseType: 'code',
-          scopes: ['read', 'write'],
-          authorizationUrl: `${ANNICT_OAUTH_BASEURL}/authorize`,
-          tokenUrl: `${ANNICT_OAUTH_BASEURL}/token`,
-          userInfoUrl: `${ANNICT_API_V1_BASEURL}/me`,
-        },
-      ],
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: envVariables.AUTH_SECRET,
+  providers: [
+    AnnictProvider({
+      redirectUri: `${envVariables.BASE_URL}/api/auth/callback/annict`,
+      clientId: envVariables.ANNICT_CLIENT_ID,
+      clientSecret: envVariables.ANNICT_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    jwt: ({ token, account }) => {
+      if (account?.access_token !== undefined) {
+        token.accessToken = account.access_token
+      }
+
+      return token
+    },
+    session: ({ session, token }) => {
+      if (token.accessToken !== undefined) {
+        session.accessToken = token.accessToken
+      }
+
+      return session
+    },
+  },
 })
 
-export const getSession = async () => {
-  return await auth.api.getSession({ headers: await headers() })
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    accessToken?: string
+  }
 }

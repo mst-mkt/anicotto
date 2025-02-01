@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import { getSession } from '../../lib/auth'
-import { LoginButton } from './login-button'
+import { auth, signIn } from '../../lib/auth'
 
 export const metadata = {
   title: 'ログイン',
@@ -9,16 +8,21 @@ export const metadata = {
 } satisfies Metadata
 
 const Login = async () => {
-  const session = await getSession()
+  const session = await auth()
 
   if (session !== null) redirect('/')
 
+  const loginAction = async () => {
+    'use server'
+    await signIn('annict', { redirectTo: '/' })
+  }
+
   return (
-    <>
+    <form action={loginAction}>
       <h1>Annictにログイン</h1>
       <p>アプリを使用するためには、Annictにログインする必要があります。</p>
-      <LoginButton />
-    </>
+      <button type="submit">ログイン</button>
+    </form>
   )
 }
 
