@@ -1,4 +1,5 @@
 NEXTJS_ENV=development
+BASE_URL=http://localhost:3000
 
 # Annict OAuth
 ANNICT_CLIENT_ID=
