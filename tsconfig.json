@@ -14,7 +14,14 @@
     "incremental": true,
     "allowJs": true,
 
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      { "name": "next" },
+      {
+        "name": "gql.tada/ts-plugin",
+        "schema": "./annict.graphql",
+        "tadaOutputLocation": "./src/types/graphql-env.d.ts"
+      }
+    ],
     "types": ["@cloudflare/workers-types/2023-07-01"],
 
     "strict": true,
