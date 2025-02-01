@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import { AnnictProvider } from './auth-provider'
 import { envVariables } from './env-variables'
+import 'next-auth/jwt'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: envVariables.AUTH_SECRET,
@@ -11,4 +12,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: envVariables.ANNICT_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    jwt: ({ token, account }) => {
+      if (account?.access_token !== undefined) {
+        token.accessToken = account.access_token
+      }
+
+      return token
+    },
+    session: ({ session, token }) => {
+      if (token.accessToken !== undefined) {
+        session.accessToken = token.accessToken
+      }
+
+      return session
+    },
+  },
 })
+
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    accessToken?: string
+  }
+}
