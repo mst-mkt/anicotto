@@ -12,14 +12,6 @@
     "directory": ".open-next/assets"
   },
 
-  "d1_databases": [
-    {
-      "binding": "Database",
-      "database_name": "annict-client",
-      "database_id": "8483560f-edc7-4ec6-8f07-29dd13a18bd5"
-    }
-  ],
-
   "observability": {
     "enabled": true
   }
