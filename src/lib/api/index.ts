@@ -6,6 +6,7 @@ import {
   getDotPath,
   safeParse,
 } from 'valibot'
+import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
 import {
   meWorksQuerySchema,
   meWorksResponseSchema,
@@ -136,5 +137,10 @@ ${result.issues
   getMeWorks = this.createFetcher('/me/works', 'GET', {
     query: meWorksQuerySchema,
     response: meWorksResponseSchema,
+  })
+
+  getEpisodes = this.createFetcher('/episodes', 'GET', {
+    query: episodesQuerySchema,
+    response: episodesResponseSchema,
   })
 }

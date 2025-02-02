@@ -1,14 +1,14 @@
 import {
+  type BaseIssue,
+  type BaseSchema,
   array,
   custom,
-  null_,
+  nullable,
   number,
   object,
   picklist,
   pipe,
-  string,
   transform,
-  union,
 } from 'valibot'
 
 export const media = picklist(['tv', 'ova', 'movie', 'web', 'other'])
@@ -22,13 +22,18 @@ export const numericString = custom<'' | `${number}`>(
   (value) => value === '' || !Number.isNaN(Number.parseInt(`${value}`, 10)),
 )
 
-export const commaSeparatedString = pipe(
-  array(string()),
-  transform((value) => value.join(',')),
-)
+export const commaSeparatedString = <
+  ItemSchema extends BaseSchema<unknown, unknown, BaseIssue<unknown>>,
+>(
+  itemSchema: ItemSchema,
+) =>
+  pipe(
+    array(itemSchema),
+    transform((value) => value.join(',')),
+  )
 
 export const pagenationInfo = object({
   total_count: number(),
-  next_page: union([number(), null_()]),
-  prev_page: union([number(), null_()]),
+  next_page: nullable(number()),
+  prev_page: nullable(number()),
 })

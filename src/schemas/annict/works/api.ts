@@ -3,7 +3,7 @@ import { workSchema } from '.'
 import { commaSeparatedString, order, pagenationInfo, status } from '../common'
 
 export const worksQuerySchema = object({
-  filter_ids: optional(commaSeparatedString),
+  filter_ids: optional(commaSeparatedString(pipe(number(), integer()))),
   filter_season: optional(string()),
   filter_title: optional(string()),
   page: optional(pipe(number(), integer(), minValue(1))),
