@@ -10,7 +10,7 @@ import {
   pipe,
 } from 'valibot'
 import { episodeSchema } from '.'
-import { commaSeparatedString, order, pagenationInfo } from '../common'
+import { commaSeparatedString, order, paginationInfo } from '../common'
 import { workSchema } from '../works'
 
 export const episodesQuerySchema = object({
@@ -31,5 +31,5 @@ export const episodesResponseSchema = object({
       next_episode: nullable(episodeSchema),
     }),
   ),
-  ...pagenationInfo.entries,
+  ...paginationInfo.entries,
 })

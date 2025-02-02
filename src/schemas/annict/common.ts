@@ -32,7 +32,7 @@ export const commaSeparatedString = <
     transform((value) => value.join(',')),
   )
 
-export const pagenationInfo = object({
+export const paginationInfo = object({
   total_count: number(),
   next_page: nullable(number()),
   prev_page: nullable(number()),

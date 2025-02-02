@@ -1,6 +1,6 @@
 import { array, integer, maxValue, minValue, number, object, optional, pipe, string } from 'valibot'
 import { workSchema } from '.'
-import { commaSeparatedString, order, pagenationInfo, status } from '../common'
+import { commaSeparatedString, order, paginationInfo, status } from '../common'
 
 export const worksQuerySchema = object({
   filter_ids: optional(commaSeparatedString(pipe(number(), integer()))),
@@ -15,7 +15,7 @@ export const worksQuerySchema = object({
 
 export const worksResponseSchema = object({
   works: array(workSchema),
-  ...pagenationInfo.entries,
+  ...paginationInfo.entries,
 })
 
 export const meWorksQuerySchema = object({
@@ -32,5 +32,5 @@ export const meWorksResponseSchema = object({
       }),
     }),
   ),
-  ...pagenationInfo.entries,
+  ...paginationInfo.entries,
 })
