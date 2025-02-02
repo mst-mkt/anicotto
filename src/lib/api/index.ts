@@ -6,6 +6,10 @@ import {
   getDotPath,
   safeParse,
 } from 'valibot'
+import {
+  charactersQuerySchema,
+  charactersResponseSchema,
+} from '../../schemas/annict/characters/api'
 import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import {
@@ -148,5 +152,10 @@ ${result.issues
   getSeries = this.createFetcher('/series', 'GET', {
     query: seriesQuerySchema,
     response: seriesResponseSchema,
+  })
+
+  getCharacters = this.createFetcher('/characters', 'GET', {
+    query: charactersQuerySchema,
+    response: charactersResponseSchema,
   })
 }
