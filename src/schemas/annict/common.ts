@@ -8,6 +8,7 @@ import {
   object,
   picklist,
   pipe,
+  string,
   transform,
 } from 'valibot'
 
@@ -36,4 +37,9 @@ export const paginationInfo = object({
   total_count: number(),
   next_page: nullable(number()),
   prev_page: nullable(number()),
+})
+
+export const prefecture = object({
+  id: number(),
+  name: string(),
 })

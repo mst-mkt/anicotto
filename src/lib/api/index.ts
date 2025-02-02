@@ -11,6 +11,7 @@ import {
   charactersResponseSchema,
 } from '../../schemas/annict/characters/api'
 import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
+import { peopleQuerySchema, peopleResponseSchema } from '../../schemas/annict/people/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import {
   meWorksQuerySchema,
@@ -157,5 +158,10 @@ ${result.issues
   getCharacters = this.createFetcher('/characters', 'GET', {
     query: charactersQuerySchema,
     response: charactersResponseSchema,
+  })
+
+  getPeople = this.createFetcher('/people', 'GET', {
+    query: peopleQuerySchema,
+    response: peopleResponseSchema,
   })
 }
