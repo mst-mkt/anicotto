@@ -50,7 +50,7 @@ ${result.issues
     return result.output
   }
 
-  private createFetcher<
+  private createFetcher = <
     QuerySchema extends ValibotSchema | undefined = undefined,
     BodySchema extends ValibotSchema | undefined = undefined,
     ResponseSchema extends ValibotSchema | undefined = undefined,
@@ -62,7 +62,7 @@ ${result.issues
       body?: BodySchema
       response?: ResponseSchema
     },
-  ) {
+  ) => {
     type Query = QuerySchema extends ValibotSchema ? InferInput<QuerySchema> : undefined
     type Body = BodySchema extends ValibotSchema ? InferInput<BodySchema> : undefined
     type Response = ResponseSchema extends ValibotSchema ? InferOutput<ResponseSchema> : undefined
@@ -75,18 +75,17 @@ ${result.issues
         ? { query?: undefined; body: Body }
         : { query?: undefined; body?: undefined }
 
-    const headers = {
-      Authorization: `Bearer ${this.accessToken}`,
-      'Content-Type': 'application/json',
-    }
-
     // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: for branching for error handling
     const fetcher = async (params: Params, options?: RequestInit): Promise<Response> => {
       if (this.accessToken === null) {
         throw new Error('No token found')
       }
 
-      const url = new URL(path, this.baseUrl)
+      const url = new URL(`${this.baseUrl}${path}`)
+      const headers = {
+        Authorization: `Bearer ${this.accessToken}`,
+        'Content-Type': 'application/json',
+      }
 
       const validatedQuery = this.validate(schemas.query, params.query, 'query')
       for (const [key, value] of Object.entries(validatedQuery ?? {})) {
