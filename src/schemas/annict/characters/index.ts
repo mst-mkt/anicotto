@@ -1,5 +1,4 @@
-import { integer, nullable, number, object, pipe, string } from 'valibot'
-import { seriesSchema } from '../series'
+import { integer, number, object, pipe, string } from 'valibot'
 
 export const characterSchema = object({
   id: number(),
@@ -27,5 +26,4 @@ export const characterSchema = object({
   description_source: string(),
   description_source_en: string(),
   favorite_characters_count: pipe(number(), integer()),
-  series: nullable(seriesSchema),
 })
