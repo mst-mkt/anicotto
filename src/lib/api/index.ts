@@ -6,6 +6,12 @@ import {
   getDotPath,
   safeParse,
 } from 'valibot'
+import {
+  meWorksQuerySchema,
+  meWorksResponseSchema,
+  worksQuerySchema,
+  worksResponseSchema,
+} from '../../schemas/annict/works/api'
 
 // biome-ignore lint/suspicious/noExplicitAny: Any is needed to receive any schema
 type ValibotSchema = BaseSchema<any, any, BaseIssue<unknown>>
@@ -121,4 +127,14 @@ ${result.issues
 
     return fetcher
   }
+
+  getWorks = this.createFetcher('/works', 'GET', {
+    query: worksQuerySchema,
+    response: worksResponseSchema,
+  })
+
+  getMeWorks = this.createFetcher('/me/works', 'GET', {
+    query: meWorksQuerySchema,
+    response: meWorksResponseSchema,
+  })
 }
