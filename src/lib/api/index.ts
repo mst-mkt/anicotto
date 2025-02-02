@@ -11,6 +11,10 @@ import {
   charactersResponseSchema,
 } from '../../schemas/annict/characters/api'
 import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
+import {
+  organizationsQuerySchema,
+  organizationsResponseSchema,
+} from '../../schemas/annict/organizations/api'
 import { peopleQuerySchema, peopleResponseSchema } from '../../schemas/annict/people/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import {
@@ -163,5 +167,10 @@ ${result.issues
   getPeople = this.createFetcher('/people', 'GET', {
     query: peopleQuerySchema,
     response: peopleResponseSchema,
+  })
+
+  getOrganizations = this.createFetcher('/organizations', 'GET', {
+    query: organizationsQuerySchema,
+    response: organizationsResponseSchema,
   })
 }
