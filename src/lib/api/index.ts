@@ -3,6 +3,7 @@ import {
   type BaseSchema,
   type InferInput,
   type InferOutput,
+  getDotPath,
   safeParse,
 } from 'valibot'
 
@@ -37,7 +38,12 @@ export class AnnictClient {
       throw new Error(`
 Invalid ${dataName ?? 'data'}:
 
-${result.issues.map((issue) => `  - ${issue}`).join('\n')}
+${result.issues
+  .map(
+    (issue) => `  - ${getDotPath(issue)}:
+    ${issue.message}`,
+  )
+  .join('\n')}
 `)
     }
 
