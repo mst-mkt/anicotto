@@ -7,6 +7,7 @@ import {
   safeParse,
 } from 'valibot'
 import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
+import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import {
   meWorksQuerySchema,
   meWorksResponseSchema,
@@ -142,5 +143,10 @@ ${result.issues
   getEpisodes = this.createFetcher('/episodes', 'GET', {
     query: episodesQuerySchema,
     response: episodesResponseSchema,
+  })
+
+  getSeries = this.createFetcher('/series', 'GET', {
+    query: seriesQuerySchema,
+    response: seriesResponseSchema,
   })
 }
