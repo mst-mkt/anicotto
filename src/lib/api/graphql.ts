@@ -1,8 +1,8 @@
 import { cacheExchange, createClient, fetchExchange } from '@urql/core'
-import { ANNICT_API_BASEURL } from '../constants/annict'
-import { auth } from './auth'
+import { ANNICT_API_BASEURL } from '../../constants/annict'
+import { auth } from '../auth'
 
-export const annictClient = createClient({
+export const annictGraphqlClient = createClient({
   url: `${ANNICT_API_BASEURL}/graphql`,
   fetch: async (url, fetchOptions = {}) => {
     const session = await auth()
