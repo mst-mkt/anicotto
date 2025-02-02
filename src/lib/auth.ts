@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth'
+import { annictApiClient } from './api/client'
 import { AnnictProvider } from './auth-provider'
 import { envVariables } from './env-variables'
 import 'next-auth/jwt'
@@ -22,6 +23,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     session: ({ session, token }) => {
       if (token.accessToken !== undefined) {
+        annictApiClient.setAccessToken(token.accessToken)
         session.accessToken = token.accessToken
       }
 
