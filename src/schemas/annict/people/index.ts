@@ -11,7 +11,7 @@ import {
 } from 'valibot'
 import { prefecture } from '../common'
 
-export const peopleSchema = object({
+export const personSchema = object({
   id: number(),
   name: string(),
   name_kana: string(),
@@ -40,7 +40,7 @@ export const peopleSchema = object({
   staffs_count: pipe(number(), integer(), minValue(0)),
 })
 
-export const peopleWithPrefectureSchema = object({
-  ...peopleSchema.entries,
+export const personWithPrefectureSchema = object({
+  ...personSchema.entries,
   prefecture: nullable(prefecture),
 })
