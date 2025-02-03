@@ -12,6 +12,7 @@ import {
   charactersResponseSchema,
 } from '../../schemas/annict/characters/api'
 import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
+import { followingQuerySchema, followingResponseSchema } from '../../schemas/annict/followee/api'
 import {
   organizationsQuerySchema,
   organizationsResponseSchema,
@@ -204,5 +205,10 @@ ${result.issues
 
   getMe = this.createFetcher('/me', 'GET', {
     response: meResponseSchema,
+  })
+
+  getFollowing = this.createFetcher('/following', 'GET', {
+    query: followingQuerySchema,
+    response: followingResponseSchema,
   })
 }
