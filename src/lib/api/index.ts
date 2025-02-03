@@ -21,6 +21,14 @@ import {
   updateRecordQuerySchema,
   updateRecordResponseSchema,
 } from '../../schemas/annict/records/api'
+import {
+  createReviewsQuerySchema,
+  createReviewsResponseSchema,
+  getReviewsQuerySchema,
+  getReviewsResponseSchema,
+  updateReviewsQuerySchema,
+  updateReviewsResponseSchema,
+} from '../../schemas/annict/reviews/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import { staffsQuerySchema, staffsResponseSchema } from '../../schemas/annict/staffs/api'
 import { statusesQuerySchema } from '../../schemas/annict/statuses/api'
@@ -205,4 +213,21 @@ export class AnnictClient {
   })
 
   deleteRecords = this.createFetcher('/me/records/{id}', 'DELETE', {})
+
+  getReviews = this.createFetcher('/reviews', 'GET', {
+    query: getReviewsQuerySchema,
+    response: getReviewsResponseSchema,
+  })
+
+  createReviews = this.createFetcher('/me/reviews', 'POST', {
+    query: createReviewsQuerySchema,
+    response: createReviewsResponseSchema,
+  })
+
+  updateReviews = this.createFetcher('/me/reviews/{id}', 'PATCH', {
+    query: updateReviewsQuerySchema,
+    response: updateReviewsResponseSchema,
+  })
+
+  deleteReviews = this.createFetcher('/me/reviews/{id}', 'DELETE', {})
 }
