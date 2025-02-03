@@ -43,3 +43,8 @@ export const prefecture = object({
   id: number(),
   name: string(),
 })
+
+export const channelSchema = object({
+  id: number(),
+  name: string(),
+})

@@ -17,6 +17,7 @@ import {
   organizationsResponseSchema,
 } from '../../schemas/annict/organizations/api'
 import { peopleQuerySchema, peopleResponseSchema } from '../../schemas/annict/people/api'
+import { meProgramsQuerySchema, meProgramsResponseSchema } from '../../schemas/annict/programs/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import { staffsQuerySchema, staffsResponseSchema } from '../../schemas/annict/staffs/api'
 import {
@@ -184,5 +185,10 @@ ${result.issues
   getStaffs = this.createFetcher('/staffs', 'GET', {
     query: staffsQuerySchema,
     response: staffsResponseSchema,
+  })
+
+  getMePrograms = this.createFetcher('/me/programs', 'GET', {
+    query: meProgramsQuerySchema,
+    response: meProgramsResponseSchema,
   })
 }
