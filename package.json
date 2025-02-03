@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@cloudflare/workers-types": "^4.20250129.0",
     "@mst-mkt/js-config": "npm:@jsr/mst-mkt__js-config@^0.0.3",
     "@tailwindcss/postcss": "^4.0.3",
     "@types/node": "^22.13.0",
