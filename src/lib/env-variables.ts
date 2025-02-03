@@ -1,7 +1,4 @@
-import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { url, minLength, object, pipe, safeParse, string } from 'valibot'
-
-const { env } = getCloudflareContext()
 
 const envVariablesSchema = object({
   // App
@@ -15,7 +12,7 @@ const envVariablesSchema = object({
   AUTH_SECRET: pipe(string(), minLength(1)),
 })
 
-const envVariablesResult = safeParse(envVariablesSchema, env)
+const envVariablesResult = safeParse(envVariablesSchema, process.env)
 
 if (!envVariablesResult.success) {
   throw new Error(`Invalid environment variables:
