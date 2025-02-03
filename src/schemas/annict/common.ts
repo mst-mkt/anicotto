@@ -18,6 +18,7 @@ export const mediaText = picklist(['TV', 'OVA', '映画', 'Web', 'その他'])
 export const order = picklist(['asc', 'desc'])
 
 export const status = picklist(['wanna_watch', 'watching', 'watched', 'on_hold', 'stop_watching'])
+export const rating = picklist(['bad', 'average', 'good', 'great'])
 
 export const numericString = custom<'' | `${number}`>(
   (value) => value === '' || !Number.isNaN(Number.parseInt(`${value}`, 10)),

@@ -13,6 +13,14 @@ import {
 } from '../../schemas/annict/organizations/api'
 import { peopleQuerySchema, peopleResponseSchema } from '../../schemas/annict/people/api'
 import { meProgramsQuerySchema, meProgramsResponseSchema } from '../../schemas/annict/programs/api'
+import {
+  createRecordQuerySchema,
+  createRecordResponseSchema,
+  getRecordsQuerySchema,
+  getRecordsResponseSchema,
+  updateRecordQuerySchema,
+  updateRecordResponseSchema,
+} from '../../schemas/annict/records/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import { staffsQuerySchema, staffsResponseSchema } from '../../schemas/annict/staffs/api'
 import { statusesQuerySchema } from '../../schemas/annict/statuses/api'
@@ -180,4 +188,21 @@ export class AnnictClient {
   createStatus = this.createFetcher('/me/statuses', 'POST', {
     query: statusesQuerySchema,
   })
+
+  getRecords = this.createFetcher('/records', 'GET', {
+    query: getRecordsQuerySchema,
+    response: getRecordsResponseSchema,
+  })
+
+  createRecords = this.createFetcher('/me/records', 'POST', {
+    query: createRecordQuerySchema,
+    response: createRecordResponseSchema,
+  })
+
+  updateRecords = this.createFetcher('/me/records/{id}', 'PATCH', {
+    query: updateRecordQuerySchema,
+    response: updateRecordResponseSchema,
+  })
+
+  deleteRecords = this.createFetcher('/me/records/{id}', 'DELETE', {})
 }
