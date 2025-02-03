@@ -1,11 +1,4 @@
-import {
-  type BaseIssue,
-  type BaseSchema,
-  type InferInput,
-  type InferOutput,
-  getDotPath,
-  safeParse,
-} from 'valibot'
+import type { BaseIssue, BaseSchema, InferInput, InferOutput } from 'valibot'
 import { castsQuerySchema, castsResponseSchema } from '../../schemas/annict/casts/api'
 import {
   charactersQuerySchema,
@@ -34,6 +27,7 @@ import {
   worksQuerySchema,
   worksResponseSchema,
 } from '../../schemas/annict/works/api'
+import { type ParsePathParam, generatePath, generateUrlWithQuery, validate } from './utils'
 
 // biome-ignore lint/suspicious/noExplicitAny: Any is needed to receive any schema
 type ValibotSchema = BaseSchema<any, any, BaseIssue<unknown>>
@@ -52,73 +46,43 @@ export class AnnictClient {
     this.accessToken = accessToken
   }
 
-  private validate = <T extends ValibotSchema | undefined>(
-    schema: T,
-    data: unknown,
-    dataName?: string,
-  ): T extends ValibotSchema ? InferOutput<T> : undefined => {
-    // biome-ignore lint/suspicious/noExplicitAny: conditionally cast to any
-    if (schema === undefined) return undefined as any
-
-    const result = safeParse(schema, data)
-
-    if (!result.success) {
-      throw new Error(`
-Invalid ${dataName ?? 'data'}:
-
-${result.issues
-  .map(
-    (issue) => `  - ${getDotPath(issue)}:
-    ${issue.message}`,
-  )
-  .join('\n')}
-`)
-    }
-
-    return result.output
-  }
-
   private createFetcher = <
+    Path extends string,
     QuerySchema extends ValibotSchema | undefined = undefined,
-    BodySchema extends ValibotSchema | undefined = undefined,
     ResponseSchema extends ValibotSchema | undefined = undefined,
   >(
-    path: string,
+    path: Path,
     method: Method,
     schemas: {
       query?: QuerySchema
-      body?: BodySchema
       response?: ResponseSchema
     },
   ) => {
+    type PathParam = ParsePathParam<Path>
     type Query = QuerySchema extends ValibotSchema ? InferInput<QuerySchema> : undefined
-    type Body = BodySchema extends ValibotSchema ? InferInput<BodySchema> : undefined
     type Response = ResponseSchema extends ValibotSchema ? InferOutput<ResponseSchema> : undefined
 
     type Params = QuerySchema extends ValibotSchema
-      ? BodySchema extends ValibotSchema
-        ? { query: Query; body: Body }
-        : { query: Query; body?: undefined }
-      : BodySchema extends ValibotSchema
-        ? { query?: undefined; body: Body }
-        : { query?: undefined; body?: undefined }
+      ? keyof PathParam extends never
+        ? { query: Query; path?: undefined }
+        : { query: Query; path: PathParam }
+      : keyof PathParam extends never
+        ? { query?: undefined; path?: undefined }
+        : { query?: undefined; path: PathParam }
 
-    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: for branching for error handling
     const fetcher = async (params: Params, options?: RequestInit): Promise<Response> => {
       if (this.accessToken === null) {
         throw new Error('No token found')
       }
 
-      const url = new URL(`${this.baseUrl}${path}`)
+      const pathWithParams = generatePath(path, params.path)
       const headers = {
         Authorization: `Bearer ${this.accessToken}`,
         'Content-Type': 'application/json',
       }
 
-      const validatedQuery = this.validate(schemas.query, params.query, 'query')
-      for (const [key, value] of Object.entries(validatedQuery ?? {})) {
-        url.searchParams.set(key, String(value))
-      }
+      const validatedQuery = validate(schemas.query, params.query, 'query')
+      const url = generateUrlWithQuery(`${this.baseUrl}${pathWithParams}`, validatedQuery)
 
       const fetchOptions: RequestInit = {
         ...options,
@@ -129,12 +93,6 @@ ${result.issues
         },
       }
 
-      const validatedBody = this.validate(schemas.body, params.body, 'body')
-
-      if (validatedBody !== undefined) {
-        fetchOptions.body = JSON.stringify(validatedBody)
-      }
-
       const response = await fetch(url.toString(), fetchOptions)
 
       if (!response.ok) {
@@ -142,7 +100,7 @@ ${result.issues
       }
 
       const jsonResponse = await response.json()
-      const validatedResponse = this.validate(schemas.response, jsonResponse, 'response')
+      const validatedResponse = validate(schemas.response, jsonResponse, 'response')
 
       return validatedResponse as Response
     }
