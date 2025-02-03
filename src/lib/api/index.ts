@@ -1,4 +1,10 @@
 import type { BaseIssue, BaseSchema, InferInput, InferOutput } from 'valibot'
+import {
+  getActivitiesQuerySchema,
+  getActivitiesResponseSchema,
+  getFollowingActivitiesQuerySchema,
+  getFollowingActivitiesResponseSchema,
+} from '../../schemas/annict/activities/api'
 import { castsQuerySchema, castsResponseSchema } from '../../schemas/annict/casts/api'
 import {
   charactersQuerySchema,
@@ -230,4 +236,14 @@ export class AnnictClient {
   })
 
   deleteReviews = this.createFetcher('/me/reviews/{id}', 'DELETE', {})
+
+  getActivities = this.createFetcher('/activities', 'GET', {
+    query: getActivitiesQuerySchema,
+    response: getActivitiesResponseSchema,
+  })
+
+  getFollowingActivities = this.createFetcher('/me/following_activities', 'GET', {
+    query: getFollowingActivitiesQuerySchema,
+    response: getFollowingActivitiesResponseSchema,
+  })
 }

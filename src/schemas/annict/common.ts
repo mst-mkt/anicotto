@@ -19,6 +19,12 @@ export const order = picklist(['asc', 'desc'])
 
 export const status = picklist(['wanna_watch', 'watching', 'watched', 'on_hold', 'stop_watching'])
 export const rating = picklist(['bad', 'average', 'good', 'great'])
+export const action = picklist([
+  'create_record',
+  'create_review',
+  'create_multiple_records',
+  'create_status',
+])
 
 export const numericString = custom<'' | `${number}`>(
   (value) => value === '' || !Number.isNaN(Number.parseInt(`${value}`, 10)),
