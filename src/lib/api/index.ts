@@ -1,3 +1,4 @@
+import { type Result, err } from 'neverthrow'
 import type { BaseIssue, BaseSchema, InferInput, InferOutput } from 'valibot'
 import {
   getActivitiesQuerySchema,
@@ -104,9 +105,13 @@ export class AnnictClient {
         ? { query?: undefined; path?: undefined }
         : { query?: undefined; path: PathParam }
 
-    const fetcher = async (params: Params, options?: RequestInit): Promise<Response> => {
+    const fetcher = async (
+      params: Params,
+      options?: RequestInit,
+      // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: for branching for error handling
+    ): Promise<Result<Response, string>> => {
       if (this.accessToken === null) {
-        throw new Error('No token found')
+        return err('Access token is not set')
       }
 
       const pathWithParams = generatePath(path, params.path)
@@ -116,7 +121,12 @@ export class AnnictClient {
       }
 
       const validatedQuery = validate(schemas.query, params.query, 'query')
-      const url = generateUrlWithQuery(`${this.baseUrl}${pathWithParams}`, validatedQuery)
+
+      if (validatedQuery.isErr()) {
+        return err(validatedQuery.error)
+      }
+
+      const url = generateUrlWithQuery(`${this.baseUrl}${pathWithParams}`, validatedQuery.value)
 
       const fetchOptions: RequestInit = {
         ...options,
@@ -130,13 +140,17 @@ export class AnnictClient {
       const response = await fetch(url.toString(), fetchOptions)
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch: ${response.statusText}`)
+        return err(`Failed to fetch: ${response.statusText}`)
       }
 
       const jsonResponse = await response.json()
       const validatedResponse = validate(schemas.response, jsonResponse, 'response')
 
-      return validatedResponse as Response
+      if (validatedResponse.isErr()) {
+        return err(`Failed to validate response: ${validatedResponse.error}`)
+      }
+
+      return validatedResponse.value as Response
     }
 
     return fetcher

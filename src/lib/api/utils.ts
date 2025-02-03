@@ -1,3 +1,4 @@
+import { type Result, err, ok } from 'neverthrow'
 import { type BaseIssue, type BaseSchema, type InferOutput, getDotPath, safeParse } from 'valibot'
 
 type ValibotIssue = BaseIssue<unknown>
@@ -14,8 +15,7 @@ ${issues
   .map(
     (issue) => `
   - ${getDotPath(issue)}
-    ${issue.message}
-`,
+    ${issue.message}`,
   )
   .join('\n')}
 `
@@ -24,17 +24,17 @@ export const validate = <T extends ValibotSchema | undefined>(
   schema: T,
   data: unknown,
   dataName?: string,
-): T extends ValibotSchema ? InferOutput<T> : undefined => {
+): Result<T extends ValibotSchema ? InferOutput<T> : undefined, string> => {
   // biome-ignore lint/suspicious/noExplicitAny: conditionally cast to any
-  if (schema === undefined) return undefined as any
+  if (schema === undefined) return ok(undefined as any)
 
   const result = safeParse(schema, data)
 
   if (!result.success) {
-    throw new Error(generateValidateErrorMessage(result.issues, dataName))
+    return err(generateValidateErrorMessage(result.issues, dataName))
   }
 
-  return result.output
+  return ok(result.output)
 }
 
 export type ParsePathParam<T extends string> = T extends `${string}{${infer Param}}${infer Rest}`
