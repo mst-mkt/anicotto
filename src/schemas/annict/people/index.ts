@@ -9,10 +9,10 @@ import {
   transform,
   union,
 } from 'valibot'
-import { prefecture } from '../common'
+import { prefectureSchema } from '../common'
 
 export const personSchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   name: string(),
   name_kana: string(),
   name_en: string(),
@@ -42,5 +42,5 @@ export const personSchema = object({
 
 export const personWithPrefectureSchema = object({
   ...personSchema.entries,
-  prefecture: nullable(prefecture),
+  prefecture: nullable(prefectureSchema),
 })

@@ -1,10 +1,10 @@
-import { number, object, string } from 'valibot'
+import { integer, number, object, pipe, string } from 'valibot'
 import { characterSchema } from '../characters'
 import { personSchema } from '../people'
 import { workSchema } from '../works'
 
 export const castSchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   name: string(),
   name_en: string(),
   sort_number: number(),

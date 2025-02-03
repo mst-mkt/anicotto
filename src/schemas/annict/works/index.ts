@@ -1,12 +1,12 @@
 import { boolean, integer, minValue, number, object, pipe, string } from 'valibot'
-import { media, mediaText, numericString } from '../common'
+import { mediaPicklist, mediaTextPicklist, numericString } from '../common'
 
 export const workSchema = object({
   id: pipe(number(), integer()),
   title: string(),
   title_kana: string(),
-  media: media,
-  media_text: mediaText,
+  media: mediaPicklist,
+  media_text: mediaTextPicklist,
   season_name: string(),
   season_name_text: string(),
   released_on: string(),

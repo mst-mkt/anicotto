@@ -1,7 +1,7 @@
-import { number, object, string } from 'valibot'
+import { integer, number, object, pipe, string } from 'valibot'
 
 export const seriesSchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   name: string(),
   name_ro: string(),
   name_en: string(),

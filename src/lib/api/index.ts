@@ -5,20 +5,32 @@ import {
   getFollowingActivitiesQuerySchema,
   getFollowingActivitiesResponseSchema,
 } from '../../schemas/annict/activities/api'
-import { castsQuerySchema, castsResponseSchema } from '../../schemas/annict/casts/api'
+import { getCastsQuerySchema, getCastsResponseSchema } from '../../schemas/annict/casts/api'
 import {
-  charactersQuerySchema,
-  charactersResponseSchema,
+  getCharactersQuerySchema,
+  getCharactersResponseSchema,
 } from '../../schemas/annict/characters/api'
-import { episodesQuerySchema, episodesResponseSchema } from '../../schemas/annict/episodes/api'
-import { followingQuerySchema, followingResponseSchema } from '../../schemas/annict/followee/api'
-import { followersQuerySchema, followersResponseSchema } from '../../schemas/annict/followers/api'
 import {
-  organizationsQuerySchema,
-  organizationsResponseSchema,
+  getEpisodesQuerySchema,
+  getEpisodesResponseSchema,
+} from '../../schemas/annict/episodes/api'
+import {
+  getFollowingQuerySchema,
+  getFollowingResponseSchema,
+} from '../../schemas/annict/followee/api'
+import {
+  getFollowersQuerySchema,
+  getFollowersResponseSchema,
+} from '../../schemas/annict/followers/api'
+import {
+  getOrganizationsQuerySchema,
+  getOrganizationsResponseSchema,
 } from '../../schemas/annict/organizations/api'
-import { peopleQuerySchema, peopleResponseSchema } from '../../schemas/annict/people/api'
-import { meProgramsQuerySchema, meProgramsResponseSchema } from '../../schemas/annict/programs/api'
+import { getPeopleQuerySchema, getPeopleResponseSchema } from '../../schemas/annict/people/api'
+import {
+  getMyProgramsQuerySchema,
+  getMyProgramsResponseSchema,
+} from '../../schemas/annict/programs/api'
 import {
   createRecordQuerySchema,
   createRecordResponseSchema,
@@ -35,19 +47,19 @@ import {
   updateReviewsQuerySchema,
   updateReviewsResponseSchema,
 } from '../../schemas/annict/reviews/api'
-import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
-import { staffsQuerySchema, staffsResponseSchema } from '../../schemas/annict/staffs/api'
-import { statusesQuerySchema } from '../../schemas/annict/statuses/api'
+import { getSeriesQuerySchema, getSeriesResponseSchema } from '../../schemas/annict/series/api'
+import { getStaffsQuerySchema, getStaffsResponseSchema } from '../../schemas/annict/staffs/api'
+import { createStatusesQuerySchema } from '../../schemas/annict/statuses/api'
 import {
-  meResponseSchema,
-  usersQuerySchema,
-  usersResponseSchema,
+  getMeResponseSchema,
+  getUsersQuerySchema,
+  getUsersResponseSchema,
 } from '../../schemas/annict/users/api'
 import {
-  meWorksQuerySchema,
-  meWorksResponseSchema,
-  worksQuerySchema,
-  worksResponseSchema,
+  getMyWorksQuerySchema,
+  getMyWorksResponseSchema,
+  getWorksQuerySchema,
+  getWorksResponseSchema,
 } from '../../schemas/annict/works/api'
 import { type ParsePathParam, generatePath, generateUrlWithQuery, validate } from './utils'
 
@@ -131,76 +143,76 @@ export class AnnictClient {
   }
 
   getWorks = this.createFetcher('/works', 'GET', {
-    query: worksQuerySchema,
-    response: worksResponseSchema,
+    query: getWorksQuerySchema,
+    response: getWorksResponseSchema,
   })
 
-  getMeWorks = this.createFetcher('/me/works', 'GET', {
-    query: meWorksQuerySchema,
-    response: meWorksResponseSchema,
+  getMyWorks = this.createFetcher('/me/works', 'GET', {
+    query: getMyWorksQuerySchema,
+    response: getMyWorksResponseSchema,
   })
 
   getEpisodes = this.createFetcher('/episodes', 'GET', {
-    query: episodesQuerySchema,
-    response: episodesResponseSchema,
+    query: getEpisodesQuerySchema,
+    response: getEpisodesResponseSchema,
   })
 
   getSeries = this.createFetcher('/series', 'GET', {
-    query: seriesQuerySchema,
-    response: seriesResponseSchema,
+    query: getSeriesQuerySchema,
+    response: getSeriesResponseSchema,
   })
 
   getCharacters = this.createFetcher('/characters', 'GET', {
-    query: charactersQuerySchema,
-    response: charactersResponseSchema,
+    query: getCharactersQuerySchema,
+    response: getCharactersResponseSchema,
   })
 
   getPeople = this.createFetcher('/people', 'GET', {
-    query: peopleQuerySchema,
-    response: peopleResponseSchema,
+    query: getPeopleQuerySchema,
+    response: getPeopleResponseSchema,
   })
 
   getOrganizations = this.createFetcher('/organizations', 'GET', {
-    query: organizationsQuerySchema,
-    response: organizationsResponseSchema,
+    query: getOrganizationsQuerySchema,
+    response: getOrganizationsResponseSchema,
   })
 
   getCasts = this.createFetcher('/casts', 'GET', {
-    query: castsQuerySchema,
-    response: castsResponseSchema,
+    query: getCastsQuerySchema,
+    response: getCastsResponseSchema,
   })
 
   getStaffs = this.createFetcher('/staffs', 'GET', {
-    query: staffsQuerySchema,
-    response: staffsResponseSchema,
+    query: getStaffsQuerySchema,
+    response: getStaffsResponseSchema,
   })
 
-  getMePrograms = this.createFetcher('/me/programs', 'GET', {
-    query: meProgramsQuerySchema,
-    response: meProgramsResponseSchema,
+  getMyPrograms = this.createFetcher('/me/programs', 'GET', {
+    query: getMyProgramsQuerySchema,
+    response: getMyProgramsResponseSchema,
   })
 
   getUsers = this.createFetcher('/users', 'GET', {
-    query: usersQuerySchema,
-    response: usersResponseSchema,
+    query: getUsersQuerySchema,
+    response: getUsersResponseSchema,
   })
 
   getMe = this.createFetcher('/me', 'GET', {
-    response: meResponseSchema,
+    response: getMeResponseSchema,
   })
 
   getFollowing = this.createFetcher('/following', 'GET', {
-    query: followingQuerySchema,
-    response: followingResponseSchema,
+    query: getFollowingQuerySchema,
+    response: getFollowingResponseSchema,
   })
 
   getFollowers = this.createFetcher('/followers', 'GET', {
-    query: followersQuerySchema,
-    response: followersResponseSchema,
+    query: getFollowersQuerySchema,
+    response: getFollowersResponseSchema,
   })
 
   createStatus = this.createFetcher('/me/statuses', 'POST', {
-    query: statusesQuerySchema,
+    query: createStatusesQuerySchema,
   })
 
   getRecords = this.createFetcher('/records', 'GET', {

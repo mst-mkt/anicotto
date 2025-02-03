@@ -1,7 +1,7 @@
-import { minValue, nullable, number, object, pipe, string } from 'valibot'
+import { integer, minValue, nullable, number, object, pipe, string } from 'valibot'
 
 export const episodeSchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   number: nullable(number()),
   number_text: string(),
   sort_number: number(),

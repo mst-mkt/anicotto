@@ -10,7 +10,7 @@ import {
   pipe,
 } from 'valibot'
 import { reviewSchema } from '.'
-import { commaSeparatedString, order, paginationInfo } from '../common'
+import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
 
 export const getReviewsQuerySchema = object({
@@ -19,13 +19,13 @@ export const getReviewsQuerySchema = object({
   filter_has_review_body: optional(boolean()),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_id: optional(order),
-  sort_likes_count: optional(order),
+  sort_id: optional(orderPicklist),
+  sort_likes_count: optional(orderPicklist),
 })
 
 export const getReviewsResponseSchema = object({
   reviews: array(reviewSchema),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })
 
 export const createReviewsQuerySchema = object({

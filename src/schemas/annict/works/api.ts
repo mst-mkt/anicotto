@@ -1,36 +1,41 @@
-import { array, integer, maxValue, minValue, number, object, optional, pipe, string } from 'valibot'
+import { array, integer, maxValue, minValue, number, object, optional, pipe } from 'valibot'
 import { workSchema } from '.'
-import { commaSeparatedString, order, paginationInfo, status } from '../common'
+import {
+  commaSeparatedString,
+  orderPicklist,
+  paginationInfoSchema,
+  statusPicklist,
+} from '../common'
 
-export const worksQuerySchema = object({
-  filter_ids: optional(commaSeparatedString(pipe(number(), integer()))),
-  filter_season: optional(string()),
-  filter_title: optional(string()),
+export const getWorksQuerySchema = object({
+  filter_ids: optional(commaSeparatedString(workSchema.entries.id)),
+  filter_season: optional(workSchema.entries.season_name),
+  filter_title: optional(workSchema.entries.title),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_id: optional(order),
-  sort_season: optional(order),
-  sort_watchers_count: optional(order),
+  sort_id: optional(orderPicklist),
+  sort_season: optional(orderPicklist),
+  sort_watchers_count: optional(orderPicklist),
 })
 
-export const worksResponseSchema = object({
+export const getWorksResponseSchema = object({
   works: array(workSchema),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })
 
-export const meWorksQuerySchema = object({
-  ...worksQuerySchema.entries,
-  filter_status: optional(status),
+export const getMyWorksQuerySchema = object({
+  ...getWorksQuerySchema.entries,
+  filter_status: optional(statusPicklist),
 })
 
-export const meWorksResponseSchema = object({
+export const getMyWorksResponseSchema = object({
   works: array(
     object({
       ...workSchema.entries,
       status: object({
-        kind: status,
+        kind: statusPicklist,
       }),
     }),
   ),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })

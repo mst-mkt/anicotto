@@ -1,7 +1,7 @@
 import { integer, minValue, nullable, number, object, pipe, string } from 'valibot'
 
 export const userSchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   username: string(),
   name: string(),
   description: string(),

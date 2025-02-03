@@ -1,8 +1,8 @@
 import { object } from 'valibot'
-import { status } from '../common'
+import { statusPicklist } from '../common'
 import { workSchema } from '../works'
 
-export const statusesQuerySchema = object({
+export const createStatusesQuerySchema = object({
   work_id: workSchema.entries.id,
-  kind: status,
+  kind: statusPicklist,
 })

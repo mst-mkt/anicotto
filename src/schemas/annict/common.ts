@@ -12,14 +12,20 @@ import {
   transform,
 } from 'valibot'
 
-export const media = picklist(['tv', 'ova', 'movie', 'web', 'other'])
-export const mediaText = picklist(['TV', 'OVA', '映画', 'Web', 'その他'])
+export const mediaPicklist = picklist(['tv', 'ova', 'movie', 'web', 'other'])
+export const mediaTextPicklist = picklist(['TV', 'OVA', '映画', 'Web', 'その他'])
 
-export const order = picklist(['asc', 'desc'])
+export const orderPicklist = picklist(['asc', 'desc'])
 
-export const status = picklist(['wanna_watch', 'watching', 'watched', 'on_hold', 'stop_watching'])
-export const rating = picklist(['bad', 'average', 'good', 'great'])
-export const action = picklist([
+export const statusPicklist = picklist([
+  'wanna_watch',
+  'watching',
+  'watched',
+  'on_hold',
+  'stop_watching',
+])
+export const ratingPicklist = picklist(['bad', 'average', 'good', 'great'])
+export const actionPicklist = picklist([
   'create_record',
   'create_review',
   'create_multiple_records',
@@ -40,13 +46,13 @@ export const commaSeparatedString = <
     transform((value) => value.join(',')),
   )
 
-export const paginationInfo = object({
+export const paginationInfoSchema = object({
   total_count: number(),
   next_page: nullable(number()),
   prev_page: nullable(number()),
 })
 
-export const prefecture = object({
+export const prefectureSchema = object({
   id: number(),
   name: string(),
 })

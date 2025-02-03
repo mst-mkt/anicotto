@@ -11,10 +11,10 @@ import {
   string,
 } from 'valibot'
 import { programSchema } from '.'
-import { channelSchema, commaSeparatedString, order, paginationInfo } from '../common'
+import { channelSchema, commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
 
-export const meProgramsQuerySchema = object({
+export const getMyProgramsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(programSchema.entries.id)),
   filter_channel_ids: optional(commaSeparatedString(channelSchema.entries.id)),
   filter_work_ids: optional(commaSeparatedString(workSchema.entries.id)),
@@ -24,11 +24,11 @@ export const meProgramsQuerySchema = object({
   filter_rebroadcast: optional(boolean()),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_id: optional(order),
-  sort_started_at: optional(order),
+  sort_id: optional(orderPicklist),
+  sort_started_at: optional(orderPicklist),
 })
 
-export const meProgramsResponseSchema = object({
+export const getMyProgramsResponseSchema = object({
   programs: array(programSchema),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })

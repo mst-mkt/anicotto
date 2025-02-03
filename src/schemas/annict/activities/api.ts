@@ -10,7 +10,7 @@ import {
   pipe,
 } from 'valibot'
 import { activitySchema, baseActivitySchema } from '.'
-import { commaSeparatedString, order, paginationInfo } from '../common'
+import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { userSchema } from '../users'
 
 export const getActivitiesQuerySchema = object({
@@ -18,12 +18,12 @@ export const getActivitiesQuerySchema = object({
   filter_username: optional(userSchema.entries.username),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_id: optional(order),
+  sort_id: optional(orderPicklist),
 })
 
 export const getActivitiesResponseSchema = object({
   activities: array(activitySchema),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })
 
 export const getFollowingActivitiesQuerySchema = object({
@@ -31,10 +31,10 @@ export const getFollowingActivitiesQuerySchema = object({
   filter_mured: optional(boolean()),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_id: optional(order),
+  sort_id: optional(orderPicklist),
 })
 
 export const getFollowingActivitiesResponseSchema = object({
   activities: array(activitySchema),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })

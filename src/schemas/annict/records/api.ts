@@ -10,7 +10,7 @@ import {
   pipe,
 } from 'valibot'
 import { recordSchema } from '.'
-import { commaSeparatedString, order, paginationInfo } from '../common'
+import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { episodeSchema } from '../episodes'
 
 export const getRecordsQuerySchema = object({
@@ -19,12 +19,12 @@ export const getRecordsQuerySchema = object({
   filter_has_record_comment: optional(boolean()),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_like_count: optional(order),
+  sort_like_count: optional(orderPicklist),
 })
 
 export const getRecordsResponseSchema = object({
   records: array(recordSchema),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })
 
 export const createRecordQuerySchema = object({

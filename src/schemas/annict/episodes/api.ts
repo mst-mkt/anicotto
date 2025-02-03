@@ -10,19 +10,19 @@ import {
   pipe,
 } from 'valibot'
 import { episodeSchema } from '.'
-import { commaSeparatedString, order, paginationInfo } from '../common'
+import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
 
-export const episodesQuerySchema = object({
+export const getEpisodesQuerySchema = object({
   filter_ids: optional(commaSeparatedString(episodeSchema.entries.id)),
   filter_work_id: optional(workSchema.entries.id),
   page: optional(pipe(number(), integer())),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
-  sort_id: optional(order),
-  sort_sort_number: optional(order),
+  sort_id: optional(orderPicklist),
+  sort_sort_number: optional(orderPicklist),
 })
 
-export const episodesResponseSchema = object({
+export const getEpisodesResponseSchema = object({
   episodes: array(
     object({
       ...episodeSchema.entries,
@@ -31,5 +31,5 @@ export const episodesResponseSchema = object({
       next_episode: nullable(episodeSchema),
     }),
   ),
-  ...paginationInfo.entries,
+  ...paginationInfoSchema.entries,
 })

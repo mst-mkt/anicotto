@@ -1,5 +1,5 @@
-import { array, literal, number, object, string, union } from 'valibot'
-import { action, status } from '../common'
+import { array, integer, literal, number, object, pipe, string, union } from 'valibot'
+import { actionPicklist, statusPicklist } from '../common'
 import { episodeSchema } from '../episodes'
 import { recordSchema } from '../records'
 import { reviewSchema } from '../reviews'
@@ -7,10 +7,10 @@ import { userSchema } from '../users'
 import { workSchema } from '../works'
 
 export const baseActivitySchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   user: userSchema,
   work: workSchema,
-  action: action,
+  action: actionPicklist,
   created_at: string(),
 })
 
@@ -42,7 +42,7 @@ const createStatusActivitySchema = object({
   ...baseActivitySchema.entries,
   action: literal('create_status'),
   status: object({
-    kind: status,
+    kind: statusPicklist,
   }),
 })
 

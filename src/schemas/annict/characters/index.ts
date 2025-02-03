@@ -1,7 +1,7 @@
 import { integer, number, object, pipe, string } from 'valibot'
 
 export const characterSchema = object({
-  id: number(),
+  id: pipe(number(), integer()),
   name: string(),
   name_kana: string(),
   name_en: string(),
