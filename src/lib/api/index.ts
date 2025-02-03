@@ -22,6 +22,7 @@ import { peopleQuerySchema, peopleResponseSchema } from '../../schemas/annict/pe
 import { meProgramsQuerySchema, meProgramsResponseSchema } from '../../schemas/annict/programs/api'
 import { seriesQuerySchema, seriesResponseSchema } from '../../schemas/annict/series/api'
 import { staffsQuerySchema, staffsResponseSchema } from '../../schemas/annict/staffs/api'
+import { statusesQuerySchema } from '../../schemas/annict/statuses/api'
 import {
   meResponseSchema,
   usersQuerySchema,
@@ -216,5 +217,9 @@ ${result.issues
   getFollowers = this.createFetcher('/followers', 'GET', {
     query: followersQuerySchema,
     response: followersResponseSchema,
+  })
+
+  createStatus = this.createFetcher('/me/statuses', 'POST', {
+    query: statusesQuerySchema,
   })
 }
