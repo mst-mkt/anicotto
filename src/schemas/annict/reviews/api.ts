@@ -54,3 +54,7 @@ export const updateReviewsQuerySchema = object({
   share_twitter: optional(boolean()),
   share_facebook: optional(boolean()),
 })
+
+export const updateReviewsResponseSchema = object({
+  ...reviewSchema.entries,
+})
