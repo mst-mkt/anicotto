@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import { NuqsAdapter } from 'nuqs/adapters/next'
 import type { ReactNode } from 'react'
+import { Toaster } from 'sonner'
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
@@ -13,7 +14,12 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ja">
     <body className="antialiased">
       <SessionProvider>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <NuqsAdapter>
+          <>
+            {children}
+            <Toaster />
+          </>
+        </NuqsAdapter>
       </SessionProvider>
     </body>
   </html>
