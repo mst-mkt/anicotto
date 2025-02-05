@@ -5,6 +5,41 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: oklch(var(--background));
+  --color-foreground: oklch(var(--foreground));
+  --color-accent: oklch(var(--accent));
+
+  --color-background-50: color-mix(in srgb, var(--color-background), var(--color-foreground) 5%);
+  --color-background-100: color-mix(in srgb, var(--color-background), var(--color-foreground) 10%);
+  --color-background-200: color-mix(in srgb, var(--color-background), var(--color-foreground) 20%);
+  --color-background-300: color-mix(in srgb, var(--color-background), var(--color-foreground) 30%);
+  --color-background-400: color-mix(in srgb, var(--color-background), var(--color-foreground) 40%);
+  --color-background-500: color-mix(in srgb, var(--color-background), var(--color-foreground) 50%);
+  --color-background-600: color-mix(in srgb, var(--color-background), var(--color-foreground) 60%);
+  --color-background-700: color-mix(in srgb, var(--color-background), var(--color-foreground) 70%);
+  --color-background-800: color-mix(in srgb, var(--color-background), var(--color-foreground) 80%);
+  --color-background-900: color-mix(in srgb, var(--color-background), var(--color-foreground) 90%);
+
+  --color-foreground-50: color-mix(in srgb, var(--color-foreground), var(--color-background) 5%);
+  --color-foreground-100: color-mix(in srgb, var(--color-foreground), var(--color-background) 10%);
+  --color-foreground-200: color-mix(in srgb, var(--color-foreground), var(--color-background) 20%);
+  --color-foreground-300: color-mix(in srgb, var(--color-foreground), var(--color-background) 30%);
+  --color-foreground-400: color-mix(in srgb, var(--color-foreground), var(--color-background) 40%);
+  --color-foreground-500: color-mix(in srgb, var(--color-foreground), var(--color-background) 50%);
+  --color-foreground-600: color-mix(in srgb, var(--color-foreground), var(--color-background) 60%);
+  --color-foreground-700: color-mix(in srgb, var(--color-foreground), var(--color-background) 70%);
+  --color-foreground-800: color-mix(in srgb, var(--color-foreground), var(--color-background) 80%);
+  --color-foreground-900: color-mix(in srgb, var(--color-foreground), var(--color-background) 90%);
+
+  --color-accent-50: color-mix(in srgb, var(--color-accent), var(--color-background) 90%);
+  --color-accent-100: color-mix(in srgb, var(--color-accent), var(--color-background) 80%);
+  --color-accent-200: color-mix(in srgb, var(--color-accent), var(--color-background) 60%);
+  --color-accent-300: color-mix(in srgb, var(--color-accent), var(--color-background) 40%);
+  --color-accent-400: color-mix(in srgb, var(--color-accent), var(--color-background) 20%);
+  --color-accent-500: var(--color-accent);
+  --color-accent-600: color-mix(in srgb, var(--color-accent), var(--color-foreground) 20%);
+  --color-accent-700: color-mix(in srgb, var(--color-accent), var(--color-foreground) 40%);
+  --color-accent-800: color-mix(in srgb, var(--color-accent), var(--color-foreground) 60%);
+  --color-accent-900: color-mix(in srgb, var(--color-accent), var(--color-foreground) 80%);
+  --color-accent-950: color-mix(in srgb, var(--color-accent), var(--color-background) 90%);
 }
