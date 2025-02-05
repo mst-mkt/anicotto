@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { PROJECT_NAME } from '../../constants/project'
+import { ThemeButton } from './theme-button'
 
 type HeaderProps = {
   className?: string
@@ -13,6 +14,7 @@ export const Header: FC<HeaderProps> = ({ className }) => (
       <Link href="/" className="transition-colors hover:text-accent">
         {PROJECT_NAME}
       </Link>
+      <ThemeButton />
     </div>
   </header>
 )
