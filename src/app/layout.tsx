@@ -26,7 +26,10 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
               <Header className={styles.header} />
               <SideMenu className={styles.sideMenu} />
               <main
-                className={twJoin(styles.main, 'mx-auto w-full min-w-[56svw] max-w-[600px] py-4')}
+                className={twJoin(
+                  styles.main,
+                  'mx-auto w-full min-w-[56svw] max-w-[600px] px-[4svmin] py-4',
+                )}
               >
                 {children}
               </main>
