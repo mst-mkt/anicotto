@@ -1,0 +1,39 @@
+.layout {
+  display: grid;
+  grid-template:
+    'header header header' auto
+    'side-menu main .' 1fr
+    'side-menu footer .' auto / 1fr clamp(56svw, 600px, 92svw) 1fr;
+  min-height: 100svh;
+  column-gap: 4svw;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sideMenu {
+  grid-area: side-menu;
+  justify-self: end;
+}
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+@media screen and (width < 64rem) {
+  .layout {
+    grid-template:
+      'header' auto
+      'main' 1fr
+      'footer' auto / 1fr;
+  }
+
+  .sideMenu {
+    display: none;
+  }
+}

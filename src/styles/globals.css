@@ -1,19 +1,19 @@
 @import './tailwind.css';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 100% 0 0;
+  --foreground: 20% 0.04 256;
+  --accent: 70% 0.2 20;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark:root {
+  --background: 20% 0 0;
+  --foreground: 90% 0 256;
+  --accent: 70% 0.2 20;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-foreground);
+  background: var(--color-background);
   font-family: Arial, Helvetica, sans-serif;
 }
