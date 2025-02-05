@@ -14,6 +14,9 @@ importers:
       '@urql/core':
         specifier: ^5.1.0
         version: 5.1.0(graphql@16.10.0)
+      motion:
+        specifier: ^12.1.0
+        version: 12.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       neverthrow:
         specifier: ^8.1.1
         version: 8.1.1
@@ -510,6 +513,20 @@ packages:
     resolution: {integrity: sha512-0/r0MySGYG8YqlayBZ6MuCfECmHFdJ5qyPh8s8wa5Hnm6SaFLSK1VYCbj+NKp090Nm1caZhD+QTnmxO7esYGyQ==}
     engines: {node: '>=10.13.0'}
 
+  framer-motion@12.1.0:
+    resolution: {integrity: sha512-0wc6Zn3Yf1pIKMXIndgEePDaPttRVbSKJMS4E2e999G/UPRgt5i9t3+e+nAy5K7U1STBJ4TXEvB3dPrPJ7IA8g==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   gql.tada@1.8.10:
     resolution: {integrity: sha512-FrvSxgz838FYVPgZHGOSgbpOjhR+yq44rCzww3oOPJYi0OvBJjAgCiP6LEokZIYND2fUTXzQAyLgcvgw1yNP5A==}
     hasBin: true
@@ -653,6 +670,26 @@ packages:
 
   mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+
+  motion-dom@12.0.0:
+    resolution: {integrity: sha512-CvYd15OeIR6kHgMdonCc1ihsaUG4MYh/wrkz8gZ3hBX/uamyZCXN9S9qJoYF03GqfTt7thTV/dxnHYX4+55vDg==}
+
+  motion-utils@12.0.0:
+    resolution: {integrity: sha512-MNFiBKbbqnmvOjkPyOKgHUp3Q6oiokLkI1bEwm5QA28cxMZrv0CbbBGDNmhF6DIXsi1pCQBSs0dX8xjeER1tmA==}
+
+  motion@12.1.0:
+    resolution: {integrity: sha512-X0Pk3mf2j+FCel6ofBbicGvN5ENXyADPymA0/6O/ER2O72wFIjKkAtXVs07eKn/cBsK9C5Dmz3HHAo3QZUvn1A==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   nanoid@3.3.8:
     resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
@@ -1158,6 +1195,15 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.1
 
+  framer-motion@12.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      motion-dom: 12.0.0
+      motion-utils: 12.0.0
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+
   gql.tada@1.8.10(graphql@16.10.0)(typescript@5.7.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.13(graphql@16.10.0)
@@ -1270,6 +1316,20 @@ snapshots:
       lightningcss-win32-x64-msvc: 1.29.1
 
   mitt@3.0.1: {}
+
+  motion-dom@12.0.0:
+    dependencies:
+      motion-utils: 12.0.0
+
+  motion-utils@12.0.0: {}
+
+  motion@12.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      framer-motion: 12.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   nanoid@3.3.8: {}
 
