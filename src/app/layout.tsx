@@ -4,6 +4,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next'
 import type { ReactNode } from 'react'
 import { Toaster } from 'sonner'
 import { twJoin } from 'tailwind-merge'
+import { ThemeProvider } from '../lib/theme-provider'
 import '../styles/globals.css'
 import { Footer } from './_layouts/footer'
 import { Header } from './_layouts/header'
@@ -19,19 +20,21 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ja">
     <body>
       <SessionProvider>
-        <NuqsAdapter>
-          <div className={styles.layout}>
-            <Header className={styles.header} />
-            <SideMenu className={styles.sideMenu} />
-            <main
-              className={twJoin(styles.main, 'mx-auto w-full min-w-[56svw] max-w-[600px] py-4')}
-            >
-              {children}
-            </main>
-            <Footer className={styles.footer} />
-          </div>
-          <Toaster />
-        </NuqsAdapter>
+        <ThemeProvider>
+          <NuqsAdapter>
+            <div className={styles.layout}>
+              <Header className={styles.header} />
+              <SideMenu className={styles.sideMenu} />
+              <main
+                className={twJoin(styles.main, 'mx-auto w-full min-w-[56svw] max-w-[600px] py-4')}
+              >
+                {children}
+              </main>
+              <Footer className={styles.footer} />
+            </div>
+            <Toaster />
+          </NuqsAdapter>
+        </ThemeProvider>
       </SessionProvider>
     </body>
   </html>
