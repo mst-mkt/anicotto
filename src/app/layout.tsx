@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ja">
-    <body>
+    <body className="scrollbar-thin scrollbar-thumb-background-200 scrollbar-thumb-rounded-full scrollbar-track-transparent overflow-y-scroll">
       <SessionProvider>
         <ThemeProvider>
           <NuqsAdapter>

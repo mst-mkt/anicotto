@@ -4,6 +4,13 @@
 @source "../components/";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@plugin "tailwind-scrollbar" {
+  /* biome-ignore lint/correctness/noUnknownProperty: this is plugin config */
+  preferredStrategy: 'pseudoelements';
+  /* biome-ignore lint/correctness/noUnknownProperty: this is plugin config */
+  nocompatible: true;
+}
+
 @theme {
   --color-background: oklch(var(--background));
   --color-foreground: oklch(var(--foreground));
