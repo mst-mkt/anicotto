@@ -1,4 +1,3 @@
-import { IconBrandGithub, IconDeviceTv, IconWorld, type TablerIcon } from '@tabler/icons-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { twJoin } from 'tailwind-merge'
@@ -9,25 +8,23 @@ import {
   PROJECT_NAME,
   PROJECT_OWNER,
 } from '../../constants/project'
+import { EarthIcon } from '../icons/earth'
+import { GithubIcon } from '../icons/github'
+import { HomeIcon } from '../icons/home'
+import { FooterLink, type FooterLinkProps } from './footer-link'
 
-type UrlInfo = {
-  icon: TablerIcon
-  label: string
-  url: string
-}
-
-const getLinkIcon = (url: string) => {
-  return match(url)
-    .returnType<UrlInfo>()
+const getLinkIcon = (href: string) => {
+  return match(href)
+    .returnType<FooterLinkProps>()
     .when(
-      (url) => url.startsWith('https://github.com/'),
-      (url) => ({ icon: IconBrandGithub, label: 'GitHub', url }),
+      (href) => href.startsWith('https://github.com/'),
+      (href) => ({ icon: GithubIcon, label: 'GitHub', href }),
     )
     .when(
-      (url) => url.startsWith('https://annict.com/'),
-      (url) => ({ icon: IconDeviceTv, label: 'Annict', url }),
+      (href) => href.startsWith('https://annict.com/'),
+      (href) => ({ icon: HomeIcon, label: 'Annict', href }),
     )
-    .otherwise((url) => ({ icon: IconWorld, label: url, url }))
+    .otherwise((href) => ({ icon: EarthIcon, label: href, href }))
 }
 
 type FooterProps = {
@@ -57,16 +54,9 @@ export const Footer: FC<FooterProps> = ({ className }) => (
       <h2 className="font-bold text-xl">{PROJECT_NAME}</h2>
       <p className="text-foreground-300 text-sm">{PROJECT_DESCRIPTION}</p>
     </hgroup>
-    <div className="flex gap-x-4">
+    <div className="flex gap-x-6">
       {PROJECT_LINKS.map(getLinkIcon).map((link) => (
-        <Link
-          key={link.url}
-          href={link.url}
-          className="flex items-center gap-x-2 transition-colors hover:text-accent"
-        >
-          <link.icon size={20} />
-          <span>{link.label}</span>
-        </Link>
+        <FooterLink key={link.href} {...link} />
       ))}
     </div>
     <p className="flex gap-x-2 text-foreground-300 text-sm">
