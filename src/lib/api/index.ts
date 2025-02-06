@@ -1,4 +1,4 @@
-import { type Result, err } from 'neverthrow'
+import { type Result, err, ok } from 'neverthrow'
 import type { BaseIssue, BaseSchema, InferInput, InferOutput } from 'valibot'
 import {
   getActivitiesQuerySchema,
@@ -150,7 +150,7 @@ export class AnnictClient {
         return err(`Failed to validate response: ${validatedResponse.error}`)
       }
 
-      return validatedResponse.value as Response
+      return ok(validatedResponse.value as Response)
     }
 
     return fetcher

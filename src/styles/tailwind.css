@@ -4,6 +4,7 @@
 @source "../components/";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@plugin "tailwindcss-animate";
 @plugin "tailwind-scrollbar" {
   /* biome-ignore lint/correctness/noUnknownProperty: this is plugin config */
   preferredStrategy: 'pseudoelements';
@@ -12,9 +13,32 @@
 }
 
 @theme {
+  --color-anicotto-accent: oklch(var(--anicotto-accent));
+
   --color-background: oklch(var(--background));
   --color-foreground: oklch(var(--foreground));
+  --color-card: oklch(var(--card));
+  --color-card-foreground: oklch(var(--card-foreground));
+  --color-popover: oklch(var(--popover));
+  --color-popover-foreground: oklch(var(--popover-foreground));
+  --color-primary: oklch(var(--primary));
+  --color-primary-foreground: oklch(var(--primary-foreground));
+  --color-secondary: oklch(var(--secondary));
+  --color-secondary-foreground: oklch(var(--secondary-foreground));
+  --color-muted: oklch(var(--muted));
+  --color-muted-foreground: oklch(var(--muted-foreground));
   --color-accent: oklch(var(--accent));
+  --color-accent-foreground: oklch(var(--accent-foreground));
+  --color-destructive: oklch(var(--destructive));
+  --color-destructive-foreground: oklch(var(--destructive-foreground));
+  --color-border: oklch(var(--border));
+  --color-input: oklch(var(--input));
+  --color-ring: oklch(var(--ring));
+  --color-chart-1: oklch(var(--chart-1));
+  --color-chart-2: oklch(var(--chart-2));
+  --color-chart-3: oklch(var(--chart-3));
+  --color-chart-4: oklch(var(--chart-4));
+  --color-chart-5: oklch(var(--chart-5));
 
   --color-background-50: color-mix(in srgb, var(--color-background), var(--color-foreground) 5%);
   --color-background-100: color-mix(in srgb, var(--color-background), var(--color-foreground) 10%);
@@ -38,15 +62,55 @@
   --color-foreground-800: color-mix(in srgb, var(--color-foreground), var(--color-background) 80%);
   --color-foreground-900: color-mix(in srgb, var(--color-foreground), var(--color-background) 90%);
 
-  --color-accent-50: color-mix(in srgb, var(--color-accent), var(--color-background) 90%);
-  --color-accent-100: color-mix(in srgb, var(--color-accent), var(--color-background) 80%);
-  --color-accent-200: color-mix(in srgb, var(--color-accent), var(--color-background) 60%);
-  --color-accent-300: color-mix(in srgb, var(--color-accent), var(--color-background) 40%);
-  --color-accent-400: color-mix(in srgb, var(--color-accent), var(--color-background) 20%);
-  --color-accent-500: var(--color-accent);
-  --color-accent-600: color-mix(in srgb, var(--color-accent), var(--color-foreground) 20%);
-  --color-accent-700: color-mix(in srgb, var(--color-accent), var(--color-foreground) 40%);
-  --color-accent-800: color-mix(in srgb, var(--color-accent), var(--color-foreground) 60%);
-  --color-accent-900: color-mix(in srgb, var(--color-accent), var(--color-foreground) 80%);
-  --color-accent-950: color-mix(in srgb, var(--color-accent), var(--color-background) 90%);
+  --color-anicotto-accent-50: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-background) 90%
+  );
+  --color-anicotto-accent-100: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-background) 80%
+  );
+  --color-anicotto-accent-200: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-background) 60%
+  );
+  --color-anicotto-accent-300: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-background) 40%
+  );
+  --color-anicotto-accent-400: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-background) 20%
+  );
+  --color-anicotto-accent-500: var(--color-anicotto-accent);
+  --color-anicotto-accent-600: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-foreground) 20%
+  );
+  --color-anicotto-accent-700: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-foreground) 40%
+  );
+  --color-anicotto-accent-800: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-foreground) 60%
+  );
+  --color-anicotto-accent-900: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-foreground) 80%
+  );
+  --color-anicotto-accent-950: color-mix(
+    in srgb,
+    var(--color-anicotto-accent),
+    var(--color-background) 90%
+  );
 }

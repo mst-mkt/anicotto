@@ -43,7 +43,7 @@ export const Footer: FC<FooterProps> = ({ className }) => (
         <span
           // biome-ignore lint/suspicious/noArrayIndexKey: This is a static array
           key={index}
-          className="block h-3 w-2 bg-accent"
+          className="block h-3 w-2 bg-anicotto-accent"
           style={{
             clipPath: 'polygon(50% 0, 100% 0, 50% 100%, 0 100%)',
           }}
