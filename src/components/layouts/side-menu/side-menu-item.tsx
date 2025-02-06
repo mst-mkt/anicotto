@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { type FC, useRef } from 'react'
-import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../icons/types'
+import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../icons/types'
 
 export type SideMenuItemProps = {
   icon: PqoqubbwIcon
