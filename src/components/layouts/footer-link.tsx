@@ -24,7 +24,7 @@ export const FooterLink: FC<FooterLinkProps> = (props) => {
   return (
     <Link
       href={props.href}
-      className="flex items-center gap-x-2 transition-colors hover:text-accent"
+      className="flex items-center gap-x-2 transition-colors hover:text-anicotto-accent"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
