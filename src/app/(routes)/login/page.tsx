@@ -1,5 +1,8 @@
+import { LogInIcon } from 'lucide-react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { Button } from '../../../components/ui/button'
 import { auth, signIn } from '../../../lib/auth'
 
 export const metadata = {
@@ -18,10 +21,19 @@ const Login = async () => {
   }
 
   return (
-    <form action={loginAction}>
-      <h1>Annictにログイン</h1>
-      <p>アプリを使用するためには、Annictにログインする必要があります。</p>
-      <button type="submit">ログイン</button>
+    <form action={loginAction} className="flex flex-col gap-y-4">
+      <h1 className="font-bold text-xl">Annictにログイン</h1>
+      <p className="text-muted-foreground">
+        アプリを使用するためには、
+        <Link href="https://annict.com" className="font-bold text-anicotto-accent hover:underline">
+          Annict
+        </Link>
+        にログインする必要があります。
+      </p>
+      <Button type="submit" className="w-fit cursor-pointer">
+        <LogInIcon size={16} />
+        ログイン
+      </Button>
     </form>
   )
 }
