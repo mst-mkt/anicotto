@@ -1,6 +1,7 @@
 import {
   type BaseIssue,
   type BaseSchema,
+  type InferOutput,
   array,
   custom,
   nullable,
@@ -13,9 +14,12 @@ import {
 } from 'valibot'
 
 export const mediaPicklist = picklist(['tv', 'ova', 'movie', 'web', 'other'])
+export type Media = InferOutput<typeof mediaPicklist>
 export const mediaTextPicklist = picklist(['TV', 'OVA', '映画', 'Web', 'その他'])
+export type MediaText = InferOutput<typeof mediaTextPicklist>
 
 export const orderPicklist = picklist(['asc', 'desc'])
+export type Order = InferOutput<typeof orderPicklist>
 
 export const statusPicklist = picklist([
   'wanna_watch',
@@ -24,13 +28,16 @@ export const statusPicklist = picklist([
   'on_hold',
   'stop_watching',
 ])
+export type Status = InferOutput<typeof statusPicklist>
 export const ratingPicklist = picklist(['bad', 'average', 'good', 'great'])
+export type Rating = InferOutput<typeof ratingPicklist>
 export const actionPicklist = picklist([
   'create_record',
   'create_review',
   'create_multiple_records',
   'create_status',
 ])
+export type Action = InferOutput<typeof actionPicklist>
 
 export const numericString = custom<'' | `${number}`>(
   (value) => value === '' || !Number.isNaN(Number.parseInt(`${value}`, 10)),

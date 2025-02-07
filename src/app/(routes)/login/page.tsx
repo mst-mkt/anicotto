@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import { auth, signIn } from '../../lib/auth'
+import { auth, signIn } from '../../../lib/auth'
 
 export const metadata = {
   title: 'ログイン',

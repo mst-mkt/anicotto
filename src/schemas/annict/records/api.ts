@@ -12,6 +12,8 @@ import {
 import { recordSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { episodeSchema } from '../episodes'
+import { userSchema } from '../users'
+import { workSchema } from '../works'
 
 export const getRecordsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(recordSchema.entries.id)),
@@ -23,7 +25,14 @@ export const getRecordsQuerySchema = object({
 })
 
 export const getRecordsResponseSchema = object({
-  records: array(recordSchema),
+  records: array(
+    object({
+      ...recordSchema.entries,
+      user: userSchema,
+      work: workSchema,
+      episode: episodeSchema,
+    }),
+  ),
   ...paginationInfoSchema.entries,
 })
 
@@ -37,6 +46,9 @@ export const createRecordQuerySchema = object({
 
 export const createRecordResponseSchema = object({
   ...recordSchema.entries,
+  user: userSchema,
+  work: workSchema,
+  episode: episodeSchema,
 })
 
 export const updateRecordQuerySchema = object({
@@ -48,4 +60,7 @@ export const updateRecordQuerySchema = object({
 
 export const updateRecordResponseSchema = object({
   ...recordSchema.entries,
+  user: userSchema,
+  work: workSchema,
+  episode: episodeSchema,
 })
