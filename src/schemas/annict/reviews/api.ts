@@ -11,6 +11,7 @@ import {
 } from 'valibot'
 import { reviewSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
+import { userSchema } from '../users'
 import { workSchema } from '../works'
 
 export const getReviewsQuerySchema = object({
@@ -24,7 +25,13 @@ export const getReviewsQuerySchema = object({
 })
 
 export const getReviewsResponseSchema = object({
-  reviews: array(reviewSchema),
+  reviews: array(
+    object({
+      ...reviewSchema.entries,
+      user: userSchema,
+      work: workSchema,
+    }),
+  ),
   ...paginationInfoSchema.entries,
 })
 
@@ -42,6 +49,8 @@ export const createReviewsQuerySchema = object({
 
 export const createReviewsResponseSchema = object({
   ...reviewSchema.entries,
+  user: userSchema,
+  work: workSchema,
 })
 
 export const updateReviewsQuerySchema = object({
@@ -57,4 +66,6 @@ export const updateReviewsQuerySchema = object({
 
 export const updateReviewsResponseSchema = object({
   ...reviewSchema.entries,
+  user: userSchema,
+  work: workSchema,
 })

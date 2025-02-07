@@ -10,9 +10,6 @@ import {
   string,
 } from 'valibot'
 import { ratingPicklist } from '../common'
-import { episodeSchema } from '../episodes'
-import { userSchema } from '../users'
-import { workSchema } from '../works'
 
 export const recordSchema = object({
   id: pipe(number(), integer()),
@@ -23,7 +20,4 @@ export const recordSchema = object({
   likes_count: pipe(number(), integer(), minValue(0)),
   comments_count: pipe(number(), integer(), minValue(0)),
   created_at: string(),
-  user: userSchema,
-  work: workSchema,
-  episode: episodeSchema,
 })
