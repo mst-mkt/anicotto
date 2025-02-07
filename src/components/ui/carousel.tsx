@@ -1,6 +1,8 @@
 'use client'
 
+import AutoPlay from 'embla-carousel-autoplay'
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import {
   type ComponentProps,
@@ -15,13 +17,17 @@ import {
 } from 'react'
 import { cn } from '../../utils/classnames'
 import { Button } from './button'
+
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
 
 type CarouselProps = {
-  opts?: CarouselOptions
+  opts?: CarouselOptions & {
+    autoplay?: boolean
+    wheel?: boolean
+  }
   plugins?: CarouselPlugin
   orientation?: 'horizontal' | 'vertical'
   setApi?: (api: CarouselApi) => void
@@ -50,12 +56,13 @@ function useCarousel() {
 
 const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & CarouselProps>(
   ({ orientation = 'horizontal', opts, setApi, plugins, className, children, ...props }, ref) => {
+    const axisMap = { horizontal: 'x', vertical: 'y' } as const
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
-        axis: orientation === 'horizontal' ? 'x' : 'y',
+        axis: axisMap[orientation],
       },
-      plugins,
+      [...(plugins ?? []), opts?.autoplay && AutoPlay(), opts?.wheel && WheelGesturesPlugin()],
     )
     const [canScrollPrev, setCanScrollPrev] = useState(false)
     const [canScrollNext, setCanScrollNext] = useState(false)
