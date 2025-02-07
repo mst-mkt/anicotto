@@ -1,6 +1,11 @@
+import { Suspense } from 'react'
+import { CurrentSeasonWork, CurrentSeasonWorkSkeleton } from './_current-season/current-season'
+
 const Home = () => (
-  <div>
-    <h1>Hello, Annict client</h1>
+  <div className="flex flex-col gap-y-8">
+    <Suspense fallback={<CurrentSeasonWorkSkeleton />}>
+      <CurrentSeasonWork />
+    </Suspense>
   </div>
 )
 
