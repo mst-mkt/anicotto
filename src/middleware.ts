@@ -9,5 +9,5 @@ export const middleware = async () => {
 }
 
 export const config = {
-  matcher: ['/((?!login|api|_next|favicon.ico|robots.txt|sitemap.xml).*)'],
+  matcher: ['/((?!login|api|_next|favicon.ico|robots.txt|sitemap.xml|.*.png).*)'],
 } satisfies MiddlewareConfig
