@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "prepare": "lefthook install",
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "pnpm run '/^dev:.*/'",
+    "dev:next": "next dev",
+    "dev:pathpida": "pathpida --enableStatic --watch -o ./src/lib",
+    "build": "pathpida --enableStatic && next build",
     "start": "next start",
     "check": "biome check ./src/",
     "fix": "biome check --write ./src/",
