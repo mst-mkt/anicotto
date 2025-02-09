@@ -13,7 +13,7 @@ import { RatingBadge, StatusBadge } from './badges'
 type ActivityProps = InferOutput<typeof getFollowingActivitiesResponseSchema>['activities'][number]
 
 export const Activity: FC<ActivityProps> = (activity) => (
-  <div className="flex gap-x-4">
+  <div className="fade-in flex animate-in gap-x-4 duration-500 ease-in-out">
     <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
       <Avatar className="z-0 h-12 w-12">
         <AvatarImage src={activity.user.avatar_url} alt={activity.user.username} />
