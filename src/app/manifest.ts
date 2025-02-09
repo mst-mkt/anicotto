@@ -12,15 +12,13 @@ const manifest = () =>
     theme_color: 'oklch(70% 0.2 20)',
     icons: [
       {
-        purpose: 'maskable',
         sizes: '512x512',
-        src: '/icon512_maskable.png',
+        src: '/icon_512.png',
         type: 'image/png',
       },
       {
-        purpose: 'any',
-        sizes: '512x512',
-        src: '/icon512_rounded.png',
+        sizes: '192x192',
+        src: '/icon_192.png',
         type: 'image/png',
       },
     ],
