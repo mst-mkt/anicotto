@@ -7,6 +7,7 @@ import { twJoin } from 'tailwind-merge'
 import { Footer } from '../components/layouts/footer'
 import { Header } from '../components/layouts/header'
 import { SideMenu } from '../components/layouts/side-menu/side-menu'
+import { TooltipProvider } from '../components/ui/tooltip'
 import { ThemeLoader, ThemeProvider } from '../lib/theme-provider'
 import '../styles/globals.css'
 import styles from './layout.module.css'
@@ -23,20 +24,22 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       <SessionProvider>
         <ThemeProvider>
           <NuqsAdapter>
-            <div className={styles.layout}>
-              <Header className={styles.header} />
-              <SideMenu className={styles.sideMenu} />
-              <main
-                className={twJoin(
-                  styles.main,
-                  'mx-auto w-full min-w-[56svw] max-w-[600px] px-[4svmin] py-4',
-                )}
-              >
-                {children}
-              </main>
-              <Footer className={styles.footer} />
-            </div>
-            <Toaster />
+            <TooltipProvider delayDuration={100}>
+              <div className={styles.layout}>
+                <Header className={styles.header} />
+                <SideMenu className={styles.sideMenu} />
+                <main
+                  className={twJoin(
+                    styles.main,
+                    'mx-auto w-full min-w-[56svw] max-w-[600px] px-[4svmin] py-4',
+                  )}
+                >
+                  {children}
+                </main>
+                <Footer className={styles.footer} />
+              </div>
+              <Toaster />
+            </TooltipProvider>
           </NuqsAdapter>
         </ThemeProvider>
       </SessionProvider>
