@@ -1,18 +1,17 @@
+import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
-import type { InferOutput } from 'valibot'
-import { ImageSelector } from '../../../components/shared/image-selector'
+import { Image } from '../../../components/shared/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
 import { Badge } from '../../../components/ui/badge'
-import type { getFollowingActivitiesResponseSchema } from '../../../schemas/annict/activities/api'
+import { getValidWorkImage } from '../../../lib/work-images'
+import type { Activity as ActivityType } from '../../../schemas/annict/activities'
 import { timeText } from '../../../utils/time-text'
 import { ActivityIcon } from './activity-icon'
 import { RatingBadge, StatusBadge } from './badges'
 
-type ActivityProps = InferOutput<typeof getFollowingActivitiesResponseSchema>['activities'][number]
-
-export const Activity: FC<ActivityProps> = (activity) => (
+export const Activity: FC<ActivityType> = (activity) => (
   <div className="fade-in flex animate-in gap-x-4 duration-500 ease-in-out">
     <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
       <Avatar className="z-0 h-12 w-12">
@@ -49,8 +48,10 @@ export const Activity: FC<ActivityProps> = (activity) => (
   </div>
 )
 
-const ActivityInfoCard: FC<ActivityProps> = (activity) =>
-  activity.action === 'create_multiple_records' ? (
+const ActivityInfoCard: FC<ActivityType> = async (activity) => {
+  const image = await getValidWorkImage(activity.work.id.toString(), activity.work.images)
+
+  return activity.action === 'create_multiple_records' ? (
     activity.multiple_records.map(({ record, episode }) => (
       <ActivityInfoCard
         key={record.id}
@@ -62,13 +63,14 @@ const ActivityInfoCard: FC<ActivityProps> = (activity) =>
     ))
   ) : (
     <div className="flex items-center gap-x-4 rounded-lg border border-muted p-2">
-      <div className="aspect-square h-24 shrink-0 grow-0 md:aspect-video">
-        <ImageSelector
-          sources={[
-            activity.work.images.recommended_url,
-            activity.work.images.facebook.og_image_url,
-            activity.work.images.twitter.image_url,
-          ].filter((url) => url !== '')}
+      <div className="aspect-square h-24 shrink-0 grow-0 overflow-hidden rounded-md md:aspect-video">
+        <Image
+          src={image}
+          fallback={
+            <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+              <ImageOffIcon size={40} />
+            </div>
+          }
           alt={activity.work.title}
           className="h-full w-full object-cover"
         />
@@ -99,3 +101,4 @@ const ActivityInfoCard: FC<ActivityProps> = (activity) =>
       </div>
     </div>
   )
+}

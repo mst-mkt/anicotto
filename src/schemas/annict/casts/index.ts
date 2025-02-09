@@ -1,4 +1,4 @@
-import { integer, number, object, pipe, string } from 'valibot'
+import { type InferOutput, integer, number, object, pipe, string } from 'valibot'
 import { characterSchema } from '../characters'
 import { personSchema } from '../people'
 import { workSchema } from '../works'
@@ -12,3 +12,5 @@ export const castSchema = object({
   character: characterSchema,
   person: personSchema,
 })
+
+export type Cast = InferOutput<typeof castSchema>

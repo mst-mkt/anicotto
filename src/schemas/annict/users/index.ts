@@ -1,4 +1,13 @@
-import { integer, minValue, nullable, number, object, pipe, string } from 'valibot'
+import {
+  type InferOutput,
+  integer,
+  minValue,
+  nullable,
+  number,
+  object,
+  pipe,
+  string,
+} from 'valibot'
 
 export const userSchema = object({
   id: pipe(number(), integer()),
@@ -18,3 +27,9 @@ export const userSchema = object({
   stop_watching_count: pipe(number(), integer(), minValue(0)),
   created_at: string(),
 })
+
+export type User = InferOutput<typeof userSchema>
+export type Me = User & {
+  email: string
+  notifications_count: number
+}

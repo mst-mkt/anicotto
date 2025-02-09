@@ -1,4 +1,7 @@
-import { integer, number, object, pipe, string } from 'valibot'
+import { type InferOutput, integer, number, object, pipe, string } from 'valibot'
+import type { Organization } from '../organizations'
+import type { Person } from '../people'
+import type { Work } from '../works'
 
 export const staffSchema = object({
   id: pipe(number(), integer()),
@@ -9,3 +12,10 @@ export const staffSchema = object({
   role_other_en: string(),
   sort_number: number(),
 })
+
+export type Staff = InferOutput<typeof staffSchema>
+export type StaffWithInfo = Staff & {
+  work: Work
+  person?: Person
+  organization?: Organization
+}

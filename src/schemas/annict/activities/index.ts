@@ -1,4 +1,14 @@
-import { array, integer, literal, number, object, pipe, string, union } from 'valibot'
+import {
+  type InferOutput,
+  array,
+  integer,
+  literal,
+  number,
+  object,
+  pipe,
+  string,
+  union,
+} from 'valibot'
 import { actionPicklist, statusPicklist } from '../common'
 import { episodeSchema } from '../episodes'
 import { recordSchema } from '../records'
@@ -21,11 +31,15 @@ const createRecordActivitySchema = object({
   record: recordSchema,
 })
 
+export type CreateRecordActivity = InferOutput<typeof createRecordActivitySchema>
+
 const createReviewActivitySchema = object({
   ...baseActivitySchema.entries,
   action: literal('create_review'),
   review: reviewSchema,
 })
+
+export type CreateReviewActivity = InferOutput<typeof createReviewActivitySchema>
 
 const createMultipleRecordsActivitySchema = object({
   ...baseActivitySchema.entries,
@@ -38,6 +52,8 @@ const createMultipleRecordsActivitySchema = object({
   ),
 })
 
+export type CreateMultipleRecordsActivity = InferOutput<typeof createMultipleRecordsActivitySchema>
+
 const createStatusActivitySchema = object({
   ...baseActivitySchema.entries,
   action: literal('create_status'),
@@ -46,9 +62,13 @@ const createStatusActivitySchema = object({
   }),
 })
 
+export type CreateStatusActivity = InferOutput<typeof createStatusActivitySchema>
+
 export const activitySchema = union([
   createRecordActivitySchema,
   createReviewActivitySchema,
   createMultipleRecordsActivitySchema,
   createStatusActivitySchema,
 ])
+
+export type Activity = InferOutput<typeof activitySchema>

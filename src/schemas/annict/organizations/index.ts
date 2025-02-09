@@ -1,4 +1,4 @@
-import { integer, minValue, number, object, pipe, string } from 'valibot'
+import { type InferOutput, integer, minValue, number, object, pipe, string } from 'valibot'
 
 export const organizationSchema = object({
   id: pipe(number(), integer()),
@@ -14,3 +14,5 @@ export const organizationSchema = object({
   favorite_organizations_count: pipe(number(), integer(), minValue(0)),
   staffs_count: pipe(number(), integer(), minValue(0)),
 })
+
+export type Organization = InferOutput<typeof organizationSchema>

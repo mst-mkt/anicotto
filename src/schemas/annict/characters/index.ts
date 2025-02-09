@@ -1,4 +1,5 @@
-import { integer, number, object, pipe, string } from 'valibot'
+import { type InferOutput, integer, number, object, pipe, string } from 'valibot'
+import type { Series } from '../series'
 
 export const characterSchema = object({
   id: pipe(number(), integer()),
@@ -27,3 +28,8 @@ export const characterSchema = object({
   description_source_en: string(),
   favorite_characters_count: pipe(number(), integer()),
 })
+
+export type Character = InferOutput<typeof characterSchema>
+export type CharacterWithSeries = Character & {
+  series: Series | null
+}

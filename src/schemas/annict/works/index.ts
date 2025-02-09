@@ -1,5 +1,5 @@
-import { boolean, integer, minValue, number, object, pipe, string } from 'valibot'
-import { mediaPicklist, mediaTextPicklist, numericString } from '../common'
+import { type InferOutput, boolean, integer, minValue, number, object, pipe, string } from 'valibot'
+import { type Status, mediaPicklist, mediaTextPicklist, numericString } from '../common'
 
 export const workSchema = object({
   id: pipe(number(), integer()),
@@ -35,3 +35,8 @@ export const workSchema = object({
   reviews_count: pipe(number(), integer(), minValue(0)),
   no_episodes: boolean(),
 })
+
+export type Work = InferOutput<typeof workSchema>
+export type WorkWithStatus = Work & {
+  status: { kind: Status }
+}
