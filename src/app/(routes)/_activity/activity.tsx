@@ -1,18 +1,15 @@
 import Link from 'next/link'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
-import type { InferOutput } from 'valibot'
 import { ImageSelector } from '../../../components/shared/image-selector'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
 import { Badge } from '../../../components/ui/badge'
-import type { getFollowingActivitiesResponseSchema } from '../../../schemas/annict/activities/api'
+import type { Activity as ActivityType } from '../../../schemas/annict/activities'
 import { timeText } from '../../../utils/time-text'
 import { ActivityIcon } from './activity-icon'
 import { RatingBadge, StatusBadge } from './badges'
 
-type ActivityProps = InferOutput<typeof getFollowingActivitiesResponseSchema>['activities'][number]
-
-export const Activity: FC<ActivityProps> = (activity) => (
+export const Activity: FC<ActivityType> = (activity) => (
   <div className="fade-in flex animate-in gap-x-4 duration-500 ease-in-out">
     <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
       <Avatar className="z-0 h-12 w-12">
@@ -49,7 +46,7 @@ export const Activity: FC<ActivityProps> = (activity) => (
   </div>
 )
 
-const ActivityInfoCard: FC<ActivityProps> = (activity) =>
+const ActivityInfoCard: FC<ActivityType> = (activity) =>
   activity.action === 'create_multiple_records' ? (
     activity.multiple_records.map(({ record, episode }) => (
       <ActivityInfoCard
