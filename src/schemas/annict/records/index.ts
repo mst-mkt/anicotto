@@ -1,4 +1,5 @@
 import {
+  type InferOutput,
   boolean,
   integer,
   minValue,
@@ -10,6 +11,9 @@ import {
   string,
 } from 'valibot'
 import { ratingPicklist } from '../common'
+import type { Episode } from '../episodes'
+import type { User } from '../users'
+import type { Work } from '../works'
 
 export const recordSchema = object({
   id: pipe(number(), integer()),
@@ -21,3 +25,10 @@ export const recordSchema = object({
   comments_count: pipe(number(), integer(), minValue(0)),
   created_at: string(),
 })
+
+export type Record = InferOutput<typeof recordSchema>
+export type RecordWithInfo = Record & {
+  user: User
+  work: Work
+  episode: Episode
+}

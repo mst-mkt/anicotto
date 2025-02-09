@@ -1,4 +1,5 @@
 import {
+  type InferOutput,
   integer,
   minValue,
   nullable,
@@ -40,7 +41,11 @@ export const personSchema = object({
   staffs_count: pipe(number(), integer(), minValue(0)),
 })
 
+export type Person = InferOutput<typeof personSchema>
+
 export const personWithPrefectureSchema = object({
   ...personSchema.entries,
   prefecture: nullable(prefectureSchema),
 })
+
+export type PersonWithPrefecture = InferOutput<typeof personWithPrefectureSchema>

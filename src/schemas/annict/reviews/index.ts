@@ -1,5 +1,16 @@
-import { integer, minValue, nullable, number, object, pipe, string } from 'valibot'
+import {
+  type InferOutput,
+  integer,
+  minValue,
+  nullable,
+  number,
+  object,
+  pipe,
+  string,
+} from 'valibot'
 import { ratingPicklist } from '../common'
+import type { User } from '../users'
+import type { Work } from '../works'
 
 export const reviewSchema = object({
   id: pipe(number(), integer()),
@@ -15,3 +26,9 @@ export const reviewSchema = object({
   created_at: string(),
   modified_at: nullable(string()),
 })
+
+export type Review = InferOutput<typeof reviewSchema>
+export type ReviewWithInfo = Review & {
+  user: User
+  work: Work
+}

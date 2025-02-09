@@ -1,4 +1,4 @@
-import { integer, number, object, pipe, string } from 'valibot'
+import { type InferOutput, integer, number, object, pipe, string } from 'valibot'
 
 export const seriesSchema = object({
   id: pipe(number(), integer()),
@@ -6,3 +6,5 @@ export const seriesSchema = object({
   name_ro: string(),
   name_en: string(),
 })
+
+export type Series = InferOutput<typeof seriesSchema>
