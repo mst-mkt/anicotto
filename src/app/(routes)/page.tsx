@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
-import { Loading } from '../../components/shared/loading'
-import { Activities } from './_activity/activities'
+import { Activities, ActivitiesLoading } from './_activity/activities'
 import { CurrentSeasonWork, CurrentSeasonWorkSkeleton } from './_current-season/current-season'
 
 const Home = () => (
@@ -8,7 +7,7 @@ const Home = () => (
     <Suspense fallback={<CurrentSeasonWorkSkeleton />}>
       <CurrentSeasonWork />
     </Suspense>
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<ActivitiesLoading />}>
       <Activities />
     </Suspense>
   </div>

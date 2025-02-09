@@ -1,4 +1,5 @@
 import { CloudAlertIcon, FlameIcon } from 'lucide-react'
+import { Loading } from '../../../components/shared/loading'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
 import { Activity } from './activity'
@@ -41,3 +42,14 @@ export const Activities = async () => {
     </div>
   )
 }
+
+export const ActivitiesLoading = () => (
+  <div className="flex flex-col gap-y-8">
+    <div className="flex items-center gap-x-2">
+      <FlameIcon size={24} className="text-anicotto-accent" />
+      <h2 className="shrink grow font-bold text-lg">アクテビティ</h2>
+      <ReloadActivityButton />
+    </div>
+    <Loading />
+  </div>
+)
