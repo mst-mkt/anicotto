@@ -1,4 +1,5 @@
 import type { Work } from '../schemas/annict/works'
+import { proxiedImage } from './image-proxy'
 
 const workImageChace = new Map<string, string | null>()
 
@@ -25,7 +26,9 @@ export const getValidWorkImage = async (workId: string, images: Work['images']) 
     images.twitter.original_avatar_url,
     images.twitter.mini_avatar_url,
     images.twitter.bigger_avatar_url,
-  ].filter((url) => url !== '')
+  ]
+    .map(proxiedImage)
+    .filter((url) => url !== '')
 
   const validUrls = await (async () => {
     for (const url of urls) {
