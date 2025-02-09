@@ -1,11 +1,13 @@
-import { ChevronRightIcon, CloudAlertIcon, EyeIcon } from 'lucide-react'
+import { ChevronRightIcon, CloudAlertIcon, EyeIcon, ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
+import { Image } from '../../../components/shared/image'
 import { AspectRatio } from '../../../components/ui/aspect-ratio'
 import { Button } from '../../../components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '../../../components/ui/carousel'
 import { Skeleton } from '../../../components/ui/skeleton'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
+import { getValidWorkImage } from '../../../lib/work-images'
 import { getCurrentSeason } from '../../../utils/get-season'
 import { SeasonIcon } from './season-icon'
 
@@ -53,14 +55,19 @@ export const CurrentSeasonWork = async () => {
       ) : (
         <Carousel opts={{ autoplay: true, wheel: true }}>
           <CarouselContent>
-            {works.map((work) => (
+            {works.map(async (work) => (
               <CarouselItem key={work.id} className="basis-1/2 md:basis-1/3">
                 <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
                   <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
-                    <img
-                      src={work.images.facebook.og_image_url}
+                    <Image
+                      src={await getValidWorkImage(work.id.toString(), work.images)}
                       alt={work.title}
                       className="h-full w-full object-cover"
+                      fallback={
+                        <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+                          <ImageOffIcon size={40} />
+                        </div>
+                      }
                     />
                   </AspectRatio>
                   <div className="flex w-full flex-col gap-y-2">
