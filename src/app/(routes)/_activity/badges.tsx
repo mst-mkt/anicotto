@@ -142,5 +142,6 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
         見たい
       </Badge>
     ))
+    .with('no_select', () => null)
     .exhaustive()
 }
