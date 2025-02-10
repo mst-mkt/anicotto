@@ -1,6 +1,6 @@
-import type { FC, ReactNode } from 'react'
+import { type FC, type ReactNode, Suspense } from 'react'
 import { Tab } from './_layouts/tabs'
-import { WorkInfo } from './_layouts/work-info/work-info'
+import { WorkInfo, WorkInfoSkeleton } from './_layouts/work-info/work-info'
 import { getWork, getWorkStatus } from './get-work'
 
 type WorksLayoutProps = {
@@ -22,7 +22,9 @@ const WorksLayout: FC<WorksLayoutProps> = async ({ children, params }) => {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <WorkInfo work={work} status={status} />
+      <Suspense fallback={<WorkInfoSkeleton />}>
+        <WorkInfo work={work} status={status} />
+      </Suspense>
       <Tab workId={workId} />
       <div>{children}</div>
     </div>

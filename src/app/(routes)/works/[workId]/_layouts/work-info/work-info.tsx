@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import { Image } from '../../../../../../components/shared/image'
 import { Badge } from '../../../../../../components/ui/badge'
 import { Separator } from '../../../../../../components/ui/separator'
+import { Skeleton } from '../../../../../../components/ui/skeleton'
 import { getValidWorkImage } from '../../../../../../lib/work-images'
 import type { Status } from '../../../../../../schemas/annict/common'
 import type { Work } from '../../../../../../schemas/annict/works'
@@ -45,3 +46,21 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ work, status }) => {
     </div>
   )
 }
+
+export const WorkInfoSkeleton = () => (
+  <div className="flex gap-x-4 overflow-hidden">
+    <div className="h-full w-64 min-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
+      <Skeleton className="aspect-video h-full w-full object-cover" />
+    </div>
+    <div className="flex grow flex-col justify-center gap-y-1">
+      <Skeleton className="h-[1lh] w-3/4 rounded-md text-lg" />
+      <Skeleton className="h-[22px] w-1/3 rounded-full" />
+      <div className="flex items-center gap-x-2 py-3">
+        <Skeleton className="h-[1lh] w-1/2 rounded-md" />
+        <Separator orientation="vertical" />
+        <Skeleton className="h-[1lh] w-1/2 rounded-md" />
+      </div>
+      <Skeleton className="h-[38px] w-1/2 rounded-md" />
+    </div>
+  </div>
+)
