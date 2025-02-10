@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
+import TopLoader from 'nextjs-toploader'
 import { NuqsAdapter } from 'nuqs/adapters/next'
 import type { ReactNode } from 'react'
 import { Toaster } from 'sonner'
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body className="scrollbar-thin scrollbar-thumb-background-200 scrollbar-thumb-rounded-full scrollbar-track-transparent overflow-y-scroll">
+      <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
       <ThemeLoader />
       <SessionProvider>
         <ThemeProvider>
