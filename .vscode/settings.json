@@ -43,17 +43,37 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
 
   "cSpell.ignoreWords": [
-    // annict
+    // project
+    "anicotto",
     "annict",
 
     // author
     "mst-mkt",
 
     // libraries
-    "opennextjs",
     "lefthook",
     "biomejs",
     "nextjs",
     "vercel",
+    "pathpida",
+    "urql",
+    "embla",
+    "embla-carousel",
+    "embla-carousel-autoplay",
+    "neverthrow",
+    "nuqs",
+    "nextjs-toploader",
+    "sonner",
+    "valibot",
+    "pqoqubbw",
+    "shadcn",
+
+    // others
+    "oklch",
+    "followee",
+    "picklist",
+    "syobocal",
+    "pseudoelements",
+    "nocompatible"
   ]
 }
