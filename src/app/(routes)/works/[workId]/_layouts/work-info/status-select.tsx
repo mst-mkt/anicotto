@@ -12,11 +12,11 @@ import {
 import { type FC, useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { match } from 'ts-pattern'
-import { Separator } from '../../../../../components/ui/separator'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../components/ui/tooltip'
-import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
-import type { Work } from '../../../../../schemas/annict/works'
-import { cn } from '../../../../../utils/classnames'
+import { Separator } from '../../../../../../components/ui/separator'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../../components/ui/tooltip'
+import { type Status, statusPicklist } from '../../../../../../schemas/annict/common'
+import type { Work } from '../../../../../../schemas/annict/works'
+import { cn } from '../../../../../../utils/classnames'
 import { updateStatus as updateStatusAction } from './update-status'
 
 type StatusSelectSelectProps = {

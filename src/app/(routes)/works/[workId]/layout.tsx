@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react'
-import { Tab } from './_tabs/tabs'
-import { WorkInfo } from './_work-info/work-info'
+import { Tab } from './_layouts/tabs'
+import { WorkInfo } from './_layouts/work-info/work-info'
 import { getWork, getWorkStatus } from './get-work'
 
 type WorksLayoutProps = {

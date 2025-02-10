@@ -8,7 +8,6 @@ import { cn } from '../../../../../utils/classnames'
 
 const pages = [
   ['', 'トップ'],
-  ['episodes', 'エピソード'],
   ['records', '記録'],
   ['information', '情報'],
   ['casts', 'キャスト'],

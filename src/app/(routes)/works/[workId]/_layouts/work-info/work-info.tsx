@@ -1,11 +1,11 @@
 import { BinocularsIcon, MessageCircleHeartIcon } from 'lucide-react'
 import type { FC } from 'react'
-import { Image } from '../../../../../components/shared/image'
-import { Badge } from '../../../../../components/ui/badge'
-import { Separator } from '../../../../../components/ui/separator'
-import { getValidWorkImage } from '../../../../../lib/work-images'
-import type { Status } from '../../../../../schemas/annict/common'
-import type { Work } from '../../../../../schemas/annict/works'
+import { Image } from '../../../../../../components/shared/image'
+import { Badge } from '../../../../../../components/ui/badge'
+import { Separator } from '../../../../../../components/ui/separator'
+import { getValidWorkImage } from '../../../../../../lib/work-images'
+import type { Status } from '../../../../../../schemas/annict/common'
+import type { Work } from '../../../../../../schemas/annict/works'
 import { StatusSelect } from './status-select'
 
 type WorkInfoProps = {
