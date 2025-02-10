@@ -1,5 +1,6 @@
 'use client'
 
+import { ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type FC, useLayoutEffect } from 'react'
@@ -52,6 +53,15 @@ export const Tab: FC<TabProps> = ({ workId }) => {
           {label}
         </Link>
       ))}
+      <Link
+        href={`https://annict.com/works/${workId}`}
+        rel="noopener noreferrer"
+        target="_blank"
+        className="flex w-fit items-center gap-x-1 break-keep rounded-md px-3 py-2 font-bold text-muted-foreground text-sm transition-colors hover:text-foreground-300"
+      >
+        Annict
+        <ExternalLinkIcon size={16} />
+      </Link>
     </div>
   )
 }
