@@ -38,7 +38,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
                 </main>
                 <Footer className={styles.footer} />
               </div>
-              <Toaster />
+              <Toaster richColors={true} />
             </TooltipProvider>
           </NuqsAdapter>
         </ThemeProvider>
