@@ -22,6 +22,7 @@ export const orderPicklist = picklist(['asc', 'desc'])
 export type Order = InferOutput<typeof orderPicklist>
 
 export const statusPicklist = picklist([
+  'no_select',
   'wanna_watch',
   'watching',
   'watched',

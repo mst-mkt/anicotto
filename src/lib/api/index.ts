@@ -143,6 +143,10 @@ export class AnnictClient {
         return err(`Failed to fetch: ${response.statusText}`)
       }
 
+      if (schemas.response === undefined) {
+        return ok(undefined as Response)
+      }
+
       const jsonResponse = await response.json()
       const validatedResponse = validate(schemas.response, jsonResponse, 'response')
 
