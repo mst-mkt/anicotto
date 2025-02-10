@@ -1,4 +1,4 @@
-import { BinocularsIcon, MessageCircleHeartIcon } from 'lucide-react'
+import { BinocularsIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Image } from '../../../../../../components/shared/image'
 import { Badge } from '../../../../../../components/ui/badge'
@@ -20,7 +20,16 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ work, status }) => {
   return (
     <div className="flex gap-x-4 overflow-hidden">
       <div className="w-64 min-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
-        <Image src={images} alt={work.title} className="h-full w-full object-cover" />
+        <Image
+          src={images}
+          alt={work.title}
+          fallback={
+            <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+              <ImageOffIcon size={40} />
+            </div>
+          }
+          className="h-full w-full object-cover"
+        />
       </div>
       <div className="flex grow flex-col justify-center gap-y-1">
         <h1 className="line-clamp-2 w-full font-bold text-lg md:text-xl">{work.title}</h1>
