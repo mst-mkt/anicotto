@@ -4,6 +4,7 @@
 @source "../components/";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 @plugin "tailwind-scrollbar" {
   /* biome-ignore lint/correctness/noUnknownProperty: this is plugin config */
