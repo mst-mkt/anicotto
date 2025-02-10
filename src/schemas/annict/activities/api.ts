@@ -28,7 +28,7 @@ export const getActivitiesResponseSchema = object({
 
 export const getFollowingActivitiesQuerySchema = object({
   filter_actions: optional(commaSeparatedString(baseActivitySchema.entries.action)),
-  filter_mured: optional(boolean()),
+  filter_muted: optional(boolean()),
   page: optional(pipe(number(), integer(), minValue(1))),
   per_page: optional(pipe(number(), integer(), minValue(1), maxValue(50))),
   sort_id: optional(orderPicklist),

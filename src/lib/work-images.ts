@@ -1,7 +1,7 @@
 import type { Work } from '../schemas/annict/works'
 import { proxiedImage } from './image-proxy'
 
-const workImageChace = new Map<string, string | null>()
+const workImageCache = new Map<string, string | null>()
 
 const checkImage = async (url: string) => {
   try {
@@ -14,8 +14,8 @@ const checkImage = async (url: string) => {
 }
 
 export const getValidWorkImage = async (workId: string, images: Work['images']) => {
-  if (workImageChace.has(workId)) {
-    return workImageChace.get(workId) ?? null
+  if (workImageCache.has(workId)) {
+    return workImageCache.get(workId) ?? null
   }
 
   const urls = [
@@ -38,6 +38,6 @@ export const getValidWorkImage = async (workId: string, images: Work['images']) 
     return null
   })()
 
-  workImageChace.set(workId, validUrls)
+  workImageCache.set(workId, validUrls)
   return validUrls
 }
