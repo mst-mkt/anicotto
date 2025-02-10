@@ -11,6 +11,7 @@ import { SideMenu } from '../components/layouts/side-menu/side-menu'
 import { TooltipProvider } from '../components/ui/tooltip'
 import { ThemeLoader, ThemeProvider } from '../lib/theme-provider'
 import '../styles/globals.css'
+import { cn } from '../utils/classnames'
 import styles from './layout.module.css'
 
 export const metadata: Metadata = {
@@ -20,7 +21,13 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ja" suppressHydrationWarning={true}>
-    <body className="scrollbar-thin scrollbar-thumb-background-200 scrollbar-thumb-rounded-full scrollbar-track-transparent overflow-y-scroll">
+    <body
+      className={cn(
+        'overflow-y-scroll',
+        'scrollbar-thin scrollbar-thumb-background-200 scrollbar-thumb-rounded-full scrollbar-track-transparent',
+        '[&>#nprogress>.spinner]:!hidden md:[&>#nprogress>.spinner]:!block',
+      )}
+    >
       <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
       <ThemeLoader />
       <SessionProvider>
