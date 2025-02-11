@@ -26,7 +26,7 @@ const WorksLayout: FC<WorksLayoutProps> = async ({ children, params }) => {
         <WorkInfo work={work} status={status} />
       </Suspense>
       <Tab workId={workId} />
-      <div>{children}</div>
+      <div className="pt-8">{children}</div>
     </div>
   )
 }
