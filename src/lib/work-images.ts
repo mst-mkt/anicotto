@@ -13,22 +13,30 @@ const checkImage = async (url: string) => {
   return null
 }
 
-export const getValidWorkImage = async (workId: string, images: Work['images']) => {
+export const getValidWorkImage = async (
+  workId: string,
+  images: Work['images'] | (string | null)[],
+) => {
   if (workImageCache.has(workId)) {
     return workImageCache.get(workId) ?? null
   }
 
-  const urls = [
-    images.recommended_url,
-    images.facebook.og_image_url,
-    images.twitter.image_url,
-    images.twitter.normal_avatar_url,
-    images.twitter.original_avatar_url,
-    images.twitter.mini_avatar_url,
-    images.twitter.bigger_avatar_url,
-  ]
-    .map(proxiedImage)
+  const urls = (
+    Array.isArray(images)
+      ? images
+      : [
+          images.recommended_url,
+          images.facebook.og_image_url,
+          images.twitter.image_url,
+          images.twitter.normal_avatar_url,
+          images.twitter.original_avatar_url,
+          images.twitter.mini_avatar_url,
+          images.twitter.bigger_avatar_url,
+        ]
+  )
     .filter((url) => url !== '')
+    .filter((url) => url !== null)
+    .map(proxiedImage)
 
   const validUrls = await (async () => {
     for (const url of urls) {

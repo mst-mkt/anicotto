@@ -62,7 +62,11 @@ const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Car
         ...opts,
         axis: axisMap[orientation],
       },
-      [...(plugins ?? []), opts?.autoplay && AutoPlay(), opts?.wheel && WheelGesturesPlugin()],
+      [
+        ...(plugins ?? []),
+        opts?.autoplay ? AutoPlay() : [],
+        opts?.wheel ? WheelGesturesPlugin() : [],
+      ].flat(),
     )
     const [canScrollPrev, setCanScrollPrev] = useState(false)
     const [canScrollNext, setCanScrollNext] = useState(false)
