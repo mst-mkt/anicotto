@@ -2,6 +2,7 @@ import { HeartIcon, MessageCircleHeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import Markdown from 'react-markdown'
+import RemarkBreaks from 'remark-breaks'
 import RemarkGfm from 'remark-gfm'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../components/ui/avatar'
 import { Button } from '../../../../../components/ui/button'
@@ -43,7 +44,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
             <div className="rounded-lg bg-muted p-3">
               <Markdown
                 skipHtml={true}
-                remarkPlugins={[RemarkGfm]}
+                remarkPlugins={[RemarkGfm, RemarkBreaks]}
                 className="prose dark:prose-invert prose-neutral w-full max-w-full break-words break-all [&_a]:text-anicotto-accent"
               >
                 {review.body}
