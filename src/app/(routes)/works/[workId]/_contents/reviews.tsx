@@ -44,7 +44,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
               <Markdown
                 skipHtml={true}
                 remarkPlugins={[RemarkGfm]}
-                className="prose dark:prose-invert prose-neutral w-full max-w-full [&_a]:text-anicotto-accent"
+                className="prose dark:prose-invert prose-neutral w-full max-w-full break-words break-all [&_a]:text-anicotto-accent"
               >
                 {review.body}
               </Markdown>
