@@ -14,7 +14,7 @@ export const getWorkSeries = async (workId: Work['id']) => {
               annictId
               name
               nameEn
-              works {
+              works (orderBy: { field: SEASON, direction: DESC }) {
                 edges {
                   item {
                     annictId
