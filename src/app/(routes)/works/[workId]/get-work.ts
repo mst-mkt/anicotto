@@ -35,7 +35,7 @@ export const getEpisodes = async (workId: number) => {
   await auth()
   const episodesResult = await annictApiClient.getEpisodes(
     { query: { filter_work_id: workId, sort_sort_number: 'asc' } },
-    { next: { tags: [`episodes-${workId}`] } },
+    { next: { tags: [`work-episodes-${workId}`] } },
   )
 
   if (episodesResult.isErr()) {
@@ -50,7 +50,7 @@ export const getReviews = async (workId: number) => {
   await auth()
   const reviewsResult = await annictApiClient.getReviews(
     { query: { filter_work_id: workId, filter_has_review_body: true, sort_likes_count: 'desc' } },
-    { next: { tags: [`reviews-${workId}`] } },
+    { next: { tags: [`work-reviews-${workId}`] } },
   )
 
   if (reviewsResult.isErr()) {

@@ -1,9 +1,7 @@
 import { HeartIcon, MessageCircleHeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
-import Markdown from 'react-markdown'
-import RemarkBreaks from 'remark-breaks'
-import RemarkGfm from 'remark-gfm'
+import { Markdown } from '../../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../components/ui/avatar'
 import { Button } from '../../../../../components/ui/button'
 import type { Work } from '../../../../../schemas/annict/works'
@@ -42,13 +40,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
           </Avatar>
           <div className="flex w-full flex-col gap-y-2">
             <div className="rounded-lg bg-muted p-3">
-              <Markdown
-                skipHtml={true}
-                remarkPlugins={[RemarkGfm, RemarkBreaks]}
-                className="prose dark:prose-invert prose-neutral w-full max-w-full break-words break-all [&_a]:text-anicotto-accent"
-              >
-                {review.body}
-              </Markdown>
+              <Markdown>{review.body}</Markdown>
             </div>
             <div className="flex w-full items-center justify-between gap-x-4">
               <div className="flex items-center gap-x-2 text-anicotto-accent">
