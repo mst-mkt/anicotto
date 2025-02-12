@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { FC } from 'react'
-import Markdown from 'react-markdown'
+import { Markdown } from '../../../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../components/ui/avatar'
 import type { ReviewWithInfo } from '../../../../../../schemas/annict/reviews'
 import { timeText } from '../../../../../../utils/time-text'
