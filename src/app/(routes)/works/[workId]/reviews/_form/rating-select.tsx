@@ -55,7 +55,7 @@ export const RatingSelect: FC<RatingSelectProps> = ({
         <Label
           key={rating.value}
           className={cn(
-            '!border-input relative flex w-full shrink cursor-pointer items-center justify-center gap-x-2 border p-2 text-sm outline-background-900/10 transition-colors',
+            '!border-input relative flex w-full shrink cursor-pointer flex-col items-center justify-center gap-2 border p-2 text-sm outline-background-900/10 transition-colors md:flex-row',
             'first:rounded-s-lg last:rounded-e-lg',
             'has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50',
             'has-[[data-state=checked]]:z-10',
