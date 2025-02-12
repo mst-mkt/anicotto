@@ -9,7 +9,7 @@ const getActivities = async () => {
   await auth()
 
   const activities = await annictApiClient.getFollowingActivities(
-    { query: { per_page: 50, sort_id: 'desc' } },
+    { query: { per_page: 20, sort_id: 'desc' } },
     { next: { tags: ['activities'] } },
   )
 

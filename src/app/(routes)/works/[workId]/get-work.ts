@@ -49,7 +49,14 @@ export const getEpisodes = async (workId: number) => {
 export const getReviews = async (workId: number) => {
   await auth()
   const reviewsResult = await annictApiClient.getReviews(
-    { query: { filter_work_id: workId, filter_has_review_body: true, sort_likes_count: 'desc' } },
+    {
+      query: {
+        filter_work_id: workId,
+        filter_has_review_body: true,
+        sort_likes_count: 'desc',
+        per_page: 20,
+      },
+    },
     { next: { tags: [`work-reviews-${workId}`] } },
   )
 
