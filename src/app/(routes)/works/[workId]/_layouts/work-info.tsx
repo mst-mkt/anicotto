@@ -31,10 +31,11 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
 
   return (
     <div className="flex gap-x-4 overflow-hidden">
-      <div className="w-64 min-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
+      <div className="relative w-64 min-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
         <Image
           src={images}
           alt={work.title}
+          fill={true}
           fallback={
             <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
               <ImageOffIcon size={40} />

@@ -1,15 +1,15 @@
-import type { FC, ImgHTMLAttributes, ReactNode } from 'react'
+import NextImage from 'next/image'
+import type { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
 
 type ImageProps = {
   src: string | null | undefined
   fallback?: ReactNode
-} & Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'>
+} & Omit<ComponentPropsWithoutRef<typeof NextImage>, 'src'>
 
 export const Image: FC<ImageProps> = ({ src, fallback, ...props }) => {
   if (typeof src !== 'string') {
     return <>{fallback}</>
   }
 
-  // biome-ignore lint/a11y/useAltText: `props` has `alt` attribute
-  return <img src={src} {...props} />
+  return <NextImage src={src} {...props} />
 }

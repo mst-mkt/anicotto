@@ -63,7 +63,7 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
     ))
   ) : (
     <div className="flex items-center gap-x-4 rounded-lg border border-muted p-2">
-      <div className="aspect-square h-24 shrink-0 grow-0 overflow-hidden rounded-md md:aspect-video">
+      <div className="relative aspect-square h-24 shrink-0 grow-0 overflow-hidden rounded-md md:aspect-video">
         <Image
           src={image}
           fallback={
@@ -71,6 +71,7 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
               <ImageOffIcon size={40} />
             </div>
           }
+          fill={true}
           alt={activity.work.title}
           className="h-full w-full object-cover"
         />

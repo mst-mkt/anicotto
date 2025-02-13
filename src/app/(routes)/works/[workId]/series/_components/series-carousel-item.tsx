@@ -30,6 +30,8 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
         <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
           <Image
             src={validThumbnail}
+            alt={work.title}
+            fill={true}
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                 <ImageOffIcon size={48} />
