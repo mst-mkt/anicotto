@@ -6,7 +6,7 @@ export const getActivities = async (per = 20, page = 1) => {
 
   const activities = await annictApiClient.getFollowingActivities(
     { query: { per_page: per, page, sort_id: 'desc' } },
-    { next: { tags: ['activities'] } },
+    { next: { tags: ['activities'], revalidate: 60 } },
   )
 
   if (activities.isErr()) {

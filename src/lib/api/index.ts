@@ -129,11 +129,16 @@ export class AnnictClient {
       const url = generateUrlWithQuery(`${this.baseUrl}${pathWithParams}`, validatedQuery.value)
 
       const fetchOptions: RequestInit = {
+        cache: 'force-cache',
         ...options,
         method,
         headers: {
           ...headers,
           ...options?.headers,
+        },
+        next: {
+          revalidate: 3600,
+          ...options?.next,
         },
       }
 

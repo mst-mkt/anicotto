@@ -12,10 +12,15 @@ export const annictGraphqlClient = createClient({
     }
 
     return fetch(url, {
+      cache: 'force-cache',
       ...fetchOptions,
       headers: {
         ...fetchOptions.headers,
         Authorization: `Bearer ${session.accessToken}`,
+      },
+      next: {
+        revalidate: 3600,
+        ...fetchOptions.next,
       },
     })
   },
