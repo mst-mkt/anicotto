@@ -41,11 +41,15 @@ const RatingBadge: FC<RatingBadgeProps> = ({ title, rating }) =>
     <Badge
       variant="secondary"
       className={cn(
-        'gap-x-1',
-        rating === 'great' && '!border-amber-500/12 bg-amber-500/10 text-amber-600',
-        rating === 'good' && '!border-emerald-500/12 bg-emerald-500/10 text-emerald-600',
-        rating === 'average' && '!border-cyan-500/12 bg-cyan-500/10 text-cyan-600',
-        rating === 'bad' && '!border-rose-500/12 bg-rose-500/10 text-rose-600',
+        'cursor-default gap-x-1',
+        rating === 'great' &&
+          '!border-anicotto-rating-good/12 bg-anicotto-rating-great-pale/10 text-anicotto-rating-great hover:bg-anicotto-rating-great-pale/16',
+        rating === 'good' &&
+          '!border-anicotto-rating-good/12 bg-anicotto-rating-good-pale/10 text-anicotto-rating-good hover:bg-anicotto-rating-good-pale/16',
+        rating === 'average' &&
+          '!border-anicotto-rating-average/12 bg-anicotto-rating-average-pale/10 text-anicotto-rating-average hover:bg-anicotto-rating-average-pale/16',
+        rating === 'bad' &&
+          '!border-anicotto-rating-bad/12 bg-anicotto-rating-bad-pale/10 text-anicotto-rating-bad hover:bg-anicotto-rating-bad-pale/16',
       )}
     >
       <span className="font-normal opacity-70">{title}</span>

@@ -12,6 +12,14 @@ body {
 
   /* anicotto-accent: oklch(70% 0.2 20) */
   --anicotto-accent: 70% 0.2 20;
+  /* anicotto-rating-great: oklch(74.5% 0.15 175) */
+  --anicotto-rating-great: 74.5% 0.15 175;
+  /* anicotto-rating-good: oklch(60.35% 0.17 260) */
+  --anicotto-rating-good: 60.35% 0.17 260;
+  /* anicotto-rating-average: oklch(77% 0.14 58.1) */
+  --anicotto-rating-average: 77% 0.14 58.1;
+  /* anicotto-rating-bad: oklch(64% 0.19 22.8) */
+  --anicotto-rating-bad: 64% 0.19 22.8;
 
   /* shadcn/ui variables */
 

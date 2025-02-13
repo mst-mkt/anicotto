@@ -16,6 +16,11 @@
 @theme {
   --color-anicotto-accent: oklch(var(--anicotto-accent));
 
+  --color-anicotto-rating-great: oklch(var(--anicotto-rating-great));
+  --color-anicotto-rating-good: oklch(var(--anicotto-rating-good));
+  --color-anicotto-rating-average: oklch(var(--anicotto-rating-average));
+  --color-anicotto-rating-bad: oklch(var(--anicotto-rating-bad));
+
   --color-background: oklch(var(--background));
   --color-foreground: oklch(var(--foreground));
   --color-card: oklch(var(--card));
@@ -113,5 +118,46 @@
     in srgb,
     var(--color-anicotto-accent),
     var(--color-background) 90%
+  );
+
+  --color-anicotto-rating-great-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-great),
+    var(--color-background) 50%
+  );
+  --color-anicotto-rating-great-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-great),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-rating-good-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-good),
+    var(--color-background) 50%
+  );
+  --color-anicotto-rating-good-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-good),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-rating-average-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-average),
+    var(--color-background) 50%
+  );
+  --color-anicotto-rating-average-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-average),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-rating-bad-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-bad),
+    var(--color-background) 50%
+  );
+  --color-anicotto-rating-bad-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-rating-bad),
+    var(--color-foreground) 50%
   );
 }

@@ -10,28 +10,28 @@ const rating = [
     label: 'とても良い',
     icon: MoonStarIcon,
     className:
-      'has-[[data-state=checked]]:!border-amber-700 has-[[data-state=checked]]:text-amber-700 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-amber-500/4 has-[[data-state=checked]]:[&>svg]:text-amber-700',
+      'has-[[data-state=checked]]:!border-anicotto-rating-great has-[[data-state=checked]]:text-anicotto-rating-great has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-great/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-great',
   },
   {
     value: 'good',
     label: '良い',
     icon: SparkleIcon,
     className:
-      'has-[[data-state=checked]]:!border-emerald-700 has-[[data-state=checked]]:text-emerald-700 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-emerald-500/4 has-[[data-state=checked]]:[&>svg]:text-emerald-700',
+      'has-[[data-state=checked]]:!border-anicotto-rating-good has-[[data-state=checked]]:text-anicotto-rating-good has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-good/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-good',
   },
   {
     value: 'average',
     label: '普通',
     icon: CupSodaIcon,
     className:
-      'has-[[data-state=checked]]:!border-cyan-700 has-[[data-state=checked]]:text-cyan-700 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-cyan-500/4 has-[[data-state=checked]]:[&>svg]:text-cyan-700',
+      'has-[[data-state=checked]]:!border-anicotto-rating-average has-[[data-state=checked]]:text-anicotto-rating-average has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-average/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-average',
   },
   {
     value: 'bad',
     label: '良くない',
     icon: BombIcon,
     className:
-      'has-[[data-state=checked]]:!border-rose-700 has-[[data-state=checked]]:text-rose-700 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-rose-500/4 has-[[data-state=checked]]:[&>svg]:text-rose-700',
+      'has-[[data-state=checked]]:!border-anicotto-rating-bad has-[[data-state=checked]]:text-anicotto-rating-bad has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-bad/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-bad',
   },
 ] as const
 

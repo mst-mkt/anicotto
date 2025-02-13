@@ -26,7 +26,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-amber-600 px-2 py-1 text-white hover:bg-amber-700',
+          '!border-anicotto-rating-great/16 bg-anicotto-rating-great-pale/16 text-anicotto-rating-great hover:bg-anicotto-rating-great-pale/24',
           props.className,
         )}
       >
@@ -38,7 +38,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-emerald-600 px-2 py-1 text-white hover:bg-emerald-700',
+          '!border-anicotto-rating-good/16 bg-anicotto-rating-good-pale/16 text-anicotto-rating-good hover:bg-anicotto-rating-good-pale/24',
           props.className,
         )}
       >
@@ -50,7 +50,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-cyan-600 px-2 py-1 text-white hover:bg-cyan-700',
+          '!border-anicotto-rating-average/16 bg-anicotto-rating-average-pale/16 text-anicotto-rating-average hover:bg-anicotto-rating-average-pale/24',
           props.className,
         )}
       >
@@ -62,7 +62,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-rose-700 px-2 py-1 text-white hover:bg-rose-800',
+          '!border-anicotto-rating-bad/16 bg-anicotto-rating-bad-pale/16 text-anicotto-rating-bad hover:bg-anicotto-rating-bad-pale/24',
           props.className,
         )}
       >

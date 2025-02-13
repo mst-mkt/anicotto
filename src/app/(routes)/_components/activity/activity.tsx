@@ -89,7 +89,11 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
           ))
           .with({ action: 'create_review' }, ({ review }) => (
             <div className="flex items-center gap-x-2">
-              <RatingBadge rating={review.rating_overall_state} className="shrink-0 grow-0" />
+              <RatingBadge
+                variant="secondary"
+                rating={review.rating_overall_state}
+                className="shrink-0 grow-0 cursor-default gap-x-1 px-2 py-1"
+              />
               {review.body.trim() !== '' && (
                 <span className="line-clamp-1 shrink ">{review.body}</span>
               )}
