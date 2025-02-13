@@ -15,6 +15,7 @@ const envVariablesSchema = object({
 const envVariablesResult = safeParse(envVariablesSchema, process.env)
 
 if (!envVariablesResult.success) {
+  console.error(process.env)
   throw new Error(`Invalid environment variables:
 ${envVariablesResult.issues.map((error) => `  - ${error.message}`).join('\n')}
 `)

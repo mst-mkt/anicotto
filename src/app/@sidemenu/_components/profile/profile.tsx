@@ -1,6 +1,6 @@
 import { EllipsisIcon, ExternalLinkIcon, UserCircleIcon } from 'lucide-react'
 import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,15 +9,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../../components/ui/dropdown'
-import { Skeleton } from '../../../components/ui/skeleton'
-import { annictApiClient } from '../../../lib/api/client'
-import { SideProfileLogout } from './side-profile-logout'
+} from '../../../../components/ui/dropdown'
+import { Skeleton } from '../../../../components/ui/skeleton'
+import { getMe } from '../../get-me'
+import { SideProfileLogout } from './logout'
 
 export const SideProfile = async () => {
-  const profile = await annictApiClient.getMe({})
+  const profile = await getMe()
 
-  if (profile.isErr()) {
+  if (profile === null) {
     return null
   }
 
@@ -26,14 +26,14 @@ export const SideProfile = async () => {
       <DropdownMenuTrigger asChild={true}>
         <div className="sticky bottom-8 mt-auto flex cursor-pointer items-center justify-between gap-x-2 rounded-full p-2 transition-colors hover:bg-background-50">
           <Avatar className="h-12 w-12 shrink-0">
-            <AvatarImage src={profile.value.avatar_url} alt={profile.value.name} loading="lazy" />
+            <AvatarImage src={profile.avatar_url} alt={profile.name} loading="lazy" />
             <AvatarFallback className="bg-anicotto-accent-300 text-white">
-              {profile.value.name.slice(0, 1)}
+              {profile.name.slice(0, 1)}
             </AvatarFallback>
           </Avatar>
           <div className="flex w-full shrink grow flex-col gap-y-1">
-            <p className="truncate text-sm">{profile.value.name}</p>
-            <p className="truncate text-foreground-300 text-xs">@{profile.value.username}</p>
+            <p className="truncate text-sm">{profile.name}</p>
+            <p className="truncate text-foreground-300 text-xs">@{profile.username}</p>
           </div>
           <div className="shrink-0 p-4">
             <EllipsisIcon size={16} />
@@ -51,7 +51,7 @@ export const SideProfile = async () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild={true}>
-            <Link href={`https://annict.com/@${profile.value.username}`}>
+            <Link href={`https://annict.com/@${profile.username}`}>
               <ExternalLinkIcon />
               <span>Annict プロフィール</span>
             </Link>

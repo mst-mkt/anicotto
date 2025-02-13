@@ -2,15 +2,15 @@
 
 import Link from 'next/link'
 import { type FC, useCallback, useRef } from 'react'
-import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../components/icons/types'
+import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../../components/icons/types'
 
-export type SideMenuItemProps = {
+type SidemenuLinkItemProps = {
   icon: PqoqubbwIcon
   href: string
   label: string
 }
 
-export const SideMenuItem: FC<SideMenuItemProps> = (props) => {
+export const SidemenuLinkItem: FC<SidemenuLinkItemProps> = (props) => {
   const iconRef = useRef<PqoqubbwIconHandle>(null)
 
   const handleMouseEnter = useCallback(() => {

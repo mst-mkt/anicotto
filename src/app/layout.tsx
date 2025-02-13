@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import TopLoader from 'nextjs-toploader'
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { Toaster } from 'sonner'
 import { twJoin } from 'tailwind-merge'
 import { ThemeLoader } from '../lib/theme/loader'
@@ -8,7 +8,7 @@ import '../styles/globals.css'
 import { cn } from '../utils/classnames'
 import { Footer } from './_layouts/footer'
 import { Header } from './_layouts/header'
-import { SideMenu } from './_layouts/side-menu/side-menu'
+import { SidemenuContainer } from './_layouts/sidemenu-container'
 import styles from './layout.module.css'
 import { Providers } from './providers'
 
@@ -17,7 +17,12 @@ export const metadata: Metadata = {
   description: 'Third-party Annict web client',
 }
 
-const RootLayout = ({ children }: { children: ReactNode }) => (
+type RootLayoutProps = {
+  children: ReactNode
+  sidemenu: ReactNode
+}
+
+const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(
@@ -31,7 +36,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
         <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
         <div className={styles.layout}>
           <Header className={styles.header} />
-          <SideMenu className={styles.sideMenu} />
+          <SidemenuContainer className={styles.sideMenu}>{sidemenu}</SidemenuContainer>
           <main
             className={twJoin(
               styles.main,
