@@ -1,6 +1,6 @@
 'use server'
 
-import { signIn } from 'next-auth/react'
+import { signIn } from '../../../lib/auth'
 
 export const loginAction = async () => {
   await signIn('annict', { redirectTo: '/' })
