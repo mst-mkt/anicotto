@@ -7,7 +7,7 @@ import { Carousel, CarouselContent, CarouselItem } from '../../../components/ui/
 import { Skeleton } from '../../../components/ui/skeleton'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
-import { getValidWorkImage } from '../../../lib/work-images'
+import { getValidWorkImage } from '../../../lib/images/valid-url'
 import { getCurrentSeason } from '../../../utils/get-season'
 import { SeasonIcon } from './season-icon'
 

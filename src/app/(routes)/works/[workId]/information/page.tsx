@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
 } from '../../../../../components/ui/table'
-import { proxiedImage } from '../../../../../lib/image-proxy'
+import { proxiedImage } from '../../../../../lib/images/proxy'
 import { getWork } from '../get-work'
 
 type WorkInformationPageProps = {

@@ -6,7 +6,7 @@ import { Image } from '../../../../../../components/shared/image'
 import { AspectRatio } from '../../../../../../components/ui/aspect-ratio'
 import { Badge } from '../../../../../../components/ui/badge'
 import { CarouselItem } from '../../../../../../components/ui/carousel'
-import { getValidWorkImage } from '../../../../../../lib/work-images'
+import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
 import type { Series } from '../get-work-series'
 
 type SeriesCarouselItemProps = {

@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
-import { annictApiClient } from './api/client'
-import { AnnictProvider } from './auth-provider'
-import { envVariables } from './env-variables'
+import { annictApiClient } from '../api/client'
+import { envVariables } from '../env-variables'
+import { AnnictProvider } from './provider'
 import 'next-auth/jwt'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({

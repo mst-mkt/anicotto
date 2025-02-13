@@ -1,5 +1,5 @@
-import type { Work } from '../schemas/annict/works'
-import { proxiedImage } from './image-proxy'
+import type { Work } from '../../schemas/annict/works'
+import { proxiedImage } from './proxy'
 
 const workImageCache = new Map<string, string | null>()
 
