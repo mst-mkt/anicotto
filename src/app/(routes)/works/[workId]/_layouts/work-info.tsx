@@ -1,20 +1,32 @@
-import { BinocularsIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
+import { BinocularsIcon, CloudAlertIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Image } from '../../../../../components/shared/image'
 import { Badge } from '../../../../../components/ui/badge'
 import { Separator } from '../../../../../components/ui/separator'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import { getValidWorkImage } from '../../../../../lib/images/valid-url'
-import type { Status } from '../../../../../schemas/annict/common'
 import type { Work } from '../../../../../schemas/annict/works'
+import { getWorkStatus } from './get-status'
+import { getWork } from './get-work'
 import { StatusSelect } from './status-select'
 
 type WorkInfoProps = {
-  work: Work
-  status: Status | null
+  workId: Work['id']
 }
 
-export const WorkInfo: FC<WorkInfoProps> = async ({ work, status }) => {
+export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
+  const work = await getWork(workId)
+  const status = await getWorkStatus(workId)
+
+  if (work === null || status === null) {
+    return (
+      <div className="flex flex-col items-center gap-y-4 p-16">
+        <CloudAlertIcon size={64} className="text-anicotto-accent" />
+        <p className="font-bold text-xl">作品情報が取得できませんでした</p>
+      </div>
+    )
+  }
+
   const images = await getValidWorkImage(work.id.toString(), work.images)
 
   return (
