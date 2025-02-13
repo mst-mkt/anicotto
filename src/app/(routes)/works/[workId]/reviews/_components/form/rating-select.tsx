@@ -1,35 +1,36 @@
-import { BombIcon, CupSodaIcon, MoonStarIcon, SparkleIcon } from 'lucide-react'
+import {} from 'lucide-react'
 import type { FC } from 'react'
 import { Label } from '../../../../../../../components/ui/label'
 import { RadioGroup, RadioGroupItem } from '../../../../../../../components/ui/radio-group'
+import { RATING_ICON, RATING_TEXT } from '../../../../../../../constants/rating'
 import { cn } from '../../../../../../../utils/classnames'
 
 const rating = [
   {
     value: 'great',
-    label: 'とても良い',
-    icon: MoonStarIcon,
+    label: RATING_TEXT.great,
+    icon: RATING_ICON.great,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-great has-[[data-state=checked]]:text-anicotto-rating-great has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-great/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-great',
   },
   {
     value: 'good',
-    label: '良い',
-    icon: SparkleIcon,
+    label: RATING_TEXT.good,
+    icon: RATING_ICON.good,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-good has-[[data-state=checked]]:text-anicotto-rating-good has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-good/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-good',
   },
   {
     value: 'average',
-    label: '普通',
-    icon: CupSodaIcon,
+    label: RATING_TEXT.average,
+    icon: RATING_ICON.average,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-average has-[[data-state=checked]]:text-anicotto-rating-average has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-average/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-average',
   },
   {
     value: 'bad',
-    label: '良くない',
-    icon: BombIcon,
+    label: RATING_TEXT.bad,
+    icon: RATING_ICON.bad,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-bad has-[[data-state=checked]]:text-anicotto-rating-bad has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-bad/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-bad',
   },

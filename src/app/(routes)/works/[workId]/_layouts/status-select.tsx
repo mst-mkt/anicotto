@@ -1,19 +1,11 @@
 'use client'
 
-import {
-  CheckIcon,
-  CircleIcon,
-  CircleSlashIcon,
-  LoaderIcon,
-  PauseIcon,
-  PlayIcon,
-  SquareIcon,
-} from 'lucide-react'
+import { LoaderIcon } from 'lucide-react'
 import { type FC, useCallback, useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { match } from 'ts-pattern'
 import { Separator } from '../../../../../components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../components/ui/tooltip'
+import { STATUS_ICON, STATUS_TEXT } from '../../../../../constants/status'
 import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
 import type { Work } from '../../../../../schemas/annict/works'
 import { cn } from '../../../../../utils/classnames'
@@ -63,16 +55,11 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
     <div className="flex items-center gap-x-4">
       <div className="flex w-fit gap-x-0.5 rounded-full border border-muted p-1">
         {statusPicklist.options
-          .map((option) =>
-            match(option)
-              .with('no_select', (value) => ({ value, label: '未選択', icon: CircleSlashIcon }))
-              .with('wanna_watch', (value) => ({ value, label: '見たい', icon: CircleIcon }))
-              .with('watching', (value) => ({ value, label: '見てる', icon: PlayIcon }))
-              .with('watched', (value) => ({ value, label: '見た', icon: CheckIcon }))
-              .with('on_hold', (value) => ({ value, label: '一時中断', icon: PauseIcon }))
-              .with('stop_watching', (value) => ({ value, label: '視聴中止', icon: SquareIcon }))
-              .exhaustive(),
-          )
+          .map((option) => ({
+            value: option,
+            label: STATUS_TEXT[option],
+            icon: STATUS_ICON[option],
+          }))
           .map((option) => (
             <Tooltip key={option.value}>
               <TooltipTrigger asChild={true}>
@@ -99,14 +86,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
       </div>
       <Separator orientation="vertical" className="hidden h-1/2 sm:block" />
       <p className="hidden truncate text-muted-foreground text-sm sm:block">
-        {match(status)
-          .with('no_select', () => '未選択')
-          .with('wanna_watch', () => '見たい')
-          .with('watching', () => '見てる')
-          .with('watched', () => '見た')
-          .with('on_hold', () => '一時中断')
-          .with('stop_watching', () => '視聴中止')
-          .exhaustive()}
+        {STATUS_TEXT[status]}
       </p>
     </div>
   )

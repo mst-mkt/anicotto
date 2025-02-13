@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import { match } from 'ts-pattern'
 import { Badge } from '../../../../../../../components/ui/badge'
+import { RATING_TEXT } from '../../../../../../../constants/rating'
 import type { Rating } from '../../../../../../../schemas/annict/common'
 import type { ReviewWithInfo } from '../../../../../../../schemas/annict/reviews'
 import { cn } from '../../../../../../../utils/classnames'
@@ -53,13 +53,6 @@ const RatingBadge: FC<RatingBadgeProps> = ({ title, rating }) =>
       )}
     >
       <span className="font-normal opacity-70">{title}</span>
-      <span>
-        {match(rating)
-          .with('great', () => 'とても良い')
-          .with('good', () => '良い')
-          .with('average', () => '普通')
-          .with('bad', () => '良くない')
-          .exhaustive()}
-      </span>
+      <span>{RATING_TEXT[rating]}</span>
     </Badge>
   )
