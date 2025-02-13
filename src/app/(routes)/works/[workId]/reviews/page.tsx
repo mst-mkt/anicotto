@@ -1,7 +1,6 @@
 import { type FC, Suspense } from 'react'
-import { Reviews } from '../_components/reviews'
 import { ReviewForm } from './_components/form/review-form'
-import { ReviewsSkeleton } from './_components/review-list/reviews'
+import { Reviews, ReviewsSkeleton } from './_components/review-list/reviews'
 
 type WorkReviewsPageProps = {
   params: Promise<{
