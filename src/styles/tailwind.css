@@ -21,6 +21,12 @@
   --color-anicotto-rating-average: oklch(var(--anicotto-rating-average));
   --color-anicotto-rating-bad: oklch(var(--anicotto-rating-bad));
 
+  --color-anicotto-status-wanna_watch: oklch(var(--anicotto-status-wanna_watch));
+  --color-anicotto-status-watching: oklch(var(--anicotto-status-watching));
+  --color-anicotto-status-watched: oklch(var(--anicotto-status-watched));
+  --color-anicotto-status-on_hold: oklch(var(--anicotto-status-on_hold));
+  --color-anicotto-status-stop_watching: oklch(var(--anicotto-status-stop_watching));
+
   --color-background: oklch(var(--background));
   --color-foreground: oklch(var(--foreground));
   --color-card: oklch(var(--card));
@@ -158,6 +164,57 @@
   --color-anicotto-rating-bad-deep: color-mix(
     in srgb,
     var(--color-anicotto-rating-bad),
+    var(--color-foreground) 50%
+  );
+
+  --color-anicotto-status-wanna_watch-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-status-wanna_watch),
+    var(--color-background) 50%
+  );
+  --color-anicotto-status-watching-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-status-watching),
+    var(--color-background) 50%
+  );
+  --color-anicotto-status-watched-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-status-watched),
+    var(--color-background) 50%
+  );
+  --color-anicotto-status-on_hold-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-status-on_hold),
+    var(--color-background) 50%
+  );
+  --color-anicotto-status-stop_watching-pale: color-mix(
+    in srgb,
+    var(--color-anicotto-status-stop_watching),
+    var(--color-background) 50%
+  );
+  --color-anicotto-status-wanna_watch-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-status-wanna_watch),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-status-watching-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-status-watching),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-status-watched-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-status-watched),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-status-on_hold-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-status-on_hold),
+    var(--color-foreground) 50%
+  );
+  --color-anicotto-status-stop_watching-deep: color-mix(
+    in srgb,
+    var(--color-anicotto-status-stop_watching),
     var(--color-foreground) 50%
   );
 }

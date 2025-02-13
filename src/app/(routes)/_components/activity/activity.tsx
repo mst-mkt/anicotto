@@ -100,7 +100,11 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
             </div>
           ))
           .with({ action: 'create_status' }, ({ status }) => (
-            <StatusBadge status={status.kind} className="w-fit" />
+            <StatusBadge
+              variant="secondary"
+              status={status.kind}
+              className="w-fit cursor-default gap-x-1 px-2 py-1"
+            />
           ))
           .otherwise(() => null)}
       </div>

@@ -88,7 +88,10 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
     .with('watching', () => (
       <Badge
         {...props}
-        className={cn('gap-x-1 bg-sky-600 px-2 py-1 text-white hover:bg-sky-700', props.className)}
+        className={cn(
+          '!border-anicotto-status-watching/16 bg-anicotto-status-watching-pale/16 text-anicotto-status-watching hover:bg-anicotto-status-watching-pale/24',
+          props.className,
+        )}
       >
         <PlayIcon size={16} />
         見てる
@@ -98,7 +101,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-emerald-600 px-2 py-1 text-white hover:bg-emerald-700',
+          '!border-anicotto-status-watched/16 bg-anicotto-status-watched-pale/16 text-anicotto-status-watched hover:bg-anicotto-status-watched-pale/24',
           props.className,
         )}
       >
@@ -110,7 +113,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-rose-700 px-2 py-1 text-white hover:bg-rose-800',
+          '!border-anicotto-status-on_hold/16 bg-anicotto-status-on_hold-pale/16 text-anicotto-status-on_hold hover:bg-anicotto-status-on_hold-pale/24',
           props.className,
         )}
       >
@@ -122,7 +125,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-stone-500 px-2 py-1 text-white hover:bg-stone-600',
+          '!border-anicotto-status-stop_watching/16 bg-anicotto-status-stop_watching-pale/16 text-anicotto-status-stop_watching hover:bg-anicotto-status-stop_watching-pale/24',
           props.className,
         )}
       >
@@ -134,7 +137,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
       <Badge
         {...props}
         className={cn(
-          'gap-x-1 bg-orange-600 px-2 py-1 text-white hover:bg-orange-700',
+          '!border-anicotto-status-wanna_watch/16 bg-anicotto-status-wanna_watch-pale/16 text-anicotto-status-wanna_watch hover:bg-anicotto-status-wanna_watch-pale/24',
           props.className,
         )}
       >

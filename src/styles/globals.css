@@ -21,6 +21,17 @@ body {
   /* anicotto-rating-bad: oklch(64% 0.19 22.8) */
   --anicotto-rating-bad: 64% 0.19 22.8;
 
+  /* anicotto-status-wanna_watch: oklch(67% 0.18 27.9) */
+  --anicotto-status-wanna_watch: 67% 0.18 27.9;
+  /* anicotto-status-watching: oklch(75% 0.13 190.5) */
+  --anicotto-status-watching: 75% 0.13 190.5;
+  /* anicotto-status-watched: oklch(65.26% 0.21 138.6) */
+  --anicotto-status-watched: 65.26% 0.21 138.6;
+  /* anicotto-status-on_hold: oklch(58% 0.18 330) */
+  --anicotto-status-on_hold: 58% 0.18 330;
+  /* anicotto-status-stop_watching: oklch(64% 0 0) */
+  --anicotto-status-stop_watching: 64% 0 0;
+
   /* shadcn/ui variables */
 
   /* background: oklch(100% 0 0) */
