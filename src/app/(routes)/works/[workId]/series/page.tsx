@@ -1,14 +1,14 @@
 import { type FC, Suspense } from 'react'
 import { Loading } from '../../../../../components/shared/loading'
-import { SeriesCarousels } from './_carousel/series-carousel'
+import { SeriesCarousels } from './_components/series-carousel'
 
-type SeriesPageProps = {
+type WorkSeriesPageProps = {
   params: Promise<{
     workId: string
   }>
 }
 
-const SeriesPage: FC<SeriesPageProps> = async ({ params }) => {
+const WorkSeriesPage: FC<WorkSeriesPageProps> = async ({ params }) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
 
@@ -23,4 +23,4 @@ const SeriesPage: FC<SeriesPageProps> = async ({ params }) => {
   )
 }
 
-export default SeriesPage
+export default WorkSeriesPage

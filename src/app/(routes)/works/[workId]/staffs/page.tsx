@@ -1,5 +1,5 @@
 import { type FC, Suspense } from 'react'
-import { Staffs, StaffsSkeleton } from './staffs'
+import { StaffTable, StaffTableSkeleton } from './_components/staff-table'
 
 type WorkStaffsPageProps = {
   params: Promise<{
@@ -13,8 +13,8 @@ const WorkStaffsPage: FC<WorkStaffsPageProps> = async ({ params }) => {
   if (Number.isNaN(workId)) return null
 
   return (
-    <Suspense fallback={<StaffsSkeleton />}>
-      <Staffs workId={workId} />
+    <Suspense fallback={<StaffTableSkeleton />}>
+      <StaffTable workId={workId} />
     </Suspense>
   )
 }

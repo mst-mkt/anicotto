@@ -1,7 +1,8 @@
 import { type FC, type ReactNode, Suspense } from 'react'
+import { getWorkStatus } from './_layouts/get-status'
+import { getWork } from './_layouts/get-work'
 import { Tab } from './_layouts/tabs'
-import { WorkInfo, WorkInfoSkeleton } from './_layouts/work-info/work-info'
-import { getWork, getWorkStatus } from './get-work'
+import { WorkInfo, WorkInfoSkeleton } from './_layouts/work-info'
 
 type WorksLayoutProps = {
   children: ReactNode

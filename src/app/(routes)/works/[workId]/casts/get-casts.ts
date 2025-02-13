@@ -5,7 +5,7 @@ export const getCasts = async (workId: number) => {
   await auth()
 
   const castsResult = await annictApiClient.getCasts(
-    { query: { filter_work_id: workId, sort_sort_number: 'asc' } },
+    { query: { filter_work_id: workId, per_page: 50, sort_sort_number: 'asc' } },
     { next: { tags: [`work-casts-${workId}`] } },
   )
 

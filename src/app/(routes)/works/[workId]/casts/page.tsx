@@ -1,5 +1,5 @@
 import { type FC, Suspense } from 'react'
-import { Casts, CastsSkeleton } from './casts'
+import { Casts, CastsSkeleton } from './_components/cast-table'
 
 type WorkCastsPageProps = {
   params: Promise<{

@@ -1,8 +1,11 @@
 import { Suspense } from 'react'
-import { Activities, ActivitiesLoading } from './_activity/activities'
-import { CurrentSeasonWork, CurrentSeasonWorkSkeleton } from './_current-season/current-season'
+import { Activities, ActivitiesLoading } from './_components/activity/activities'
+import {
+  CurrentSeasonWork,
+  CurrentSeasonWorkSkeleton,
+} from './_components/current-season/current-season'
 
-const Home = () => (
+const IndexPage = () => (
   <div className="flex flex-col gap-y-16">
     <Suspense fallback={<CurrentSeasonWorkSkeleton />}>
       <CurrentSeasonWork />
@@ -13,4 +16,4 @@ const Home = () => (
   </div>
 )
 
-export default Home
+export default IndexPage

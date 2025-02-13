@@ -3,22 +3,18 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Button } from '../../../components/ui/button'
-import { auth, signIn } from '../../../lib/auth'
+import { auth } from '../../../lib/auth'
+import { loginAction } from '../../actions/auth/login'
 
 export const metadata = {
   title: 'ログイン',
   description: 'Annictにログインしてアプリを使用する',
 } satisfies Metadata
 
-const Login = async () => {
+const LoginPage = async () => {
   const session = await auth()
 
   if (session !== null) redirect('/')
-
-  const loginAction = async () => {
-    'use server'
-    await signIn('annict', { redirectTo: '/' })
-  }
 
   return (
     <form action={loginAction} className="flex flex-col gap-y-4">
@@ -38,4 +34,4 @@ const Login = async () => {
   )
 }
 
-export default Login
+export default LoginPage
