@@ -7,7 +7,12 @@
   },
   "overrides": [
     {
-      "include": ["./src/app/**/layout.tsx", "./src/app/**/page.tsx", "./src/app/manifest.ts"],
+      "include": [
+        "./src/app/**/layout.tsx",
+        "./src/app/**/page.tsx",
+        "./src/app/manifest.ts",
+        "./src/app/**/default.tsx"
+      ],
       "linter": {
         "rules": { "style": { "noDefaultExport": "off" } }
       }
