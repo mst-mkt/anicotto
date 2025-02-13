@@ -17,5 +17,7 @@ export const updateStatus = async (workId: number, kind: Status) => {
   }
 
   revalidateTag(`status-${workId}`)
+  revalidateTag('activities')
+
   return { success: true }
 }

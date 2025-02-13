@@ -62,6 +62,7 @@ export const createReview = async (formData: FormData) => {
   if (result.isErr()) return { success: false, error: result.error } as const
 
   revalidateTag(`work-reviews-${formDataResult.value.workId}`)
+  revalidateTag('activities')
 
   return { success: true, value: result.value } as const
 }
