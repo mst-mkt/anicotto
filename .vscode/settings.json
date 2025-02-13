@@ -74,6 +74,7 @@
     "picklist",
     "syobocal",
     "pseudoelements",
-    "nocompatible"
+    "nocompatible",
+    "sidemenu",
   ]
 }
