@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 type RootLayoutProps = {
   children: ReactNode
   sidemenu: ReactNode
+  modal: ReactNode
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
+const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(
@@ -46,6 +47,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
             {children}
           </main>
           <Footer className={styles.footer} />
+          {modal}
         </div>
         <Toaster richColors={true} />
       </Providers>
