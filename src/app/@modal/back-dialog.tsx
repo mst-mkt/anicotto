@@ -26,7 +26,7 @@ type BackDialogProps = {
 
 export const BackDialog: FC<BackDialogProps> = (props) => {
   const router = useRouter()
-  const isMobile = useMediaQuery('(max-width: 640px)')
+  const isMobile = useMediaQuery('(max-width: 48rem)')
 
   return isMobile ? (
     <Drawer open={true} onOpenChange={(open) => !open && router.back()}>
