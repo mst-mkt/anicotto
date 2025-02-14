@@ -1,4 +1,4 @@
-import { cacheExchange, createClient, fetchExchange } from '@urql/core'
+import { createClient, fetchExchange } from '@urql/core'
 import { ANNICT_API_BASEURL } from '../../constants/annict'
 import { auth } from '../auth'
 
@@ -24,5 +24,5 @@ export const annictGraphqlClient = createClient({
       },
     })
   },
-  exchanges: [cacheExchange, fetchExchange],
+  exchanges: [fetchExchange],
 })

@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 type RootLayoutProps = {
   children: ReactNode
   sidemenu: ReactNode
+  modal: ReactNode
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
+const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(
@@ -34,7 +35,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
       <ThemeLoader />
       <Providers>
         <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
-        <div className={styles.layout}>
+        <div className={cn(styles.layout, 'bg-background')} data-vaul-drawer-wrapper={true}>
           <Header className={styles.header} />
           <SidemenuContainer className={styles.sideMenu}>{sidemenu}</SidemenuContainer>
           <main
@@ -46,6 +47,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
             {children}
           </main>
           <Footer className={styles.footer} />
+          {modal}
         </div>
         <Toaster richColors={true} />
       </Providers>

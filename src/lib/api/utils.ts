@@ -56,6 +56,7 @@ export const generateUrlWithQuery = (
   const url = new URL(baseUrl)
 
   for (const [key, value] of Object.entries(params ?? {})) {
+    if (value === undefined) continue
     url.searchParams.set(key, String(value))
   }
 
