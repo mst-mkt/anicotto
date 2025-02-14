@@ -34,7 +34,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu }) => (
       <ThemeLoader />
       <Providers>
         <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
-        <div className={styles.layout}>
+        <div className={cn(styles.layout, 'bg-background')} data-vaul-drawer-wrapper={true}>
           <Header className={styles.header} />
           <SidemenuContainer className={styles.sideMenu}>{sidemenu}</SidemenuContainer>
           <main
