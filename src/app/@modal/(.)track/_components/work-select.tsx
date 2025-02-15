@@ -35,7 +35,7 @@ export const WorkSelect = async () => {
 
   return (
     <Select name="episode_id" defaultValue={libraries[0].nextEpisode?.id.toString() ?? ''}>
-      <SelectTrigger className="h-fit w-full cursor-pointer pl-2">
+      <SelectTrigger className="h-fit w-full cursor-pointer pl-2 [&>span]:block [&>span]:h-fit">
         <SelectValue />
       </SelectTrigger>
       <SelectContent className="max-w-[92svw]">
