@@ -24,7 +24,5 @@ jobs:
         run: pnpm i --frozen-lockfile
       - name: Check lint and format
         run: pnpm biome ci ./src/ --reporter=github
-      - name: Generate codes
-        run: pnpm run "/^generate:.*/"
       - name: Type check
         run: pnpm typecheck

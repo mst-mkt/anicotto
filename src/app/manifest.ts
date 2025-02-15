@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
 import { PROJECT_DESCRIPTION, PROJECT_ID, PROJECT_NAME } from '../constants/project'
-import { staticPath } from '../lib/$path'
 
 const manifest = () =>
   ({
@@ -14,12 +13,12 @@ const manifest = () =>
     icons: [
       {
         sizes: '512x512',
-        src: staticPath.icon_512_png,
+        src: '/icon-512.png',
         type: 'image/png',
       },
       {
         sizes: '192x192',
-        src: staticPath.icon_192_png,
+        src: '/icon-192.png',
         type: 'image/png',
       },
     ],
