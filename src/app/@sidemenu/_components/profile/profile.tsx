@@ -24,7 +24,7 @@ export const SideProfile = async () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="sticky bottom-8 mt-auto ">
+      <DropdownMenuTrigger className="sticky bottom-8 mt-auto">
         <Tooltip>
           <TooltipTrigger asChild={true}>
             <div className="flex w-fit cursor-pointer items-center justify-between gap-x-2 rounded-full p-2 transition-colors hover:bg-background-50 lg:w-full">
