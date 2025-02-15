@@ -42,6 +42,10 @@
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
 
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "@radix-ui/*"
+  ],
+
   "cSpell.ignoreWords": [
     // project
     "anicotto",
