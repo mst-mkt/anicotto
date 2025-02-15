@@ -42,7 +42,7 @@ export const Tab: FC<TabProps> = ({ workId }) => {
         <Link
           key={page}
           id={`tab-${page}`}
-          href={`/works/${workId}/${page}`}
+          href={page === '' ? `/works/${workId}` : `/works/${workId}/${page}`}
           className={cn(
             'w-fit break-keep rounded-md px-3 py-2 font-bold text-muted-foreground text-sm transition-colors hover:text-foreground-300',
             path === page &&

@@ -18,7 +18,7 @@ export const BottomMenu = () => (
       <span className="text-xs">検索</span>
     </Link>
     <Link
-      href="/settings"
+      href="/discover"
       className="flex w-full shrink flex-col items-center gap-y-2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-background-400/10 hover:text-foreground"
     >
       <TelescopeIcon size={20} />

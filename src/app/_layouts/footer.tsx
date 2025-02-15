@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { twJoin } from 'tailwind-merge'
@@ -13,7 +14,7 @@ import {
 } from '../../constants/project'
 import { FooterLink, type FooterLinkProps } from './footer-link'
 
-const getLinkIcon = (href: string) => {
+const getLinkIcon = (href: Route) => {
   return match(href)
     .returnType<FooterLinkProps>()
     .when(

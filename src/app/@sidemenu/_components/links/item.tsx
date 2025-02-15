@@ -1,5 +1,6 @@
 'use client'
 
+import type { Route } from 'next'
 import Link from 'next/link'
 import { type FC, useCallback, useRef } from 'react'
 import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../../components/icons/types'
@@ -7,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../components/
 
 type SidemenuLinkItemProps = {
   icon: PqoqubbwIcon
-  href: string
+  href: Route
   label: string
 }
 

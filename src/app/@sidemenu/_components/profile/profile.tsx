@@ -53,7 +53,7 @@ export const SideProfile = async () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild={true}>
-            <Link href="/profile">
+            <Link href={`/users/${profile.username}`}>
               <UserCircleIcon />
               <span>プロフィール</span>
             </Link>

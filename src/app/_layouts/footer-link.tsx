@@ -1,12 +1,13 @@
 'use client'
 
+import type { Route } from 'next'
 import Link from 'next/link'
 import { type FC, useRef } from 'react'
 import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../components/icons/types'
 
 export type FooterLinkProps = {
   icon: PqoqubbwIcon
-  href: string
+  href: Route
   label: string
 }
 

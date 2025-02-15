@@ -69,7 +69,7 @@ export const Casts: FC<CastsProps> = async ({ workId }) => {
             </TableCell>
             <TableCell>
               <Link
-                href={`/person/${cast.person.id}`}
+                href={`/people/${cast.person.id}`}
                 className="py-4 transition-colors hover:text-anicotto-accent"
               >
                 {cast.person.name}

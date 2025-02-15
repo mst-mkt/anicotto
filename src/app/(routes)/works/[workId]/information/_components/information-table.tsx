@@ -12,6 +12,7 @@ import {
 } from '../../../../../../components/ui/table'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
 import type { Work } from '../../../../../../schemas/annict/works'
+import { isWithProtocol } from '../../../../../../utils/toute-type'
 import { getWork } from '../get-work'
 
 type InformationTableProps = {
@@ -72,14 +73,16 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
           <TableRow>
             <TableHead className="break-keep">公式サイト</TableHead>
             <TableCell className="break-all">
-              <Link
-                href={work.official_site_url}
-                rel="noopener noreferrer"
-                target="_blank"
-                className="line-clamp-3 text-anicotto-accent"
-              >
-                {work.official_site_url}
-              </Link>
+              {isWithProtocol(work.official_site_url) && (
+                <Link
+                  href={work.official_site_url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="line-clamp-3 text-anicotto-accent"
+                >
+                  {work.official_site_url}
+                </Link>
+              )}
             </TableCell>
           </TableRow>
         )}
@@ -87,14 +90,16 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
           <TableRow>
             <TableHead className="break-keep">Wikipedia</TableHead>
             <TableCell className="break-all">
-              <Link
-                href={work.wikipedia_url}
-                rel="noopener noreferrer"
-                target="_blank"
-                className="line-clamp-3 text-anicotto-accent"
-              >
-                {work.wikipedia_url}
-              </Link>
+              {isWithProtocol(work.wikipedia_url) && (
+                <Link
+                  href={work.wikipedia_url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="line-clamp-3 text-anicotto-accent"
+                >
+                  {work.wikipedia_url}
+                </Link>
+              )}
             </TableCell>
           </TableRow>
         )}
