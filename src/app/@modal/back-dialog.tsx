@@ -30,12 +30,14 @@ export const BackDialog: FC<BackDialogProps> = (props) => {
 
   return isMobile ? (
     <Drawer open={true} onOpenChange={(open) => !open && router.back()}>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>{props.title}</DrawerTitle>
-          <DrawerDescription>{props.description}</DrawerDescription>
-        </DrawerHeader>
-        <div className="p-[4svw]">{props.children}</div>
+      <DrawerContent className="max-h-[92svh]">
+        <div className="overflow-y-auto">
+          <DrawerHeader>
+            <DrawerTitle>{props.title}</DrawerTitle>
+            <DrawerDescription>{props.description}</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-[4svw]">{props.children}</div>
+        </div>
       </DrawerContent>
     </Drawer>
   ) : (
