@@ -8,6 +8,7 @@ import '../styles/globals.css'
 import { cn } from '../utils/classnames'
 import { Footer } from './_layouts/footer'
 import { Header } from './_layouts/header'
+import { BottomMenu } from './_layouts/mobile-menu'
 import { SidemenuContainer } from './_layouts/sidemenu-container'
 import styles from './layout.module.css'
 import { Providers } from './providers'
@@ -35,7 +36,10 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal }) => (
       <ThemeLoader />
       <Providers>
         <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
-        <div className={cn(styles.layout, 'bg-background')} data-vaul-drawer-wrapper={true}>
+        <div
+          className={cn(styles.layout, 'bg-background pb-24 md:pb-0')}
+          data-vaul-drawer-wrapper={true}
+        >
           <Header className={styles.header} />
           <SidemenuContainer className={styles.sideMenu}>{sidemenu}</SidemenuContainer>
           <main
@@ -49,6 +53,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal }) => (
           <Footer className={styles.footer} />
           {modal}
         </div>
+        <BottomMenu />
         <Toaster richColors={true} />
       </Providers>
     </body>
