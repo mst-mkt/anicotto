@@ -77,27 +77,44 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
+        <Link
+          href={`/works/${activity.work.id}`}
+          className="transition-colors hover:text-anicotto-accent-600 hover:underline"
+        >
+          <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
+        </Link>
         {match(activity)
           .with({ action: 'create_record' }, ({ episode }) => (
-            <div className="flex items-center gap-x-2">
-              <Badge className="shrink-0 grow-0">{episode.number_text}</Badge>
+            <Link
+              href={`/work/${activity.work.id}/episodes/${episode.id}`}
+              className="group flex items-center gap-x-2"
+            >
+              <Badge className="shrink-0 grow-0 group-hover:bg-primary/80">
+                {episode.number_text}
+              </Badge>
               {episode.title !== null && (
-                <span className="line-clamp-1 shrink">{episode.title}</span>
+                <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent-600 group-hover:underline">
+                  {episode.title}
+                </span>
               )}
-            </div>
+            </Link>
           ))
           .with({ action: 'create_review' }, ({ review }) => (
-            <div className="flex items-center gap-x-2">
+            <Link
+              href={`/works/${activity.work.id}/reviews`}
+              className="group flex items-center gap-x-2"
+            >
               <RatingBadge
                 variant="secondary"
                 rating={review.rating_overall_state}
                 className="shrink-0 grow-0 cursor-default gap-x-1 px-2 py-1"
               />
               {review.body.trim() !== '' && (
-                <span className="line-clamp-1 shrink ">{review.body}</span>
+                <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent-600 group-hover:underline">
+                  {review.body}
+                </span>
               )}
-            </div>
+            </Link>
           ))
           .with({ action: 'create_status' }, ({ status }) => (
             <StatusBadge
