@@ -59,7 +59,6 @@ export const WorkSelect = async () => {
                           <ImageOffIcon size={24} />
                         </div>
                       }
-                      displayPlaceholder={false}
                       alt={lib.work.title}
                       className="h-full w-full object-cover"
                     />
