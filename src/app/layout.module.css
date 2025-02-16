@@ -2,8 +2,9 @@
   display: grid;
   grid-template:
     'header header header' auto
-    'side-menu main .' 1fr
-    'side-menu footer .' auto / 1fr clamp(56svw, 600px, 92svw) 1fr;
+    'side-menu main panel' 1fr
+    'side-menu footer panel' auto / 2fr clamp(50svw, 500px, 92svw) 3fr;
+  column-gap: 4svw;
   min-height: 100svh;
 }
 
@@ -24,12 +25,22 @@
   grid-area: footer;
 }
 
+.panel {
+  grid-area: panel;
+}
+
+@media screen and (width < 64rem) {
+  .layout {
+    grid-template-columns: 1fr clamp(50svw, 500px, 92svw) 1fr;
+  }
+}
+
 @media screen and (width < 48rem) {
   .layout {
     grid-template:
-      'header' auto
-      'main' 1fr
-      'footer' auto / 1fr;
+      '. header .' auto
+      '. main .' 1fr
+      '. footer .' auto / 0 92svw 0;
   }
 
   .sideMenu {

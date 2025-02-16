@@ -33,12 +33,7 @@ type FooterProps = {
 }
 
 export const Footer: FC<FooterProps> = ({ className }) => (
-  <footer
-    className={twJoin(
-      className,
-      'mx-auto flex w-full min-w-[56svw] max-w-[600px] flex-col gap-y-4 px-[4svmin] pt-24 pb-4',
-    )}
-  >
+  <footer className={twJoin(className, 'flex w-full flex-col gap-y-4 pt-24 pb-4')}>
     <div className="flex gap-x-1">
       {[...Array(3)].map((_, index) => (
         <span

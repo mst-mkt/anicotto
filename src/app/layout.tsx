@@ -22,9 +22,10 @@ type RootLayoutProps = {
   children: ReactNode
   sidemenu: ReactNode
   modal: ReactNode
+  panel: ReactNode
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal }) => (
+const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal, panel }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(
@@ -37,20 +38,14 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal }) => (
       <Providers>
         <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
         <div
-          className={cn(styles.layout, 'bg-background pb-24 md:pb-0')}
+          className={cn(styles.layout, 'w-full bg-background pb-24 md:pb-0')}
           data-vaul-drawer-wrapper={true}
         >
           <Header className={styles.header} />
           <SidemenuContainer className={styles.sideMenu}>{sidemenu}</SidemenuContainer>
-          <main
-            className={twJoin(
-              styles.main,
-              'mx-auto w-full min-w-[56svw] max-w-[600px] px-[4svmin] py-4',
-            )}
-          >
-            {children}
-          </main>
+          <main className={twJoin(styles.main, 'w-full py-4')}>{children}</main>
           <Footer className={styles.footer} />
+          {panel}
           {modal}
         </div>
         <BottomMenu />
