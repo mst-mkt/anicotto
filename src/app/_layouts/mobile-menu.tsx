@@ -2,7 +2,7 @@ import { HomeIcon, PenToolIcon, SearchIcon, TelescopeIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export const BottomMenu = () => (
-  <div className="fixed bottom-0 left-0 flex w-full justify-between gap-x-2 rounded-t-xl border border-muted border-b-0 bg-background/64 p-2 pb-4 backdrop-blur-lg md:hidden">
+  <div className="fixed bottom-0 left-0 flex w-full justify-between gap-x-2 rounded-t-xl border border-muted border-b-0 bg-background/64 p-2 backdrop-blur-lg md:hidden [@media(display-mode:standalone)]:pb-4">
     <Link
       href="/"
       className="flex w-full shrink flex-col items-center gap-y-2 rounded-lg p-2 text-muted-foreground transition-colors active:bg-background-400/10 active:text-foreground"
