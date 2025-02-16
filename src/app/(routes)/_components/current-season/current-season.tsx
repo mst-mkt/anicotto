@@ -43,7 +43,8 @@ export const CurrentSeasonWork = async () => {
                       src={await getValidWorkImage(work.id.toString(), work.images)}
                       alt={work.title}
                       className="h-full w-full object-cover"
-                      fill={true}
+                      height={144}
+                      width={256}
                       fallback={
                         <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                           <ImageOffIcon size={40} />

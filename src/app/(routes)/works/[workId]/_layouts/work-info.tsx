@@ -30,18 +30,19 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
   const images = await getValidWorkImage(work.id.toString(), work.images)
 
   return (
-    <div className="flex gap-x-4 overflow-hidden">
-      <div className="relative w-64 min-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
+    <div className="flex items-center gap-x-4 overflow-hidden">
+      <div className="relative aspect-square h-48 shrink-0 overflow-hidden rounded-lg border border-muted p-2">
         <Image
           src={images}
           alt={work.title}
-          fill={true}
+          height={144}
+          width={256}
           fallback={
             <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
               <ImageOffIcon size={40} />
             </div>
           }
-          className="h-full w-full object-cover"
+          className="h-full w-full rounded-sm object-cover"
         />
       </div>
       <div className="flex grow flex-col justify-center gap-y-1">
@@ -71,8 +72,8 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
 
 export const WorkInfoSkeleton = () => (
   <div className="flex gap-x-4 overflow-hidden">
-    <div className="h-full w-64 min-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
-      <Skeleton className="aspect-video h-full w-full object-cover" />
+    <div className="aspect-square h-48 overflow-hidden rounded-lg border border-muted p-2">
+      <Skeleton className="h-full w-full rounded-sm object-cover" />
     </div>
     <div className="flex grow flex-col justify-center gap-y-1">
       <Skeleton className="h-[1lh] w-3/4 rounded-md text-lg" />

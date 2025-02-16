@@ -31,12 +31,13 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
           <Image
             src={validThumbnail}
             alt={work.title}
-            fill={true}
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                 <ImageOffIcon size={48} />
               </div>
             }
+            height={144}
+            width={256}
             className="h-full w-full object-cover"
           />
         </AspectRatio>

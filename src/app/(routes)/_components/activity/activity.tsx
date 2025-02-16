@@ -71,7 +71,8 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
               <ImageOffIcon size={40} />
             </div>
           }
-          fill={true}
+          height={256}
+          width={256}
           alt={activity.work.title}
           className="h-full w-full object-cover"
         />

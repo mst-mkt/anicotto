@@ -51,7 +51,8 @@ export const WorkSelect = async () => {
                 <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md">
                   <AspectRatio ratio={1}>
                     <Image
-                      fill={true}
+                      height={128}
+                      width={128}
                       src={lib.work.image}
                       fallback={
                         <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">

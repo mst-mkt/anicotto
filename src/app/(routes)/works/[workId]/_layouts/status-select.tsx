@@ -52,7 +52,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   )
 
   return (
-    <div className="flex items-center gap-x-4">
+    <div className="flex items-center gap-x-2">
       <div className="flex w-fit gap-x-0.5 rounded-full border border-muted p-1">
         {statusPicklist.options
           .map((option) => ({

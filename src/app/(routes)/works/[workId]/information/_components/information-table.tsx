@@ -184,6 +184,8 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
                 src={proxiedImage(work.images.facebook.og_image_url)}
                 alt={`${work.title} のOGP画像`}
                 fallback={<span className="text-muted-foreground">画像が見つかりません</span>}
+                height={144}
+                width={256}
                 className="max-h-32 max-w-full"
               />
             ) : (
@@ -199,6 +201,8 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
                 src={proxiedImage(work.images.twitter.image_url)}
                 alt={`${work.title} の Twitter カード画像`}
                 fallback={<span className="text-muted-foreground">画像が見つかりません</span>}
+                height={144}
+                width={256}
                 className="max-h-32 max-w-full"
               />
             ) : (
