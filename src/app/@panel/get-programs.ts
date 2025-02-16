@@ -6,7 +6,7 @@ export const getWorks = async () => {
 
   const worksResult = await annictApiClient.getMyWorks(
     { query: { sort_season: 'desc', filter_status: 'watching' } },
-    { next: { tags: ['my-works'] } },
+    { next: { tags: ['libraries'] } },
   )
 
   if (worksResult.isErr()) {
