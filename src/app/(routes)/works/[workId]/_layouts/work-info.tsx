@@ -82,8 +82,6 @@ export const WorkInfoSkeleton = () => (
       <Skeleton className="h-[22px] w-1/3 rounded-full" />
       <div className="flex items-center gap-x-2 py-3">
         <Skeleton className="h-[1lh] w-1/2 rounded-md" />
-        <Separator orientation="vertical" />
-        <Skeleton className="h-[1lh] w-1/2 rounded-md" />
       </div>
       <Skeleton className="h-[38px] w-1/2 rounded-md" />
     </div>
