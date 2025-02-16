@@ -59,8 +59,9 @@ export const WorkSelect = async () => {
                           <ImageOffIcon size={24} />
                         </div>
                       }
+                      displayPlaceholder={false}
                       alt={lib.work.title}
-                      className="object-cover"
+                      className="h-full w-full object-cover"
                     />
                   </AspectRatio>
                 </div>
