@@ -89,6 +89,9 @@ importers:
       nuqs:
         specifier: ^2.3.2
         version: 2.3.2(next@15.1.6(babel-plugin-react-compiler@19.0.0-beta-30d8a17-20250209)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+      plaiceholder:
+        specifier: ^3.0.0
+        version: 3.0.0(sharp@0.33.5)
       react:
         specifier: ^19.0.0
         version: 19.0.0
