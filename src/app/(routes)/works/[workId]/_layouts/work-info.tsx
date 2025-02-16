@@ -47,9 +47,11 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
       </div>
       <div className="flex grow flex-col justify-center gap-y-1">
         <h1 className="line-clamp-2 w-full font-bold text-lg md:text-xl">{work.title}</h1>
-        <div>
+        <div className="flex items-center gap-x-1">
           <Badge>{work.media_text}</Badge>
-          <Badge>{work.season_name_text}</Badge>
+          {work.season_name_text !== undefined && work.season_name_text !== '' && (
+            <Badge>{work.season_name_text}</Badge>
+          )}
         </div>
         <div className="flex items-center gap-x-2 py-3">
           <div className="contents text-sm">
