@@ -31,7 +31,7 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
 
   return (
     <div className="flex items-center gap-x-4 overflow-hidden">
-      <div className="relative aspect-square h-48 shrink-0 overflow-hidden rounded-lg border border-muted p-2">
+      <div className="relative aspect-square h-48 max-w-2/5 shrink-0 overflow-hidden rounded-lg border border-muted p-2">
         <Image
           src={images}
           alt={work.title}
@@ -74,7 +74,7 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
 
 export const WorkInfoSkeleton = () => (
   <div className="flex gap-x-4 overflow-hidden">
-    <div className="aspect-square h-48 overflow-hidden rounded-lg border border-muted p-2">
+    <div className="aspect-square h-48 max-w-2/5 overflow-hidden rounded-lg border border-muted p-2">
       <Skeleton className="h-full w-full rounded-sm object-cover" />
     </div>
     <div className="flex grow flex-col justify-center gap-y-1">
