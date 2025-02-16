@@ -1,11 +1,11 @@
 import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
-import { match } from 'ts-pattern'
 import { Image } from '../../../../../../components/shared/image'
 import { AspectRatio } from '../../../../../../components/ui/aspect-ratio'
 import { Badge } from '../../../../../../components/ui/badge'
 import { CarouselItem } from '../../../../../../components/ui/carousel'
+import { MEDIA_TEXT } from '../../../../../../constants/media'
 import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
 import type { Series } from '../get-series'
 
@@ -42,15 +42,7 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
           />
         </AspectRatio>
         <div className="flex gap-x-2">
-          <Badge className="h-fit break-keep">
-            {match(work.media)
-              .with('TV', () => 'TV')
-              .with('OVA', () => 'OVA')
-              .with('MOVIE', () => '映画')
-              .with('WEB', () => 'Web')
-              .with('OTHER', () => 'その他')
-              .exhaustive()}
-          </Badge>
+          <Badge className="h-fit break-keep">{MEDIA_TEXT[work.media]}</Badge>
           <h3 className="line-clamp-2 w-full shrink text-sm transition-colors group-hover:text-anicotto-accent">
             {work.title}
           </h3>
