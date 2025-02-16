@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
+import { Skeleton } from '../../../components/ui/skeleton'
 import { getWorks } from '../get-programs'
 import { WorkItem } from './work-item'
 
@@ -29,7 +30,10 @@ export const WatchingPanel = async () => {
 }
 
 export const WatchingPanelSkeleton = () => (
-  <div>
-    <div>loading...</div>
+  <div className="flex w-full flex-col gap-y-2">
+    {[...Array(8)].map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: This is a static array
+      <Skeleton key={index} className="h-12 w-full" />
+    ))}
   </div>
 )
