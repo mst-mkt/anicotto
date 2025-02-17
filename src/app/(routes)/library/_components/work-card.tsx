@@ -33,7 +33,7 @@ export const WorkCard: FC<WorkCardProps> = async ({ work }) => {
         />
       </div>
       <div className="flex flex-col gap-y-1 p-4">
-        <h2 className="font-bold text-lg transition-colors group-hover:text-anicotto-accent">
+        <h2 className="line-clamp-2 font-bold text-base transition-colors group-hover:text-anicotto-accent md:text-lg">
           {work.title}
         </h2>
         <div className="flex gap-x-2">
