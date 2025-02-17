@@ -1,11 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { type ComponentProps, type FC, useRef } from 'react'
 import { toast } from 'sonner'
 import { createRecord } from '../../../actions/api/create-record'
 
 export const TrackFormWrapper: FC<ComponentProps<'form'>> = (props) => {
   const formRef = useRef<HTMLFormElement>(null)
+  const router = useRouter()
 
   const submitAction = async (formData: FormData) => {
     const result = await createRecord(formData)
@@ -16,6 +18,7 @@ export const TrackFormWrapper: FC<ComponentProps<'form'>> = (props) => {
         </p>,
       )
       formRef.current?.reset()
+      router.back()
     } else {
       toast.error(`記録に失敗しました ${result.error}`)
     }
