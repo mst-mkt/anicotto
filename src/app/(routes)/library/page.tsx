@@ -1,35 +1,38 @@
 import { BookImageIcon } from 'lucide-react'
-import { Suspense } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs'
-import { STATUS_TEXT } from '../../../constants/status'
+import type { SearchParams } from 'nuqs/server'
+import { type FC, Suspense } from 'react'
+import { TabsContent } from '../../../components/ui/tabs'
 import { statusPicklist } from '../../../schemas/annict/common'
+import { Tab } from './_components/tab'
 import { WorkList, WorkListSkeleton } from './_components/work-list'
+import { loadSearchParams } from './search-params'
 
-const libraryStatus = statusPicklist.options.filter((status) => status !== 'no_select')
+type LibraryPageProps = {
+  searchParams: Promise<SearchParams>
+}
 
-const LibraryPage = () => (
-  <div className="flex flex-col gap-y-4">
-    <h1 className="flex items-center gap-x-2 font-bold text-lg">
-      <BookImageIcon className="text-anicotto-accent" size={24} />
-      ライブラリ
-    </h1>
-    <Tabs defaultValue="watching">
-      <TabsList>
-        {libraryStatus.map((status) => (
-          <TabsTrigger key={status} value={status} className="cursor-pointer">
-            {STATUS_TEXT[status]}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      {libraryStatus.map((status) => (
-        <TabsContent key={status} value={status}>
-          <Suspense fallback={<WorkListSkeleton />}>
-            <WorkList status={status} />
-          </Suspense>
-        </TabsContent>
-      ))}
-    </Tabs>
-  </div>
-)
+const LibraryPage: FC<LibraryPageProps> = async ({ searchParams }) => {
+  const { status } = await loadSearchParams(searchParams)
+
+  return (
+    <div className="flex flex-col gap-y-4">
+      <h1 className="flex items-center gap-x-2 font-bold text-lg">
+        <BookImageIcon className="text-anicotto-accent" size={24} />
+        ライブラリ
+      </h1>
+      <Tab initialStatus={status ?? 'watching'}>
+        {statusPicklist.options
+          .filter((status) => status !== 'no_select')
+          .map((status) => (
+            <TabsContent key={status} value={status}>
+              <Suspense fallback={<WorkListSkeleton />}>
+                <WorkList status={status} />
+              </Suspense>
+            </TabsContent>
+          ))}
+      </Tab>
+    </div>
+  )
+}
 
 export default LibraryPage
