@@ -1,4 +1,6 @@
+import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
+import { Badge } from '../../../../components/ui/badge'
 import { Skeleton } from '../../../../components/ui/skeleton'
 import { STATUS_TEXT } from '../../../../constants/status'
 import type { Status } from '../../../../schemas/annict/common'
@@ -13,11 +15,25 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
   const works = await getWorks(status)
 
   if (works === null) {
-    return <div>{STATUS_TEXT[status]} の作品の取得に失敗しました</div>
+    return (
+      <div className="flex flex-col items-center gap-y-4 py-16">
+        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <p>
+          <Badge variant="secondary">{STATUS_TEXT[status]}</Badge> の作品の取得に失敗しました
+        </p>
+      </div>
+    )
   }
 
   if (works.length === 0) {
-    return <div>{STATUS_TEXT[status]} の作品がありません</div>
+    return (
+      <div className="flex flex-col items-center gap-y-4 py-16">
+        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <div>
+          <Badge variant="secondary">{STATUS_TEXT[status]}</Badge> の作品が見当たりません
+        </div>
+      </div>
+    )
   }
 
   return (
