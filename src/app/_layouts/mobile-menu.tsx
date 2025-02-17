@@ -1,4 +1,4 @@
-import { HomeIcon, PenToolIcon, SearchIcon, TelescopeIcon } from 'lucide-react'
+import { BookTextIcon, HomeIcon, PenToolIcon, SearchIcon, TelescopeIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export const BottomMenu = () => (
@@ -16,6 +16,13 @@ export const BottomMenu = () => (
     >
       <SearchIcon size={20} />
       <span className="text-xs">検索</span>
+    </Link>
+    <Link
+      href="/library"
+      className="flex w-full shrink flex-col items-center gap-y-2 rounded-lg p-2 text-muted-foreground transition-colors active:bg-background-400/10 active:text-foreground"
+    >
+      <BookTextIcon size={20} />
+      <span className="text-xs">ライブラリ</span>
     </Link>
     <Link
       href="/discover"
