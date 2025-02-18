@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../component
 import { Badge } from '../../../../../../components/ui/badge'
 import { Button } from '../../../../../../components/ui/button'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
-import { getMe, getUser } from '../get-user'
+import { getMe, getUser } from '../../get-user'
 import { FollowButton } from './follow-button'
 import { IsFollowed } from './is-followed'
 

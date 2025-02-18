@@ -1,6 +1,6 @@
-import { annictApiClient } from '../../../../../lib/api/client'
-import { auth } from '../../../../../lib/auth'
-import type { User } from '../../../../../schemas/annict/users'
+import { annictApiClient } from '../../../../lib/api/client'
+import { auth } from '../../../../lib/auth'
+import type { User } from '../../../../schemas/annict/users'
 
 export const getUser = async (username: User['username']) => {
   await auth()
