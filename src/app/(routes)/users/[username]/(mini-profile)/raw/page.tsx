@@ -1,11 +1,22 @@
 import { type FC, Suspense } from 'react'
 import { Loading } from '../../../../../../components/shared/loading'
+import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../get-user'
 
 type UserRawPageProps = {
   params: Promise<{
     username: string
   }>
+}
+
+export const generateMetadata = async ({ params }: UserRawPageProps) => {
+  const { username } = await params
+  const user = await getUser(username)
+
+  return {
+    title: `${user?.name} - 情報 | ${PROJECT_NAME}`,
+    description: `${user?.name}の情報 (APIのレスポンス)`,
+  }
 }
 
 const UserRawPage: FC<UserRawPageProps> = async ({ params }) => {

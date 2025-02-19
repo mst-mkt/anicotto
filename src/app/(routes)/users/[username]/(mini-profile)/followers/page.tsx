@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { type FC, Suspense } from 'react'
 import { SearchIcon } from '../../../../../../components/icons/search'
 import { Button } from '../../../../../../components/ui/button'
+import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../get-user'
 import { FollowersList, FollowersListSkeleton } from './_components/followers-list'
 
@@ -10,6 +11,16 @@ type FollowersPageProps = {
   params: Promise<{
     username: string
   }>
+}
+
+export const generateMetadata = async ({ params }: FollowersPageProps) => {
+  const { username } = await params
+  const user = await getUser(username)
+
+  return {
+    title: `${user?.name} - フォロワー | ${PROJECT_NAME}`,
+    description: `${user?.name}のフォロワーの一覧`,
+  }
 }
 
 const FollowersPage: FC<FollowersPageProps> = async ({ params }) => {

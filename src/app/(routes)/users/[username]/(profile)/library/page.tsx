@@ -1,10 +1,22 @@
 import { type FC, Suspense } from 'react'
+import { PROJECT_NAME } from '../../../../../../constants/project'
+import { getUser } from '../../get-user'
 import { LibraryCarousel, LibraryCarouselSkeleton } from './_components/carousel'
 
 type UserLibraryPageProps = {
   params: Promise<{
     username: string
   }>
+}
+
+export const generateMetadata = async ({ params }: UserLibraryPageProps) => {
+  const { username } = await params
+  const user = await getUser(username)
+
+  return {
+    title: `${user?.name} - ライブラリ | ${PROJECT_NAME}`,
+    description: `${user?.name}の視聴した作品の一覧`,
+  }
 }
 
 const UserLibraryPage: FC<UserLibraryPageProps> = async ({ params }) => {

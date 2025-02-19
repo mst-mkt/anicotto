@@ -1,4 +1,6 @@
 import { type FC, Suspense } from 'react'
+import { PROJECT_NAME } from '../../../../../constants/project'
+import { getWork } from '../_layouts/get-work'
 import { ReviewForm } from './_components/form/review-form'
 import { Reviews, ReviewsSkeleton } from './_components/review-list/reviews'
 
@@ -6,6 +8,18 @@ type WorkReviewsPageProps = {
   params: Promise<{
     workId: string
   }>
+}
+
+export const generateMetadata = async ({ params }: WorkReviewsPageProps) => {
+  const { workId } = await params
+  const workIdNumber = Number.parseInt(workId, 10)
+  if (Number.isNaN(workIdNumber)) return null
+  const work = await getWork(workIdNumber)
+
+  return {
+    title: `${work?.title} - レビュー | ${PROJECT_NAME}`,
+    description: `「${work?.title}」のレビュー一覧ページ`,
+  }
 }
 
 const WorkReviewsPage: FC<WorkReviewsPageProps> = async ({ params }) => {

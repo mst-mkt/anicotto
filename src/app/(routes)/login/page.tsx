@@ -3,11 +3,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Button } from '../../../components/ui/button'
+import { PROJECT_NAME } from '../../../constants/project'
 import { auth } from '../../../lib/auth'
 import { loginAction } from '../../actions/auth/login'
 
 export const metadata = {
-  title: 'ログイン',
+  title: `ログイン | ${PROJECT_NAME}`,
   description: 'Annictにログインしてアプリを使用する',
 } satisfies Metadata
 

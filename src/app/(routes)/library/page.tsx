@@ -1,11 +1,18 @@
 import { BookImageIcon } from 'lucide-react'
+import type { Metadata } from 'next'
 import type { SearchParams } from 'nuqs/server'
 import { type FC, Suspense } from 'react'
 import { TabsContent } from '../../../components/ui/tabs'
+import { PROJECT_NAME } from '../../../constants/project'
 import { statusPicklist } from '../../../schemas/annict/common'
 import { Tab } from './_components/tab'
 import { WorkList, WorkListSkeleton } from './_components/work-list'
 import { loadSearchParams } from './search-params'
+
+export const metadata: Metadata = {
+  title: `ライブラリ | ${PROJECT_NAME}`,
+  description: 'ステータスを設定した作品の一覧',
+}
 
 type LibraryPageProps = {
   searchParams: Promise<SearchParams>
