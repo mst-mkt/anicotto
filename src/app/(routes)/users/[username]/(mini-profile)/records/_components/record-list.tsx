@@ -7,7 +7,7 @@ import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import type { User } from '../../../../../../../schemas/annict/users'
 import { timeText } from '../../../../../../../utils/time-text'
 import { getUserRecords } from '../get-records'
-import { groupRecords } from './group-records'
+import { groupRecords } from '../group-records'
 import { RatingBadge } from './rating-badge'
 
 type RecordListProps = {
