@@ -12,7 +12,7 @@ const UserMiniProfileLayout: FC<UserMiniProfileLayoutProps> = async ({ children,
   const { username } = await params
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-8">
       <MiniProfile username={username} />
       {children}
     </div>

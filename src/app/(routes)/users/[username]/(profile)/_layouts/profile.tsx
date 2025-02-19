@@ -96,21 +96,21 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
       </div>
       <div className="flex gap-x-4 truncate py-4 text-sm">
         <Link
-          href={`/${user.username}/following`}
+          href={`/users/${user.username}/following`}
           className="flex items-center gap-x-1 hover:underline"
         >
           <span className="text-muted-foreground text-sm">フォロー</span>
           <span>{user.followings_count}</span>
         </Link>
         <Link
-          href={`/${user.username}/followers`}
+          href={`/users/${user.username}/followers`}
           className="flex items-center gap-x-1 hover:underline"
         >
           <span className="text-muted-foreground text-sm">フォロワー</span>
           <span>{user.followers_count}</span>
         </Link>
         <Link
-          href={`/${user.username}/records`}
+          href={`/users/${user.username}/records`}
           className="flex items-center gap-x-1 hover:underline"
         >
           <span className="text-muted-foreground text-sm">記録した数</span>
