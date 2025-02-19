@@ -4,15 +4,15 @@ import { type FC, Suspense } from 'react'
 import { SearchIcon } from '../../../../../../components/icons/search'
 import { Button } from '../../../../../../components/ui/button'
 import { getUser } from '../../get-user'
-import { FollowersList, FollowersListSkeleton } from './_components/followers-list'
+import { FollowingList, FollowingListSkeleton } from './_components/following-list'
 
-type FollowersPageProps = {
+type FollowingPageProps = {
   params: Promise<{
     username: string
   }>
 }
 
-const FollowersPage: FC<FollowersPageProps> = async ({ params }) => {
+const FollowingPage: FC<FollowingPageProps> = async ({ params }) => {
   const { username } = await params
 
   const user = await getUser(username)
@@ -21,19 +21,19 @@ const FollowersPage: FC<FollowersPageProps> = async ({ params }) => {
     <div className="flex flex-col gap-y-8">
       <h1 className="flex items-center gap-x-2 font-bold text-lg">
         <UsersIcon size={24} className="text-anicotto-accent" />
-        {user?.name}のフォロワー
+        {user?.name}のフォロー
       </h1>
-      <Suspense fallback={<FollowersListSkeleton />}>
-        <FollowersList username={username} />
+      <Suspense fallback={<FollowingListSkeleton />}>
+        <FollowingList username={username} />
       </Suspense>
       <Button variant="secondary" asChild={true} className="w-fit self-center">
-        <Link href={`/users/${username}/following`}>
+        <Link href={`/users/${username}/followers`}>
           <SearchIcon />
-          フォローを見る
+          フォロワーを見る
         </Link>
       </Button>
     </div>
   )
 }
 
-export default FollowersPage
+export default FollowingPage
