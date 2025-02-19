@@ -10,7 +10,7 @@ import { cn } from '../../../../../../utils/classnames'
 const pages = [
   ['', 'トップ'],
   ['library', 'ライブラリ'],
-  ['reviews', 'レビュー'],
+  ['records', '記録'],
 ] as const satisfies [string, string][]
 type PagePath = (typeof pages)[number][0]
 
