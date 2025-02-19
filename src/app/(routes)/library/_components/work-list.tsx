@@ -37,7 +37,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4 py-4">
       {works.map((work) => (
         <WorkCard key={work.id} work={work} />
       ))}
@@ -46,7 +46,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
 }
 
 export const WorkListSkeleton = () => (
-  <div className="flex flex-col gap-y-4">
+  <div className="flex flex-col gap-y-4 py-4">
     {[...Array(8)].map((_, index) => (
       <div
         // biome-ignore lint/suspicious/noArrayIndexKey: this is static array
