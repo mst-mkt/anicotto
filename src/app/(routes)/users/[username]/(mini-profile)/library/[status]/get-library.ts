@@ -25,7 +25,7 @@ export const getLibrary = async (username: User['username'], status: SelectedSta
   const query = graphql(`
     query getLibrary($username: String!, $status: StatusState!) {
       user(username: $username) {
-        libraryEntries(states: [$status], orderBy: { field: LAST_TRACKED_AT, direction: DESC }) {
+        libraryEntries(states: [$status], orderBy: { field: LAST_TRACKED_AT, direction: DESC }, first: 32) {
           edges {
             node {
               work {
