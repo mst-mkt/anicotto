@@ -38,11 +38,11 @@ export const getIsFollowed = async (from: User['username'], to: User['username']
     const PER_PAGE = 50
     const followedResult = await annictApiClient.getFollowing(
       { query: { filter_username: from, page, per_page: PER_PAGE } },
-      { next: { tags: [`following-${from}`] } },
+      { next: { tags: [`following-${from}-${to}`] } },
     )
 
     if (followedResult.isErr()) {
-      console.error('[/users/[username] Failed to fetch followed:', followedResult.error)
+      console.error('[/users/{username}] Failed to fetch followed:', followedResult.error)
       return false
     }
 
@@ -59,4 +59,34 @@ export const getIsFollowed = async (from: User['username'], to: User['username']
   }
 
   return await getIsFollowedImpl()
+}
+
+export const getIsFollowing = async (from: User['username'], to: User['username']) => {
+  await auth()
+
+  const getIsFollowingImpl = async (page = 1) => {
+    const PER_PAGE = 50
+    const followingResult = await annictApiClient.getFollowing(
+      { query: { filter_username: to, page, per_page: PER_PAGE } },
+      { next: { tags: [`following-${from}-${to}`] } },
+    )
+
+    if (followingResult.isErr()) {
+      console.error('[/users/{username}] Failed to fetch following:', followingResult.error)
+      return false
+    }
+
+    const following = followingResult.value.users
+
+    const isInclude = following.some((user) => user.username === from)
+    const isLastPage = following.length < PER_PAGE
+
+    if (isInclude || isLastPage) {
+      return isInclude
+    }
+
+    return await getIsFollowingImpl(page + 1)
+  }
+
+  return await getIsFollowingImpl()
 }

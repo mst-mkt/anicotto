@@ -92,7 +92,11 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
             </time>
           </div>
         </div>
-        {user.id !== me?.id && <FollowButton isFollowing={true} username={user.username} />}
+        {me !== null && user.id !== me.id && (
+          <Suspense>
+            <FollowButton username={user.username} myUsername={me.username} />
+          </Suspense>
+        )}
       </div>
       <div className="flex gap-x-4 truncate py-4 text-sm">
         <Link
