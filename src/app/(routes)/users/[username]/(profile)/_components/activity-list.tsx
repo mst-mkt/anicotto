@@ -1,3 +1,4 @@
+import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import type { User } from '../../../../../../schemas/annict/users'
 import { getActivities } from '../get-activities'
@@ -10,8 +11,22 @@ type ActivityListProps = {
 export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
   const activities = await getActivities(username)
 
-  if (!activities) {
-    return <div>Failed to fetch activities</div>
+  if (activities === null) {
+    return (
+      <div className="flex w-full flex-col items-center justify-center gap-y-4 py-16">
+        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <p>アクテビティが取得できませんでした</p>
+      </div>
+    )
+  }
+
+  if (activities.length === 0) {
+    return (
+      <div className="flex w-full flex-col items-center justify-center gap-y-4 py-16">
+        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <p>アクテビティがありません</p>
+      </div>
+    )
   }
 
   return (
