@@ -44,7 +44,7 @@ type CarouselContextProps = {
 
 const CarouselContext = createContext<CarouselContextProps | null>(null)
 
-function useCarousel() {
+export const useCarousel = () => {
   const context = useContext(CarouselContext)
 
   if (context === null) {
