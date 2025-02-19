@@ -1,5 +1,5 @@
 import { type FC, Suspense } from 'react'
-import { ActivityList } from './_components/activity-list'
+import { ActivityList, ActivityListSkeleton } from './_components/activity-list'
 
 type UserPageProps = {
   params: Promise<{
@@ -12,7 +12,7 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <Suspense>
+      <Suspense fallback={<ActivityListSkeleton />}>
         <ActivityList username={username} />
       </Suspense>
     </div>
