@@ -5,48 +5,42 @@ import { match } from 'ts-pattern'
 import { Image } from '../../../../components/shared/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import { Badge } from '../../../../components/ui/badge'
+import { ACTIVITY_ICON, ACTIVITY_TEXT } from '../../../../constants/activity'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity as ActivityType } from '../../../../schemas/annict/activities'
 import { timeText } from '../../../../utils/time-text'
-import { ActivityIcon } from './activity-icon'
 import { RatingBadge, StatusBadge } from './badges'
 
-export const Activity: FC<ActivityType> = (activity) => (
-  <div className="fade-in flex animate-in gap-x-4 duration-500 ease-in-out">
-    <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
-      <Avatar className="z-0 h-12 w-12">
-        <AvatarImage src={activity.user.avatar_url} alt={activity.user.username} />
-        <AvatarFallback>{activity.user.name.slice(0, 1)}</AvatarFallback>
-      </Avatar>
-    </Link>
-    <div className="flex w-full flex-col gap-y-4">
-      <div className="flex h-10 items-center gap-x-2">
-        <ActivityIcon action={activity.action} size={28} className="text-foreground-300" />
-        <Link href={`/users/${activity.user.username}`} className="hover:underline">
-          {activity.user.name}
-        </Link>
-        <p className="shrink grow truncate text-sm">
-          {match(activity)
-            .with({ action: 'create_record' }, () => 'が記録しました')
-            .with(
-              { action: 'create_multiple_records' },
-              (activity) => `が${activity.multiple_records.length}件の記録をしました`,
-            )
-            .with({ action: 'create_review' }, () => 'がレビューしました')
-            .with({ action: 'create_status' }, () => 'がステータスを変更しました')
-            .exhaustive()}
-        </p>
-        <time
-          dateTime={activity.created_at}
-          className="hidden shrink-0 grow-0 text-muted-foreground text-sm md:block"
-        >
-          {timeText(activity.created_at)}
-        </time>
+export const Activity: FC<ActivityType> = (activity) => {
+  const Icon = ACTIVITY_ICON[activity.action]
+
+  return (
+    <div className="fade-in flex animate-in gap-x-4 duration-500 ease-in-out">
+      <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
+        <Avatar className="z-0 h-12 w-12">
+          <AvatarImage src={activity.user.avatar_url} alt={activity.user.username} />
+          <AvatarFallback>{activity.user.name.slice(0, 1)}</AvatarFallback>
+        </Avatar>
+      </Link>
+      <div className="flex w-full flex-col gap-y-4">
+        <div className="flex h-10 items-center gap-x-2">
+          <Icon size={28} className="text-foreground-300" />
+          <Link href={`/users/${activity.user.username}`} className="hover:underline">
+            {activity.user.name}
+          </Link>
+          <p className="shrink grow truncate text-sm">が{ACTIVITY_TEXT(activity)}</p>
+          <time
+            dateTime={activity.created_at}
+            className="hidden shrink-0 grow-0 text-muted-foreground text-sm md:block"
+          >
+            {timeText(activity.created_at)}
+          </time>
+        </div>
+        <ActivityInfoCard {...activity} />
       </div>
-      <ActivityInfoCard {...activity} />
     </div>
-  </div>
-)
+  )
+}
 
 const ActivityInfoCard: FC<ActivityType> = async (activity) => {
   const image = await getValidWorkImage(activity.work.id.toString(), activity.work.images)
