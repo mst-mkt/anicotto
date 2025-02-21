@@ -1,11 +1,25 @@
 import { BookCopyIcon } from 'lucide-react'
 import { type FC, Suspense } from 'react'
+import { PROJECT_NAME } from '../../../../constants/project'
 import { MultiTrack, MultiTrackSkeleton } from './_components/multi-track'
+import { getWork } from './get-work'
 
 type MultiTrackPageProps = {
   params: Promise<{
     workId: string
   }>
+}
+
+export const generateMetadata = async ({ params }: MultiTrackPageProps) => {
+  const { workId } = await params
+  const workIdNumber = Number.parseInt(workId, 10)
+  if (Number.isNaN(workIdNumber)) return null
+  const work = await getWork(workIdNumber)
+
+  return {
+    title: `${work?.title} - 記録 | ${PROJECT_NAME}`,
+    description: `「${work?.title}」のエピソードに対する記録を行います`,
+  }
 }
 
 const MultiTrackPage: FC<MultiTrackPageProps> = async ({ params }) => {
