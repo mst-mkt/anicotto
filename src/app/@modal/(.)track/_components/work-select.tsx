@@ -1,4 +1,8 @@
-import { ImageOffIcon, TriangleAlertIcon } from 'lucide-react'
+'use client'
+
+import { ImageOffIcon } from 'lucide-react'
+import { useQueryState } from 'nuqs'
+import { type FC, useCallback } from 'react'
 import { Image } from '../../../../components/shared/image'
 import { AspectRatio } from '../../../../components/ui/aspect-ratio'
 import { Badge } from '../../../../components/ui/badge'
@@ -9,32 +13,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../../../components/ui/select'
-import { Skeleton } from '../../../../components/ui/skeleton'
-import { getLibraries } from '../get-libraries'
+import type { Library } from '../get-libraries'
+import { trackSearchParams } from '../search-params'
 
-export const WorkSelect = async () => {
-  const libraries = await getLibraries()
+type WorkSelectProps = {
+  libraries: Library[]
+  selectedEpisode?: string
+}
 
-  if (libraries === null) {
-    return (
-      <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
-        <TriangleAlertIcon size={24} className="text-anicotto-accent" />
-        <p>エピソード情報の取得に失敗しました</p>
-      </div>
-    )
-  }
+export const WorkSelect: FC<WorkSelectProps> = ({ libraries, selectedEpisode }) => {
+  const [_, setEpisode] = useQueryState('episode', trackSearchParams.episode)
 
-  if (libraries.filter((lib) => lib.nextEpisode !== null).length === 0) {
-    return (
-      <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
-        <TriangleAlertIcon size={24} className="text-anicotto-accent" />
-        <p>視聴中の作品がありません</p>
-      </div>
-    )
-  }
+  const handleSelect = useCallback(
+    (value: string) => {
+      const episode = Number.parseInt(value, 10)
+      setEpisode(episode)
+    },
+    [setEpisode],
+  )
 
   return (
-    <Select name="episode_id" defaultValue={libraries[0].nextEpisode?.id.toString() ?? ''}>
+    <Select name="episode_id" defaultValue={selectedEpisode} onValueChange={handleSelect}>
       <SelectTrigger className="h-fit w-full cursor-pointer pl-2 [&>span]:block [&>span]:h-fit">
         <SelectValue />
       </SelectTrigger>
@@ -80,13 +79,3 @@ export const WorkSelect = async () => {
     </Select>
   )
 }
-
-export const WorkSelectSkeleton = () => (
-  <div className="flex items-center gap-x-4 rounded-md border border-muted p-2">
-    <Skeleton className="h-16 w-16" />
-    <div className="flex flex-col gap-y-1">
-      <Skeleton className="h-[1lh] w-20" />
-      <Skeleton className="h-[1lh] w-32" />
-    </div>
-  </div>
-)
