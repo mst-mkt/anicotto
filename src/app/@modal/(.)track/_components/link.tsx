@@ -16,7 +16,7 @@ export const MultiTrackLink: FC<MultiTrackLinkProps> = ({ workId }) => (
     // without this onClick, intercepting-routes (track modal) will remain open
     // このやり方は無理矢理感があるのでなんとかしたい
     onClick={() => redirect(`/track/${workId}`)}
-    className="flex items-center justify-end gap-x-2 text-anicotto-accent text-sm hover:underline"
+    className="flex w-fit items-center justify-end gap-x-2 self-end text-anicotto-accent text-sm hover:underline"
   >
     この作品をまとめて記録する
     <ChevronRightIcon size={16} />

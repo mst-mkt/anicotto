@@ -1,15 +1,9 @@
 import { TriangleAlertIcon } from 'lucide-react'
-import { redirect } from 'next/navigation'
-import type { FC } from 'react'
 import { Skeleton } from '../../../../components/ui/skeleton'
 import { getLibraries } from '../get-libraries'
 import { WorkSelect as WorkSelectContent } from './work-select'
 
-type WorkSelectProps = {
-  selectedEpisode: number | null
-}
-
-export const WorkSelect: FC<WorkSelectProps> = async ({ selectedEpisode }) => {
+export const WorkSelect = async () => {
   const libraries = await getLibraries()
 
   if (libraries === null) {
@@ -30,15 +24,7 @@ export const WorkSelect: FC<WorkSelectProps> = async ({ selectedEpisode }) => {
     )
   }
 
-  if (selectedEpisode === null) {
-    const showLibrary = libraries.find((lib) => lib.nextEpisode !== null)
-
-    if (showLibrary !== undefined) {
-      return redirect(`/track?episode=${showLibrary.nextEpisode?.id}`)
-    }
-  }
-
-  return <WorkSelectContent libraries={libraries} selectedEpisode={selectedEpisode?.toString()} />
+  return <WorkSelectContent libraries={libraries} />
 }
 
 export const WorkSelectSkeleton = () => (
