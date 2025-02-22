@@ -1,5 +1,6 @@
 import { annictApiClient } from '../../../../lib/api/client'
 import { auth } from '../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import type { Work } from '../../../../schemas/annict/works'
 
 export const getReviews = async (workId: Work['id'], per = 20, page = 1) => {
@@ -15,7 +16,7 @@ export const getReviews = async (workId: Work['id'], per = 20, page = 1) => {
         page,
       },
     },
-    { next: { tags: [`work-reviews-${workId}`] } },
+    { next: { tags: [CACHE_TAGS.WORK(workId), CACHE_TAGS.WORK_REVIEWS(workId)] } },
   )
 
   if (reviewsResult.isErr()) {

@@ -1,5 +1,6 @@
 import { annictApiClient } from '../../../../lib/api/client'
 import { auth } from '../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import type { User } from '../../../../schemas/annict/users'
 
 export const getUser = async (username: User['username']) => {
@@ -7,7 +8,7 @@ export const getUser = async (username: User['username']) => {
 
   const userResult = await annictApiClient.getUsers(
     { query: { filter_usernames: [username], per_page: 1 } },
-    { next: { tags: [`user-${username}`] } },
+    { next: { tags: [CACHE_TAGS.USER(username)] } },
   )
 
   if (userResult.isErr()) {
@@ -21,7 +22,7 @@ export const getUser = async (username: User['username']) => {
 export const getMe = async () => {
   await auth()
 
-  const meResult = await annictApiClient.getMe({}, { next: { tags: ['me'] } })
+  const meResult = await annictApiClient.getMe({}, { next: { tags: [CACHE_TAGS.ME] } })
 
   if (meResult.isErr()) {
     console.error('[/me] Failed to fetch me:', meResult.error)
@@ -38,7 +39,17 @@ export const getIsFollowed = async (from: User['username'], to: User['username']
     const PER_PAGE = 50
     const followedResult = await annictApiClient.getFollowing(
       { query: { filter_username: from, page, per_page: PER_PAGE } },
-      { next: { tags: [`following-${from}-${to}`] } },
+      {
+        next: {
+          tags: [
+            CACHE_TAGS.USER(from),
+            CACHE_TAGS.USER(to),
+            CACHE_TAGS.FOLLOWING(from),
+            CACHE_TAGS.FOLLOWERS(to),
+            CACHE_TAGS.IS_FOLLOWER(from, to),
+          ],
+        },
+      },
     )
 
     if (followedResult.isErr()) {
@@ -68,7 +79,17 @@ export const getIsFollowing = async (from: User['username'], to: User['username'
     const PER_PAGE = 50
     const followingResult = await annictApiClient.getFollowing(
       { query: { filter_username: to, page, per_page: PER_PAGE } },
-      { next: { tags: [`following-${from}-${to}`] } },
+      {
+        next: {
+          tags: [
+            CACHE_TAGS.USER(from),
+            CACHE_TAGS.USER(to),
+            CACHE_TAGS.FOLLOWING(to),
+            CACHE_TAGS.FOLLOWERS(from),
+            CACHE_TAGS.IS_FOLLOWER(to, from),
+          ],
+        },
+      },
     )
 
     if (followingResult.isErr()) {

@@ -1,6 +1,7 @@
 import { graphql } from 'gql.tada'
 import { annictGraphqlClient } from '../../../lib/api/graphql'
 import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../lib/images/valid-url'
 import type { UnNullable, UnPromise } from '../../../types/util-types'
 
@@ -39,7 +40,21 @@ export const getLibraries = async () => {
   `)
 
   const { data, error } = await annictGraphqlClient
-    .query(query, {}, { fetchOptions: { next: { tags: ['libraries'] } } })
+    .query(
+      query,
+      {},
+      {
+        fetchOptions: {
+          next: {
+            tags: [
+              CACHE_TAGS.ME,
+              CACHE_TAGS.MY_LIBRARIES,
+              CACHE_TAGS.MY_LIBRARIES_STATUS('watching'),
+            ],
+          },
+        },
+      },
+    )
     .toPromise()
 
   const libraries = data?.viewer?.libraryEntries?.nodes ?? []

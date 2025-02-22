@@ -3,6 +3,7 @@ import { err, ok } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
 import { type Rating, ratingPicklist } from '../../../schemas/annict/common'
 
 const isRating = (value: unknown): value is Rating => {
@@ -56,13 +57,22 @@ export const createReview = async (formData: FormData) => {
         rating_music_state: formDataResult.value.ratings.music,
       },
     },
-    { next: { tags: [`work-reviews-${formDataResult.value.workId}`] } },
+    {
+      next: {
+        tags: [
+          CACHE_TAGS.WORK(formDataResult.value.workId),
+          CACHE_TAGS.WORK_REVIEWS(formDataResult.value.workId),
+          CACHE_TAGS.MY_ACTIVITY,
+        ],
+      },
+    },
   )
 
   if (result.isErr()) return { success: false, error: result.error } as const
 
-  revalidateTag(`work-reviews-${formDataResult.value.workId}`)
-  revalidateTag('activities')
+  revalidateTag(CACHE_TAGS.WORK(formDataResult.value.workId))
+  revalidateTag(CACHE_TAGS.WORK_REVIEWS(formDataResult.value.workId))
+  revalidateTag(CACHE_TAGS.MY_ACTIVITY)
 
   return { success: true, value: result.value } as const
 }

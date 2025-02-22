@@ -1,6 +1,7 @@
 import { graphql } from 'gql.tada'
 import { annictGraphqlClient } from '../../../../../../lib/api/graphql'
 import { auth } from '../../../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
 import type { User } from '../../../../../../schemas/annict/users'
 import type { UnNullable, UnPromise } from '../../../../../../types/util-types'
@@ -42,7 +43,11 @@ export const getUserRecords = async (username: User['username']) => {
     .query(
       query,
       { username },
-      { fetchOptions: { next: { tags: ['records', `records-${username}`] } } },
+      {
+        fetchOptions: {
+          next: { tags: [CACHE_TAGS.USER(username), CACHE_TAGS.USER_RECORDS(username)] },
+        },
+      },
     )
     .toPromise()
 

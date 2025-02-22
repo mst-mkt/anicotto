@@ -3,9 +3,10 @@
 import { LoaderIcon, RotateCwIcon } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { useRevalidate } from '../../../../hooks/useRevalidate'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
 
 export const ReloadActivityButton = () => {
-  const { isPending, revalidate: handleClick } = useRevalidate('activities')
+  const { isPending, revalidate: handleClick } = useRevalidate(CACHE_TAGS.MY_ACTIVITY)
 
   return (
     <Button

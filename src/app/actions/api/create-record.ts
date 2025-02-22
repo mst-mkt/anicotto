@@ -4,6 +4,7 @@ import { err, ok } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
 import { type Rating, ratingPicklist } from '../../../schemas/annict/common'
 
 const isRating = (value: unknown): value is Rating => {
@@ -46,15 +47,24 @@ export const createRecord = async (formData: FormData) => {
         share_facebook: formDataResult.value.shareFacebook,
       },
     },
-    { next: { tags: [`records-${formDataResult.value.episodeId}`] } },
+    {
+      next: {
+        tags: [
+          CACHE_TAGS.EPISODE(formDataResult.value.episodeId),
+          CACHE_TAGS.EPISODE_RECORDS(formDataResult.value.episodeId),
+          CACHE_TAGS.MY_ACTIVITY,
+          CACHE_TAGS.MY_RECORDS,
+        ],
+      },
+    },
   )
 
   if (result.isErr()) return { success: false, error: result.error } as const
 
-  revalidateTag(`episodes-${formDataResult.value.episodeId}`)
-  revalidateTag(`records-${formDataResult.value.episodeId}`)
-  revalidateTag('libraries')
-  revalidateTag('activities')
+  revalidateTag(CACHE_TAGS.EPISODE(formDataResult.value.episodeId))
+  revalidateTag(CACHE_TAGS.EPISODE_RECORDS(formDataResult.value.episodeId))
+  revalidateTag(CACHE_TAGS.MY_RECORDS)
+  revalidateTag(CACHE_TAGS.MY_ACTIVITY)
 
   return { success: true, data: result.value } as const
 }

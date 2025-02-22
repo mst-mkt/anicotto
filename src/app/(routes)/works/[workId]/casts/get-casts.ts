@@ -1,12 +1,13 @@
 import { annictApiClient } from '../../../../../lib/api/client'
 import { auth } from '../../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../../lib/cache-tag'
 
 export const getCasts = async (workId: number) => {
   await auth()
 
   const castsResult = await annictApiClient.getCasts(
     { query: { filter_work_id: workId, per_page: 50, sort_sort_number: 'asc' } },
-    { next: { tags: [`work-casts-${workId}`] } },
+    { next: { tags: [CACHE_TAGS.WORK(workId), CACHE_TAGS.WORK_CASTS(workId)] } },
   )
 
   if (castsResult.isErr()) {

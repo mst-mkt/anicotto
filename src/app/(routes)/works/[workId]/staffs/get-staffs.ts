@@ -1,5 +1,6 @@
 import { annictApiClient } from '../../../../../lib/api/client'
 import { auth } from '../../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../../lib/cache-tag'
 import type { Work } from '../../../../../schemas/annict/works'
 
 export const getStaffs = async (workId: Work['id']) => {
@@ -7,7 +8,7 @@ export const getStaffs = async (workId: Work['id']) => {
 
   const staffsResult = await annictApiClient.getStaffs(
     { query: { filter_work_id: workId, per_page: 50, sort_sort_number: 'asc' } },
-    { next: { tags: [`work-staffs-${workId}`] } },
+    { next: { tags: [CACHE_TAGS.WORK(workId), CACHE_TAGS.WORK_STAFFS(workId)] } },
   )
 
   if (staffsResult.isErr()) {

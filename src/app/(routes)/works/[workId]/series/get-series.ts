@@ -1,5 +1,6 @@
 import { graphql } from 'gql.tada'
 import { annictGraphqlClient } from '../../../../../lib/api/graphql'
+import { CACHE_TAGS } from '../../../../../lib/cache-tag'
 import type { Work } from '../../../../../schemas/annict/works'
 import type { UnNullable, UnPromise } from '../../../../../types/util-types'
 
@@ -38,7 +39,13 @@ export const getWorkSeries = async (workId: Work['id']) => {
   `)
 
   const { data, error } = await annictGraphqlClient
-    .query(query, { workId }, { fetchOptions: { next: { tags: [`work-series-${workId}`] } } })
+    .query(
+      query,
+      { workId },
+      {
+        fetchOptions: { next: { tags: [CACHE_TAGS.WORK(workId), CACHE_TAGS.WORK_SERIES(workId)] } },
+      },
+    )
     .toPromise()
 
   const [work] = data?.searchWorks?.nodes ?? []

@@ -1,5 +1,6 @@
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
 import type { Episode } from '../../../schemas/annict/episodes'
 
 export const getEpisode = async (episode: Episode['id']) => {
@@ -7,7 +8,7 @@ export const getEpisode = async (episode: Episode['id']) => {
 
   const episodeResult = await annictApiClient.getEpisodes(
     { query: { filter_ids: [episode], per_page: 1 } },
-    { next: { tags: [`episode-${episode}`] } },
+    { next: { tags: [CACHE_TAGS.EPISODE(episode)] } },
   )
 
   if (episodeResult.isErr()) {

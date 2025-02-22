@@ -3,6 +3,7 @@
 import { revalidateTag } from 'next/cache'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
 import type { Status } from '../../../schemas/annict/common'
 
 export const updateStatus = async (workId: number, kind: Status) => {
@@ -16,9 +17,10 @@ export const updateStatus = async (workId: number, kind: Status) => {
     return { success: false }
   }
 
-  revalidateTag(`work-status-${workId}`)
-  revalidateTag('libraries')
-  revalidateTag('activities')
+  revalidateTag(CACHE_TAGS.WORK(workId))
+  revalidateTag(CACHE_TAGS.WORK_STATUS(workId))
+  revalidateTag(CACHE_TAGS.MY_LIBRARIES)
+  revalidateTag(CACHE_TAGS.MY_ACTIVITY)
 
   return { success: true }
 }

@@ -4,6 +4,7 @@ import { Result } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
 import type { Episode } from '../../../schemas/annict/episodes'
 
 export const createMultipleRecords = async (episodeIds: Episode['id'][]) => {
@@ -16,12 +17,21 @@ export const createMultipleRecords = async (episodeIds: Episode['id'][]) => {
       episodeIds.map(async (episodeId) => {
         const result = await annictApiClient.createRecords(
           { query: { episode_id: episodeId } },
-          { next: { tags: [`records-${episodeId}`] } },
+          {
+            next: {
+              tags: [
+                CACHE_TAGS.EPISODE(episodeId),
+                CACHE_TAGS.EPISODE_RECORDS(episodeId),
+                CACHE_TAGS.MY_ACTIVITY,
+                CACHE_TAGS.MY_RECORDS,
+              ],
+            },
+          },
         )
 
         if (result.isOk()) {
-          revalidateTag(`records-${episodeId}`)
-          revalidateTag(`episodes-${episodeId}`)
+          revalidateTag(CACHE_TAGS.EPISODE_RECORDS(episodeId))
+          revalidateTag(CACHE_TAGS.MY_RECORDS)
         }
 
         return result
@@ -29,8 +39,8 @@ export const createMultipleRecords = async (episodeIds: Episode['id'][]) => {
     ),
   )
 
-  revalidateTag('libraries')
-  revalidateTag('activities')
+  revalidateTag(CACHE_TAGS.MY_LIBRARIES)
+  revalidateTag(CACHE_TAGS.MY_ACTIVITY)
 
   if (recordResults.isErr()) return { success: false, error: recordResults.error } as const
 

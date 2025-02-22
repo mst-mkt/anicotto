@@ -1,5 +1,6 @@
 import { annictApiClient } from '../../../../../lib/api/client'
 import { auth } from '../../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../../lib/cache-tag'
 import type { User } from '../../../../../schemas/annict/users'
 
 export const getActivities = async (username: User['username']) => {
@@ -7,7 +8,7 @@ export const getActivities = async (username: User['username']) => {
 
   const activitiesResult = await annictApiClient.getActivities(
     { query: { filter_username: username, sort_id: 'desc' } },
-    { next: { tags: ['activities', `activities-${username}`] } },
+    { next: { tags: [CACHE_TAGS.USER(username), CACHE_TAGS.USER_ACTIVITY(username)] } },
   )
 
   if (activitiesResult.isErr()) {

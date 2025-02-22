@@ -2,6 +2,7 @@ import { graphql } from 'gql.tada'
 import { match } from 'ts-pattern'
 import { annictGraphqlClient } from '../../../../../../../lib/api/graphql'
 import { auth } from '../../../../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../../../../lib/images/valid-url'
 import type { Status } from '../../../../../../../schemas/annict/common'
 import type { User } from '../../../../../../../schemas/annict/users'
@@ -51,7 +52,11 @@ export const getLibrary = async (username: User['username'], status: SelectedSta
   const { data, error } = await annictGraphqlClient.query(
     query,
     { username, status: convertStatusEnum(status) },
-    { fetchOptions: { next: { tags: ['libraries', `libraries-${username}`] } } },
+    {
+      fetchOptions: {
+        next: { tags: [CACHE_TAGS.USER(username), CACHE_TAGS.USER_LIBRARIES(username)] },
+      },
+    },
   )
 
   const libraries =
