@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import TopLoader from 'nextjs-toploader'
 import type { FC, ReactNode } from 'react'
-import { Toaster } from 'sonner'
 import { twJoin } from 'tailwind-merge'
+import { Toaster } from '../components/ui/sonner'
 import { ThemeLoader } from '../lib/theme/loader'
 import '../styles/globals.css'
 import { cn } from '../utils/classnames'
@@ -49,7 +49,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal, panel }) =
           {modal}
         </div>
         <BottomMenu />
-        <Toaster richColors={true} />
+        <Toaster />
       </Providers>
     </body>
   </html>
