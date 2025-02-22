@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+import { NextConfig } from "next";
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -14,6 +15,6 @@ const nextConfig = {
     // typedRoutes: true, // with next 15.1.6, occurs error when build
     reactCompiler: true,
   }
-};
+} satisfies NextConfig
 
 export default nextConfig;
