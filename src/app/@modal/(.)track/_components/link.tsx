@@ -2,7 +2,6 @@
 
 import { ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 import type { FC } from 'react'
 import type { Work } from '../../../../schemas/annict/works'
 
@@ -13,9 +12,6 @@ type MultiTrackLinkProps = {
 export const MultiTrackLink: FC<MultiTrackLinkProps> = ({ workId }) => (
   <Link
     href={`/track/${workId}`}
-    // without this onClick, intercepting-routes (track modal) will remain open
-    // このやり方は無理矢理感があるのでなんとかしたい
-    onClick={() => redirect(`/track/${workId}`)}
     className="flex w-fit items-center justify-end gap-x-2 self-end text-anicotto-accent text-sm hover:underline"
   >
     この作品をまとめて記録する
