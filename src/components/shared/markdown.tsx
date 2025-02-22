@@ -10,14 +10,14 @@ type MarkdownProps = {
 }
 
 export const Markdown: FC<MarkdownProps> = ({ children, className }) => (
-  <ReactMarkdown
+  <div
     className={cn(
       'prose dark:prose-invert prose-neutral w-full max-w-full break-words break-all [&_a]:text-anicotto-accent',
       className,
     )}
-    skipHtml={false}
-    remarkPlugins={[remarkGfm, remarkBreaks]}
   >
-    {children}
-  </ReactMarkdown>
+    <ReactMarkdown skipHtml={false} remarkPlugins={[remarkGfm, remarkBreaks]}>
+      {children}
+    </ReactMarkdown>
+  </div>
 )
