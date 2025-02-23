@@ -1,5 +1,7 @@
+'use client'
+
 import { LogOutIcon } from 'lucide-react'
-import { logoutAction } from '../actions/auth/logout'
+import { logoutAction } from '../../actions/auth/logout'
 
 export const LogOutButton = () => (
   <button

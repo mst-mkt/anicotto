@@ -1,6 +1,6 @@
 import { ExternalLinkIcon, UserCircleIcon } from 'lucide-react'
 import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from '../../components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
 import {
   Drawer,
   DrawerClose,
@@ -8,13 +8,13 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '../../components/ui/drawer'
-import {} from '../../components/ui/dropdown'
-import { Separator } from '../../components/ui/separator'
-import { annictApiClient } from '../../lib/api/client'
-import { auth } from '../../lib/auth'
-import { CACHE_TAGS } from '../../lib/cache-tag'
-import { LogOutButton } from './header-logout'
+} from '../../../components/ui/drawer'
+import {} from '../../../components/ui/dropdown'
+import { Separator } from '../../../components/ui/separator'
+import { annictApiClient } from '../../../lib/api/client'
+import { auth } from '../../../lib/auth'
+import { CACHE_TAGS } from '../../../lib/cache-tag'
+import { LogOutButton } from './logout-button'
 
 export const HeaderAccount = async () => {
   await auth()

@@ -3,16 +3,16 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { twJoin } from 'tailwind-merge'
 import { match } from 'ts-pattern'
-import { EarthIcon } from '../../components/icons/earth'
-import { GithubIcon } from '../../components/icons/github'
-import { HomeIcon } from '../../components/icons/home'
+import { EarthIcon } from '../../../components/icons/earth'
+import { GithubIcon } from '../../../components/icons/github'
+import { HomeIcon } from '../../../components/icons/home'
 import {
   PROJECT_DESCRIPTION,
   PROJECT_LINKS,
   PROJECT_NAME,
   PROJECT_OWNER,
-} from '../../constants/project'
-import { FooterLink, type FooterLinkProps } from './footer-link'
+} from '../../../constants/project'
+import { FooterLink, type FooterLinkProps } from './link'
 
 const getLinkIcon = (href: Route) => {
   return match(href)

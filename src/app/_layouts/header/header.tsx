@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import type { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { PROJECT_NAME } from '../../constants/project'
-import { HeaderAccount } from './header-account'
+import { PROJECT_NAME } from '../../../constants/project'
+import { HeaderAccount } from './account'
 import { ThemeButton } from './theme-button'
 
 type HeaderProps = {
