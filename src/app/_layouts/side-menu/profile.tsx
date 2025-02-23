@@ -1,6 +1,6 @@
 import { EllipsisIcon, ExternalLinkIcon, UserCircleIcon } from 'lucide-react'
 import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,13 +9,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../../../components/ui/dropdown'
-import { Skeleton } from '../../../../components/ui/skeleton'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../components/ui/tooltip'
-import { getMe } from '../../get-me'
-import { SideProfileLogout } from './logout'
+} from '../../../components/ui/dropdown'
+import { Skeleton } from '../../../components/ui/skeleton'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/tooltip'
+import { getMe } from './get-me'
+import { SidemenuLogout } from './logout'
 
-export const SideProfile = async () => {
+export const SidemenuProfile = async () => {
   const profile = await getMe()
 
   if (profile === null) {
@@ -66,7 +66,7 @@ export const SideProfile = async () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <SideProfileLogout />
+        <SidemenuLogout />
       </DropdownMenuContent>
     </DropdownMenu>
   )

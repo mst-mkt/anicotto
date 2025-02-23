@@ -9,7 +9,7 @@ import { cn } from '../utils/classnames'
 import { Footer } from './_layouts/footer/footer'
 import { Header } from './_layouts/header/header'
 import { BottomMenu } from './_layouts/mobile-menu/mobile-menu'
-import { SidemenuContainer } from './_layouts/side-menu/sidemenu-container'
+import { Sidemenu } from './_layouts/side-menu/sidemenu'
 import styles from './layout.module.css'
 import { Providers } from './providers'
 
@@ -20,12 +20,11 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: ReactNode
-  sidemenu: ReactNode
   modal: ReactNode
   panel: ReactNode
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal, panel }) => (
+const RootLayout: FC<RootLayoutProps> = ({ children, modal, panel }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(
@@ -42,7 +41,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, sidemenu, modal, panel }) =
           data-vaul-drawer-wrapper={true}
         >
           <Header className={styles.header} />
-          <SidemenuContainer className={styles.sideMenu}>{sidemenu}</SidemenuContainer>
+          <Sidemenu className={styles.sideMenu} />
           <main className={twJoin(styles.main, 'w-full py-4')}>{children}</main>
           <Footer className={styles.footer} />
           {panel}

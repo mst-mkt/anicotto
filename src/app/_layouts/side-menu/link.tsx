@@ -3,16 +3,16 @@
 import type { Route } from 'next'
 import Link from 'next/link'
 import { type FC, useCallback, useRef } from 'react'
-import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../../components/icons/types'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../components/ui/tooltip'
+import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../components/icons/types'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/tooltip'
 
-type SidemenuLinkItemProps = {
+type SidemenuLinkProps = {
   icon: PqoqubbwIcon
   href: Route
   label: string
 }
 
-export const SidemenuLinkItem: FC<SidemenuLinkItemProps> = (props) => {
+export const SidemenuLink: FC<SidemenuLinkProps> = (props) => {
   const iconRef = useRef<PqoqubbwIconHandle>(null)
 
   const handleMouseEnter = useCallback(() => {
