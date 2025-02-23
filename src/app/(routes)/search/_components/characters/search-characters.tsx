@@ -1,4 +1,4 @@
-import { HeartIcon } from 'lucide-react'
+import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
@@ -12,11 +12,21 @@ export const SearchCharacters: FC<SearchCharactersProps> = async ({ query }) => 
   const characters = await searchCharacters(query)
 
   if (characters === null) {
-    return <div>キャラクターが見つかりませんでした</div>
+    return (
+      <div className="flex flex-col items-center gap-y-4 py-16">
+        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <p>キャラクターの検索に失敗しました</p>
+      </div>
+    )
   }
 
   if (characters.length === 0) {
-    return <div>キャラクターが見つかりませんでした</div>
+    return (
+      <div className="flex flex-col items-center gap-y-4 py-16">
+        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <p>キャラクターの検索結果が見当たりませんでした</p>
+      </div>
+    )
   }
 
   return (

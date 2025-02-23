@@ -1,4 +1,4 @@
-import { HeartIcon } from 'lucide-react'
+import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
@@ -12,7 +12,21 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query }) => {
   const people = await searchPeople(query)
 
   if (people === null) {
-    return <div>検索結果が見つかりませんでした</div>
+    return (
+      <div className="flex flex-col items-center gap-y-4 py-16">
+        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <p>人物の検索に失敗しました</p>
+      </div>
+    )
+  }
+
+  if (people.length === 0) {
+    return (
+      <div className="flex flex-col items-center gap-y-4 py-16">
+        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <p>人物の検索結果が見当たりませんでした</p>
+      </div>
+    )
   }
 
   return (
