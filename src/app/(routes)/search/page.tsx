@@ -3,6 +3,10 @@ import type { SearchParams } from 'nuqs/server'
 import { type FC, Suspense } from 'react'
 import { match } from 'ts-pattern'
 import { PROJECT_NAME } from '../../../constants/project'
+import {
+  SearchCharacters,
+  SearchCharactersSkeleton,
+} from './_components/characters/search-characters'
 import { SearchInput } from './_components/input'
 import { SearchTabs } from './_components/tabs'
 import { SearchWorks, SearchWorksSkeleton } from './_components/works/search-works'
@@ -38,6 +42,11 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
             .with('works', () => (
               <Suspense fallback={<SearchWorksSkeleton />}>
                 <SearchWorks query={query} />
+              </Suspense>
+            ))
+            .with('characters', () => (
+              <Suspense fallback={<SearchCharactersSkeleton />}>
+                <SearchCharacters query={query} />
               </Suspense>
             ))
             .otherwise(() => (

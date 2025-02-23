@@ -20,6 +20,10 @@ export const CACHE_TAGS = {
   EPISODE: (id: Episode['id']) => `episode:${id}`,
   EPISODE_RECORDS: (id: Episode['id']) => `episode:${id}:records`,
 
+  // characters
+  CHARACTERS: 'characters',
+  CHARACTER: (id: string) => `character:${id}`,
+
   // users
   USER: (username: User['username']) => `user:${username}`,
   USER_RECORDS: (username: User['username']) => `user:${username}:records`,
