@@ -8,6 +8,10 @@ import {
   SearchCharactersSkeleton,
 } from './_components/characters/search-characters'
 import { SearchInput } from './_components/input'
+import {
+  SearchOrganizations,
+  SearchOrganizationsSkeleton,
+} from './_components/organizations/search-organizations'
 import { SearchPeople, SearchPeopleSkeleton } from './_components/people/search-people'
 import { SearchTabs } from './_components/tabs'
 import { SearchWorks, SearchWorksSkeleton } from './_components/works/search-works'
@@ -55,9 +59,12 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
                 <SearchPeople query={query} />
               </Suspense>
             ))
-            .otherwise(() => (
-              <div>検索結果が見つかりませんでした</div>
-            ))}
+            .with('organizations', () => (
+              <Suspense fallback={<SearchOrganizationsSkeleton />}>
+                <SearchOrganizations query={query} />
+              </Suspense>
+            ))
+            .exhaustive()}
         </div>
       )}
     </div>
