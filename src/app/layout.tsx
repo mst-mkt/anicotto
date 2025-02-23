@@ -3,6 +3,7 @@ import TopLoader from 'nextjs-toploader'
 import type { FC, ReactNode } from 'react'
 import { twJoin } from 'tailwind-merge'
 import { Toaster } from '../components/ui/sonner'
+import { PROJECT_DESCRIPTION, PROJECT_NAME } from '../constants/project'
 import { ThemeLoader } from '../lib/theme/loader'
 import '../styles/globals.css'
 import { cn } from '../utils/classnames'
@@ -14,8 +15,8 @@ import styles from './layout.module.css'
 import { Providers } from './providers'
 
 export const metadata: Metadata = {
-  title: 'Anicotto',
-  description: 'Third-party Annict web client',
+  title: PROJECT_NAME,
+  description: PROJECT_DESCRIPTION,
 }
 
 type RootLayoutProps = {
