@@ -8,6 +8,7 @@ import {
   SearchCharactersSkeleton,
 } from './_components/characters/search-characters'
 import { SearchInput } from './_components/input'
+import { SearchPeople, SearchPeopleSkeleton } from './_components/people/search-people'
 import { SearchTabs } from './_components/tabs'
 import { SearchWorks, SearchWorksSkeleton } from './_components/works/search-works'
 import { loadSearchParams } from './search-params'
@@ -47,6 +48,11 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
             .with('characters', () => (
               <Suspense fallback={<SearchCharactersSkeleton />}>
                 <SearchCharacters query={query} />
+              </Suspense>
+            ))
+            .with('people', () => (
+              <Suspense fallback={<SearchPeopleSkeleton />}>
+                <SearchPeople query={query} />
               </Suspense>
             ))
             .otherwise(() => (

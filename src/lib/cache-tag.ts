@@ -1,5 +1,7 @@
+import type { Character } from '../schemas/annict/characters'
 import type { Status } from '../schemas/annict/common'
 import type { Episode } from '../schemas/annict/episodes'
+import type { Person } from '../schemas/annict/people'
 import type { User } from '../schemas/annict/users'
 import type { Work } from '../schemas/annict/works'
 
@@ -22,7 +24,11 @@ export const CACHE_TAGS = {
 
   // characters
   CHARACTERS: 'characters',
-  CHARACTER: (id: string) => `character:${id}`,
+  CHARACTER: (id: Character['id']) => `character:${id}`,
+
+  // people
+  PEOPLE: 'people',
+  PERSON: (id: Person['id']) => `person:${id}`,
 
   // users
   USER: (username: User['username']) => `user:${username}`,
