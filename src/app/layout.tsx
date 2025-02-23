@@ -20,11 +20,11 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: ReactNode
-  modal: ReactNode
+  track: ReactNode
   panel: ReactNode
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ children, modal, panel }) => (
+const RootLayout: FC<RootLayoutProps> = ({ children, track, panel }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(
@@ -45,7 +45,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, modal, panel }) => (
           <main className={twJoin(styles.main, 'w-full py-4')}>{children}</main>
           <Footer className={styles.footer} />
           {panel}
-          {modal}
+          {track}
         </div>
         <BottomMenu />
         <Toaster />
