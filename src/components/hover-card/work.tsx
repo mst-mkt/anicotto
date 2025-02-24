@@ -10,7 +10,18 @@ import { Badge } from '../ui/badge'
 import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '../ui/hover-card'
 
 type WorkHoverCardProps = {
-  work: Work
+  work:
+    | Work
+    | {
+        id: number
+        title: string
+        media_text: string
+        season_name_text?: string
+        episodes_count: number
+        watchers_count: number
+        reviews_count: number
+        images: string[]
+      }
   side?: HoverCardContentProps['side']
   children: ReactNode
 }
