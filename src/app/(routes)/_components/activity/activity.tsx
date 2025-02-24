@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { UserHoverCard } from '../../../../components/hover-card/user'
+import { WorkHoverCard } from '../../../../components/hover-card/work'
 import { Image } from '../../../../components/shared/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import { Badge } from '../../../../components/ui/badge'
@@ -77,12 +78,14 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <Link
-          href={`/works/${activity.work.id}`}
-          className="transition-colors hover:text-anicotto-accent-600 hover:underline"
-        >
-          <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
-        </Link>
+        <WorkHoverCard work={activity.work}>
+          <Link
+            href={`/works/${activity.work.id}`}
+            className="transition-colors hover:text-anicotto-accent-600 hover:underline"
+          >
+            <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
+          </Link>
+        </WorkHoverCard>
         {match(activity)
           .with({ action: 'create_record' }, ({ episode }) => (
             <Link

@@ -1,5 +1,6 @@
 import { ChevronRightIcon, CloudAlertIcon, EyeIcon, ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
+import { WorkHoverCard } from '../../../../components/hover-card/work'
 import { Image } from '../../../../components/shared/image'
 import { AspectRatio } from '../../../../components/ui/aspect-ratio'
 import { Button } from '../../../../components/ui/button'
@@ -37,31 +38,33 @@ export const CurrentSeasonWork = async () => {
           <CarouselContent>
             {works.map(async (work) => (
               <CarouselItem key={work.id} className="basis-1/2 md:basis-1/3">
-                <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
-                  <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
-                    <Image
-                      src={await getValidWorkImage(work.id.toString(), work.images)}
-                      alt={work.title}
-                      className="h-full w-full object-cover"
-                      height={144}
-                      width={256}
-                      fallback={
-                        <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-                          <ImageOffIcon size={40} />
-                        </div>
-                      }
-                    />
-                  </AspectRatio>
-                  <div className="flex w-full flex-col gap-y-2">
-                    <h3 className="line-clamp-1 font-bold transition-colors group-hover:text-anicotto-accent-600 md:line-clamp-2">
-                      {work.title}
-                    </h3>
-                    <p className="flex items-center gap-x-2 text-muted-foreground text-sm">
-                      <EyeIcon size={16} />
-                      <span>{work.watchers_count}人が視聴中</span>
-                    </p>
-                  </div>
-                </Link>
+                <WorkHoverCard work={work}>
+                  <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
+                    <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
+                      <Image
+                        src={await getValidWorkImage(work.id.toString(), work.images)}
+                        alt={work.title}
+                        className="h-full w-full object-cover"
+                        height={144}
+                        width={256}
+                        fallback={
+                          <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+                            <ImageOffIcon size={40} />
+                          </div>
+                        }
+                      />
+                    </AspectRatio>
+                    <div className="flex w-full flex-col gap-y-2">
+                      <h3 className="line-clamp-1 font-bold transition-colors group-hover:text-anicotto-accent-600 md:line-clamp-2">
+                        {work.title}
+                      </h3>
+                      <p className="flex items-center gap-x-2 text-muted-foreground text-sm">
+                        <EyeIcon size={16} />
+                        <span>{work.watchers_count}人が視聴中</span>
+                      </p>
+                    </div>
+                  </Link>
+                </WorkHoverCard>
               </CarouselItem>
             ))}
           </CarouselContent>
