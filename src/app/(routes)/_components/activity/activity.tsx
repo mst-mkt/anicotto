@@ -2,6 +2,7 @@ import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
+import { UserHoverCard } from '../../../../components/hover-card/user'
 import { Image } from '../../../../components/shared/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import { Badge } from '../../../../components/ui/badge'
@@ -16,18 +17,22 @@ export const Activity: FC<ActivityType> = (activity) => {
 
   return (
     <div className="flex animate-in gap-x-4 duration-500 ease-in-out">
-      <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
-        <Avatar className="z-0 h-12 w-12">
-          <AvatarImage src={activity.user.avatar_url} alt={activity.user.username} />
-          <AvatarFallback>{activity.user.name.slice(0, 1)}</AvatarFallback>
-        </Avatar>
-      </Link>
+      <UserHoverCard user={activity.user}>
+        <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
+          <Avatar className="z-0 h-12 w-12">
+            <AvatarImage src={activity.user.avatar_url} alt={activity.user.username} />
+            <AvatarFallback>{activity.user.name.slice(0, 1)}</AvatarFallback>
+          </Avatar>
+        </Link>
+      </UserHoverCard>
       <div className="flex w-full flex-col gap-y-4">
         <div className="flex h-10 items-center gap-x-2">
           <Icon size={28} className="text-foreground-300" />
-          <Link href={`/users/${activity.user.username}`} className="hover:underline">
-            {activity.user.name}
-          </Link>
+          <UserHoverCard user={activity.user}>
+            <Link href={`/users/${activity.user.username}`} className="hover:underline">
+              {activity.user.name}
+            </Link>
+          </UserHoverCard>
           <p className="shrink grow truncate text-sm">が{ACTIVITY_TEXT(activity)}</p>
           <time
             dateTime={activity.created_at}

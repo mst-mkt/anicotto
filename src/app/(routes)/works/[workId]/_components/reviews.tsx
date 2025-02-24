@@ -1,6 +1,7 @@
 import { HeartIcon, MessageCircleHeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { UserHoverCard } from '../../../../../components/hover-card/user'
 import { Markdown } from '../../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../components/ui/avatar'
 import { Button } from '../../../../../components/ui/button'
@@ -34,10 +35,14 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
     <div className="flex w-full flex-col gap-y-8">
       {reviews.map((review) => (
         <div key={review.id} className="flex gap-x-4">
-          <Avatar className="sticky top-20 h-fit">
-            <AvatarImage src={review.user.avatar_url} alt={`${review.user.name}のアバター`} />
-            <AvatarFallback>{review.user.name.slice(0, 1)}</AvatarFallback>
-          </Avatar>
+          <UserHoverCard user={review.user}>
+            <Link href={`/users/${review.user.username}`} className="sticky top-20 h-fit">
+              <Avatar className="h-fit">
+                <AvatarImage src={review.user.avatar_url} alt={`${review.user.name}のアバター`} />
+                <AvatarFallback>{review.user.name.slice(0, 1)}</AvatarFallback>
+              </Avatar>
+            </Link>
+          </UserHoverCard>
           <div className="flex w-full flex-col gap-y-2">
             <div className="rounded-lg bg-muted p-3">
               <Markdown>{review.body}</Markdown>
