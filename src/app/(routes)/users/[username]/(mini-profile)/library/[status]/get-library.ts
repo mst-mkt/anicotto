@@ -41,6 +41,9 @@ export const getLibrary = async (username: User['username'], status: SelectedSta
                   twitterNormalAvatarUrl
                   twitterAvatarUrl
                 }
+                watchersCount
+                reviewsCount
+                episodesCount
               }
             }
           }
@@ -83,6 +86,9 @@ export const getLibrary = async (username: User['username'], status: SelectedSta
             library.work.image?.twitterNormalAvatarUrl ?? null,
             library.work.image?.twitterAvatarUrl ?? null,
           ]),
+          watchersCount: library.work.watchersCount,
+          reviewsCount: library.work.reviewsCount,
+          episodesCount: library.work.episodesCount,
         },
       })),
   )

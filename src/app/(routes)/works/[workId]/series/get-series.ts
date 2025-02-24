@@ -21,6 +21,11 @@ export const getWorkSeries = async (workId: Work['id']) => {
                     annictId
                     title
                     media
+                    seasonYear
+                    seasonName
+                    watchersCount
+                    reviewsCount
+                    episodesCount
                     image {
                       recommendedImageUrl
                       facebookOgImageUrl
@@ -70,6 +75,11 @@ export const getWorkSeries = async (workId: Work['id']) => {
               id: work.annictId,
               title: work.title,
               media: work.media,
+              seasonYear: work.seasonYear,
+              seasonName: work.seasonName,
+              watchersCount: work.watchersCount,
+              reviewsCount: work.reviewsCount,
+              episodesCount: work.episodesCount,
               image: {
                 recommendedImageUrl: work.image?.recommendedImageUrl ?? null,
                 facebookOgImageUrl: work.image?.facebookOgImageUrl ?? null,
