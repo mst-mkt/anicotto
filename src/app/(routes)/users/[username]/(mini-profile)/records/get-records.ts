@@ -21,12 +21,18 @@ export const getUserRecords = async (username: User['username']) => {
             work {
               annictId
               title
+              media
+              seasonYear
+              seasonName
               image {
                 recommendedImageUrl
                 facebookOgImageUrl
                 twitterNormalAvatarUrl
                 twitterAvatarUrl
               }
+              episodesCount
+              watchersCount
+              reviewsCount
             }
             episode {
               annictId
@@ -69,12 +75,18 @@ export const getUserRecords = async (username: User['username']) => {
         work: {
           id: record.work.annictId,
           title: record.work.title,
+          media: record.work.media,
+          seasonYear: record.work.seasonYear,
+          seasonName: record.work.seasonName,
           image: await getValidWorkImage(record.work.annictId.toString(), [
             record.work.image?.recommendedImageUrl ?? null,
             record.work.image?.facebookOgImageUrl ?? null,
             record.work.image?.twitterNormalAvatarUrl ?? null,
             record.work.image?.twitterAvatarUrl ?? null,
           ]),
+          episodesCount: record.work.episodesCount,
+          watchersCount: record.work.watchersCount,
+          reviewsCount: record.work.reviewsCount,
         },
         episode: {
           id: record.episode.annictId,

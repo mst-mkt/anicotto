@@ -1,9 +1,12 @@
 import { CloudAlertIcon, ImageOffIcon, ScrollTextIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { WorkHoverCard } from '../../../../../../../components/hover-card/work'
 import { Image } from '../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../components/ui/badge'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
+import { MEDIA_TEXT } from '../../../../../../../constants/media'
+import { SEASON_TEXT } from '../../../../../../../constants/season'
 import type { User } from '../../../../../../../schemas/annict/users'
 import { timeText } from '../../../../../../../utils/time-text'
 import { getUserRecords } from '../get-records'
@@ -55,12 +58,28 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
           </div>
           <div className="flex w-full min-w-0 flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
-              <Link
-                href={`/works/${work.id}`}
-                className="shrink grow truncate font-bold transition-colors hover:text-anicotto-accent-600 hover:underline"
+              <WorkHoverCard
+                work={{
+                  id: work.id,
+                  title: work.title,
+                  images: [work.image ?? ''],
+                  media_text: MEDIA_TEXT[work.media],
+                  season_name_text:
+                    work.seasonName !== null && work.seasonYear !== null
+                      ? `${work.seasonYear}年${SEASON_TEXT[work.seasonName]}`
+                      : undefined,
+                  episodes_count: work.episodesCount,
+                  watchers_count: work.watchersCount,
+                  reviews_count: work.reviewsCount,
+                }}
               >
-                {work.title}
-              </Link>
+                <Link
+                  href={`/works/${work.id}`}
+                  className="shrink grow truncate font-bold transition-colors hover:text-anicotto-accent-600 hover:underline"
+                >
+                  {work.title}
+                </Link>
+              </WorkHoverCard>
               <time
                 dateTime={updatedAt}
                 className="shrink-0 break-keep text-muted-foreground text-sm"
