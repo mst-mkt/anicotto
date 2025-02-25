@@ -33,6 +33,10 @@
   .layout {
     grid-template-columns: 1fr clamp(50svw, 500px, 92svw) 1fr;
   }
+
+  .panel {
+    display: none;
+  }
 }
 
 @media screen and (width < 48rem) {

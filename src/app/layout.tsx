@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import TopLoader from 'nextjs-toploader'
 import type { FC, ReactNode } from 'react'
-import { twJoin } from 'tailwind-merge'
 import { Toaster } from '../components/ui/sonner'
 import { PROJECT_DESCRIPTION, PROJECT_NAME } from '../constants/project'
 import { ThemeLoader } from '../lib/theme/loader'
@@ -43,7 +42,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, track, panel }) => (
         >
           <Header className={styles.header} />
           <Sidemenu className={styles.sideMenu} />
-          <main className={twJoin(styles.main, 'w-full py-4')}>{children}</main>
+          <main className={cn(styles.main, 'w-full py-4')}>{children}</main>
           <Footer className={styles.footer} />
           {panel}
           {track}
