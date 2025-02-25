@@ -3,7 +3,7 @@
   grid-template:
     'header header header' auto
     'side-menu main panel' 1fr
-    'side-menu footer panel' auto / 2fr clamp(50svw, 500px, 92svw) 3fr;
+    'side-menu footer panel' auto / 1fr clamp(40svw, 500px, 92svw) 1fr;
   column-gap: 4svw;
   min-height: 100svh;
 }
@@ -30,10 +30,6 @@
 }
 
 @media screen and (width < 64rem) {
-  .layout {
-    grid-template-columns: 1fr clamp(50svw, 500px, 92svw) 1fr;
-  }
-
   .panel {
     display: none;
   }
