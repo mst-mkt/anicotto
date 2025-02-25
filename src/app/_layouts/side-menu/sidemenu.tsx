@@ -16,7 +16,7 @@ export const Sidemenu: FC<SidemenuProps> = ({ className }) => (
   <aside
     className={cn('flex h-full w-full max-w-64 flex-col justify-between gap-y-4 px-4', className)}
   >
-    <ul className="sticky top-16 flex flex-col gap-y-4">
+    <ul className="sticky top-16 flex flex-col gap-y-2">
       <SidemenuLink icon={HomeIcon} href="/" label="ホーム" />
       <SidemenuLink icon={SearchIcon} href="/search" label="検索" />
       <SidemenuLink icon={BookTextIcon} href="/library" label="ライブラリ" />

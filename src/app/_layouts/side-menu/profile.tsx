@@ -24,17 +24,17 @@ export const SidemenuProfile = async () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="sticky bottom-8 mt-auto">
+      <DropdownMenuTrigger className="sticky bottom-8 mt-auto w-fit overflow-hidden rounded-full transition-colors hover:bg-background-50 lg:w-full">
         <Tooltip>
           <TooltipTrigger asChild={true}>
-            <div className="flex w-fit cursor-pointer items-center justify-between gap-x-2 rounded-full p-2 transition-colors hover:bg-background-50 lg:w-full">
+            <div className="flex cursor-pointer items-center justify-between gap-x-2 p-2">
               <Avatar className="h-12 w-12 shrink-0">
                 <AvatarImage src={profile.avatar_url} alt={profile.name} loading="lazy" />
                 <AvatarFallback className="bg-anicotto-accent-300 text-white">
                   {profile.name.slice(0, 1)}
                 </AvatarFallback>
               </Avatar>
-              <div className="hidden w-full shrink grow flex-col gap-y-1 lg:flex">
+              <div className="hidden w-full shrink grow flex-col items-start gap-y-1 lg:flex">
                 <p className="truncate text-sm">{profile.name}</p>
                 <p className="truncate text-foreground-300 text-xs">@{profile.username}</p>
               </div>

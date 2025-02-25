@@ -27,11 +27,11 @@ export const SidemenuLink: FC<SidemenuLinkProps> = (props) => {
     <Tooltip>
       <TooltipTrigger asChild={true}>
         <li
-          className="w-fit rounded-lg transition-colors hover:bg-background-50 lg:w-full"
+          className="w-fit rounded-full transition-colors hover:bg-background-50 lg:w-full"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Link href={props.href} className="flex items-center gap-x-4 p-4">
+          <Link href={props.href} className="flex items-center gap-x-4 p-4 lg:px-6">
             <props.icon className="shrink-0 grow-0 text-foreground" size={20} ref={iconRef} />
             <span className="hidden shrink grow lg:block">{props.label}</span>
           </Link>
