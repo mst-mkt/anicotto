@@ -14,7 +14,7 @@ const HoverCardContent = forwardRef<
   ComponentRef<typeof Content>,
   ComponentPropsWithoutRef<typeof Content>
 >(({ className, align = 'center', sideOffset = 4, ...props }, ref) => (
-  <Portal container={document.body}>
+  <Portal>
     <Content
       ref={ref}
       align={align}
