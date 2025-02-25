@@ -76,6 +76,7 @@ const EarthIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="pointer-events-none"
         >
           <title>earth icon by pqoqubbw/icons</title>
           <motion.path

@@ -76,6 +76,7 @@ const TelescopeIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="pointer-events-none"
         >
           <title>telescope icon by pqoqubbw/icons</title>
           <motion.g

@@ -70,6 +70,7 @@ const SearchIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
             bounce: 0.3,
           }}
           animate={controls}
+          className="pointer-events-none"
         >
           <title>search icon by pqoqubbw/icons</title>
           <circle cx="11" cy="11" r="8" />

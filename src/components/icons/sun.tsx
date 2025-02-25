@@ -66,6 +66,7 @@ const SunIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="pointer-events-none"
         >
           <title>sun icon by pqoqubbw/icons</title>
           <circle cx="12" cy="12" r="4" />

@@ -115,6 +115,7 @@ const GithubIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="pointer-events-none"
         >
           <title>github icons by pqoqubbw/icons</title>
           <motion.path

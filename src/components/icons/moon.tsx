@@ -75,6 +75,7 @@ const MoonIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
           variants={svgVariants}
           animate={controls}
           transition={svgTransition}
+          className="pointer-events-none"
         >
           <title>moon icon by pqoqubbw/icons</title>
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
