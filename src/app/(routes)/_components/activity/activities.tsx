@@ -8,7 +8,7 @@ export const Activities = async () => {
   const activities = await getActivities()
 
   return (
-    <div className="flex flex-col gap-y-8">
+    <div className="flex flex-col gap-y-4">
       <div className="flex items-center gap-x-2">
         <FlameIcon size={24} className="text-anicotto-accent" />
         <h2 className="shrink grow font-bold text-lg">アクテビティ</h2>
@@ -20,7 +20,11 @@ export const Activities = async () => {
           <p>アクテビティが取得できませんでした</p>
         </div>
       ) : (
-        activities.map((activity) => <Activity key={activity.id} {...activity} />)
+        <div className="flex flex-col gap-y-8">
+          {activities.map((activity) => (
+            <Activity key={activity.id} {...activity} />
+          ))}
+        </div>
       )}
     </div>
   )

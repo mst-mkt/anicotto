@@ -26,9 +26,9 @@ export const Activity: FC<ActivityType> = (activity) => {
           </Avatar>
         </Link>
       </UserHoverCard>
-      <div className="flex w-full flex-col gap-y-4">
-        <div className="flex h-10 items-center gap-x-2">
-          <Icon size={28} className="text-foreground-300" />
+      <div className="flex w-full flex-col">
+        <div className="flex h-12 items-center gap-x-2">
+          <Icon size={24} className="text-muted-foreground" />
           <UserHoverCard user={activity.user}>
             <Link href={`/users/${activity.user.username}`} className="hover:underline">
               {activity.user.name}
@@ -81,7 +81,7 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
         <WorkHoverCard work={activity.work}>
           <Link
             href={`/works/${activity.work.id}`}
-            className="transition-colors hover:text-anicotto-accent-600 hover:underline"
+            className="transition-colors hover:text-anicotto-accent"
           >
             <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
           </Link>
@@ -96,7 +96,7 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
                 {episode.number_text}
               </Badge>
               {episode.title !== null && (
-                <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent-600 group-hover:underline">
+                <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent">
                   {episode.title}
                 </span>
               )}
@@ -113,7 +113,7 @@ const ActivityInfoCard: FC<ActivityType> = async (activity) => {
                 className="shrink-0 grow-0 cursor-default gap-x-1 px-2 py-1"
               />
               {review.body.trim() !== '' && (
-                <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent-600 group-hover:underline">
+                <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent">
                   {review.body}
                 </span>
               )}
