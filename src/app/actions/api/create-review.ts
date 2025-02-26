@@ -1,4 +1,5 @@
 'use server'
+
 import { err, ok } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
 import { annictApiClient } from '../../../lib/api/client'
@@ -10,7 +11,6 @@ const isRating = (value: unknown): value is Rating => {
   return ratingPicklist.options.includes(value as Rating)
 }
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: mainly type-guard, so allowable
 const getFormData = (formData: FormData) => {
   const workIdString = formData.get('workId')
   const workId = Number.parseInt(workIdString as string, 10)
