@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, UserCircleIcon } from 'lucide-react'
+import { ExternalLinkIcon, SettingsIcon, UserCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
 import {
@@ -51,6 +51,16 @@ export const HeaderAccount = async () => {
             >
               <ExternalLinkIcon size={20} />
               Annict プロフィール
+            </Link>
+          </DrawerClose>
+          <Separator />
+          <DrawerClose asChild={true}>
+            <Link
+              href="/settings"
+              className="flex items-center gap-x-2 rounded-md p-2 transition-colors active:bg-muted"
+            >
+              <SettingsIcon size={20} />
+              設定
             </Link>
           </DrawerClose>
           <Separator />
