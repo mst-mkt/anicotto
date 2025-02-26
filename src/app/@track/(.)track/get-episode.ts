@@ -1,3 +1,5 @@
+'use server'
+
 import { annictApiClient } from '../../../lib/api/client'
 import { auth } from '../../../lib/auth'
 import { CACHE_TAGS } from '../../../lib/cache-tag'
@@ -12,7 +14,7 @@ export const getEpisode = async (episode: Episode['id']) => {
   )
 
   if (episodeResult.isErr()) {
-    console.error(`[/track?episode=${episode}] Failed to fetch episode:`, episodeResult.error)
+    console.error('[/track] Failed to fetch episode:', episodeResult.error)
     return null
   }
 
