@@ -6,7 +6,10 @@ import { useRevalidate } from '../../../../hooks/useRevalidate'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 
 export const ReloadActivityButton = () => {
-  const { isPending, revalidate: handleClick } = useRevalidate(CACHE_TAGS.MY_ACTIVITY)
+  const { isPending, revalidate: handleClick } = useRevalidate(
+    CACHE_TAGS.MY_ACTIVITY,
+    CACHE_TAGS.MY_LIBRARIES,
+  )
 
   return (
     <Button

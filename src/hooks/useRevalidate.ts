@@ -1,12 +1,16 @@
 import { useCallback, useTransition } from 'react'
 import { revalidate } from '../app/actions/revalidate'
 
-export const useRevalidate = (tag: string) => {
+export const useRevalidate = (...tags: string[]) => {
   const [isPending, startTransition] = useTransition()
 
   const handleRevalidate = useCallback(() => {
-    startTransition(() => revalidate(tag))
-  }, [tag])
+    startTransition(() => {
+      for (const tag of tags) {
+        revalidate(tag)
+      }
+    })
+  }, [tags])
 
   return { isPending, revalidate: handleRevalidate }
 }
