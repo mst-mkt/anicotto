@@ -8,6 +8,7 @@ import {
   pipe,
   string,
 } from 'valibot'
+import { workSchema } from '../works'
 
 export const episodeSchema = object({
   id: pipe(number(), integer()),
@@ -20,3 +21,12 @@ export const episodeSchema = object({
 })
 
 export type Episode = InferOutput<typeof episodeSchema>
+
+export const episodeWithInfoSchema = object({
+  ...episodeSchema.entries,
+  work: workSchema,
+  prev_episode: nullable(episodeSchema),
+  next_episode: nullable(episodeSchema),
+})
+
+export type EpisodeWithInfo = InferOutput<typeof episodeWithInfoSchema>
