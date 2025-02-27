@@ -1,6 +1,13 @@
 'use client'
 
-import { EarthIcon, HomeIcon, LockIcon } from 'lucide-react'
+import { EarthIcon, HomeIcon, InfoIcon, LockIcon } from 'lucide-react'
+import Link from 'next/link'
+import { Badge } from '../../../../../components/ui/badge'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '../../../../../components/ui/hover-card'
 import { Input } from '../../../../../components/ui/input'
 import { Label } from '../../../../../components/ui/label'
 import {
@@ -61,16 +68,43 @@ export const MisskeyShareConfig = () => {
       {shareMisskey && (
         <div className="flex flex-col gap-y-4 rounded-md bg-muted p-4">
           <Label className="flex flex-col items-center justify-between gap-x-4 gap-y-2 md:flex-row">
-            <span className="w-full px-2 py-1">インスタンス</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>インスタンス</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="text-sm">
+                  Misskeyのサーバーのドメインを入力してください。
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Input
               value={misskeyInstance}
               type="url"
               onChange={({ currentTarget }) => setMisskeyInstance(currentTarget.value)}
+              placeholder='例: "misskey.io"'
               className="w-full shrink-0 grow-0 md:w-1/2"
             />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-x-4 gap-y-2 md:flex-row">
-            <span className="w-full px-2 py-1">アクセストークン</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>アクセストークン</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="text-sm">
+                  <p>Misskeyのアクセストークンを入力してください。</p>
+                  <Link
+                    href={`https://${misskeyInstance}/settings/api`}
+                    className="text-anicotto-accent"
+                  >
+                    アクセストークンを取得する
+                  </Link>
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Input
               value={accessToken}
               type="password"
@@ -79,7 +113,35 @@ export const MisskeyShareConfig = () => {
             />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-x-4 gap-y-2 md:flex-row">
-            <span className="w-full px-2 py-1">公開範囲</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>公開範囲</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="flex w-fit flex-col gap-y-2 text-sm">
+                  <p>投稿の公開範囲を選択してください。</p>
+                  <div>
+                    <Badge variant="secondary" className="rounded-sm px-1 py-0.5 text-xs">
+                      パブリック
+                    </Badge>{' '}
+                    すべてのユーザーに公開されます。
+                  </div>
+                  <div>
+                    <Badge variant="secondary" className="rounded-sm px-1 py-0.5 text-xs">
+                      ホーム
+                    </Badge>{' '}
+                    ホームタイムラインに表示されます。
+                  </div>
+                  <div>
+                    <Badge variant="secondary" className="rounded-sm px-1 py-0.5 text-xs">
+                      フォロワー
+                    </Badge>{' '}
+                    あなたのフォロワーにのみ表示されます。
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Select
               value={visibility}
               onValueChange={(value) => isMisskeyNoteVisibility(value) && setVisibility(value)}
@@ -113,11 +175,75 @@ export const MisskeyShareConfig = () => {
             </Select>
           </Label>
           <Label className="flex items-center justify-between gap-x-4">
-            <span className="w-full px-2 py-1">連合なし</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>連合なし</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="text-sm">
+                  連合している他のサーバーへ投稿を行わないようにします。
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Switch checked={localOnly} onCheckedChange={setLocalOnly} />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-y-2">
-            <span className="w-full px-2 py-1">投稿内容 - 記録</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>投稿内容 - 記録</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-fit text-sm">
+                  <p>記録の投稿内容を入力してください。</p>
+                  <div className="flex flex-col gap-y-1">
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.id}'}
+                      </Badge>{' '}
+                      作品のID
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.title}'}
+                      </Badge>{' '}
+                      作品のタイトル
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.season}'}
+                      </Badge>{' '}
+                      作品が放送された時期
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.hashtag}'}
+                      </Badge>{' '}
+                      作品のハッシュタグ
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{episode.id}'}
+                      </Badge>{' '}
+                      エピソードのID
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{episode.number}'}
+                      </Badge>{' '}
+                      エピソードの話数
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{episode.title}'}
+                      </Badge>{' '}
+                      エピソードのタイトル
+                    </div>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Textarea
               value={promptForRecord}
               onChange={({ currentTarget }) => setPromptForRecord(currentTarget.value)}
@@ -125,7 +251,85 @@ export const MisskeyShareConfig = () => {
             />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-y-2">
-            <span className="w-full px-2 py-1">投稿内容 - 複数の記録</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>投稿内容 - 複数の記録</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-fit text-sm">
+                  <p>複数の記録の投稿内容を入力してください。</p>
+                  <div className="flex flex-col gap-y-1">
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.id}'}
+                      </Badge>{' '}
+                      作品のID
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.title}'}
+                      </Badge>{' '}
+                      作品のタイトル
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.season}'}
+                      </Badge>{' '}
+                      作品が放送された時期
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.hashtag}'}
+                      </Badge>{' '}
+                      作品のハッシュタグ
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{from.id}'}
+                      </Badge>{' '}
+                      1つめのエピソードのID
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{from.number}'}
+                      </Badge>{' '}
+                      1つめのエピソードの話数
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{from.title}'}
+                      </Badge>{' '}
+                      1つめのエピソードのタイトル
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{to.id}'}
+                      </Badge>{' '}
+                      最後のエピソードのID
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{to.number}'}
+                      </Badge>{' '}
+                      最後のエピソードの話数
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{to.title}'}
+                      </Badge>{' '}
+                      最後のエピソードのタイトル
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{count}'}
+                      </Badge>{' '}
+                      記録したエピソードの数
+                    </div>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Textarea
               value={promptForMultipleRecords}
               onChange={({ currentTarget }) => setPromptForMultipleRecords(currentTarget.value)}
@@ -133,7 +337,49 @@ export const MisskeyShareConfig = () => {
             />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-y-2">
-            <span className="w-full px-2 py-1">投稿内容 - ステータス</span>
+            <p className="flex w-full items-center gap-x-1 px-2 py-1">
+              <span>投稿内容 - ステータス</span>
+              <HoverCard openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild={true}>
+                  <InfoIcon size={16} className="text-muted-foreground" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-fit text-sm">
+                  <p>視聴ステータスの投稿内容を入力してください。</p>
+                  <div className="flex flex-col gap-y-1">
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.id}'}
+                      </Badge>{' '}
+                      作品のID
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.title}'}
+                      </Badge>{' '}
+                      作品のタイトル
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.season}'}
+                      </Badge>{' '}
+                      作品が放送された時期
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.hashtag}'}
+                      </Badge>{' '}
+                      作品のハッシュタグ
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="rounded-sm px-1 py-0 text-xs">
+                        {'{work.status}'}
+                      </Badge>{' '}
+                      作品の視聴ステータス
+                    </div>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </p>
             <Textarea
               value={promptForStatus}
               onChange={({ currentTarget }) => setPromptForStatus(currentTarget.value)}

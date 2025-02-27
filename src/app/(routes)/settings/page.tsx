@@ -7,8 +7,13 @@ const SettingsPage = () => (
       <SettingsIcon size={24} className="text-anicotto-accent" />
       設定
     </h1>
-    <section className="flex flex-col gap-y-4">
-      <h2 className="font-bold">記録の共有</h2>
+    <section className="flex flex-col gap-y-8">
+      <hgroup>
+        <h2 className="font-bold">アクティビティの共有</h2>
+        <span className="text-muted-foreground text-sm">
+          記録や視聴ステータスの更新を他のサービスに共有します。
+        </span>
+      </hgroup>
       <MisskeyShareConfig />
     </section>
   </div>
