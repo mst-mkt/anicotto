@@ -80,5 +80,6 @@
     "pseudoelements",
     "nocompatible",
     "sidemenu",
+    "misskey",
   ]
 }
