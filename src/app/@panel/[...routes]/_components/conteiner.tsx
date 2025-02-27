@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react'
-import { cn } from '../../../utils/classnames'
-import styles from '../../layout.module.css'
+import { cn } from '../../../../utils/classnames'
+import styles from '../../../layout.module.css'
 
 type SidePanelContainerProps = {
   title: ReactNode

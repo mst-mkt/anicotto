@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import type { FC } from 'react'
-import { WorkHoverCard } from '../../../components/hover-card/work'
-import { Image } from '../../../components/shared/image'
-import { getValidWorkImage } from '../../../lib/images/valid-url'
-import type { WorkWithStatus } from '../../../schemas/annict/works'
+import { WorkHoverCard } from '../../../../components/hover-card/work'
+import { Image } from '../../../../components/shared/image'
+import { getValidWorkImage } from '../../../../lib/images/valid-url'
+import type { WorkWithStatus } from '../../../../schemas/annict/works'
 
 export const WorkItem: FC<WorkWithStatus> = async (work) => {
   const image = await getValidWorkImage(work.id.toString(), work.images)
