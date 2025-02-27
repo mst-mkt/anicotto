@@ -5,6 +5,7 @@
   "scripts": {
     "prepare": "lefthook install",
     "dev": "next dev",
+    "dev:turbo": "next dev --turbopack",
     "dev:https": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
