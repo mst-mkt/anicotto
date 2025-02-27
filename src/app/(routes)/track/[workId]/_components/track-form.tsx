@@ -8,6 +8,7 @@ import { Badge } from '../../../../../components/ui/badge'
 import { Button } from '../../../../../components/ui/button'
 import { Checkbox } from '../../../../../components/ui/checkbox'
 import { Label } from '../../../../../components/ui/label'
+import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { createMultipleRecords } from '../../../../actions/api/create-multiple-records'
 import type { Library } from '../get-libraries'
@@ -20,7 +21,10 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
   const displayEpisodes = useMemo(() => episodes.slice(0, 64), [episodes])
   const [selected, setSelected] = useState(displayEpisodes.map(({ id }) => `${id}`))
   const [isPending, startTransition] = useTransition()
-  const { shareRecord, shareMultipleRecords } = useShareMisskey()
+  const { shareRecord: shareMisskey, shareMultipleRecords: shareMisskeyMultiple } =
+    useShareMisskey()
+  const { shareRecord: shareDiscord, shareMultipleRecords: shareDiscordMultiple } =
+    useDiscordShare()
 
   const currentAllCheckedState = useMemo(() => {
     if (selected.length === 0) return false
@@ -54,13 +58,15 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
 
       if (result.data.length === 1) {
         const data = result.data[0]
-        shareRecord({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
+        shareMisskey({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
+        shareDiscord({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
       } else {
         const length = result.data.length
         const from = result.data[0].episode
         const to = result.data[result.data.length - 1].episode
         const work = result.data[0].work
-        shareMultipleRecords(length, { from, to }, work)
+        shareMisskeyMultiple(length, { from, to }, work)
+        shareDiscordMultiple(length, { from, to }, work)
       }
     } else {
       toast.error(`記録に失敗しました: ${result.error}`)

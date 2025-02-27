@@ -1,4 +1,5 @@
 import { SettingsIcon } from 'lucide-react'
+import { DiscordShareConfig } from './_components/share/discord'
 import { MisskeyShareConfig } from './_components/share/misskey'
 
 const SettingsPage = () => (
@@ -15,6 +16,7 @@ const SettingsPage = () => (
         </span>
       </hgroup>
       <MisskeyShareConfig />
+      <DiscordShareConfig />
     </section>
   </div>
 )

@@ -4,6 +4,7 @@ import { err, ok } from 'neverthrow'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps, type FC, useRef } from 'react'
 import { toast } from 'sonner'
+import { useDiscordShare } from '../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../hooks/share/useMisskeyShare'
 import { type Rating, ratingPicklist } from '../../../../schemas/annict/common'
 import { createRecord } from '../../../actions/api/create-record'
@@ -14,7 +15,8 @@ type TrackFormWrapperProps = ComponentProps<'form'>
 export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
-  const { shareRecord } = useShareMisskey()
+  const { shareRecord: shareMisskey } = useShareMisskey()
+  const { shareRecord: shareDiscord } = useDiscordShare()
 
   const getFormData = (formData: FormData) => {
     const isRating = (value: unknown): value is Rating => {
@@ -61,7 +63,8 @@ export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
     const episode = await getEpisode(episodeId)
 
     if (episode !== null) {
-      shareRecord(episode)
+      shareMisskey(episode)
+      shareDiscord(episode)
     }
 
     formRef.current?.reset()

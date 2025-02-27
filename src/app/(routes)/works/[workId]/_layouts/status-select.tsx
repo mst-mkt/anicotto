@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import { Separator } from '../../../../../components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../components/ui/tooltip'
 import { STATUS_ICON, STATUS_TEXT } from '../../../../../constants/status'
+import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
 import type { Work } from '../../../../../schemas/annict/works'
@@ -20,7 +21,8 @@ type StatusSelectSelectProps = {
 export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   const [updatingStatus, setUpdatingStatus] = useState<Status | null>(null)
   const [isUpdating, startTransition] = useTransition()
-  const { shareStatus } = useShareMisskey()
+  const { shareStatus: shareMisskey } = useShareMisskey()
+  const { shareStatus: shareDiscord } = useDiscordShare()
 
   const updateStatus = useCallback(
     async (status: Status) => {
@@ -32,7 +34,8 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
             <b className="font-bold">{work.title}</b> のステータスを更新しました
           </span>,
         )
-        shareStatus(work, status)
+        shareMisskey(work, status)
+        shareDiscord(work, status)
       } else {
         toast.error(
           <span>
@@ -43,7 +46,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
 
       setUpdatingStatus(null)
     },
-    [work, shareStatus],
+    [work, shareDiscord, shareMisskey],
   )
 
   const handleClick = useCallback(
