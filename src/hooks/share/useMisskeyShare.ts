@@ -9,7 +9,7 @@ import {
 import { PROJECT_ID } from '../../constants/project'
 import { STATUS_TEXT } from '../../constants/status'
 import type { Status } from '../../schemas/annict/common'
-import type { EpisodeWithInfo } from '../../schemas/annict/episodes'
+import type { Episode, EpisodeWithInfo } from '../../schemas/annict/episodes'
 import type { Work } from '../../schemas/annict/works'
 import { useLocalStorage } from '../useLocalStorage'
 
@@ -22,6 +22,34 @@ const generatePromptForRecord = (prompt: string, episode: EpisodeWithInfo) => {
     'episode.id': episode.id,
     'episode.number': episode.number_text,
     'episode.title': episode.title,
+  }
+
+  return Object.entries(variablesMap).reduce((acc, [key, value]) => {
+    return acc.replaceAll(`{${key}}`, `${value ?? ''}`)
+  }, prompt)
+}
+
+const generatePromptForMultipleRecords = (
+  prompt: string,
+  data: {
+    from: Episode
+    to: Episode
+    work: Work
+    count: number
+  },
+) => {
+  const variablesMap = {
+    'work.id': data.work.id,
+    'work.title': data.work.title,
+    'work.season': data.work.season_name_text,
+    'work.hashtag': data.work.twitter_hashtag !== '' ? `#${data.work.twitter_hashtag}` : '',
+    'from.id': data.from.id,
+    'from.number': data.from.number_text,
+    'from.title': data.from.title,
+    'to.id': data.to.id,
+    'to.number': data.to.number_text,
+    'to.title': data.to.title,
+    count: data.count,
   }
 
   return Object.entries(variablesMap).reduce((acc, [key, value]) => {
@@ -92,6 +120,10 @@ export const useShareMisskey = () => {
     `${PROJECT_ID}:share/misskey/prompt/record`,
     MISSKEY_DEFAULT_NOTE_PROMPT_FOR_RECORD,
   )
+  const [promptForMultipleRecords] = useLocalStorage(
+    `${PROJECT_ID}:share/misskey/prompt/multipleRecords`,
+    MISSKEY_DEFAULT_NOTE_PROMPT_FOR_RECORD,
+  )
   const [promptForStatus] = useLocalStorage(
     `${PROJECT_ID}:share/misskey/prompt/status`,
     MISSKEY_DEFAULT_NOTE_PROMPT_FOR_STATUS,
@@ -109,6 +141,43 @@ export const useShareMisskey = () => {
     }
 
     const noteBody = generatePromptForRecord(promptForRecord, episode)
+
+    if (noteBody.trim() === '') {
+      console.error('Note body is empty')
+      return
+    }
+
+    await postNote(misskeyInstance, accessToken, {
+      visibility,
+      localOnly,
+      noteBody,
+    })
+  }
+
+  const shareMultipleRecords = async (
+    count: number,
+    episodes: {
+      from: Episode
+      to: Episode
+    },
+    work: Work,
+  ) => {
+    if (!shareMisskey) return
+    if (misskeyInstance.trim() === '') {
+      console.error('Misskey instance is not set')
+      return
+    }
+    if (accessToken.trim() === '') {
+      console.error('Access token is not set')
+      return
+    }
+
+    const noteBody = generatePromptForMultipleRecords(promptForMultipleRecords, {
+      from: episodes.from,
+      to: episodes.to,
+      work,
+      count,
+    })
 
     if (noteBody.trim() === '') {
       console.error('Note body is empty')
@@ -147,5 +216,5 @@ export const useShareMisskey = () => {
     })
   }
 
-  return { shareRecord, shareStatus }
+  return { shareRecord, shareStatus, shareMultipleRecords }
 }
