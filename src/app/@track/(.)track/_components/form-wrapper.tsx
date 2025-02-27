@@ -14,7 +14,7 @@ type TrackFormWrapperProps = ComponentProps<'form'>
 export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
-  const shareMisskey = useShareMisskey()
+  const { shareRecord } = useShareMisskey()
 
   const getFormData = (formData: FormData) => {
     const isRating = (value: unknown): value is Rating => {
@@ -61,7 +61,7 @@ export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
     const episode = await getEpisode(episodeId)
 
     if (episode !== null) {
-      shareMisskey(episode)
+      shareRecord(episode)
     }
 
     formRef.current?.reset()

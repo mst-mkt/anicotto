@@ -14,7 +14,8 @@ import { Switch } from '../../../../../components/ui/switch'
 import { Textarea } from '../../../../../components/ui/textarea'
 import {
   MISSKEY_DEFAULT_INSTANCE,
-  MISSKEY_DEFAULT_NOTE_PROMPT,
+  MISSKEY_DEFAULT_NOTE_PROMPT_FOR_RECORD,
+  MISSKEY_DEFAULT_NOTE_PROMPT_FOR_STATUS,
   MISSKEY_NOTE_VISIBILITY,
   type MisskeyNoteVisibility,
   isMisskeyNoteVisibility,
@@ -37,9 +38,13 @@ export const MisskeyShareConfig = () => {
     MISSKEY_NOTE_VISIBILITY[0],
   )
   const [localOnly, setLocalOnly] = useLocalStorage(`${PROJECT_ID}:share/misskey/localOnly`, false)
-  const [notePrompt, setNotePrompt] = useLocalStorage(
-    `${PROJECT_ID}:share/misskey/notePrompt`,
-    MISSKEY_DEFAULT_NOTE_PROMPT,
+  const [promptForRecord, setPromptForRecord] = useLocalStorage(
+    `${PROJECT_ID}:share/misskey/prompt/record`,
+    MISSKEY_DEFAULT_NOTE_PROMPT_FOR_RECORD,
+  )
+  const [promptForStatus, setPromptForStatus] = useLocalStorage(
+    `${PROJECT_ID}:share/misskey/prompt/status`,
+    MISSKEY_DEFAULT_NOTE_PROMPT_FOR_STATUS,
   )
 
   return (
@@ -107,10 +112,18 @@ export const MisskeyShareConfig = () => {
             <Switch checked={localOnly} onCheckedChange={setLocalOnly} />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-y-2">
-            <span className="w-full px-2 py-1">投稿内容</span>
+            <span className="w-full px-2 py-1">投稿内容 - 記録</span>
             <Textarea
-              value={notePrompt}
-              onChange={({ currentTarget }) => setNotePrompt(currentTarget.value)}
+              value={promptForRecord}
+              onChange={({ currentTarget }) => setPromptForRecord(currentTarget.value)}
+              className="w-full shrink-0 grow-0"
+            />
+          </Label>
+          <Label className="flex flex-col items-center justify-between gap-y-2">
+            <span className="w-full px-2 py-1">投稿内容 - ステータス</span>
+            <Textarea
+              value={promptForStatus}
+              onChange={({ currentTarget }) => setPromptForStatus(currentTarget.value)}
               className="w-full shrink-0 grow-0"
             />
           </Label>

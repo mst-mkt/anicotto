@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import { Separator } from '../../../../../components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../components/ui/tooltip'
 import { STATUS_ICON, STATUS_TEXT } from '../../../../../constants/status'
+import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
 import type { Work } from '../../../../../schemas/annict/works'
 import { cn } from '../../../../../utils/classnames'
@@ -19,17 +20,19 @@ type StatusSelectSelectProps = {
 export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   const [updatingStatus, setUpdatingStatus] = useState<Status | null>(null)
   const [isUpdating, startTransition] = useTransition()
+  const { shareStatus } = useShareMisskey()
 
   const updateStatus = useCallback(
     async (status: Status) => {
-      const { success } = await updateStatusAction(work.id, status)
+      const result = await updateStatusAction(work.id, status)
 
-      if (success) {
+      if (result.success) {
         toast.success(
           <span>
             <b className="font-bold">{work.title}</b> のステータスを更新しました
           </span>,
         )
+        shareStatus(work, status)
       } else {
         toast.error(
           <span>
@@ -40,7 +43,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
 
       setUpdatingStatus(null)
     },
-    [work.id, work.title],
+    [work, shareStatus],
   )
 
   const handleClick = useCallback(

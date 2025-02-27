@@ -1,15 +1,19 @@
 import { toast } from 'sonner'
 import {
   MISSKEY_DEFAULT_INSTANCE,
-  MISSKEY_DEFAULT_NOTE_PROMPT,
+  MISSKEY_DEFAULT_NOTE_PROMPT_FOR_RECORD,
+  MISSKEY_DEFAULT_NOTE_PROMPT_FOR_STATUS,
   MISSKEY_NOTE_VISIBILITY,
   type MisskeyNoteVisibility,
 } from '../../constants/misskey'
 import { PROJECT_ID } from '../../constants/project'
+import { STATUS_TEXT } from '../../constants/status'
+import type { Status } from '../../schemas/annict/common'
 import type { EpisodeWithInfo } from '../../schemas/annict/episodes'
+import type { Work } from '../../schemas/annict/works'
 import { useLocalStorage } from '../useLocalStorage'
 
-const generatePrompt = (prompt: string, episode: EpisodeWithInfo) => {
+const generatePromptForRecord = (prompt: string, episode: EpisodeWithInfo) => {
   const variablesMap = {
     'work.id': episode.work.id,
     'work.title': episode.work.title,
@@ -18,6 +22,20 @@ const generatePrompt = (prompt: string, episode: EpisodeWithInfo) => {
     'episode.id': episode.id,
     'episode.number': episode.number_text,
     'episode.title': episode.title,
+  }
+
+  return Object.entries(variablesMap).reduce((acc, [key, value]) => {
+    return acc.replaceAll(`{${key}}`, `${value ?? ''}`)
+  }, prompt)
+}
+
+const generatePromptForStatus = (prompt: string, work: Work, status: Status) => {
+  const variablesMap = {
+    'work.id': work.id,
+    'work.title': work.title,
+    'work.season': work.season_name_text,
+    'work.hashtag': work.twitter_hashtag !== '' ? `#${work.twitter_hashtag}` : '',
+    'work.status': STATUS_TEXT[status],
   }
 
   return Object.entries(variablesMap).reduce((acc, [key, value]) => {
@@ -70,12 +88,16 @@ export const useShareMisskey = () => {
     MISSKEY_NOTE_VISIBILITY[0],
   )
   const [localOnly] = useLocalStorage(`${PROJECT_ID}:share/misskey/localOnly`, false)
-  const [notePrompt] = useLocalStorage(
-    `${PROJECT_ID}:share/misskey/notePrompt`,
-    MISSKEY_DEFAULT_NOTE_PROMPT,
+  const [promptForRecord] = useLocalStorage(
+    `${PROJECT_ID}:share/misskey/prompt/record`,
+    MISSKEY_DEFAULT_NOTE_PROMPT_FOR_RECORD,
+  )
+  const [promptForStatus] = useLocalStorage(
+    `${PROJECT_ID}:share/misskey/prompt/status`,
+    MISSKEY_DEFAULT_NOTE_PROMPT_FOR_STATUS,
   )
 
-  const share = async (episode: EpisodeWithInfo) => {
+  const shareRecord = async (episode: EpisodeWithInfo) => {
     if (!shareMisskey) return
     if (misskeyInstance.trim() === '') {
       console.error('Misskey instance is not set')
@@ -86,7 +108,7 @@ export const useShareMisskey = () => {
       return
     }
 
-    const noteBody = generatePrompt(notePrompt, episode)
+    const noteBody = generatePromptForRecord(promptForRecord, episode)
 
     if (noteBody.trim() === '') {
       console.error('Note body is empty')
@@ -100,5 +122,30 @@ export const useShareMisskey = () => {
     })
   }
 
-  return share
+  const shareStatus = async (work: Work, status: Status) => {
+    if (!shareMisskey) return
+    if (misskeyInstance.trim() === '') {
+      console.error('Misskey instance is not set')
+      return
+    }
+    if (accessToken.trim() === '') {
+      console.error('Access token is not set')
+      return
+    }
+
+    const noteBody = generatePromptForStatus(promptForStatus, work, status)
+
+    if (noteBody.trim() === '') {
+      console.error('Note body is empty')
+      return
+    }
+
+    await postNote(misskeyInstance, accessToken, {
+      visibility,
+      localOnly,
+      noteBody,
+    })
+  }
+
+  return { shareRecord, shareStatus }
 }
