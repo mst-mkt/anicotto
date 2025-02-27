@@ -1,15 +1,5 @@
-import {
-  array,
-  integer,
-  maxValue,
-  minValue,
-  nullable,
-  number,
-  object,
-  optional,
-  pipe,
-} from 'valibot'
-import { episodeSchema } from '.'
+import { array, integer, maxValue, minValue, number, object, optional, pipe } from 'valibot'
+import { episodeSchema, episodeWithInfoSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
 
@@ -23,13 +13,6 @@ export const getEpisodesQuerySchema = object({
 })
 
 export const getEpisodesResponseSchema = object({
-  episodes: array(
-    object({
-      ...episodeSchema.entries,
-      work: workSchema,
-      prev_episode: nullable(episodeSchema),
-      next_episode: nullable(episodeSchema),
-    }),
-  ),
+  episodes: array(episodeWithInfoSchema),
   ...paginationInfoSchema.entries,
 })

@@ -1,4 +1,4 @@
-import { EllipsisIcon, ExternalLinkIcon, UserCircleIcon } from 'lucide-react'
+import { EllipsisIcon, ExternalLinkIcon, SettingsIcon, UserCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar'
 import {
@@ -65,6 +65,13 @@ export const SidemenuProfile = async () => {
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild={true}>
+          <Link href="/settings">
+            <SettingsIcon />
+            <span>設定</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <SidemenuLogout />
       </DropdownMenuContent>

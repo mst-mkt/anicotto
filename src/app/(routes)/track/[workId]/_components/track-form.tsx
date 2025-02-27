@@ -8,6 +8,7 @@ import { Badge } from '../../../../../components/ui/badge'
 import { Button } from '../../../../../components/ui/button'
 import { Checkbox } from '../../../../../components/ui/checkbox'
 import { Label } from '../../../../../components/ui/label'
+import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { createMultipleRecords } from '../../../../actions/api/create-multiple-records'
 import type { Library } from '../get-libraries'
 
@@ -19,6 +20,7 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
   const displayEpisodes = useMemo(() => episodes.slice(0, 64), [episodes])
   const [selected, setSelected] = useState(displayEpisodes.map(({ id }) => `${id}`))
   const [isPending, startTransition] = useTransition()
+  const { shareRecord, shareMultipleRecords } = useShareMisskey()
 
   const currentAllCheckedState = useMemo(() => {
     if (selected.length === 0) return false
@@ -35,9 +37,9 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
     }
   }
 
-  const handleCheckedChange = useCallback((checked: CheckedState, id: string) => {
+  const handleCheckedChange = useCallback(async (checked: CheckedState, id: string) => {
     if (checked) {
-      setSelected((prev) => [...prev, id])
+      setSelected((prev) => [...prev, id].toSorted())
     } else {
       setSelected((prev) => prev.filter((prevId) => prevId !== id))
     }
@@ -49,6 +51,17 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
 
     if (result.success) {
       toast.success('記録しました')
+
+      if (result.data.length === 1) {
+        const data = result.data[0]
+        shareRecord({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
+      } else {
+        const length = result.data.length
+        const from = result.data[0].episode
+        const to = result.data[result.data.length - 1].episode
+        const work = result.data[0].work
+        shareMultipleRecords(length, { from, to }, work)
+      }
     } else {
       toast.error(`記録に失敗しました: ${result.error}`)
     }
