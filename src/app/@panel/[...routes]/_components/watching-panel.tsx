@@ -1,8 +1,8 @@
 import { ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import { Skeleton } from '../../../../components/ui/skeleton.tsx'
-import { getWorks } from '../../get-programs.ts'
-import { WorkItem } from './work-item.tsx'
+import { Skeleton } from '../../../../components/ui/skeleton'
+import { getWorks } from '../../get-programs'
+import { WorkItem } from './work-item'
 
 export const WatchingPanel = async () => {
   const watchingWorks = await getWorks()
