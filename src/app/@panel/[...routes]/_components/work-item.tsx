@@ -1,3 +1,4 @@
+import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { WorkHoverCard } from '../../../../components/hover-card/work'
@@ -20,6 +21,11 @@ export const WorkItem: FC<WorkWithStatus> = async (work) => {
             height={128}
             src={image}
             alt={work.title}
+            fallback={
+              <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+                <ImageOffIcon size={20} />
+              </div>
+            }
             className="h-full w-full object-cover"
           />
         </div>
