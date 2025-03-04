@@ -1,6 +1,6 @@
 import { createClient, fetchExchange } from '@urql/core'
-import { ANNICT_API_BASEURL } from '../../constants/annict'
-import { auth } from '../auth'
+import { ANNICT_API_BASEURL } from '../../../constants/annict'
+import { auth } from '../../auth'
 
 export const annictGraphqlClient = createClient({
   url: `${ANNICT_API_BASEURL}/graphql`,

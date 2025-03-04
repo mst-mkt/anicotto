@@ -1,5 +1,5 @@
 import { graphql } from 'gql.tada'
-import { annictGraphqlClient } from '../../../../../lib/api/graphql'
+import { annictGraphqlClient } from '../../../../../lib/api/annict-graphql/client'
 import { CACHE_TAGS } from '../../../../../lib/cache-tag'
 import type { Work } from '../../../../../schemas/annict/works'
 import type { UnNullable, UnPromise } from '../../../../../types/util-types'

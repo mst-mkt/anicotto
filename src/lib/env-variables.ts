@@ -8,6 +8,10 @@ const envVariablesSchema = object({
   ANNICT_CLIENT_ID: pipe(string(), minLength(1)),
   ANNICT_CLIENT_SECRET: pipe(string(), minLength(1)),
 
+  // Spotify OAuth
+  SPOTIFY_CLIENT_ID: pipe(string(), minLength(1)),
+  SPOTIFY_CLIENT_SECRET: pipe(string(), minLength(1)),
+
   // Auth
   AUTH_SECRET: pipe(string(), minLength(1)),
 })

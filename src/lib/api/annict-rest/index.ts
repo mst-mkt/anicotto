@@ -5,33 +5,33 @@ import {
   getActivitiesResponseSchema,
   getFollowingActivitiesQuerySchema,
   getFollowingActivitiesResponseSchema,
-} from '../../schemas/annict/activities/api'
-import { getCastsQuerySchema, getCastsResponseSchema } from '../../schemas/annict/casts/api'
+} from '../../../schemas/annict/activities/api'
+import { getCastsQuerySchema, getCastsResponseSchema } from '../../../schemas/annict/casts/api'
 import {
   getCharactersQuerySchema,
   getCharactersResponseSchema,
-} from '../../schemas/annict/characters/api'
+} from '../../../schemas/annict/characters/api'
 import {
   getEpisodesQuerySchema,
   getEpisodesResponseSchema,
-} from '../../schemas/annict/episodes/api'
+} from '../../../schemas/annict/episodes/api'
 import {
   getFollowingQuerySchema,
   getFollowingResponseSchema,
-} from '../../schemas/annict/followee/api'
+} from '../../../schemas/annict/followee/api'
 import {
   getFollowersQuerySchema,
   getFollowersResponseSchema,
-} from '../../schemas/annict/followers/api'
+} from '../../../schemas/annict/followers/api'
 import {
   getOrganizationsQuerySchema,
   getOrganizationsResponseSchema,
-} from '../../schemas/annict/organizations/api'
-import { getPeopleQuerySchema, getPeopleResponseSchema } from '../../schemas/annict/people/api'
+} from '../../../schemas/annict/organizations/api'
+import { getPeopleQuerySchema, getPeopleResponseSchema } from '../../../schemas/annict/people/api'
 import {
   getMyProgramsQuerySchema,
   getMyProgramsResponseSchema,
-} from '../../schemas/annict/programs/api'
+} from '../../../schemas/annict/programs/api'
 import {
   createRecordQuerySchema,
   createRecordResponseSchema,
@@ -39,7 +39,7 @@ import {
   getRecordsResponseSchema,
   updateRecordQuerySchema,
   updateRecordResponseSchema,
-} from '../../schemas/annict/records/api'
+} from '../../../schemas/annict/records/api'
 import {
   createReviewsQuerySchema,
   createReviewsResponseSchema,
@@ -47,21 +47,21 @@ import {
   getReviewsResponseSchema,
   updateReviewsQuerySchema,
   updateReviewsResponseSchema,
-} from '../../schemas/annict/reviews/api'
-import { getSeriesQuerySchema, getSeriesResponseSchema } from '../../schemas/annict/series/api'
-import { getStaffsQuerySchema, getStaffsResponseSchema } from '../../schemas/annict/staffs/api'
-import { createStatusesQuerySchema } from '../../schemas/annict/statuses/api'
+} from '../../../schemas/annict/reviews/api'
+import { getSeriesQuerySchema, getSeriesResponseSchema } from '../../../schemas/annict/series/api'
+import { getStaffsQuerySchema, getStaffsResponseSchema } from '../../../schemas/annict/staffs/api'
+import { createStatusesQuerySchema } from '../../../schemas/annict/statuses/api'
 import {
   getMeResponseSchema,
   getUsersQuerySchema,
   getUsersResponseSchema,
-} from '../../schemas/annict/users/api'
+} from '../../../schemas/annict/users/api'
 import {
   getMyWorksQuerySchema,
   getMyWorksResponseSchema,
   getWorksQuerySchema,
   getWorksResponseSchema,
-} from '../../schemas/annict/works/api'
+} from '../../../schemas/annict/works/api'
 import { type ParsePathParam, generatePath, generateUrlWithQuery, validate } from './utils'
 
 // biome-ignore lint/suspicious/noExplicitAny: Any is needed to receive any schema

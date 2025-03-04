@@ -45,4 +45,6 @@ pnpm dev:https
 - `BASE_URL`: Next.js base URL (default: `http://localhost:3000`)
 - `ANNICT_CLIENT_ID`: [Annict OAuth](https://annict.com/oauth/applications) client ID
 - `ANNICT_CLIENT_SECRET`: [Annict OAuth](https://annict.com/oauth/applications) client secret
+- `SPOTIFY_CLIENT_ID`: [Spotify OAuth](https://developer.spotify.com/dashboard/applications) client ID
+- `SPOTIFY_CLIENT_SECRET`: [Spotify OAuth](https://developer.spotify.com/dashboard/applications) client secret
 - `AUTH_SECRET`: Secret for Auth.js (generate with `pnpx auth secret --raw`)

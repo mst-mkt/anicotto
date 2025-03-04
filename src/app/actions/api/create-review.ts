@@ -2,7 +2,7 @@
 
 import { err, ok } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
-import { annictApiClient } from '../../../lib/api/client'
+import { annictApiClient } from '../../../lib/api/annict-rest/client'
 import { auth } from '../../../lib/auth'
 import { CACHE_TAGS } from '../../../lib/cache-tag'
 import { type Rating, ratingPicklist } from '../../../schemas/annict/common'
