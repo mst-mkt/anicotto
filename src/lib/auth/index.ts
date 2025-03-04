@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth'
-import { annictApiClient } from '../api/client'
+import { annictApiClient } from '../api/annict-rest/client'
 import { envVariables } from '../env-variables'
 import { AnnictProvider } from './provider'
 import 'next-auth/jwt'

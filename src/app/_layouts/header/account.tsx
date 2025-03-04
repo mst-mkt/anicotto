@@ -11,7 +11,7 @@ import {
 } from '../../../components/ui/drawer'
 import {} from '../../../components/ui/dropdown'
 import { Separator } from '../../../components/ui/separator'
-import { annictApiClient } from '../../../lib/api/client'
+import { annictApiClient } from '../../../lib/api/annict-rest/client'
 import { auth } from '../../../lib/auth'
 import { CACHE_TAGS } from '../../../lib/cache-tag'
 import { LogOutButton } from './logout-button'

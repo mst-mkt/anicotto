@@ -1,5 +1,5 @@
 import { graphql } from 'gql.tada'
-import { annictGraphqlClient } from '../../../../../../lib/api/graphql'
+import { annictGraphqlClient } from '../../../../../../lib/api/annict-graphql/client'
 import { auth } from '../../../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
