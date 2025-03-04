@@ -36,6 +36,7 @@ export const createRecord = async (episodeId: Episode['id'], comment?: string, r
   revalidateTag(CACHE_TAGS.EPISODE_RECORDS(episodeId))
   revalidateTag(CACHE_TAGS.MY_RECORDS)
   revalidateTag(CACHE_TAGS.MY_ACTIVITY)
+  revalidateTag(CACHE_TAGS.MY_LIBRARIES)
 
   return { success: true, data: result.value } as const
 }
