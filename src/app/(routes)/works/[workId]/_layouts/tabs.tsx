@@ -9,9 +9,9 @@ import { cn } from '../../../../../utils/classnames'
 const pages = [
   ['', 'トップ'],
   ['reviews', 'レビュー'],
-  ['information', '情報'],
   ['casts', 'キャスト'],
   ['staffs', 'スタッフ'],
+  ['musics', '音楽'],
   ['series', '関連作品'],
 ] as const satisfies [string, string][]
 type PagePath = (typeof pages)[number][0]
