@@ -38,6 +38,11 @@ export const Links: FC<LinksProps> = async ({ workId }) => {
           関連ツイート
         </LinkItem>
       )}
+      {work.wikipedia_url !== '' && (
+        <LinkItem href={work.wikipedia_url} icon={EarthIcon}>
+          Wikipedia
+        </LinkItem>
+      )}
       {work.syobocal_tid !== '' && (
         <LinkItem href={`https://cal.syoboi.jp/tid/${work.syobocal_tid}`} icon={CalendarIcon}>
           しょぼいカレンダー
