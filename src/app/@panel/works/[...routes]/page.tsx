@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { WorkPanel } from './_components/work-panel'
 
 type WorkSidePanelProps = {
   params: Promise<{
@@ -14,7 +15,7 @@ const WorkSidePanel: FC<WorkSidePanelProps> = async ({ params }) => {
 
   if (Number.isNaN(workId)) return null
 
-  return <>{workId}</>
+  return <WorkPanel workId={workId} />
 }
 
 export default WorkSidePanel
