@@ -1,4 +1,4 @@
-import { BinocularsIcon, CloudAlertIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
+import { BinocularsIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Image } from '../../../../../components/shared/image'
 import { Badge } from '../../../../../components/ui/badge'
@@ -15,17 +15,7 @@ type WorkInfoProps = {
 }
 
 export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
-  const work = await getWork(workId)
-  const status = await getWorkStatus(workId)
-
-  if (work === null || status === null) {
-    return (
-      <div className="flex flex-col items-center gap-y-4 p-16">
-        <CloudAlertIcon size={64} className="text-anicotto-accent" />
-        <p className="font-bold text-xl">作品情報が取得できませんでした</p>
-      </div>
-    )
-  }
+  const [work, status] = await Promise.all([getWork(workId), getWorkStatus(workId)])
 
   const images = await getValidWorkImage(work.id.toString(), work.images)
 

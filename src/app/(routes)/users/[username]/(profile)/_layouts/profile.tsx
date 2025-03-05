@@ -1,11 +1,10 @@
-import { HomeIcon, LinkIcon, UserRoundXIcon } from 'lucide-react'
+import { LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import { type FC, Suspense } from 'react'
 import { Image } from '../../../../../../components/shared/image'
 import { AspectRatio } from '../../../../../../components/ui/aspect-ratio'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../components/ui/avatar'
 import { Badge } from '../../../../../../components/ui/badge'
-import { Button } from '../../../../../../components/ui/button'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
 import { getMe, getUser } from '../../get-user'
 import { FollowButton } from './follow-button'
@@ -18,21 +17,6 @@ type ProfileProps = {
 export const Profile: FC<ProfileProps> = async ({ username }) => {
   const me = await getMe()
   const user = await getUser(username)
-
-  if (user === null) {
-    return (
-      <div className="flex flex-col items-center gap-y-8 py-16">
-        <UserRoundXIcon size={40} className="text-anicotto-accent" />
-        <p>ユーザーが見つかりませんでした</p>
-        <Button asChild={true}>
-          <Link href="/">
-            <HomeIcon />
-            ホームに戻る
-          </Link>
-        </Button>
-      </div>
-    )
-  }
 
   return (
     <div>
