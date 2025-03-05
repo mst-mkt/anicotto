@@ -32,7 +32,7 @@ export const BackDialog: FC<BackDialogProps> = (props) => {
     <Drawer open={true} onOpenChange={(open) => !open && router.back()}>
       <DrawerContent className="max-h-[92svh]">
         <div className="overflow-y-auto">
-          <DrawerHeader>
+          <DrawerHeader className="text-center sm:text-center">
             <DrawerTitle>{props.title}</DrawerTitle>
             <DrawerDescription>{props.description}</DrawerDescription>
           </DrawerHeader>
