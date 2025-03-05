@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { annictApiClient } from '../../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../../lib/cache-tag'
@@ -13,7 +14,7 @@ export const getWorkStatus = async (workId: Work['id']) => {
 
   if (statusResult.isErr()) {
     console.error(`[/works/${workId}] Failed to fetch status:`, statusResult.error)
-    return null
+    notFound()
   }
 
   return statusResult.value.works.at(0)?.status.kind ?? 'no_select'

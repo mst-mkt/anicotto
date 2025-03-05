@@ -1,6 +1,6 @@
 import { Disc3Icon, MusicIcon } from 'lucide-react'
 import { type FC, Suspense } from 'react'
-import { PROJECT_NAME } from '../../../../../constants/project'
+import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { Playlist, PlaylistSkeleton } from './_components/playlist'
 import { Tracks, TracksSkeleton } from './_components/tracks'
 import { getWorkTitle } from './get-work-title'
@@ -14,10 +14,10 @@ type WorkMusicsPageProps = {
 export const generateMetadata = async ({ params }: WorkMusicsPageProps) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
-  if (Number.isNaN(workId)) return null
+  if (Number.isNaN(workId)) return BASIC_METADATA
 
   const title = await getWorkTitle(workId)
-  if (title === null) return null
+  if (title === null) return BASIC_METADATA
 
   return {
     title: `${title} - 楽曲 | ${PROJECT_NAME}`,

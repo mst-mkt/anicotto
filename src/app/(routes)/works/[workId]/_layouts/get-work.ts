@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { annictApiClient } from '../../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../../lib/cache-tag'
@@ -13,8 +14,14 @@ export const getWork = async (workId: Work['id']) => {
 
   if (worksResult.isErr()) {
     console.error(`[/works/${workId}] Failed to fetch work:`, worksResult.error)
-    return null
+    notFound()
   }
 
-  return worksResult.value.works.at(0) ?? null
+  const work = worksResult.value.works.at(0)
+
+  if (work === undefined || work === null) {
+    notFound()
+  }
+
+  return work
 }

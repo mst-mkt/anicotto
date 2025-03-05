@@ -12,14 +12,6 @@ type MiniProfileProps = {
 export const MiniProfile: FC<MiniProfileProps> = async ({ username }) => {
   const user = await getUser(username)
 
-  if (user === null) {
-    return (
-      <header className="flex h-20 items-center justify-center text-muted-foreground">
-        ユーザーが取得できませんでした
-      </header>
-    )
-  }
-
   return (
     <header className="flex h-10 items-center gap-x-2">
       <Link href={`/users/${user.username}`} className="contents">

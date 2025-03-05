@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
@@ -13,10 +14,16 @@ export const getUser = async (username: User['username']) => {
 
   if (userResult.isErr()) {
     console.error('[/users/[username] Failed to fetch user:', userResult.error)
-    return null
+    notFound()
   }
 
-  return userResult.value.users.at(0) ?? null
+  const user = userResult.value.users.at(0)
+
+  if (user === undefined) {
+    notFound()
+  }
+
+  return user
 }
 
 export const getMe = async () => {
