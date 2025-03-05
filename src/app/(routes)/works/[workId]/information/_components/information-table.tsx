@@ -12,7 +12,7 @@ import {
 } from '../../../../../../components/ui/table'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
 import type { Work } from '../../../../../../schemas/annict/works'
-import { isWithProtocol } from '../../../../../../utils/toute-type'
+import { isWithProtocol } from '../../../../../../utils/route-type'
 import { getWork } from '../get-work'
 
 type InformationTableProps = {
