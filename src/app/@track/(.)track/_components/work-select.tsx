@@ -70,7 +70,9 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
                   <div className="flex min-w-0 flex-col gap-y-1">
                     <h3 className="truncate font-bold">{lib.work.title}</h3>
                     <div className="flex w-full items-center gap-x-2 overflow-hidden break-keep">
-                      <Badge variant="secondary">{lib.nextEpisode?.numberText}</Badge>
+                      <Badge variant="secondary" className="shrink-0 break-keep">
+                        {lib.nextEpisode?.numberText}
+                      </Badge>
                       <span className="shrink truncate text-muted-foreground">
                         {lib.nextEpisode?.title}
                       </span>
