@@ -1,5 +1,5 @@
 import { type FC, Suspense } from 'react'
-import { PROJECT_NAME } from '../../../../../constants/project'
+import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../_layouts/get-work'
 import { ReviewForm } from './_components/form/review-form'
 import { Reviews, ReviewsSkeleton } from './_components/review-list/reviews'
@@ -13,7 +13,7 @@ type WorkReviewsPageProps = {
 export const generateMetadata = async ({ params }: WorkReviewsPageProps) => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
-  if (Number.isNaN(workIdNumber)) return null
+  if (Number.isNaN(workIdNumber)) return BASIC_METADATA
   const work = await getWork(workIdNumber)
 
   return {

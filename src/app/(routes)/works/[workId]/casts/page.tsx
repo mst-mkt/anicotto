@@ -1,5 +1,5 @@
 import { type FC, Suspense } from 'react'
-import { PROJECT_NAME } from '../../../../../constants/project'
+import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../_layouts/get-work'
 import { Casts, CastsSkeleton } from './_components/cast-table'
 
@@ -12,7 +12,7 @@ type WorkCastsPageProps = {
 export const generateMetadata = async ({ params }: WorkCastsPageProps) => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
-  if (Number.isNaN(workIdNumber)) return null
+  if (Number.isNaN(workIdNumber)) return BASIC_METADATA
   const works = await getWork(workIdNumber)
 
   return {

@@ -1,8 +1,7 @@
-import type { Metadata } from 'next'
 import TopLoader from 'nextjs-toploader'
 import type { FC, ReactNode } from 'react'
 import { Toaster } from '../components/ui/sonner'
-import { PROJECT_DESCRIPTION, PROJECT_NAME } from '../constants/project'
+import { BASIC_METADATA } from '../constants/project'
 import { ThemeLoader } from '../lib/theme/loader'
 import '../styles/globals.css'
 import { cn } from '../utils/classnames'
@@ -13,10 +12,7 @@ import { Sidemenu } from './_layouts/side-menu/sidemenu'
 import styles from './layout.module.css'
 import { Providers } from './providers'
 
-export const metadata: Metadata = {
-  title: PROJECT_NAME,
-  description: PROJECT_DESCRIPTION,
-}
+export const metadata = BASIC_METADATA
 
 type RootLayoutProps = {
   children: ReactNode
