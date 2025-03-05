@@ -2,11 +2,12 @@
 
 import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { match } from 'ts-pattern'
 import { Button } from '../components/ui/button'
 
 const NotFound = () => {
-  const currentPath = window.location.pathname
+  const currentPath = usePathname()
 
   return (
     <div className="flex h-full flex-col items-center gap-y-8 py-16">
