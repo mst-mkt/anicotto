@@ -2,14 +2,16 @@ import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
+import type { SearchOrder } from '../../search-params'
 import { searchPeople } from './get-people'
 
 type SearchPeopleProps = {
   query: string
+  order: SearchOrder
 }
 
-export const SearchPeople: FC<SearchPeopleProps> = async ({ query }) => {
-  const people = await searchPeople(query)
+export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
+  const people = await searchPeople(query, order)
 
   if (people === null) {
     return (

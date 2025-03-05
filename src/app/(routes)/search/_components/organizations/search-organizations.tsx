@@ -2,14 +2,16 @@ import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
+import type { SearchOrder } from '../../search-params'
 import { searchOrganizations } from './get-organizations'
 
 type SearchOrganizationsProps = {
   query: string
+  order: SearchOrder
 }
 
-export const SearchOrganizations: FC<SearchOrganizationsProps> = async ({ query }) => {
-  const organizations = await searchOrganizations(query)
+export const SearchOrganizations: FC<SearchOrganizationsProps> = async ({ query, order }) => {
+  const organizations = await searchOrganizations(query, order)
 
   if (organizations === null) {
     return (
