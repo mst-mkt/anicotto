@@ -13,6 +13,7 @@ import {
   SearchOrganizationsSkeleton,
 } from './_components/organizations/search-organizations'
 import { SearchPeople, SearchPeopleSkeleton } from './_components/people/search-people'
+import { SortSelect } from './_components/sort-select'
 import { SearchTabs } from './_components/tabs'
 import { SearchWorks, SearchWorksSkeleton } from './_components/works/search-works'
 import { loadSearchParams } from './search-params'
@@ -31,7 +32,7 @@ export const generateMetadata = async ({ searchParams }: SearchPageProps) => {
 }
 
 const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
-  const { q: query, r: resource } = await loadSearchParams(searchParams)
+  const { q: query, r: resource, sort, order } = await loadSearchParams(searchParams)
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -39,29 +40,32 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
         <SearchIcon size={24} className="text-anicotto-accent" />
         検索
       </h1>
-      <SearchInput />
+      <div className="flex items-center justify-between gap-x-4">
+        <SearchInput />
+        <SortSelect />
+      </div>
       <SearchTabs />
       {query === null ? null : (
         <div>
           {match(resource ?? 'works')
             .with('works', () => (
               <Suspense fallback={<SearchWorksSkeleton />}>
-                <SearchWorks query={query} />
+                <SearchWorks query={query} sort={sort} order={order} />
               </Suspense>
             ))
             .with('characters', () => (
               <Suspense fallback={<SearchCharactersSkeleton />}>
-                <SearchCharacters query={query} />
+                <SearchCharacters query={query} order={order} />
               </Suspense>
             ))
             .with('people', () => (
               <Suspense fallback={<SearchPeopleSkeleton />}>
-                <SearchPeople query={query} />
+                <SearchPeople query={query} order={order} />
               </Suspense>
             ))
             .with('organizations', () => (
               <Suspense fallback={<SearchOrganizationsSkeleton />}>
-                <SearchOrganizations query={query} />
+                <SearchOrganizations query={query} order={order} />
               </Suspense>
             ))
             .exhaustive()}

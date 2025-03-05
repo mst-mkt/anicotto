@@ -11,7 +11,7 @@ export const SearchTabs = () => {
   })
 
   return (
-    <div className="scrollbar-thin flex w-fit max-w-full scroll-p-1 overflow-x-auto rounded-lg bg-muted p-1 ring-2 ring-muted">
+    <div className="scrollbar-thin flex w-fit max-w-full scroll-p-1 self-start overflow-x-auto rounded-lg bg-muted p-1 ring-2 ring-muted">
       <button
         type="button"
         onClick={() => setResource('works')}

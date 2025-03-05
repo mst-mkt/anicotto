@@ -5,6 +5,13 @@ export const searchSearchParams = {
   r: parseAsStringLiteral(['works', 'characters', 'people', 'organizations']).withOptions({
     shallow: false,
   }),
+  sort: parseAsStringLiteral(['id', 'season', 'watchers'])
+    .withDefault('id')
+    .withOptions({ shallow: false }),
+  order: parseAsStringLiteral(['asc', 'desc']).withDefault('desc').withOptions({ shallow: false }),
 }
 
 export const loadSearchParams = createLoader(searchSearchParams)
+
+export type SearchSort = typeof searchSearchParams.sort.defaultValue
+export type SearchOrder = typeof searchSearchParams.order.defaultValue

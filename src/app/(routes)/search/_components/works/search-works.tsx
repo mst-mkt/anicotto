@@ -1,15 +1,18 @@
 import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
+import type { SearchOrder, SearchSort } from '../../search-params'
 import { searchWorks } from './get-works'
 import { WorkCard } from './work-card'
 
 type SearchWorksProps = {
   query: string
+  sort: SearchSort
+  order: SearchOrder
 }
 
-export const SearchWorks: FC<SearchWorksProps> = async ({ query }) => {
-  const works = await searchWorks(query)
+export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order }) => {
+  const works = await searchWorks(query, sort, order)
 
   if (works === null) {
     return (
