@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@mst-mkt/js-config": "npm:@jsr/mst-mkt__js-config@^0.0.4",
+    "@mst-mkt/js-config": "npm:@jsr/mst-mkt__js-config@^0.1.0",
     "@tailwindcss/postcss": "^4.0.9",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.13.5",
