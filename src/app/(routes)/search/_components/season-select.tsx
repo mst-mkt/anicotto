@@ -5,11 +5,12 @@ import {
   CalendarRangeIcon,
   FlowerIcon,
   LeafIcon,
+  LoaderIcon,
   SnowflakeIcon,
   SunIcon,
 } from 'lucide-react'
 import { useQueryStates } from 'nuqs'
-import { useMemo } from 'react'
+import { useMemo, useTransition } from 'react'
 import { match } from 'ts-pattern'
 import {
   Select,
@@ -22,7 +23,8 @@ import {
 import { searchSearchParams } from '../search-params'
 
 export const SeasonSelect = () => {
-  const [query, setQuery] = useQueryStates(searchSearchParams)
+  const [isPending, startTransition] = useTransition()
+  const [query, setQuery] = useQueryStates(searchSearchParams, { startTransition })
 
   const seasonText = query.season === 'all' ? 'all' : `${query.season.year}-${query.season.season}`
 
@@ -42,24 +44,28 @@ export const SeasonSelect = () => {
     <Select onValueChange={handleChange} value={seasonText}>
       <SelectTrigger className="w-fit shrink-0 cursor-pointer gap-x-2 justify-self-start">
         <div className="flex items-center gap-x-2">
-          {match(query.season)
-            .with('all', () => <CalendarDaysIcon size={16} className="text-muted-foreground" />)
-            .with({ season: 'all' }, () => (
-              <CalendarRangeIcon size={16} className="text-muted-foreground" />
-            ))
-            .with({ season: 'winter' }, () => (
-              <SnowflakeIcon size={16} className="text-muted-foreground" />
-            ))
-            .with({ season: 'spring' }, () => (
-              <FlowerIcon size={16} className="text-muted-foreground" />
-            ))
-            .with({ season: 'summer' }, () => (
-              <SunIcon size={16} className="text-muted-foreground" />
-            ))
-            .with({ season: 'autumn' }, () => (
-              <LeafIcon size={16} className="text-muted-foreground" />
-            ))
-            .exhaustive()}
+          {isPending ? (
+            <LoaderIcon size={16} className="animate-spin text-muted-foreground" />
+          ) : (
+            match(query.season)
+              .with('all', () => <CalendarDaysIcon size={16} className="text-muted-foreground" />)
+              .with({ season: 'all' }, () => (
+                <CalendarRangeIcon size={16} className="text-muted-foreground" />
+              ))
+              .with({ season: 'winter' }, () => (
+                <SnowflakeIcon size={16} className="text-muted-foreground" />
+              ))
+              .with({ season: 'spring' }, () => (
+                <FlowerIcon size={16} className="text-muted-foreground" />
+              ))
+              .with({ season: 'summer' }, () => (
+                <SunIcon size={16} className="text-muted-foreground" />
+              ))
+              .with({ season: 'autumn' }, () => (
+                <LeafIcon size={16} className="text-muted-foreground" />
+              ))
+              .exhaustive()
+          )}
           <span className=" sm:inline">
             {match(query.season)
               .with('all', () => '全期間')

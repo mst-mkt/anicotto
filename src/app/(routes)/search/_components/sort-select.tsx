@@ -7,9 +7,10 @@ import {
   CalendarArrowUpIcon,
   ClockArrowDownIcon,
   ClockArrowUpIcon,
+  LoaderIcon,
 } from 'lucide-react'
 import { useQueryState } from 'nuqs'
-import { useEffect } from 'react'
+import { useEffect, useTransition } from 'react'
 import { match } from 'ts-pattern'
 import {
   Select,
@@ -23,12 +24,14 @@ import {
 import { searchSearchParams } from '../search-params'
 
 export const SortSelect = () => {
+  const [isPending, startTransition] = useTransition()
   const [resource] = useQueryState('r', searchSearchParams.r)
   const [sort, setSort] = useQueryState('sort', {
     ...searchSearchParams.sort,
     defaultValue: resource === 'works' ? 'watchers' : 'id',
+    startTransition,
   })
-  const [order, setOrder] = useQueryState('order', searchSearchParams.order)
+  const [order, setOrder] = useQueryState('order', { ...searchSearchParams.order, startTransition })
 
   const handleChange = (value: string) => {
     const [sort, order] = value.split(':')
@@ -48,14 +51,30 @@ export const SortSelect = () => {
     <Select onValueChange={(value) => handleChange(value)} value={`${sort}:${order}`}>
       <SelectTrigger className="w-fit shrink-0 cursor-pointer gap-x-2 justify-self-start">
         <div className="flex w-fit items-center gap-x-2">
-          {match([sort, order])
-            .with(['id', 'asc'], () => <ClockArrowUpIcon size={16} />)
-            .with(['id', 'desc'], () => <ClockArrowDownIcon size={16} />)
-            .with(['season', 'asc'], () => <CalendarArrowUpIcon size={16} />)
-            .with(['season', 'desc'], () => <CalendarArrowDownIcon size={16} />)
-            .with(['watchers', 'asc'], () => <ArrowDownNarrowWideIcon size={16} />)
-            .with(['watchers', 'desc'], () => <ArrowUpNarrowWideIcon size={16} />)
-            .exhaustive()}
+          {isPending ? (
+            <LoaderIcon size={16} className="animate-spin text-muted-foreground" />
+          ) : (
+            match([sort, order])
+              .with(['id', 'asc'], () => (
+                <ClockArrowUpIcon size={16} className="text-muted-foreground" />
+              ))
+              .with(['id', 'desc'], () => (
+                <ClockArrowDownIcon size={16} className="text-muted-foreground" />
+              ))
+              .with(['season', 'asc'], () => (
+                <CalendarArrowUpIcon size={16} className="text-muted-foreground" />
+              ))
+              .with(['season', 'desc'], () => (
+                <CalendarArrowDownIcon size={16} className="text-muted-foreground" />
+              ))
+              .with(['watchers', 'asc'], () => (
+                <ArrowDownNarrowWideIcon size={16} className="text-muted-foreground" />
+              ))
+              .with(['watchers', 'desc'], () => (
+                <ArrowUpNarrowWideIcon size={16} className="text-muted-foreground" />
+              ))
+              .exhaustive()
+          )}
           <span className="hidden sm:inline">
             {match([sort, order])
               .with(['id', 'asc'], () => '作成日: 古い順')
