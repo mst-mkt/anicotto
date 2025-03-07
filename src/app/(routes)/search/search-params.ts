@@ -2,7 +2,7 @@ import { createLoader, createParser, parseAsString, parseAsStringLiteral } from 
 import { isSeason } from '../../../constants/season'
 
 export const searchSearchParams = {
-  q: parseAsString.withOptions({ shallow: false }),
+  q: parseAsString.withDefault('').withOptions({ shallow: false }),
   r: parseAsStringLiteral(['works', 'characters', 'people', 'organizations'])
     .withDefault('works')
     .withOptions({ shallow: false }),

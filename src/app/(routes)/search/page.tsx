@@ -41,35 +41,33 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
       </h1>
       <SearchTabs />
       <SearchForm />
-      {query === null
-        ? null
-        : match(resource)
-            .with('works', () => (
-              <Suspense fallback={<SearchWorksSkeleton />}>
-                <SearchWorks
-                  query={query}
-                  sort={sort ?? 'watchers'}
-                  order={order}
-                  season={season === 'all' ? undefined : `${season.year}-${season.season}`}
-                />
-              </Suspense>
-            ))
-            .with('characters', () => (
-              <Suspense fallback={<SearchCharactersSkeleton />}>
-                <SearchCharacters query={query} order={order} />
-              </Suspense>
-            ))
-            .with('people', () => (
-              <Suspense fallback={<SearchPeopleSkeleton />}>
-                <SearchPeople query={query} order={order} />
-              </Suspense>
-            ))
-            .with('organizations', () => (
-              <Suspense fallback={<SearchOrganizationsSkeleton />}>
-                <SearchOrganizations query={query} order={order} />
-              </Suspense>
-            ))
-            .exhaustive()}
+      {match(resource)
+        .with('works', () => (
+          <Suspense fallback={<SearchWorksSkeleton />}>
+            <SearchWorks
+              query={query}
+              sort={sort ?? 'watchers'}
+              order={order}
+              season={season === 'all' ? undefined : `${season.year}-${season.season}`}
+            />
+          </Suspense>
+        ))
+        .with('characters', () => (
+          <Suspense fallback={<SearchCharactersSkeleton />}>
+            <SearchCharacters query={query} order={order} />
+          </Suspense>
+        ))
+        .with('people', () => (
+          <Suspense fallback={<SearchPeopleSkeleton />}>
+            <SearchPeople query={query} order={order} />
+          </Suspense>
+        ))
+        .with('organizations', () => (
+          <Suspense fallback={<SearchOrganizationsSkeleton />}>
+            <SearchOrganizations query={query} order={order} />
+          </Suspense>
+        ))
+        .exhaustive()}
     </div>
   )
 }
