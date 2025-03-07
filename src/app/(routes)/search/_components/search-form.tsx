@@ -6,6 +6,7 @@ import { useTransition } from 'react'
 import { Button } from '../../../../components/ui/button'
 import { Input } from '../../../../components/ui/input'
 import { searchSearchParams } from '../search-params'
+import { SeasonSelect } from './season-select'
 import { SortSelect } from './sort-select'
 
 export const SearchForm = () => {
@@ -22,7 +23,7 @@ export const SearchForm = () => {
   })
 
   return (
-    <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+    <div className="grid grid-cols-2 gap-x-4 gap-y-2">
       <Input
         value={search}
         onChange={(e) => setSearch(e.currentTarget.value)}
@@ -31,7 +32,10 @@ export const SearchForm = () => {
         autoFocus={true}
         className="col-span-2 w-full"
       />
-      <SortSelect />
+      <div className="flex gap-x-2">
+        <SortSelect />
+        <SeasonSelect />
+      </div>
       <Button
         onClick={() => setSearchInstantly(search)}
         disabled={isPending || search.trim() === ''}

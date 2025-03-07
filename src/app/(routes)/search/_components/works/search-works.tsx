@@ -9,10 +9,11 @@ type SearchWorksProps = {
   query: string
   sort: SearchSort
   order: SearchOrder
+  season?: string
 }
 
-export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order }) => {
-  const works = await searchWorks(query, sort, order)
+export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order, season }) => {
+  const works = await searchWorks(query, sort, order, season)
 
   if (works === null) {
     return (
