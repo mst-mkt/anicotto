@@ -48,7 +48,7 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
           {match(resource ?? 'works')
             .with('works', () => (
               <Suspense fallback={<SearchWorksSkeleton />}>
-                <SearchWorks query={query} sort={sort} order={order} />
+                <SearchWorks query={query} sort={sort ?? 'watchers'} order={order} />
               </Suspense>
             ))
             .with('characters', () => (
