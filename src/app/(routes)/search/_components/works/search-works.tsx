@@ -33,7 +33,7 @@ export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order }) 
   }
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
+    <div className="flex flex-col gap-y-4">
       {works.map((work) => (
         <WorkCard key={work.id} work={work} />
       ))}
@@ -42,7 +42,7 @@ export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order }) 
 }
 
 export const SearchWorksSkeleton = () => (
-  <div className="flex flex-col gap-y-4 py-4">
+  <div className="flex flex-col gap-y-4">
     {[...Array(8)].map((_, index) => (
       <div
         // biome-ignore lint/suspicious/noArrayIndexKey: this is static array

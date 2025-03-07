@@ -44,7 +44,7 @@ export const SortSelect = () => {
 
   return (
     <Select onValueChange={(value) => handleChange(value)} value={`${query.sort}:${query.order}`}>
-      <SelectTrigger className="w-fit shrink-0 cursor-pointer gap-x-2 self-end">
+      <SelectTrigger className="w-fit shrink-0 cursor-pointer gap-x-2 justify-self-start">
         <div className="flex w-fit items-center gap-x-2">
           {match(query)
             .with({ sort: 'id', order: 'asc' }, () => <ClockArrowUpIcon size={16} />)
