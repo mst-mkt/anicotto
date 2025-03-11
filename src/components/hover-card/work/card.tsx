@@ -8,6 +8,8 @@ import { Image } from '../../shared/image'
 import { AspectRatio } from '../../ui/aspect-ratio'
 import { Badge } from '../../ui/badge'
 import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '../../ui/hover-card'
+import { getWorkStatus } from './get-status'
+import { StatusSelect } from './status-select'
 
 type WorkHoverCardProps = {
   work:
@@ -28,6 +30,7 @@ type WorkHoverCardProps = {
 
 export const WorkHoverCard: FC<WorkHoverCardProps> = async ({ work, side, children }) => {
   const image = await getValidWorkImage(work.id.toString(), work.images)
+  const status = await getWorkStatus(work.id)
 
   return (
     <HoverCard openDelay={100} closeDelay={100}>
@@ -37,7 +40,7 @@ export const WorkHoverCard: FC<WorkHoverCardProps> = async ({ work, side, childr
           align="start"
           side={side}
           sideOffset={16}
-          className="flex w-64 flex-col gap-y-2 rounded-lg"
+          className="flex w-64 flex-col gap-y-3 rounded-lg"
         >
           <AspectRatio ratio={16 / 9} className="w-full overflow-hidden rounded-md">
             <Image
@@ -86,6 +89,7 @@ export const WorkHoverCard: FC<WorkHoverCardProps> = async ({ work, side, childr
               {work.reviews_count}
             </Link>
           </div>
+          {status !== null && <StatusSelect id={work.id} title={work.title} status={status} />}
         </HoverCardContent>
       </HoverCardPortal>
     </HoverCard>
