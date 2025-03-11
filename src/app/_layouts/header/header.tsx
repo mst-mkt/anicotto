@@ -1,17 +1,17 @@
 import Link from 'next/link'
 import type { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { PROJECT_NAME } from '../../../constants/project'
+import { cn } from '../../../utils/classnames'
 import { HeaderAccount } from './account'
 import { ThemeButton } from './theme-button'
 
 type HeaderProps = {
-  className?: string
+  className: string
 }
 
 export const Header: FC<HeaderProps> = ({ className }) => (
   <header
-    className={twMerge(
+    className={cn(
       'sticky top-0 z-50 grid grid-cols-subgrid bg-background/16 backdrop-blur-md',
       className,
     )}

@@ -1,9 +1,6 @@
-import type { Route } from 'next'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { twJoin } from 'tailwind-merge'
-import { match } from 'ts-pattern'
-import { EarthIcon } from '../../../components/icons/earth'
 import { GithubIcon } from '../../../components/icons/github'
 import { HomeIcon } from '../../../components/icons/home'
 import {
@@ -12,24 +9,10 @@ import {
   PROJECT_NAME,
   PROJECT_OWNER,
 } from '../../../constants/project'
-import { FooterLink, type FooterLinkProps } from './link'
-
-const getLinkIcon = (href: Route) => {
-  return match(href)
-    .returnType<FooterLinkProps>()
-    .when(
-      (href) => href.startsWith('https://github.com/'),
-      (href) => ({ icon: GithubIcon, label: 'GitHub', href }),
-    )
-    .when(
-      (href) => href.startsWith('https://annict.com/'),
-      (href) => ({ icon: HomeIcon, label: 'Annict', href }),
-    )
-    .otherwise((href) => ({ icon: EarthIcon, label: href, href }))
-}
+import { FooterLink } from './link'
 
 type FooterProps = {
-  className?: string
+  className: string
 }
 
 export const Footer: FC<FooterProps> = ({ className }) => (
@@ -51,9 +34,8 @@ export const Footer: FC<FooterProps> = ({ className }) => (
       <p className="text-foreground-300 text-sm">{PROJECT_DESCRIPTION}</p>
     </hgroup>
     <div className="flex gap-x-6">
-      {PROJECT_LINKS.map(getLinkIcon).map((link) => (
-        <FooterLink key={link.href} {...link} />
-      ))}
+      <FooterLink icon={GithubIcon} href={PROJECT_LINKS.github} label="GitHub" />
+      <FooterLink icon={HomeIcon} href={PROJECT_LINKS.annict} label="Annict" />
     </div>
     <p className="flex gap-x-2 text-foreground-300 text-sm">
       &copy; {new Date().getFullYear()}

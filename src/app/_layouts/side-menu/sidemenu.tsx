@@ -9,7 +9,7 @@ import { SidemenuLink } from './link'
 import { SidemenuProfile } from './profile'
 
 type SidemenuProps = {
-  className?: string
+  className: string
 }
 
 export const Sidemenu: FC<SidemenuProps> = ({ className }) => (

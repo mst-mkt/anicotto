@@ -12,7 +12,7 @@ import {
 } from '../../../components/ui/dropdown'
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/tooltip'
-import { getMe } from './get-me'
+import { getMe } from '../get-me'
 import { SidemenuLogout } from './logout'
 
 export const SidemenuProfile = async () => {
