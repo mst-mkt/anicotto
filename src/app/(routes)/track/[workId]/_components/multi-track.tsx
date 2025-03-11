@@ -22,11 +22,16 @@ export const MultiTrack: FC<MultiTrackProps> = async ({ workId }) => {
   const unavailable = currentEpisodes === undefined || currentEpisodes.length === 0
 
   if (unavailable) {
-    const workId = libraries?.find((lib) => lib.work.episodes.length > 0)?.work.id
-    if (workId === undefined) {
+    const trackableLibrary = libraries?.find(
+      (lib) => lib.work.episodes.filter(({ viewerDidTrack }) => !viewerDidTrack).length > 0,
+    )
+    const trackableWorkId = trackableLibrary?.work.id
+
+    if (trackableWorkId === undefined) {
       return <p>エピソードが見つかりませんでした</p>
     }
-    redirect(`/track/${workId}`)
+
+    redirect(`/track/${trackableWorkId}`)
   }
 
   return (
