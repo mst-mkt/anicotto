@@ -1,4 +1,5 @@
 import { SettingsIcon } from 'lucide-react'
+import { RevalidateButton } from './_components/cache/revalidate-button'
 import { DiscordShareConfig } from './_components/share/discord'
 import { MisskeyShareConfig } from './_components/share/misskey'
 
@@ -17,6 +18,17 @@ const SettingsPage = () => (
       </hgroup>
       <MisskeyShareConfig />
       <DiscordShareConfig />
+    </section>
+    <section className="flex flex-col gap-y-8">
+      <hgroup>
+        <h2 className="font-bold">キャッシュ</h2>
+        <span className="text-muted-foreground text-sm">
+          AnnictのAPIから取得したデータがキャッシュされています。
+          <br />
+          データが古い場合は、こちらからキャッシュを再検証できます。
+        </span>
+      </hgroup>
+      <RevalidateButton />
     </section>
   </div>
 )

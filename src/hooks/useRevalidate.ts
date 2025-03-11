@@ -6,9 +6,7 @@ export const useRevalidate = (...tags: string[]) => {
 
   const handleRevalidate = useCallback(() => {
     startTransition(() => {
-      for (const tag of tags) {
-        revalidate(tag)
-      }
+      Promise.all(tags.map((tag) => revalidate(tag)))
     })
   }, [tags])
 
