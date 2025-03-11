@@ -1,5 +1,4 @@
-import { ChevronRightIcon } from 'lucide-react'
-import Link from 'next/link'
+import { ScrollArea } from '../../../../components/ui/scroll-area'
 import { Skeleton } from '../../../../components/ui/skeleton'
 import { getWorks } from '../../get-programs'
 import { WorkItem } from './work-item'
@@ -12,25 +11,18 @@ export const WatchingPanel = async () => {
   }
 
   return (
-    <div className="flex w-full flex-col gap-y-2">
-      {watchingWorks.slice(0, 8).map((work) => (
-        <WorkItem key={work.id} {...work} />
-      ))}
-      {watchingWorks.length > 8 && (
-        <Link
-          href="/library"
-          className="mx-auto flex w-fit items-center gap-x-2 rounded-full px-4 py-3 font-bold text-anicotto-accent text-sm transition-colors hover:bg-muted"
-        >
-          もっと見る
-          <ChevronRightIcon size={20} />
-        </Link>
-      )}
-    </div>
+    <ScrollArea className="h-[64svh]">
+      <div className="flex w-full flex-col gap-y-2 pr-2">
+        {watchingWorks.map((work) => (
+          <WorkItem key={work.id} {...work} />
+        ))}
+      </div>
+    </ScrollArea>
   )
 }
 
 export const WatchingPanelSkeleton = () => (
-  <div className="flex w-full flex-col gap-y-2">
+  <div className="flex w-full flex-col gap-y-2 pr-2">
     {[...Array(8)].map((_, index) => (
       // biome-ignore lint/suspicious/noArrayIndexKey: This is a static array
       <Skeleton key={index} className="h-12 w-full" />
