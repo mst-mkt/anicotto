@@ -1,10 +1,10 @@
 import { CalendarIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC, ReactNode } from 'react'
-import type { User } from '../../schemas/annict/users'
-import { timeText } from '../../utils/time-text'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import type { User } from '../../../schemas/annict/users'
+import { timeText } from '../../../utils/time-text'
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../../ui/hover-card'
 
 type UserHoverCardProps = {
   user: User

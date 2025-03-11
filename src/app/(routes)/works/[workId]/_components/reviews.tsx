@@ -1,7 +1,7 @@
 import { HeartIcon, MessageCircleHeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
-import { UserHoverCard } from '../../../../../components/hover-card/user'
+import { UserHoverCard } from '../../../../../components/hover-card/user/card'
 import { Markdown } from '../../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../components/ui/avatar'
 import { Button } from '../../../../../components/ui/button'

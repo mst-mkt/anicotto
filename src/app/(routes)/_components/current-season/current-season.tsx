@@ -1,6 +1,6 @@
 import { CloudAlertIcon, EyeIcon, ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
-import { WorkHoverCard } from '../../../../components/hover-card/work'
+import { WorkHoverCard } from '../../../../components/hover-card/work/card'
 import { Image } from '../../../../components/shared/image'
 import { AspectRatio } from '../../../../components/ui/aspect-ratio'
 import { Carousel, CarouselContent, CarouselItem } from '../../../../components/ui/carousel'

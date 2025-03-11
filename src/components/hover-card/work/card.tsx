@@ -2,12 +2,12 @@ import type { HoverCardContentProps } from '@radix-ui/react-hover-card'
 import { ClapperboardIcon, EyeIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC, ReactNode } from 'react'
-import { getValidWorkImage } from '../../lib/images/valid-url'
-import type { Work } from '../../schemas/annict/works'
-import { Image } from '../shared/image'
-import { AspectRatio } from '../ui/aspect-ratio'
-import { Badge } from '../ui/badge'
-import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '../ui/hover-card'
+import { getValidWorkImage } from '../../../lib/images/valid-url'
+import type { Work } from '../../../schemas/annict/works'
+import { Image } from '../../shared/image'
+import { AspectRatio } from '../../ui/aspect-ratio'
+import { Badge } from '../../ui/badge'
+import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '../../ui/hover-card'
 
 type WorkHoverCardProps = {
   work:

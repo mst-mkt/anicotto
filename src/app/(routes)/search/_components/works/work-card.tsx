@@ -1,7 +1,7 @@
 import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
-import { WorkHoverCard } from '../../../../../components/hover-card/work'
+import { WorkHoverCard } from '../../../../../components/hover-card/work/card'
 import { Image } from '../../../../../components/shared/image'
 import { Badge } from '../../../../../components/ui/badge'
 import { getValidWorkImage } from '../../../../../lib/images/valid-url'
