@@ -20,15 +20,18 @@ type WorkSelectProps = {
 }
 
 export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
-  const [library, setLibrary] = useState(libraries.at(0))
+  const librariesHasNext = libraries.filter(
+    (lib) => lib.nextEpisode !== null && !lib.nextEpisode.viewerDidTrack,
+  )
+  const [library, setLibrary] = useState(librariesHasNext.at(0))
 
   const handleSelect = useCallback(
     (value: string) => {
       const episode = Number.parseInt(value, 10)
-      const library = libraries.find((lib) => lib.nextEpisode?.id === episode)
+      const library = librariesHasNext.find((lib) => lib.nextEpisode?.id === episode)
       setLibrary(library)
     },
-    [libraries.find],
+    [librariesHasNext.find],
   )
 
   return (
@@ -42,45 +45,43 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent className="max-w-[92svw]">
-          {libraries
-            .filter((lib) => lib.nextEpisode !== null)
-            .map((lib) => (
-              <SelectItem
-                key={lib.work.id}
-                value={lib.nextEpisode?.id.toString() ?? ''}
-                className="[&>:last-child]:min-w-0"
-              >
-                <div className="flex cursor-pointer items-center gap-x-4 pr-4 text-left">
-                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md">
-                    <AspectRatio ratio={1}>
-                      <Image
-                        height={128}
-                        width={128}
-                        src={lib.work.image}
-                        fallback={
-                          <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">
-                            <ImageOffIcon size={24} />
-                          </div>
-                        }
-                        alt={lib.work.title}
-                        className="h-full w-full object-cover"
-                      />
-                    </AspectRatio>
-                  </div>
-                  <div className="flex min-w-0 flex-col gap-y-1">
-                    <h3 className="truncate font-bold">{lib.work.title}</h3>
-                    <div className="flex w-full items-center gap-x-2 overflow-hidden break-keep">
-                      <Badge variant="secondary" className="shrink-0 break-keep">
-                        {lib.nextEpisode?.numberText}
-                      </Badge>
-                      <span className="shrink truncate text-muted-foreground">
-                        {lib.nextEpisode?.title}
-                      </span>
-                    </div>
+          {librariesHasNext.map((lib) => (
+            <SelectItem
+              key={lib.work.id}
+              value={lib.nextEpisode?.id.toString() ?? ''}
+              className="[&>:last-child]:min-w-0"
+            >
+              <div className="flex cursor-pointer items-center gap-x-4 pr-4 text-left">
+                <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md">
+                  <AspectRatio ratio={1}>
+                    <Image
+                      height={128}
+                      width={128}
+                      src={lib.work.image}
+                      fallback={
+                        <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">
+                          <ImageOffIcon size={24} />
+                        </div>
+                      }
+                      alt={lib.work.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </AspectRatio>
+                </div>
+                <div className="flex min-w-0 flex-col gap-y-1">
+                  <h3 className="truncate font-bold">{lib.work.title}</h3>
+                  <div className="flex w-full items-center gap-x-2 overflow-hidden break-keep">
+                    <Badge variant="secondary" className="shrink-0 break-keep">
+                      {lib.nextEpisode?.numberText}
+                    </Badge>
+                    <span className="shrink truncate text-muted-foreground">
+                      {lib.nextEpisode?.title}
+                    </span>
                   </div>
                 </div>
-              </SelectItem>
-            ))}
+              </div>
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
       {library !== undefined && <MultiTrackLink workId={library.work.id} />}
