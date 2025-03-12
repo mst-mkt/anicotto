@@ -1,4 +1,5 @@
 import { type FC, Suspense } from 'react'
+import { ViewTransition } from '../../../../../components/shared/view-transition'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../_layouts/get-work'
 import { ReviewForm } from './_components/form/review-form'
@@ -30,9 +31,11 @@ const WorkReviewsPage: FC<WorkReviewsPageProps> = async ({ params }) => {
   return (
     <div className="flex flex-col gap-y-16">
       <ReviewForm workId={workId} />
-      <Suspense fallback={<ReviewsSkeleton />}>
-        <Reviews workId={workId} />
-      </Suspense>
+      <ViewTransition>
+        <Suspense fallback={<ReviewsSkeleton />}>
+          <Reviews workId={workId} />
+        </Suspense>
+      </ViewTransition>
     </div>
   )
 }

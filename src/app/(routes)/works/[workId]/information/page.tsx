@@ -1,4 +1,5 @@
 import { type FC, Suspense } from 'react'
+import { ViewTransition } from '../../../../../components/shared/view-transition'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { InformationTable, InformationTableSkeleton } from './_components/information-table'
 import { getWork } from './get-work'
@@ -27,9 +28,11 @@ const WorkInformationPage: FC<WorkInformationPageProps> = async ({ params }) => 
   if (Number.isNaN(workId)) return null
 
   return (
-    <Suspense fallback={<InformationTableSkeleton />}>
-      <InformationTable workId={workId} />
-    </Suspense>
+    <ViewTransition>
+      <Suspense fallback={<InformationTableSkeleton />}>
+        <InformationTable workId={workId} />
+      </Suspense>
+    </ViewTransition>
   )
 }
 

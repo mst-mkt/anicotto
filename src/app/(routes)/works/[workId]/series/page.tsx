@@ -1,5 +1,6 @@
 import { type FC, Suspense } from 'react'
 import { Loading } from '../../../../../components/shared/loading'
+import { ViewTransition } from '../../../../../components/shared/view-transition'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../_layouts/get-work'
 import { SeriesCarousels } from './_components/series-carousel'
@@ -30,9 +31,11 @@ const WorkSeriesPage: FC<WorkSeriesPageProps> = async ({ params }) => {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <Suspense fallback={<Loading />}>
-        <SeriesCarousels workId={workId} />
-      </Suspense>
+      <ViewTransition>
+        <Suspense fallback={<Loading />}>
+          <SeriesCarousels workId={workId} />
+        </Suspense>
+      </ViewTransition>
     </div>
   )
 }

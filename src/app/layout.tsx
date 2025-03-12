@@ -1,5 +1,6 @@
 import TopLoader from 'nextjs-toploader'
 import type { FC, ReactNode } from 'react'
+import { ViewTransition } from '../components/shared/view-transition'
 import { Toaster } from '../components/ui/sonner'
 import { BASIC_METADATA } from '../constants/project'
 import { ThemeLoader } from '../lib/theme/loader'
@@ -38,9 +39,11 @@ const RootLayout: FC<RootLayoutProps> = ({ children, track, panel }) => (
         >
           <Header className={styles.header} />
           <Sidemenu className={styles.sideMenu} />
-          <main className={cn(styles.main, 'w-full py-4')}>{children}</main>
+          <main className={cn(styles.main, 'w-full py-4')}>
+            <ViewTransition>{children}</ViewTransition>
+          </main>
           <Footer className={styles.footer} />
-          {panel}
+          <ViewTransition>{panel}</ViewTransition>
           {track}
         </div>
         <BottomMenu />

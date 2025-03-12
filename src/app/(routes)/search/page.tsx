@@ -2,6 +2,7 @@ import { SearchIcon } from 'lucide-react'
 import type { SearchParams } from 'nuqs/server'
 import { type FC, Suspense } from 'react'
 import { match } from 'ts-pattern'
+import { ViewTransition } from '../../../components/shared/view-transition'
 import { PROJECT_NAME } from '../../../constants/project'
 import {
   SearchCharacters,
@@ -41,33 +42,35 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
       </h1>
       <SearchTabs />
       <SearchForm />
-      {match(resource)
-        .with('works', () => (
-          <Suspense fallback={<SearchWorksSkeleton />}>
-            <SearchWorks
-              query={query}
-              sort={sort ?? 'watchers'}
-              order={order}
-              season={season === 'all' ? undefined : `${season.year}-${season.season}`}
-            />
-          </Suspense>
-        ))
-        .with('characters', () => (
-          <Suspense fallback={<SearchCharactersSkeleton />}>
-            <SearchCharacters query={query} order={order} />
-          </Suspense>
-        ))
-        .with('people', () => (
-          <Suspense fallback={<SearchPeopleSkeleton />}>
-            <SearchPeople query={query} order={order} />
-          </Suspense>
-        ))
-        .with('organizations', () => (
-          <Suspense fallback={<SearchOrganizationsSkeleton />}>
-            <SearchOrganizations query={query} order={order} />
-          </Suspense>
-        ))
-        .exhaustive()}
+      <ViewTransition>
+        {match(resource)
+          .with('works', () => (
+            <Suspense fallback={<SearchWorksSkeleton />}>
+              <SearchWorks
+                query={query}
+                sort={sort ?? 'watchers'}
+                order={order}
+                season={season === 'all' ? undefined : `${season.year}-${season.season}`}
+              />
+            </Suspense>
+          ))
+          .with('characters', () => (
+            <Suspense fallback={<SearchCharactersSkeleton />}>
+              <SearchCharacters query={query} order={order} />
+            </Suspense>
+          ))
+          .with('people', () => (
+            <Suspense fallback={<SearchPeopleSkeleton />}>
+              <SearchPeople query={query} order={order} />
+            </Suspense>
+          ))
+          .with('organizations', () => (
+            <Suspense fallback={<SearchOrganizationsSkeleton />}>
+              <SearchOrganizations query={query} order={order} />
+            </Suspense>
+          ))
+          .exhaustive()}
+      </ViewTransition>
     </div>
   )
 }

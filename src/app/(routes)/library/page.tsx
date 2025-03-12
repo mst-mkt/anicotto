@@ -2,6 +2,7 @@ import { BookImageIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import type { SearchParams } from 'nuqs/server'
 import { type FC, Suspense } from 'react'
+import { ViewTransition } from '../../../components/shared/view-transition'
 import { TabsContent } from '../../../components/ui/tabs'
 import { PROJECT_NAME } from '../../../constants/project'
 import { statusPicklist } from '../../../schemas/annict/common'
@@ -32,9 +33,11 @@ const LibraryPage: FC<LibraryPageProps> = async ({ searchParams }) => {
           .filter((status) => status !== 'no_select')
           .map((status) => (
             <TabsContent key={status} value={status}>
-              <Suspense fallback={<WorkListSkeleton />}>
-                <WorkList status={status} />
-              </Suspense>
+              <ViewTransition>
+                <Suspense fallback={<WorkListSkeleton />}>
+                  <WorkList status={status} />
+                </Suspense>
+              </ViewTransition>
             </TabsContent>
           ))}
       </Tab>
