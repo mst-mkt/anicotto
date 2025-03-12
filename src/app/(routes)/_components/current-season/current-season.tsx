@@ -68,8 +68,9 @@ export const CurrentSeasonWorkSkeleton = () => (
         className="flex basis-1/2 flex-col gap-y-2 last:hidden md:basis-1/3 md:last:flex"
       >
         <Skeleton className="aspect-video" />
-        <Skeleton className="h-[1lh] w-3/4" />
+        <Skeleton className="h-[1lh] w-full" />
         <Skeleton className="h-[1lh] w-1/2 text-sm" />
+        <div className="-mt-2 h-[1lh] w-full" />
       </div>
     ))}
   </div>
