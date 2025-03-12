@@ -28,11 +28,14 @@ export const WorkSelect = async () => {
 }
 
 export const WorkSelectSkeleton = () => (
-  <div className="flex items-center gap-x-4 rounded-md border border-muted p-2">
-    <Skeleton className="h-16 w-16" />
-    <div className="flex flex-col gap-y-1">
-      <Skeleton className="h-[1lh] w-20" />
-      <Skeleton className="h-[1lh] w-32" />
+  <>
+    <div className="flex items-center gap-x-4 rounded-md border border-muted p-2">
+      <Skeleton className="h-16 w-16" />
+      <div className="flex flex-col gap-y-1">
+        <Skeleton className="h-[1lh] w-20" />
+        <Skeleton className="h-[1lh] w-32" />
+      </div>
     </div>
-  </div>
+    <Skeleton className="h-[1lh] w-1/3 text-sm" />
+  </>
 )

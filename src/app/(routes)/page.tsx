@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { Button } from '../../components/ui/button'
 import { getCurrentSeason } from '../../utils/get-season'
-import { ActivitiesLoading, Activity } from './_components/activity/activity'
+import { Activity, ActivitySkeleton } from './_components/activity/activity'
 import { ReloadActivityButton } from './_components/activity/reload-button'
 import {
   CurrentSeasonWork,
@@ -36,7 +36,7 @@ const IndexPage = () => (
         <h2 className="shrink grow font-bold text-lg">アクテビティ</h2>
         <ReloadActivityButton />
       </hgroup>
-      <Suspense fallback={<ActivitiesLoading />}>
+      <Suspense fallback={<ActivitySkeleton />}>
         <Activity />
       </Suspense>
     </div>
