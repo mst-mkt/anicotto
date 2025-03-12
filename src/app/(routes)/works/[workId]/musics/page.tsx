@@ -1,6 +1,5 @@
 import { Disc3Icon, MusicIcon } from 'lucide-react'
 import { type FC, Suspense } from 'react'
-import { ViewTransition } from '../../../../../components/shared/view-transition'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { Playlist, PlaylistSkeleton } from './_components/playlist'
 import { Tracks, TracksSkeleton } from './_components/tracks'
@@ -37,20 +36,16 @@ const WorkMusicsPage: FC<WorkMusicsPageProps> = async ({ params }) => {
         <Disc3Icon size={24} className="text-anicotto-accent" />
         プレイリスト
       </h2>
-      <ViewTransition>
-        <Suspense fallback={<PlaylistSkeleton />}>
-          <Playlist workId={workId} />
-        </Suspense>
-      </ViewTransition>
+      <Suspense fallback={<PlaylistSkeleton />}>
+        <Playlist workId={workId} />
+      </Suspense>
       <h2 className="flex items-center gap-x-2 font-bold text-lg">
         <MusicIcon size={24} className="text-anicotto-accent" />
         関連楽曲
       </h2>
-      <ViewTransition>
-        <Suspense fallback={<TracksSkeleton />}>
-          <Tracks workId={workId} />
-        </Suspense>
-      </ViewTransition>
+      <Suspense fallback={<TracksSkeleton />}>
+        <Tracks workId={workId} />
+      </Suspense>
     </div>
   )
 }

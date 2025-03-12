@@ -1,5 +1,4 @@
 import { type FC, Suspense } from 'react'
-import { ViewTransition } from '../../../../../components/shared/view-transition'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../_layouts/get-work'
 import { StaffTable, StaffTableSkeleton } from './_components/staff-table'
@@ -28,11 +27,9 @@ const WorkStaffsPage: FC<WorkStaffsPageProps> = async ({ params }) => {
   if (Number.isNaN(workId)) return null
 
   return (
-    <ViewTransition>
-      <Suspense fallback={<StaffTableSkeleton />}>
-        <StaffTable workId={workId} />
-      </Suspense>
-    </ViewTransition>
+    <Suspense fallback={<StaffTableSkeleton />}>
+      <StaffTable workId={workId} />
+    </Suspense>
   )
 }
 

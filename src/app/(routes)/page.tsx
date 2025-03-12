@@ -1,7 +1,6 @@
 import { ChevronRightIcon, FlameIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { ViewTransition } from '../../components/shared/view-transition'
 import { Button } from '../../components/ui/button'
 import { getCurrentSeason } from '../../utils/get-season'
 import { Activity, ActivitySkeleton } from './_components/activity/activity'
@@ -27,11 +26,9 @@ const IndexPage = () => (
           </Link>
         </Button>
       </hgroup>
-      <ViewTransition>
-        <Suspense fallback={<CurrentSeasonWorkSkeleton />}>
-          <CurrentSeasonWork />
-        </Suspense>
-      </ViewTransition>
+      <Suspense fallback={<CurrentSeasonWorkSkeleton />}>
+        <CurrentSeasonWork />
+      </Suspense>
     </div>
     <div className="flex flex-col gap-y-8">
       <hgroup className="flex items-center gap-x-2">
@@ -39,11 +36,9 @@ const IndexPage = () => (
         <h2 className="shrink grow font-bold text-lg">アクテビティ</h2>
         <ReloadActivityButton />
       </hgroup>
-      <ViewTransition>
-        <Suspense fallback={<ActivitySkeleton />}>
-          <Activity />
-        </Suspense>
-      </ViewTransition>
+      <Suspense fallback={<ActivitySkeleton />}>
+        <Activity />
+      </Suspense>
     </div>
   </div>
 )

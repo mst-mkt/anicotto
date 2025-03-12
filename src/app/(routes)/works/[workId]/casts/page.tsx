@@ -1,5 +1,4 @@
 import { type FC, Suspense } from 'react'
-import { ViewTransition } from '../../../../../components/shared/view-transition'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../_layouts/get-work'
 import { Casts, CastsSkeleton } from './_components/cast-table'
@@ -28,11 +27,9 @@ const WorkCastsPage: FC<WorkCastsPageProps> = async ({ params }) => {
   if (Number.isNaN(workId)) return null
 
   return (
-    <ViewTransition>
-      <Suspense fallback={<CastsSkeleton />}>
-        <Casts workId={workId} />
-      </Suspense>
-    </ViewTransition>
+    <Suspense fallback={<CastsSkeleton />}>
+      <Casts workId={workId} />
+    </Suspense>
   )
 }
 
