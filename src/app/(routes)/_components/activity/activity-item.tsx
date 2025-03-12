@@ -22,7 +22,7 @@ export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
   const thumbnail = await getValidWorkImage(activity.work.id.toString(), activity.work.images)
 
   return (
-    <div className="flex animate-in gap-x-4 duration-500 ease-in-out">
+    <div className="flex gap-x-4">
       <UserHoverCard user={activity.user}>
         <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
           <Avatar className="z-0 h-12 w-12">
