@@ -14,6 +14,7 @@ const nextConfig = {
   experimental: {
     // typedRoutes: true, // with next 15.1.6, occurs error when build
     reactCompiler: true,
+    viewTransition: true,
   }
 } satisfies NextConfig
 
