@@ -25,6 +25,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
     <Badge
       {...props}
       className={cn(
+        'cursor-default gap-x-1 px-2 py-1',
         rating === 'great' &&
           '!border-anicotto-rating-great/16 bg-anicotto-rating-great-pale/16 text-anicotto-rating-great hover:bg-anicotto-rating-great-pale/24',
         rating === 'good' &&
@@ -54,6 +55,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
     <Badge
       {...props}
       className={cn(
+        'cursor-default gap-x-1 px-2 py-1',
         status === 'watching' &&
           '!border-anicotto-status-watching/16 bg-anicotto-status-watching-pale/16 text-anicotto-status-watching hover:bg-anicotto-status-watching-pale/24',
         status === 'watched' &&
