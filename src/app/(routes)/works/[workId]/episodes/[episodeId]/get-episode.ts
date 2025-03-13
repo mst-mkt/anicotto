@@ -13,6 +13,7 @@ export const getEpisode = async (episodeId: EpisodeType['id']) => {
           annictId
           work {
             annictId
+            title
           }
           numberText
           prevEpisode {
@@ -103,6 +104,7 @@ export const getEpisode = async (episodeId: EpisodeType['id']) => {
         })) ?? [],
     work: {
       id: episode.work.annictId,
+      title: episode.work.title,
     },
     prevEpisode:
       episode.prevEpisode === null
