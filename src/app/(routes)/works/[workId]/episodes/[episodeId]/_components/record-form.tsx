@@ -15,12 +15,13 @@ import { RatingSelect } from './rating-select'
 import { RecordSubmitButton } from './record-submit-button'
 
 type RecordFormProps = {
-  episodeId: Episode['id']
-  tracked: boolean
+  episodeId?: Episode['id']
+  tracked?: boolean
 }
 
-export const RecordForm: FC<RecordFormProps> = ({ episodeId, tracked }) => {
+export const RecordForm: FC<RecordFormProps> = ({ episodeId, tracked = false }) => {
   const handleSubmit = async (formData: FormData) => {
+    if (episodeId === undefined) return
     const comment = formData.get('comment')?.toString()
     const ratingString = formData.get('rating')?.toString()
 

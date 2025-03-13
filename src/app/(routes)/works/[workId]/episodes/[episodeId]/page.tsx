@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
-import type { FC } from 'react'
+import { type FC, Suspense } from 'react'
 import { PROJECT_NAME } from '../../../../../../constants/project'
-import { EpisodeInfo } from './_components/episode-info'
+import { EpisodeInfo, EpisodeInfoSkeleton } from './_components/episode-info'
 import { getEpisode } from './get-episode'
 
 type EpisodePageProps = {
@@ -36,7 +36,11 @@ const EpisodePage: FC<EpisodePageProps> = async ({ params }) => {
     notFound()
   }
 
-  return <EpisodeInfo workId={workId} episodeId={episodeId} />
+  return (
+    <Suspense fallback={<EpisodeInfoSkeleton />}>
+      <EpisodeInfo workId={workId} episodeId={episodeId} />
+    </Suspense>
+  )
 }
 
 export default EpisodePage

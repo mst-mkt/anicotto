@@ -18,6 +18,7 @@ import { Markdown } from '../../../../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../../components/ui/avatar'
 import { Button } from '../../../../../../../components/ui/button'
 import { Separator } from '../../../../../../../components/ui/separator'
+import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../../../components/ui/tooltip'
 import type { Episode } from '../../../../../../../schemas/annict/episodes'
 import type { Work } from '../../../../../../../schemas/annict/works'
@@ -197,3 +198,22 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
     </div>
   )
 }
+
+export const EpisodeInfoSkeleton = () => (
+  <div className="flex flex-col gap-y-6">
+    <div className="flex flex-col gap-y-4">
+      <div className="flex h-8.5 items-center gap-x-2">
+        <Skeleton className="h-[1lh] w-1/4" />
+        <Separator className="shrink" />
+      </div>
+      <Skeleton className="h-[1lh] w-1/2 text-xl" />
+    </div>
+    <div className="flex gap-x-6">
+      <Skeleton className="h-5 w-24" />
+      <Skeleton className="h-5 w-24" />
+      <Skeleton className="h-5 w-24" />
+    </div>
+    <RecordForm />
+    <div className="h-64 w-full" />
+  </div>
+)
