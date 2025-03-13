@@ -7,7 +7,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../../ui/hover-card'
 
 type UserHoverCardProps = {
-  user: User
+  user:
+    | User
+    | {
+        username: string
+        avatar_url: string
+        name: string
+        description: string
+        followings_count: number
+        followers_count: number
+        created_at: string
+      }
   children: ReactNode
 }
 
