@@ -20,7 +20,7 @@ const IndexPage = () => (
           今季アニメ
         </h2>
         <Button variant="ghost" size="sm" asChild={true}>
-          <Link href="/discover">
+          <Link href={`/search?season=${getCurrentSeason()}`}>
             もっと見る
             <ChevronRightIcon size={16} />
           </Link>
