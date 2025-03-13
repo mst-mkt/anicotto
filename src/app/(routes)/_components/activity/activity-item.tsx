@@ -74,7 +74,7 @@ export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
             {match(activity)
               .with({ action: 'create_record' }, ({ episode }) => (
                 <Link
-                  href={`/work/${activity.work.id}/episodes/${episode.id}`}
+                  href={`/works/${activity.work.id}/episodes/${episode.id}`}
                   className="group flex items-center gap-x-2"
                 >
                   <Badge className="shrink-0 grow-0 group-hover:bg-primary/80">
