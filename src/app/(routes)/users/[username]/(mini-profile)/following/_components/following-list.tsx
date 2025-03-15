@@ -72,7 +72,6 @@ export const FollowingList: FC<FollowingListProps> = async ({ username }) => {
 export const FollowingListSkeleton = () => (
   <ul className="flex flex-col gap-y-4">
     {[...Array(8)].map((_, index) => (
-      // biome-ignore lint/suspicious/noArrayIndexKey: this is static array
       <li key={index} className="flex items-center gap-x-4 rounded-lg border border-muted p-4">
         <Skeleton className="h-12 w-12 rounded-full" />
         <div className="flex w-full flex-col gap-y-1">

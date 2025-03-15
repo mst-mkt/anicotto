@@ -24,7 +24,6 @@ export const WatchingPanel = async () => {
 export const WatchingPanelSkeleton = () => (
   <div className="flex w-full flex-col gap-y-2 pr-2">
     {[...Array(8)].map((_, index) => (
-      // biome-ignore lint/suspicious/noArrayIndexKey: This is a static array
       <Skeleton key={index} className="h-14 w-full" />
     ))}
   </div>

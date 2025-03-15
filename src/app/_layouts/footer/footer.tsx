@@ -20,7 +20,6 @@ export const Footer: FC<FooterProps> = ({ className }) => (
     <div className="flex gap-x-1">
       {[...Array(3)].map((_, index) => (
         <span
-          // biome-ignore lint/suspicious/noArrayIndexKey: This is a static array
           key={index}
           className="block h-3 w-2 bg-anicotto-accent"
           style={{

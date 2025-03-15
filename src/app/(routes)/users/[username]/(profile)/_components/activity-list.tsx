@@ -42,7 +42,6 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
 export const ActivityListSkeleton = () => (
   <div className="flex flex-col gap-y-4 py-4">
     {[...Array(4)].map((_, index) => (
-      // biome-ignore lint/suspicious/noArrayIndexKey: this is static array
       <div className="flex flex-col gap-y-2" key={index}>
         <div className="flex justify-between gap-x-2">
           <Skeleton className="h-[1lh] w-1/2" />

@@ -123,7 +123,6 @@ export const LibraryCarouselSkeleton: FC<Pick<LibraryCarouselProps, 'status'>> =
     <div className="flex w-full gap-x-4">
       {[...Array(3)].map((_, i) => (
         <div
-          // biome-ignore lint/suspicious/noArrayIndexKey: this key is index of static array
           key={i}
           className="flex shrink basis-1/2 flex-col gap-y-2 last:hidden md:basis-1/3 md:last:flex"
         >

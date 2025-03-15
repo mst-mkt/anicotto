@@ -7,5 +7,10 @@
   "files": {
     "include": ["./src/**/*"],
     "ignore": ["./src/**/*.d.ts"]
+  },
+  "linter": {
+    "rules": {
+      "suspicious": { "noArrayIndexKey": "off" }
+    }
   }
 }

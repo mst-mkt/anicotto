@@ -45,11 +45,7 @@ export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order, se
 export const SearchWorksSkeleton = () => (
   <div className="flex flex-col gap-y-4">
     {[...Array(8)].map((_, index) => (
-      <div
-        // biome-ignore lint/suspicious/noArrayIndexKey: this is static array
-        key={index}
-        className="flex items-center rounded-lg border border-muted p-2 shadow-xs"
-      >
+      <div key={index} className="flex items-center rounded-lg border border-muted p-2 shadow-xs">
         <Skeleton className="h-24 w-24 shrink-0" />
         <div className="flex w-full flex-col gap-y-1 p-4">
           <Skeleton className="h-[1lh] w-full" />

@@ -66,7 +66,6 @@ export const SearchCharactersSkeleton = () => (
   <div className="flex flex-col gap-y-4">
     {[...Array(8)].map((_, index) => (
       <div
-        // biome-ignore lint/suspicious/noArrayIndexKey: this is static array
         key={index}
         className="flex flex-col gap-y-1 rounded-lg border border-muted p-4 shadow-xs"
       >
