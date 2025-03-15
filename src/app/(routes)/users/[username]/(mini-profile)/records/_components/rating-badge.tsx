@@ -1,7 +1,8 @@
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
+import { RatingIcon } from '../../../../../../../components/icon/rating'
 import { Badge, type BadgeProps } from '../../../../../../../components/ui/badge'
-import { RATING_ICON, RATING_TEXT } from '../../../../../../../constants/rating'
+import { RATING_TEXT } from '../../../../../../../constants/rating'
 import type { Rating } from '../../../../../../../schemas/annict/common'
 import type { introspection_types } from '../../../../../../../types/graphql-env.d'
 import { cn } from '../../../../../../../utils/classnames'
@@ -22,7 +23,6 @@ const convertRating = (rating: introspection_types['RatingState']['enumValues'])
 export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
   const ratingValue = convertRating(rating)
   const text = RATING_TEXT[ratingValue]
-  const Icon = RATING_ICON[ratingValue]
 
   return (
     <Badge
@@ -39,7 +39,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
         props.className,
       )}
     >
-      <Icon size={16} />
+      <RatingIcon rating={rating} size={16} />
       {text}
     </Badge>
   )

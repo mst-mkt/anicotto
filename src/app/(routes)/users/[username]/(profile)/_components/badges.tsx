@@ -1,7 +1,9 @@
 import type { FC } from 'react'
+import { RatingIcon } from '../../../../../../components/icon/rating'
+import { StatusIcon } from '../../../../../../components/icon/status'
 import { Badge, type BadgeProps } from '../../../../../../components/ui/badge'
-import { RATING_ICON, RATING_TEXT } from '../../../../../../constants/rating'
-import { STATUS_ICON, STATUS_TEXT } from '../../../../../../constants/status'
+import { RATING_TEXT } from '../../../../../../constants/rating'
+import { STATUS_TEXT } from '../../../../../../constants/status'
 import type { Rating, Status } from '../../../../../../schemas/annict/common'
 import { cn } from '../../../../../../utils/classnames'
 
@@ -19,7 +21,6 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
   }
 
   const text = RATING_TEXT[rating]
-  const Icon = RATING_ICON[rating]
 
   return (
     <Badge
@@ -37,7 +38,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating, ...props }) => {
         props.className,
       )}
     >
-      <Icon size={16} />
+      <RatingIcon rating={rating} size={16} />
       {text}
     </Badge>
   )
@@ -49,7 +50,6 @@ type StatusBadgeProps = {
 
 export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
   const text = STATUS_TEXT[status]
-  const Icon = STATUS_ICON[status]
 
   return (
     <Badge
@@ -69,7 +69,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => {
         props.className,
       )}
     >
-      <Icon size={16} />
+      <StatusIcon status={status} size={16} />
       {text}
     </Badge>
   )

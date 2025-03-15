@@ -1,4 +1,3 @@
-import { BombIcon, CupSodaIcon, type LucideIcon, MoonStarIcon, SparklesIcon } from 'lucide-react'
 import type { Rating } from '../schemas/annict/common'
 
 export const RATING_TEXT = {
@@ -14,10 +13,3 @@ export const RATING_ID = {
   GOOD: 'good',
   GREAT: 'great',
 } as const satisfies Record<string, Rating>
-
-export const RATING_ICON = {
-  bad: BombIcon,
-  average: CupSodaIcon,
-  good: SparklesIcon,
-  great: MoonStarIcon,
-} as const satisfies Record<Rating, LucideIcon>

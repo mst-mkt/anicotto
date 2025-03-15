@@ -1,6 +1,7 @@
 import type { FC } from 'react'
+import { RatingIcon } from '../../../../../../../components/icon/rating'
 import { Badge } from '../../../../../../../components/ui/badge'
-import { RATING_ICON, RATING_ID, RATING_TEXT } from '../../../../../../../constants/rating'
+import { RATING_ID, RATING_TEXT } from '../../../../../../../constants/rating'
 import { cn } from '../../../../../../../utils/classnames'
 import type { Episode } from '../get-episode'
 
@@ -9,7 +10,6 @@ type RatingBadgeProps = {
 }
 
 export const RatingBadge: FC<RatingBadgeProps> = ({ rating }) => {
-  const Icon = RATING_ICON[RATING_ID[rating]]
   const label = RATING_TEXT[RATING_ID[rating]]
 
   return (
@@ -27,7 +27,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({ rating }) => {
           '!border-anicotto-rating-bad/12 bg-anicotto-rating-bad-pale/10 text-anicotto-rating-bad hover:bg-anicotto-rating-bad-pale/16',
       )}
     >
-      <Icon size={16} />
+      <RatingIcon rating={rating} size={16} />
       <span>{label}</span>
     </Badge>
   )

@@ -2,11 +2,11 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { FC } from 'react'
+import { StatusIcon } from '../../../../../../../components/icon/status'
 import { Button } from '../../../../../../../components/ui/button'
 import { useCarousel } from '../../../../../../../components/ui/carousel'
 import { Separator } from '../../../../../../../components/ui/separator'
-import {} from '../../../../../../../components/ui/tooltip'
-import { STATUS_ICON, STATUS_TEXT } from '../../../../../../../constants/status'
+import { STATUS_TEXT } from '../../../../../../../constants/status'
 import { useMediaQuery } from '../../../../../../../hooks/useMediaQuery'
 import type { Status } from '../../../../../../../schemas/annict/common'
 
@@ -18,14 +18,13 @@ type LibraryCarouselTitleProps = {
 export const LibraryCarouselTitle: FC<LibraryCarouselTitleProps> = ({ status, itemCount }) => {
   const isMobile = useMediaQuery('(width < 48rem)')
   const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
-  const Icon = STATUS_ICON[status]
 
   const basis = isMobile ? 2 : 3
 
   return (
     <div className="flex items-center justify-between gap-x-4">
       <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
-        <Icon className="text-anicotto-accent" size={24} />
+        <StatusIcon status={status} className="text-anicotto-accent" size={24} />
         {STATUS_TEXT[status]}
       </h2>
       <Separator className="shrink" />
@@ -55,16 +54,12 @@ export const LibraryCarouselTitle: FC<LibraryCarouselTitleProps> = ({ status, it
   )
 }
 
-export const LibraryTitle: FC<Omit<LibraryCarouselTitleProps, 'itemCount'>> = ({ status }) => {
-  const Icon = STATUS_ICON[status]
-
-  return (
-    <div className="flex items-center gap-x-4">
-      <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
-        <Icon className="text-anicotto-accent" size={24} />
-        {STATUS_TEXT[status]}
-      </h2>
-      <Separator className="shrink" />
-    </div>
-  )
-}
+export const LibraryTitle: FC<Omit<LibraryCarouselTitleProps, 'itemCount'>> = ({ status }) => (
+  <div className="flex items-center gap-x-4">
+    <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
+      <StatusIcon status={status} className="text-anicotto-accent" size={24} />
+      {STATUS_TEXT[status]}
+    </h2>
+    <Separator className="shrink" />
+  </div>
+)

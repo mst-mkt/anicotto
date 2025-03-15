@@ -1,9 +1,3 @@
-import {
-  type LucideIcon,
-  MessageCircleHeartIcon,
-  MonitorCheckIcon,
-  PenToolIcon,
-} from 'lucide-react'
 import type { Activity } from '../schemas/annict/activities'
 
 export const ACTIVITY_TEXT = (activity: Activity) => {
@@ -19,10 +13,3 @@ export const ACTIVITY_TEXT = (activity: Activity) => {
     } as const satisfies Record<Activity['action'], string>
   )[activity.action]
 }
-
-export const ACTIVITY_ICON = {
-  create_record: PenToolIcon,
-  create_multiple_records: PenToolIcon,
-  create_review: MessageCircleHeartIcon,
-  create_status: MonitorCheckIcon,
-} as const satisfies Record<Activity['action'], LucideIcon>

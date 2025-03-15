@@ -3,9 +3,10 @@
 import { LoaderIcon } from 'lucide-react'
 import { type FC, useCallback, useState, useTransition } from 'react'
 import { toast } from 'sonner'
+import { StatusIcon } from '../../../../../components/icon/status'
 import { Separator } from '../../../../../components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../components/ui/tooltip'
-import { STATUS_ICON, STATUS_TEXT } from '../../../../../constants/status'
+import { STATUS_TEXT } from '../../../../../constants/status'
 import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
@@ -64,7 +65,6 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
           .map((option) => ({
             value: option,
             label: STATUS_TEXT[option],
-            icon: STATUS_ICON[option],
           }))
           .map((option) => (
             <Tooltip key={option.value}>
@@ -82,7 +82,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
                   {updatingStatus === option.value ? (
                     <LoaderIcon size={16} className="animate-spin" />
                   ) : (
-                    <option.icon size={16} />
+                    <StatusIcon status={option.value} size={16} />
                   )}
                 </button>
               </TooltipTrigger>

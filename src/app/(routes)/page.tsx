@@ -1,6 +1,7 @@
 import { ChevronRightIcon, FlameIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { SeasonIcon } from '../../components/icon/season'
 import { Button } from '../../components/ui/button'
 import { getCurrentSeason } from '../../utils/get-season'
 import { Activity, ActivitySkeleton } from './_components/activity/activity'
@@ -9,7 +10,6 @@ import {
   CurrentSeasonWork,
   CurrentSeasonWorkSkeleton,
 } from './_components/current-season/current-season'
-import { SeasonIcon } from './_components/current-season/season-icon'
 
 const IndexPage = () => (
   <div className="flex flex-col gap-y-16">

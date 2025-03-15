@@ -4,10 +4,11 @@ import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { UserHoverCard } from '../../../../components/hover-card/user/card'
 import { WorkHoverCard } from '../../../../components/hover-card/work/card'
+import { ActionIcon } from '../../../../components/icon/action'
 import { Image } from '../../../../components/shared/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import { Badge } from '../../../../components/ui/badge'
-import { ACTIVITY_ICON, ACTIVITY_TEXT } from '../../../../constants/activity'
+import { ACTIVITY_TEXT } from '../../../../constants/activity'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity } from '../../../../schemas/annict/activities'
 import { timeText } from '../../../../utils/time-text'
@@ -18,7 +19,6 @@ type ActivityItemProps = {
 }
 
 export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
-  const Icon = ACTIVITY_ICON[activity.action]
   const thumbnail = await getValidWorkImage(activity.work.id.toString(), activity.work.images)
 
   return (
@@ -33,7 +33,7 @@ export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
       </UserHoverCard>
       <div className="flex w-full flex-col">
         <div className="flex h-12 items-center gap-x-2">
-          <Icon size={24} className="text-muted-foreground" />
+          <ActionIcon action={activity.action} size={24} className="text-muted-foreground" />
           <UserHoverCard user={activity.user}>
             <Link href={`/users/${activity.user.username}`} className="hover:underline">
               {activity.user.name}

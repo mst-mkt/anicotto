@@ -9,10 +9,14 @@ type SeasonIconProps = {
 export const SeasonIcon: FC<SeasonIconProps> = ({ season, ...props }) => {
   const seasonName = season.split('-').at(-1)
 
-  return match(seasonName)
+  if (seasonName === undefined) {
+    return null
+  }
+
+  return match(seasonName.toLowerCase())
     .with('spring', () => <FlowerIcon {...props} />)
     .with('summer', () => <SunIcon {...props} />)
     .with('autumn', () => <LeafIcon {...props} />)
     .with('winter', () => <SnowflakeIcon {...props} />)
-    .otherwise(() => <></>)
+    .otherwise(() => null)
 }

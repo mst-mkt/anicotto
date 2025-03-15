@@ -4,11 +4,12 @@ import { LoaderIcon } from 'lucide-react'
 import { type FC, useCallback, useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { updateStatus as updateStatusAction } from '../../../app/actions/api/update-status'
-import { STATUS_ICON, STATUS_TEXT } from '../../../constants/status'
+import { STATUS_TEXT } from '../../../constants/status'
 import { type Status, statusPicklist } from '../../../schemas/annict/common'
 import type { Work } from '../../../schemas/annict/works'
 import { cn } from '../../../utils/classnames'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../..//ui/tooltip'
+import { StatusIcon } from '../../icon/status'
 
 type StatusSelectSelectProps = {
   id: Work['id']
@@ -61,7 +62,6 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ id, title, status })
         .map((option) => ({
           value: option,
           label: STATUS_TEXT[option],
-          icon: STATUS_ICON[option],
         }))
         .map((option) => (
           <Tooltip key={option.value}>
@@ -79,7 +79,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ id, title, status })
                 {updatingStatus === option.value ? (
                   <LoaderIcon size={16} className="animate-spin" />
                 ) : (
-                  <option.icon size={16} />
+                  <StatusIcon status={option.value} size={16} />
                 )}
               </button>
             </TooltipTrigger>

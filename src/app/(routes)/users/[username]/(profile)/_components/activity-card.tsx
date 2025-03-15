@@ -1,8 +1,9 @@
 import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { ActionIcon } from '../../../../../../components/icon/action'
 import { Image } from '../../../../../../components/shared/image'
-import { ACTIVITY_ICON, ACTIVITY_TEXT } from '../../../../../../constants/activity'
+import { ACTIVITY_TEXT } from '../../../../../../constants/activity'
 import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
 import type { Activity } from '../../../../../../schemas/annict/activities'
 import { timeText } from '../../../../../../utils/time-text'
@@ -13,13 +14,12 @@ type ActivityCardProps = {
 }
 
 export const ActivityCard: FC<ActivityCardProps> = async ({ activity }) => {
-  const Icon = ACTIVITY_ICON[activity.action]
   const workImage = await getValidWorkImage(activity.work.id.toString(), activity.work.images)
 
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center gap-x-2">
-        <Icon size={32} className="text-muted-foreground" />
+        <ActionIcon action={activity.action} size={32} className="text-muted-foreground" />
         <span className="w-full min-w-0 shrink truncate">{ACTIVITY_TEXT(activity)}</span>
         <time dateTime={activity.created_at} className="shrink-0 text-muted-foreground text-sm">
           {timeText(activity.created_at)}

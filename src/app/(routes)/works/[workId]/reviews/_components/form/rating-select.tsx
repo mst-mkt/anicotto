@@ -1,37 +1,33 @@
-import {} from 'lucide-react'
 import type { FC } from 'react'
+import { RatingIcon } from '../../../../../../../components/icon/rating'
 import { Label } from '../../../../../../../components/ui/label'
 import { RadioGroup, RadioGroupItem } from '../../../../../../../components/ui/radio-group'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../../../components/ui/tooltip'
-import { RATING_ICON, RATING_TEXT } from '../../../../../../../constants/rating'
+import { RATING_TEXT } from '../../../../../../../constants/rating'
 import { cn } from '../../../../../../../utils/classnames'
 
 const rating = [
   {
     value: 'great',
     label: RATING_TEXT.great,
-    icon: RATING_ICON.great,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-great has-[[data-state=checked]]:text-anicotto-rating-great has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-great/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-great',
   },
   {
     value: 'good',
     label: RATING_TEXT.good,
-    icon: RATING_ICON.good,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-good has-[[data-state=checked]]:text-anicotto-rating-good has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-good/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-good',
   },
   {
     value: 'average',
     label: RATING_TEXT.average,
-    icon: RATING_ICON.average,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-average has-[[data-state=checked]]:text-anicotto-rating-average has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-average/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-average',
   },
   {
     value: 'bad',
     label: RATING_TEXT.bad,
-    icon: RATING_ICON.bad,
     className:
       'has-[[data-state=checked]]:!border-anicotto-rating-bad has-[[data-state=checked]]:text-anicotto-rating-bad has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-bad/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-bad',
   },
@@ -67,7 +63,7 @@ export const RatingSelect: FC<RatingSelectProps> = ({
               )}
             >
               <RadioGroupItem value={rating.value} className="sr-only" />
-              <rating.icon size={20} className="text-muted-foreground" />
+              <RatingIcon rating={rating.value} size={20} className="text-muted-foreground" />
               {showItemLabel && <span>{rating.label}</span>}
             </Label>
           </TooltipTrigger>
