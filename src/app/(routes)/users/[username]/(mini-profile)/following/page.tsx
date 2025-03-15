@@ -1,7 +1,6 @@
-import { UsersIcon } from 'lucide-react'
+import { SearchIcon, UsersIcon } from 'lucide-react'
 import Link from 'next/link'
 import { type FC, Suspense } from 'react'
-import { SearchIcon } from '../../../../../../components/icons/search'
 import { Button } from '../../../../../../components/ui/button'
 import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../get-user'

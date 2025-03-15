@@ -3,7 +3,7 @@
 import type { Route } from 'next'
 import Link from 'next/link'
 import { type FC, useCallback, useRef } from 'react'
-import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../components/icons/types'
+import type { PqoqubbwIcon, PqoqubbwIconHandle } from '../../../components/ui/icons/types'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/tooltip'
 
 type SidemenuLinkProps = {

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import type { FC } from 'react'
 import { twJoin } from 'tailwind-merge'
-import { GithubIcon } from '../../../components/icons/github'
-import { HomeIcon } from '../../../components/icons/home'
+import { GithubIcon } from '../../../components/ui/icons/github'
+import { HomeIcon } from '../../../components/ui/icons/home'
 import {
   PROJECT_DESCRIPTION,
   PROJECT_LINKS,

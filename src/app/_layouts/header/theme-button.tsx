@@ -3,8 +3,8 @@
 import { useTheme } from 'next-themes'
 import { useCallback } from 'react'
 import { match } from 'ts-pattern'
-import { MoonIcon } from '../../../components/icons/moon'
-import { SunIcon } from '../../../components/icons/sun'
+import { MoonIcon } from '../../../components/ui/icons/moon'
+import { SunIcon } from '../../../components/ui/icons/sun'
 
 export const ThemeButton = () => {
   const { theme, setTheme } = useTheme()
