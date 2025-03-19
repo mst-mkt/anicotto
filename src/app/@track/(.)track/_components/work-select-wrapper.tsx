@@ -36,6 +36,6 @@ export const WorkSelectSkeleton = () => (
         <Skeleton className="h-[1lh] w-32" />
       </div>
     </div>
-    <Skeleton className="h-[1lh] w-1/3 text-sm" />
+    <Skeleton className="h-[1lh] w-1/2 self-end text-sm" />
   </>
 )
