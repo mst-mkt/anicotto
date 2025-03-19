@@ -2,6 +2,8 @@ import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
+import { RatingBadge } from '../../../../components/badge/rating'
+import { StatusBadge } from '../../../../components/badge/status'
 import { UserHoverCard } from '../../../../components/hover-card/user/card'
 import { WorkHoverCard } from '../../../../components/hover-card/work/card'
 import { ActionIcon } from '../../../../components/icon/action'
@@ -12,7 +14,6 @@ import { ACTIVITY_TEXT } from '../../../../constants/activity'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity } from '../../../../schemas/annict/activities'
 import { timeText } from '../../../../utils/time-text'
-import { RatingBadge, StatusBadge } from './badges'
 
 type ActivityItemProps = {
   activity: Activity
@@ -92,11 +93,7 @@ export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
                   href={`/works/${activity.work.id}/reviews`}
                   className="group flex items-center gap-x-2"
                 >
-                  <RatingBadge
-                    variant="secondary"
-                    rating={review.rating_overall_state}
-                    className="shrink-0 grow-0 cursor-default gap-x-1 px-2 py-1"
-                  />
+                  <RatingBadge rating={review.rating_overall_state} />
                   {review.body.trim() !== '' && (
                     <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent">
                       {review.body}
@@ -105,11 +102,7 @@ export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
                 </Link>
               ))
               .with({ action: 'create_status' }, ({ status }) => (
-                <StatusBadge
-                  variant="secondary"
-                  status={status.kind}
-                  className="w-fit cursor-default gap-x-1 px-2 py-1"
-                />
+                <StatusBadge status={status.kind} />
               ))
               .otherwise(() => null)}
           </div>

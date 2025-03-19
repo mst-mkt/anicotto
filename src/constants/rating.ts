@@ -13,3 +13,11 @@ export const RATING_ID = {
   GOOD: 'good',
   GREAT: 'great',
 } as const satisfies Record<string, Rating>
+
+export const RATING_KIND_TEXT = {
+  overall: '全体',
+  character: 'キャラクター',
+  story: 'ストーリー',
+  animation: '映像',
+  music: '音楽',
+} as const

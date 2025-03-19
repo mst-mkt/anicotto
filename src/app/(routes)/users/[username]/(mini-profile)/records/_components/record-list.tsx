@@ -1,17 +1,18 @@
 import { CloudAlertIcon, ImageOffIcon, ScrollTextIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { RatingBadge } from '../../../../../../../components/badge/rating'
 import { WorkHoverCard } from '../../../../../../../components/hover-card/work/card'
 import { Image } from '../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../components/ui/badge'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import { MEDIA_TEXT } from '../../../../../../../constants/media'
+import { RATING_ID } from '../../../../../../../constants/rating'
 import { SEASON_TEXT } from '../../../../../../../constants/season'
 import type { User } from '../../../../../../../schemas/annict/users'
 import { timeText } from '../../../../../../../utils/time-text'
 import { getUserRecords } from '../get-records'
 import { groupRecords } from '../group-records'
-import { RatingBadge } from './rating-badge'
 
 type RecordListProps = {
   username: User['username']
@@ -105,9 +106,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
                       タイトル不明
                     </span>
                   )}
-                  {rating !== null && (
-                    <RatingBadge rating={rating} className="shrink-0 break-keep" />
-                  )}
+                  {rating !== null && <RatingBadge rating={RATING_ID[rating]} />}
                 </Link>
                 {comment !== null && comment !== '' && (
                   <p className="pb-2 text-muted-foreground text-sm">{comment}</p>

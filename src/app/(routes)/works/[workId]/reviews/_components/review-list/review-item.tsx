@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import type { FC } from 'react'
+import { RatingBadge } from '../../../../../../../components/badge/rating'
 import { UserHoverCard } from '../../../../../../../components/hover-card/user/card'
 import { Markdown } from '../../../../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../../components/ui/avatar'
 import type { ReviewWithInfo } from '../../../../../../../schemas/annict/reviews'
 import { timeText } from '../../../../../../../utils/time-text'
-import { RatingBadges } from './rating-badges'
 
 type ReviewItemProps = {
   review: ReviewWithInfo
@@ -45,7 +45,48 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
       </div>
       <div className="flex w-full flex-col gap-y-4">
         <Markdown className="break-all">{review.body}</Markdown>
-        <RatingBadges review={review} />
+        <div className="flex flex-wrap gap-2">
+          {review.rating_overall_state !== null && (
+            <RatingBadge
+              rating={review.rating_overall_state}
+              showIcon={false}
+              showRating={true}
+              showTitle={true}
+            />
+          )}
+          {review.rating_animation_state !== null && (
+            <RatingBadge
+              rating={review.rating_animation_state}
+              showIcon={false}
+              showRating={true}
+              showTitle={true}
+            />
+          )}
+          {review.rating_character_state !== null && (
+            <RatingBadge
+              rating={review.rating_character_state}
+              showIcon={false}
+              showRating={true}
+              showTitle={true}
+            />
+          )}
+          {review.rating_music_state !== null && (
+            <RatingBadge
+              rating={review.rating_music_state}
+              showIcon={false}
+              showRating={true}
+              showTitle={true}
+            />
+          )}
+          {review.rating_story_state !== null && (
+            <RatingBadge
+              rating={review.rating_story_state}
+              showIcon={false}
+              showRating={true}
+              showTitle={true}
+            />
+          )}
+        </div>
       </div>
     </div>
   </div>

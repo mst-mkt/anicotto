@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
+import { RatingBadge } from '../../../../../../components/badge/rating'
+import { StatusBadge } from '../../../../../../components/badge/status'
 import { Badge } from '../../../../../../components/ui/badge'
 import type {
   Activity,
@@ -9,7 +11,6 @@ import type {
   CreateReviewActivity,
   CreateStatusActivity,
 } from '../../../../../../schemas/annict/activities'
-import { RatingBadge, StatusBadge } from './badges'
 
 const CreateRecordInfo: FC<CreateRecordActivity> = (activity) => (
   <Link
@@ -36,7 +37,7 @@ const CreateMultipleRecordsInfo: FC<CreateMultipleRecordsActivity> = (activity) 
 
 const CreateReviewInfo: FC<CreateReviewActivity> = (activity) => (
   <div className="flex flex-col gap-y-2">
-    <RatingBadge rating={activity.review.rating_overall_state} className="w-fit" />
+    <RatingBadge rating={activity.review.rating_overall_state} />
     {activity.review.body !== '' && (
       <span className="line-clamp-3 text-muted-foreground text-sm">{activity.review.body}</span>
     )}
