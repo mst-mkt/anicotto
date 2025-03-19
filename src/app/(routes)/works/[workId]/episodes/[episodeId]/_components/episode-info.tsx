@@ -146,7 +146,7 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
                 followings_count: record.user.followingsCount,
               }}
             >
-              <Link href={`/users/${record.user.username}`} className="sticky top-20 z-10 h-fit">
+              <Link href={`/users/${record.user.username}`} className="sticky top-20 h-fit">
                 <Avatar className="h-10 w-10">
                   {record.user.avatarUrl !== null && (
                     <AvatarImage
