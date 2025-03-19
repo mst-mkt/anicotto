@@ -69,7 +69,7 @@ export const CurrentSeasonWorkSkeleton = () => (
         <Skeleton className="aspect-video" />
         <Skeleton className="h-[1lh] w-full" />
         <Skeleton className="h-[1lh] w-1/2 text-sm" />
-        <div className="-mt-2 h-[1lh] w-full" />
+        <div className="-mt-2 hidden h-[1lh] w-full md:block" />
       </div>
     ))}
   </div>
