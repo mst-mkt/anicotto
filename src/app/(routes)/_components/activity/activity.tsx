@@ -28,7 +28,7 @@ export const ActivitySkeleton = () => (
   <div className="flex flex-col gap-y-8">
     {[...Array(8)].map((_, index) => (
       <div key={index} className="flex gap-x-4">
-        <Skeleton className="h-12 w-12 rounded-full" />
+        <Skeleton className="h-12 w-12 shrink-0 rounded-full" />
         <div className="flex w-full flex-col">
           <div className="flex h-12 items-center justify-between gap-x-2">
             <Skeleton className="h-[1lh] w-1/2" />
