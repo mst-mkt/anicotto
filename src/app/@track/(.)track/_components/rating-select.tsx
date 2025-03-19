@@ -34,7 +34,7 @@ export const RatingSelect = () => (
             >
               <RadioGroupItem value={rating} className="sr-only" />
               <RatingIcon rating={rating} size={20} className="text-muted-foreground" />
-              <span>{RATING_TEXT(rating)}</span>
+              <span className="break-keep">{RATING_TEXT(rating)}</span>
             </Label>
           </TooltipTrigger>
         </Tooltip>
