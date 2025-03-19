@@ -2,7 +2,7 @@ import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Badge } from '../../../../../../../../components/ui/badge'
 import { Skeleton } from '../../../../../../../../components/ui/skeleton'
-import { STATUS_TEXT } from '../../../../../../../../constants/status'
+import { STATUS_TEXT } from '../../../../../../../../constants/text/status'
 import type { Status } from '../../../../../../../../schemas/annict/common'
 import type { User } from '../../../../../../../../schemas/annict/users'
 import { getLibrary } from '../get-library'
@@ -21,7 +21,7 @@ export const WorkList: FC<WorkListProps> = async ({ status, username }) => {
       <div className="flex flex-col items-center gap-y-4 py-16">
         <CloudAlertIcon size={40} className="text-anicotto-accent" />
         <p>
-          <Badge variant="secondary">{STATUS_TEXT[status]}</Badge> の作品の取得に失敗しました
+          <Badge variant="secondary">{STATUS_TEXT(status)}</Badge> の作品の取得に失敗しました
         </p>
       </div>
     )
@@ -32,7 +32,7 @@ export const WorkList: FC<WorkListProps> = async ({ status, username }) => {
       <div className="flex flex-col items-center gap-y-4 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
         <div>
-          <Badge variant="secondary">{STATUS_TEXT[status]}</Badge> の作品が見当たりません
+          <Badge variant="secondary">{STATUS_TEXT(status)}</Badge> の作品が見当たりません
         </div>
       </div>
     )

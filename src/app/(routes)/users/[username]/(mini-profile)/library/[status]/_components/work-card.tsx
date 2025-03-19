@@ -4,8 +4,8 @@ import type { FC } from 'react'
 import { WorkHoverCard } from '../../../../../../../../components/hover-card/work/card'
 import { Image } from '../../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../../components/ui/badge'
-import { MEDIA_TEXT } from '../../../../../../../../constants/media'
-import { SEASON_TEXT } from '../../../../../../../../constants/season'
+import { MEDIA_TEXT } from '../../../../../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../../../../../constants/text/season'
 import type { Library } from '../get-library'
 
 type WorkCardProps = {
@@ -17,10 +17,10 @@ export const WorkCard: FC<WorkCardProps> = async ({ work }) => (
     work={{
       id: work.id,
       title: work.title,
-      media_text: MEDIA_TEXT[work.media],
+      media_text: MEDIA_TEXT(work.media),
       season_name_text:
         work.seasonName !== null && work.seasonYear !== null
-          ? `${work.seasonYear}年${SEASON_TEXT[work.seasonName]}`
+          ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
           : undefined,
       episodes_count: work.episodesCount,
       watchers_count: work.watchersCount,
@@ -51,10 +51,10 @@ export const WorkCard: FC<WorkCardProps> = async ({ work }) => (
           {work.title}
         </h2>
         <div className="flex gap-x-2">
-          <Badge>{MEDIA_TEXT[work.media]}</Badge>
+          <Badge>{MEDIA_TEXT(work.media)}</Badge>
           {work.seasonYear !== null && work.seasonName !== null && (
             <Badge>
-              {work.seasonYear}年{SEASON_TEXT[work.seasonName]}
+              {work.seasonYear}年{SEASON_NAME_TEXT(work.seasonName)}
             </Badge>
           )}
         </div>

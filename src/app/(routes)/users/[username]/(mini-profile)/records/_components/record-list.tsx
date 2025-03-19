@@ -6,9 +6,8 @@ import { WorkHoverCard } from '../../../../../../../components/hover-card/work/c
 import { Image } from '../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../components/ui/badge'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
-import { MEDIA_TEXT } from '../../../../../../../constants/media'
-import { RATING_ID } from '../../../../../../../constants/rating'
-import { SEASON_TEXT } from '../../../../../../../constants/season'
+import { MEDIA_TEXT } from '../../../../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../../../../constants/text/season'
 import type { User } from '../../../../../../../schemas/annict/users'
 import { timeText } from '../../../../../../../utils/time-text'
 import { getUserRecords } from '../get-records'
@@ -64,10 +63,10 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
                   id: work.id,
                   title: work.title,
                   images: [work.image ?? ''],
-                  media_text: MEDIA_TEXT[work.media],
+                  media_text: MEDIA_TEXT(work.media),
                   season_name_text:
                     work.seasonName !== null && work.seasonYear !== null
-                      ? `${work.seasonYear}年${SEASON_TEXT[work.seasonName]}`
+                      ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
                       : undefined,
                   episodes_count: work.episodesCount,
                   watchers_count: work.watchersCount,
@@ -106,7 +105,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
                       タイトル不明
                     </span>
                   )}
-                  {rating !== null && <RatingBadge rating={RATING_ID[rating]} />}
+                  {rating !== null && <RatingBadge rating={rating} />}
                 </Link>
                 {comment !== null && comment !== '' && (
                   <p className="pb-2 text-muted-foreground text-sm">{comment}</p>

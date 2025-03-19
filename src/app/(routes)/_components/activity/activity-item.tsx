@@ -10,7 +10,7 @@ import { ActionIcon } from '../../../../components/icon/action'
 import { Image } from '../../../../components/shared/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import { Badge } from '../../../../components/ui/badge'
-import { ACTIVITY_TEXT } from '../../../../constants/activity'
+import { ACTIVITY_TEXT } from '../../../../constants/text/activity'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity } from '../../../../schemas/annict/activities'
 import { timeText } from '../../../../utils/time-text'
@@ -40,7 +40,7 @@ export const ActivityItem: FC<ActivityItemProps> = async ({ activity }) => {
               {activity.user.name}
             </Link>
           </UserHoverCard>
-          <p className="shrink grow truncate text-sm">が{ACTIVITY_TEXT(activity)}</p>
+          <p className="shrink grow truncate text-sm">が{ACTIVITY_TEXT(activity.action)}</p>
           <time
             dateTime={activity.created_at}
             className="hidden shrink-0 grow-0 text-muted-foreground text-sm md:block"

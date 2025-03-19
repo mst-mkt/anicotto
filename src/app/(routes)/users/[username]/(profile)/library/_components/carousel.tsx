@@ -11,9 +11,9 @@ import {
   CarouselItem,
 } from '../../../../../../../components/ui/carousel'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
-import { MEDIA_TEXT } from '../../../../../../../constants/media'
-import { SEASON_TEXT } from '../../../../../../../constants/season'
-import { STATUS_TEXT } from '../../../../../../../constants/status'
+import { MEDIA_TEXT } from '../../../../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../../../../constants/text/season'
+import { STATUS_TEXT } from '../../../../../../../constants/text/status'
 import type { Status } from '../../../../../../../schemas/annict/common'
 import { getLibrary } from '../get-library'
 import { LibraryCarouselTitle, LibraryTitle } from './carousel-title'
@@ -32,7 +32,7 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
         <LibraryTitle status={status} />
         <div className="flex w-full flex-col items-center justify-center gap-y-4 p-8">
           <CloudAlertIcon size={40} className="text-muted-foreground" />
-          <p>「{STATUS_TEXT[status]}」のライブラリが取得できませんでした</p>
+          <p>「{STATUS_TEXT(status)}」のライブラリが取得できませんでした</p>
         </div>
       </div>
     )
@@ -44,7 +44,7 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
         <LibraryTitle status={status} />
         <div className="flex w-full flex-col items-center justify-center gap-y-6 py-12">
           <OrigamiIcon size={40} className="text-muted-foreground" />
-          <p>ライブラリに「{STATUS_TEXT[status]}」の作品はありません</p>
+          <p>ライブラリに「{STATUS_TEXT(status)}」の作品はありません</p>
         </div>
       </div>
     )
@@ -60,10 +60,10 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
               work={{
                 id: work.id,
                 title: work.title,
-                media_text: MEDIA_TEXT[work.media],
+                media_text: MEDIA_TEXT(work.media),
                 season_name_text:
                   work.seasonName !== null && work.seasonYear !== null
-                    ? `${work.seasonYear}年${SEASON_TEXT[work.seasonName]}`
+                    ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
                     : undefined,
                 episodes_count: work.episodesCount,
                 watchers_count: work.watchersCount,
@@ -92,10 +92,10 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
                 <div className="flex gap-x-2 py-1">
                   {work.seasonName !== null && work.seasonYear && (
                     <Badge variant="secondary">
-                      {work.seasonYear}年{SEASON_TEXT[work.seasonName]}
+                      {work.seasonYear}年{SEASON_NAME_TEXT(work.seasonName)}
                     </Badge>
                   )}
-                  <Badge variant="secondary">{MEDIA_TEXT[work.media]}</Badge>
+                  <Badge variant="secondary">{MEDIA_TEXT(work.media)}</Badge>
                 </div>
               </Link>
             </WorkHoverCard>

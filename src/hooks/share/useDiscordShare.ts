@@ -1,6 +1,6 @@
 import { toast } from 'sonner'
 import { PROJECT_ID, PROJECT_NAME } from '../../constants/project'
-import { STATUS_TEXT } from '../../constants/status'
+import { STATUS_TEXT } from '../../constants/text/status'
 import type { Status } from '../../schemas/annict/common'
 import type { Episode, EpisodeWithInfo } from '../../schemas/annict/episodes'
 import type { Work } from '../../schemas/annict/works'
@@ -108,7 +108,7 @@ export const useDiscordShare = () => {
     }
 
     await postMessage(discordWebhookUrl, {
-      content: `「**${work.title}**」 の視聴ステータスを「${STATUS_TEXT[status]}」に変更しました`,
+      content: `「**${work.title}**」 の視聴ステータスを「${STATUS_TEXT(status)}」に変更しました`,
       username: discordWebhookUsername,
       avatar_url: discordWebhookAvatarUrl,
       embeds: [

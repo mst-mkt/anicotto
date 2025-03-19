@@ -1,5 +1,5 @@
 import { createLoader, createParser, parseAsString, parseAsStringLiteral } from 'nuqs/server'
-import { isSeason } from '../../../constants/season'
+import { isSeason } from '../../../constants/text/season'
 
 export const searchSearchParams = {
   q: parseAsString.withDefault('').withOptions({ shallow: false }),

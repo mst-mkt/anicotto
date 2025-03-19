@@ -21,7 +21,6 @@ import { Button } from '../../../../../../../components/ui/button'
 import { Separator } from '../../../../../../../components/ui/separator'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../../../components/ui/tooltip'
-import { RATING_ID } from '../../../../../../../constants/rating'
 import type { Episode } from '../../../../../../../schemas/annict/episodes'
 import type { Work } from '../../../../../../../schemas/annict/works'
 import { timeText } from '../../../../../../../utils/time-text'
@@ -191,9 +190,7 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
                 </time>
               </header>
               {record.comment !== null && <Markdown>{record.comment}</Markdown>}
-              {record.ratingState !== null && (
-                <RatingBadge rating={RATING_ID[record.ratingState]} />
-              )}
+              {record.ratingState !== null && <RatingBadge rating={record.ratingState} />}
             </div>
           </div>
         ))}

@@ -6,8 +6,8 @@ import { Image } from '../../../../../../components/shared/image'
 import { AspectRatio } from '../../../../../../components/ui/aspect-ratio'
 import { Badge } from '../../../../../../components/ui/badge'
 import { CarouselItem } from '../../../../../../components/ui/carousel'
-import { MEDIA_TEXT } from '../../../../../../constants/media'
-import { SEASON_TEXT } from '../../../../../../constants/season'
+import { MEDIA_TEXT } from '../../../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../../../constants/text/season'
 import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
 import type { Series } from '../get-series'
 
@@ -29,10 +29,10 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
         work={{
           id: work.id,
           title: work.title,
-          media_text: MEDIA_TEXT[work.media],
+          media_text: MEDIA_TEXT(work.media),
           season_name_text:
             work.seasonName !== null && work.seasonYear !== null
-              ? `${work.seasonYear}年${SEASON_TEXT[work.seasonName]}`
+              ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
               : undefined,
           images: [validThumbnail ?? ''],
           episodes_count: work.episodesCount,
@@ -56,7 +56,7 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
             />
           </AspectRatio>
           <div className="flex gap-x-2">
-            <Badge className="h-fit break-keep">{MEDIA_TEXT[work.media]}</Badge>
+            <Badge className="h-fit break-keep">{MEDIA_TEXT(work.media)}</Badge>
             <h3 className="line-clamp-2 w-full shrink text-sm transition-colors group-hover:text-anicotto-accent">
               {work.title}
             </h3>

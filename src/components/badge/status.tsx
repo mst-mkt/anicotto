@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { STATUS_TEXT } from '../../constants/status'
+import { STATUS_TEXT } from '../../constants/text/status'
 import type { Status } from '../../schemas/annict/common'
 import { cn } from '../../utils/classnames'
 import { StatusIcon } from '../icon/status'
@@ -28,6 +28,6 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => (
     )}
   >
     <StatusIcon status={status} size={16} />
-    {STATUS_TEXT[status]}
+    {STATUS_TEXT(status)}
   </Badge>
 )

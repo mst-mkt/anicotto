@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 import { StatusIcon } from '../../../../../components/icon/status'
 import { Separator } from '../../../../../components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../components/ui/tooltip'
-import { STATUS_TEXT } from '../../../../../constants/status'
+import { STATUS_TEXT } from '../../../../../constants/text/status'
 import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
@@ -61,38 +61,33 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   return (
     <div className="flex items-center gap-x-2">
       <div className="flex w-fit gap-x-0.5 rounded-full border border-muted p-1">
-        {statusPicklist.options
-          .map((option) => ({
-            value: option,
-            label: STATUS_TEXT[option],
-          }))
-          .map((option) => (
-            <Tooltip key={option.value}>
-              <TooltipTrigger asChild={true}>
-                <button
-                  type="button"
-                  onClick={() => handleClick(option.value)}
-                  disabled={isUpdating}
-                  className={cn(
-                    'cursor-pointer rounded-full bg-background-100 p-1.5 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground data-[state=closed]:bg-transparent',
-                    option.value === status &&
-                      'bg-background-900 text-foreground-900 data-[state=closed]:bg-background-800',
-                  )}
-                >
-                  {updatingStatus === option.value ? (
-                    <LoaderIcon size={16} className="animate-spin" />
-                  ) : (
-                    <StatusIcon status={option.value} size={16} />
-                  )}
-                </button>
-              </TooltipTrigger>
-              <TooltipContent>{option.label}</TooltipContent>
-            </Tooltip>
-          ))}
+        {statusPicklist.options.map((option) => (
+          <Tooltip key={option}>
+            <TooltipTrigger asChild={true}>
+              <button
+                type="button"
+                onClick={() => handleClick(option)}
+                disabled={isUpdating}
+                className={cn(
+                  'cursor-pointer rounded-full bg-background-100 p-1.5 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground data-[state=closed]:bg-transparent',
+                  option === status &&
+                    'bg-background-900 text-foreground-900 data-[state=closed]:bg-background-800',
+                )}
+              >
+                {updatingStatus === option ? (
+                  <LoaderIcon size={16} className="animate-spin" />
+                ) : (
+                  <StatusIcon status={option} size={16} />
+                )}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>{STATUS_TEXT(option)}</TooltipContent>
+          </Tooltip>
+        ))}
       </div>
       <Separator orientation="vertical" className="hidden h-1/2 sm:block" />
       <p className="hidden truncate text-muted-foreground text-sm sm:block">
-        {STATUS_TEXT[status]}
+        {STATUS_TEXT(status)}
       </p>
     </div>
   )

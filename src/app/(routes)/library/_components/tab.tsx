@@ -4,7 +4,7 @@ import { useQueryState } from 'nuqs'
 import type { FC, ReactNode } from 'react'
 import { StatusIcon } from '../../../../components/icon/status'
 import { Tabs, TabsList, TabsTrigger } from '../../../../components/ui/tabs'
-import { STATUS_TEXT } from '../../../../constants/status'
+import { STATUS_TEXT } from '../../../../constants/text/status'
 import { type Status, statusPicklist } from '../../../../schemas/annict/common'
 import { librarySearchParams } from '../search-params'
 
@@ -43,6 +43,6 @@ type TabTriggerProps = {
 const TabTrigger: FC<TabTriggerProps> = ({ status }) => (
   <TabsTrigger value={status} className="cursor-pointer gap-x-1">
     <StatusIcon status={status} size={16} className="hidden md:block" />
-    {STATUS_TEXT[status]}
+    {STATUS_TEXT(status)}
   </TabsTrigger>
 )

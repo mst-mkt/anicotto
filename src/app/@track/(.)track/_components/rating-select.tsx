@@ -2,42 +2,17 @@ import { RatingIcon } from '../../../../components/icon/rating'
 import { Label } from '../../../../components/ui/label'
 import { RadioGroup, RadioGroupItem } from '../../../../components/ui/radio-group'
 import { Tooltip, TooltipTrigger } from '../../../../components/ui/tooltip'
-import { RATING_TEXT } from '../../../../constants/rating'
-import { cn } from '../../../../utils/classnames'
+import { RATING_TEXT } from '../../../../constants/text/rating'
+import { ratingPicklist } from '../../../../schemas/annict/common'
 
-const rating = [
-  {
-    value: 'great',
-    label: RATING_TEXT.great,
-    className:
-      'has-[[data-state=checked]]:!border-anicotto-rating-great has-[[data-state=checked]]:text-anicotto-rating-great has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-great/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-great',
-  },
-  {
-    value: 'good',
-    label: RATING_TEXT.good,
-    className:
-      'has-[[data-state=checked]]:!border-anicotto-rating-good has-[[data-state=checked]]:text-anicotto-rating-good has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-good/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-good',
-  },
-  {
-    value: 'average',
-    label: RATING_TEXT.average,
-    className:
-      'has-[[data-state=checked]]:!border-anicotto-rating-average has-[[data-state=checked]]:text-anicotto-rating-average has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-average/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-average',
-  },
-  {
-    value: 'bad',
-    label: RATING_TEXT.bad,
-    className:
-      'has-[[data-state=checked]]:!border-anicotto-rating-bad has-[[data-state=checked]]:text-anicotto-rating-bad has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:bg-anicotto-rating-bad/4 has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-bad',
-  },
-] as const
+import { cn } from '../../../../utils/classnames'
 
 export const RatingSelect = () => (
   <div className="flex flex-col gap-y-2">
     <Label htmlFor="rating">評価</Label>
     <RadioGroup id="rating" name="rating" className="flex gap-0 rounded-lg shadow-xs">
-      {rating.map((rating) => (
-        <Tooltip key={rating.value}>
+      {ratingPicklist.options.map((rating) => (
+        <Tooltip key={rating}>
           <TooltipTrigger asChild={true}>
             <Label
               className={cn(
@@ -46,12 +21,20 @@ export const RatingSelect = () => (
                 'has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50',
                 'has-[[data-state=checked]]:z-10',
                 'has-[:focus-visible]:outline-4',
-                rating.className,
+
+                rating === 'great' &&
+                  'has-[[data-state=checked]]:!border-anicotto-rating-great has-[[data-state=checked]]:bg-anicotto-rating-great/4 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:text-anicotto-rating-great has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-great',
+                rating === 'good' &&
+                  'has-[[data-state=checked]]:!border-anicotto-rating-good has-[[data-state=checked]]:bg-anicotto-rating-good/4 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:text-anicotto-rating-good has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-good',
+                rating === 'average' &&
+                  'has-[[data-state=checked]]:!border-anicotto-rating-average has-[[data-state=checked]]:bg-anicotto-rating-average/4 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:text-anicotto-rating-average has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-average',
+                rating === 'bad' &&
+                  'has-[[data-state=checked]]:!border-anicotto-rating-bad has-[[data-state=checked]]:bg-anicotto-rating-bad/4 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:text-anicotto-rating-bad has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-bad',
               )}
             >
-              <RadioGroupItem value={rating.value} className="sr-only" />
-              <RatingIcon rating={rating.value} size={20} className="text-muted-foreground" />
-              <span>{rating.label}</span>
+              <RadioGroupItem value={rating} className="sr-only" />
+              <RatingIcon rating={rating} size={20} className="text-muted-foreground" />
+              <span>{RATING_TEXT(rating)}</span>
             </Label>
           </TooltipTrigger>
         </Tooltip>

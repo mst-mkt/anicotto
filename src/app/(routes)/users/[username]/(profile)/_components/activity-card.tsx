@@ -3,7 +3,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { ActionIcon } from '../../../../../../components/icon/action'
 import { Image } from '../../../../../../components/shared/image'
-import { ACTIVITY_TEXT } from '../../../../../../constants/activity'
+import { ACTIVITY_TEXT } from '../../../../../../constants/text/activity'
 import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
 import type { Activity } from '../../../../../../schemas/annict/activities'
 import { timeText } from '../../../../../../utils/time-text'
@@ -20,7 +20,7 @@ export const ActivityCard: FC<ActivityCardProps> = async ({ activity }) => {
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center gap-x-2">
         <ActionIcon action={activity.action} size={32} className="text-muted-foreground" />
-        <span className="w-full min-w-0 shrink truncate">{ACTIVITY_TEXT(activity)}</span>
+        <span className="w-full min-w-0 shrink truncate">{ACTIVITY_TEXT(activity.action)}</span>
         <time dateTime={activity.created_at} className="shrink-0 text-muted-foreground text-sm">
           {timeText(activity.created_at)}
         </time>

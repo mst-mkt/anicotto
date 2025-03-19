@@ -1,17 +1,10 @@
 'use client'
 
-import {
-  CalendarDaysIcon,
-  CalendarRangeIcon,
-  FlowerIcon,
-  LeafIcon,
-  LoaderIcon,
-  SnowflakeIcon,
-  SunIcon,
-} from 'lucide-react'
+import { CalendarDaysIcon, CalendarRangeIcon, LoaderIcon } from 'lucide-react'
 import { useQueryStates } from 'nuqs'
 import { useMemo, useTransition } from 'react'
 import { match } from 'ts-pattern'
+import { SeasonIcon } from '../../../../components/icon/season'
 import {
   Select,
   SelectContent,
@@ -20,6 +13,7 @@ import {
   SelectLabel,
   SelectTrigger,
 } from '../../../../components/ui/select'
+import { SEASON_NAME_TEXT, isSeason } from '../../../../constants/text/season'
 import { searchSearchParams } from '../search-params'
 
 export const SeasonSelect = () => {
@@ -52,29 +46,15 @@ export const SeasonSelect = () => {
               .with({ season: 'all' }, () => (
                 <CalendarRangeIcon size={16} className="text-muted-foreground" />
               ))
-              .with({ season: 'winter' }, () => (
-                <SnowflakeIcon size={16} className="text-muted-foreground" />
+              .otherwise(({ season }) => (
+                <SeasonIcon season={season} size={16} className="text-muted-foreground" />
               ))
-              .with({ season: 'spring' }, () => (
-                <FlowerIcon size={16} className="text-muted-foreground" />
-              ))
-              .with({ season: 'summer' }, () => (
-                <SunIcon size={16} className="text-muted-foreground" />
-              ))
-              .with({ season: 'autumn' }, () => (
-                <LeafIcon size={16} className="text-muted-foreground" />
-              ))
-              .exhaustive()
           )}
-          <span className=" sm:inline">
+          <span className="sm:inline">
             {match(query.season)
               .with('all', () => '全期間')
               .with({ season: 'all' }, ({ year }) => `${year}年`)
-              .with({ season: 'winter' }, ({ year }) => `${year}年 冬`)
-              .with({ season: 'spring' }, ({ year }) => `${year}年 春`)
-              .with({ season: 'summer' }, ({ year }) => `${year}年 夏`)
-              .with({ season: 'autumn' }, ({ year }) => `${year}年 秋`)
-              .exhaustive()}
+              .otherwise(({ year, season }) => `${year}年${SEASON_NAME_TEXT(season)}`)}
           </span>
         </div>
       </SelectTrigger>
@@ -98,30 +78,16 @@ export const SeasonSelect = () => {
                 <CalendarRangeIcon size={16} className="text-muted-foreground" />
                 全季節
               </SelectItem>
-              <SelectItem
-                value={`${year}-winter`}
-                className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
-              >
-                <SnowflakeIcon size={16} className="text-muted-foreground" />冬
-              </SelectItem>
-              <SelectItem
-                value={`${year}-spring`}
-                className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
-              >
-                <FlowerIcon size={16} className="text-muted-foreground" />春
-              </SelectItem>
-              <SelectItem
-                value={`${year}-summer`}
-                className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
-              >
-                <SunIcon size={16} className="text-muted-foreground" />夏
-              </SelectItem>
-              <SelectItem
-                value={`${year}-autumn`}
-                className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
-              >
-                <LeafIcon size={16} className="text-muted-foreground" />秋
-              </SelectItem>
+              {['winter', 'spring', 'summer', 'autumn'].map((season) => (
+                <SelectItem
+                  key={season}
+                  value={`${year}-${season}`}
+                  className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+                >
+                  <SeasonIcon season={season} size={16} className="text-muted-foreground" />
+                  {isSeason(season) ? SEASON_NAME_TEXT(season) : season}
+                </SelectItem>
+              ))}
             </SelectGroup>
           ))}
         </SelectGroup>

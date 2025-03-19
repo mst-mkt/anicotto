@@ -7,7 +7,7 @@ import {
   type MisskeyNoteVisibility,
 } from '../../constants/misskey'
 import { PROJECT_ID } from '../../constants/project'
-import { STATUS_TEXT } from '../../constants/status'
+import { STATUS_TEXT } from '../../constants/text/status'
 import type { Status } from '../../schemas/annict/common'
 import type { Episode, EpisodeWithInfo } from '../../schemas/annict/episodes'
 import type { Work } from '../../schemas/annict/works'
@@ -63,7 +63,7 @@ const generatePromptForStatus = (prompt: string, work: Work, status: Status) => 
     'work.title': work.title,
     'work.season': work.season_name_text,
     'work.hashtag': work.twitter_hashtag !== '' ? `#${work.twitter_hashtag}` : '',
-    'work.status': STATUS_TEXT[status],
+    'work.status': STATUS_TEXT(status),
   }
 
   return Object.entries(variablesMap).reduce((acc, [key, value]) => {

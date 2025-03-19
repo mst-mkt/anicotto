@@ -6,7 +6,7 @@ import { StatusIcon } from '../../../../../../../components/icon/status'
 import { Button } from '../../../../../../../components/ui/button'
 import { useCarousel } from '../../../../../../../components/ui/carousel'
 import { Separator } from '../../../../../../../components/ui/separator'
-import { STATUS_TEXT } from '../../../../../../../constants/status'
+import { STATUS_TEXT } from '../../../../../../../constants/text/status'
 import { useMediaQuery } from '../../../../../../../hooks/useMediaQuery'
 import type { Status } from '../../../../../../../schemas/annict/common'
 
@@ -25,7 +25,7 @@ export const LibraryCarouselTitle: FC<LibraryCarouselTitleProps> = ({ status, it
     <div className="flex items-center justify-between gap-x-4">
       <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
         <StatusIcon status={status} className="text-anicotto-accent" size={24} />
-        {STATUS_TEXT[status]}
+        {STATUS_TEXT(status)}
       </h2>
       <Separator className="shrink" />
       {itemCount > basis && (
@@ -58,7 +58,7 @@ export const LibraryTitle: FC<Omit<LibraryCarouselTitleProps, 'itemCount'>> = ({
   <div className="flex items-center gap-x-4">
     <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
       <StatusIcon status={status} className="text-anicotto-accent" size={24} />
-      {STATUS_TEXT[status]}
+      {STATUS_TEXT(status)}
     </h2>
     <Separator className="shrink" />
   </div>
