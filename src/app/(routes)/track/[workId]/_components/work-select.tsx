@@ -49,7 +49,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
       <SelectTrigger className="h-fit w-full cursor-pointer pl-2 *:block *:h-fit *:min-h-16">
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className="[:has(>&)]:!max-w-[92svw] [:has(>&)]:!w-125 [:has(>&)]:!min-w-[50svw] w-full">
+      <SelectContent className="[:has(>&)]:!max-w-[92svw] [:has(>&)]:!w-125 [:has(>&)]:!min-w-[40svw] w-full">
         {libraries
           .filter((lib) => lib.nextEpisode !== null)
           .map((lib) => (
