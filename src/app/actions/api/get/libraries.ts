@@ -1,7 +1,9 @@
 'use server'
 
 import { graphql } from 'gql.tada'
-import { match } from 'ts-pattern'
+import { P, match } from 'ts-pattern'
+import { MEDIA_TEXT } from '../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
@@ -19,6 +21,7 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
           nodes {
             nextEpisode {
               annictId
+              number
               numberText
               title
               viewerDidTrack
@@ -77,24 +80,31 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
 
   return await Promise.all(
     libraries.map(async (library) => ({
-      nextEpisode:
+      next_episode:
         library.nextEpisode === null
           ? null
           : {
               id: library.nextEpisode.annictId,
-              numberText: library.nextEpisode.numberText,
+              number_text:
+                library.nextEpisode.numberText ??
+                (library.nextEpisode.number === null
+                  ? '不明'
+                  : `第${library.nextEpisode.number}話`),
               title: library.nextEpisode.title,
-              viewerDidTrack: library.nextEpisode.viewerDidTrack,
+              viewer_did_track: library.nextEpisode.viewerDidTrack,
             },
       work: {
         id: library.work.annictId,
         title: library.work.title,
-        seasonName: library.work.seasonName,
-        seasonYear: library.work.seasonYear,
-        media: library.work.media,
-        watchersCount: library.work.watchersCount,
-        reviewsCount: library.work.reviewsCount,
-        episodesCount: library.work.episodesCount,
+        season_name_text: match([library.work.seasonYear, library.work.seasonName])
+          .with([P.nullish, P._], () => null)
+          .with([P.number, P.nullish], ([year]) => `${year}年`)
+          .with([P.number, P.string], ([year, season]) => `${year}年${SEASON_NAME_TEXT(season)}`)
+          .exhaustive(),
+        media_text: MEDIA_TEXT(library.work.media),
+        watchers_count: library.work.watchersCount,
+        reviews_count: library.work.reviewsCount,
+        episodes_count: library.work.episodesCount,
         thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
           library.work.image?.facebookOgImageUrl,
           library.work.image?.recommendedImageUrl,
@@ -119,6 +129,7 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
           nodes {
             nextEpisode {
               annictId
+              number
               numberText
               title
               viewerDidTrack
@@ -188,24 +199,31 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
 
   return await Promise.all(
     libraries.map(async (library) => ({
-      nextEpisode:
+      next_episode:
         library.nextEpisode === null
           ? null
           : {
               id: library.nextEpisode.annictId,
-              numberText: library.nextEpisode.numberText,
+              number_text:
+                library.nextEpisode.numberText ??
+                (library.nextEpisode.number === null
+                  ? '不明'
+                  : `第${library.nextEpisode.number}話`),
               title: library.nextEpisode.title,
-              viewerDidTrack: library.nextEpisode.viewerDidTrack,
+              viewer_did_track: library.nextEpisode.viewerDidTrack,
             },
       work: {
         id: library.work.annictId,
         title: library.work.title,
-        seasonName: library.work.seasonName,
-        seasonYear: library.work.seasonYear,
-        media: library.work.media,
-        watchersCount: library.work.watchersCount,
-        reviewsCount: library.work.reviewsCount,
-        episodesCount: library.work.episodesCount,
+        season_name_text: match([library.work.seasonYear, library.work.seasonName])
+          .with([P.nullish, P._], () => null)
+          .with([P.number, P.nullish], ([year]) => `${year}年`)
+          .with([P.number, P.string], ([year, season]) => `${year}年${SEASON_NAME_TEXT(season)}`)
+          .exhaustive(),
+        media_text: MEDIA_TEXT(library.work.media),
+        watchers_count: library.work.watchersCount,
+        reviews_count: library.work.reviewsCount,
+        episodes_count: library.work.episodesCount,
         thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
           library.work.image?.facebookOgImageUrl,
           library.work.image?.recommendedImageUrl,
@@ -220,10 +238,10 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
             ?.filter((episode) => episode !== null)
             .map((episode) => ({
               id: episode.annictId,
-              numberText:
+              number_text:
                 episode.numberText ?? (episode.number === null ? '不明' : `第${episode.number}話`),
               title: episode.title,
-              viewerDidTrack: episode.viewerDidTrack,
+              viewer_did_track: episode.viewerDidTrack,
             })) ?? [],
       },
     })),
@@ -245,6 +263,7 @@ export const getUserLibraries = async (
           nodes {
             nextEpisode {
               annictId
+              number
               numberText
               title
               viewerDidTrack
@@ -304,24 +323,31 @@ export const getUserLibraries = async (
 
   return await Promise.all(
     libraries.map(async (library) => ({
-      nextEpisode:
+      next_episode:
         library.nextEpisode === null
           ? null
           : {
               id: library.nextEpisode.annictId,
-              numberText: library.nextEpisode.numberText,
+              number_text:
+                library.nextEpisode.numberText ??
+                (library.nextEpisode.number === null
+                  ? '不明'
+                  : `第${library.nextEpisode.number}話`),
               title: library.nextEpisode.title,
-              viewerDidTrack: library.nextEpisode.viewerDidTrack,
+              viewer_did_track: library.nextEpisode.viewerDidTrack,
             },
       work: {
         id: library.work.annictId,
         title: library.work.title,
-        seasonName: library.work.seasonName,
-        seasonYear: library.work.seasonYear,
-        media: library.work.media,
-        watchersCount: library.work.watchersCount,
-        reviewsCount: library.work.reviewsCount,
-        episodesCount: library.work.episodesCount,
+        season_name_text: match([library.work.seasonYear, library.work.seasonName])
+          .with([P.nullish, P._], () => null)
+          .with([P.number, P.nullish], ([year]) => `${year}年`)
+          .with([P.number, P.string], ([year, season]) => `${year}年${SEASON_NAME_TEXT(season)}`)
+          .exhaustive(),
+        media_text: MEDIA_TEXT(library.work.media),
+        watchers_count: library.work.watchersCount,
+        reviews_count: library.work.reviewsCount,
+        episodes_count: library.work.episodesCount,
         thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
           library.work.image?.facebookOgImageUrl,
           library.work.image?.recommendedImageUrl,

@@ -16,7 +16,7 @@ type RecordsChartProps = {
 export const RecordsChart: FC<RecordsChartProps> = ({ records }) => (
   <ChartContainer
     config={{
-      recordsCount: {
+      records_count: {
         label: '記録数',
         color: 'oklch(70% 0.2 20)',
       },
@@ -26,14 +26,14 @@ export const RecordsChart: FC<RecordsChartProps> = ({ records }) => (
     <LineChart data={records} accessibilityLayer={true}>
       <Line
         type="monotone"
-        dataKey="recordsCount"
+        dataKey="records_count"
         stroke="oklch(70% 0.2 20)"
         strokeWidth={2}
         dot={false}
       />
       <CartesianGrid vertical={false} strokeDasharray="4 4" />
       <XAxis
-        dataKey="numberText"
+        dataKey="number_text"
         interval={Math.floor(records.length / 7)}
         tickMargin={8}
         padding={{ left: 10, right: 10 }}

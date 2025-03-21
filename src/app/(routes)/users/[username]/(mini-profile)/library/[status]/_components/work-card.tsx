@@ -4,8 +4,6 @@ import type { FC } from 'react'
 import { WorkHoverCard } from '../../../../../../../../components/hover-card/work/card'
 import { Image } from '../../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../../components/ui/badge'
-import { MEDIA_TEXT } from '../../../../../../../../constants/text/media'
-import { SEASON_NAME_TEXT } from '../../../../../../../../constants/text/season'
 import type { Library } from '../../../../../../../actions/api/get/libraries'
 
 type WorkCardProps = {
@@ -13,21 +11,7 @@ type WorkCardProps = {
 }
 
 export const WorkCard: FC<WorkCardProps> = async ({ work }) => (
-  <WorkHoverCard
-    work={{
-      id: work.id,
-      title: work.title,
-      media_text: MEDIA_TEXT(work.media),
-      season_name_text:
-        work.seasonName !== null && work.seasonYear !== null
-          ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
-          : undefined,
-      episodes_count: work.episodesCount,
-      watchers_count: work.watchersCount,
-      reviews_count: work.reviewsCount,
-      thumbnail: work.thumbnail,
-    }}
-  >
+  <WorkHoverCard work={work}>
     <Link
       href={`/works/${work.id}`}
       className="group flex items-center rounded-lg border border-muted p-2 shadow-xs transition-colors hover:bg-muted"
@@ -51,12 +35,8 @@ export const WorkCard: FC<WorkCardProps> = async ({ work }) => (
           {work.title}
         </h2>
         <div className="flex gap-x-2">
-          <Badge>{MEDIA_TEXT(work.media)}</Badge>
-          {work.seasonYear !== null && work.seasonName !== null && (
-            <Badge>
-              {work.seasonYear}年{SEASON_NAME_TEXT(work.seasonName)}
-            </Badge>
-          )}
+          <Badge>{work.media_text}</Badge>
+          {work.season_name_text !== null && <Badge>{work.season_name_text}</Badge>}
         </div>
       </div>
     </Link>

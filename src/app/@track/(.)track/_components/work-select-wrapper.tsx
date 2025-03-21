@@ -15,7 +15,7 @@ export const WorkSelect = async () => {
     )
   }
 
-  if (libraries.filter((lib) => lib.nextEpisode !== null).length === 0) {
+  if (libraries.filter((lib) => lib.next_episode !== null).length === 0) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
         <TriangleAlertIcon size={24} className="text-anicotto-accent" />

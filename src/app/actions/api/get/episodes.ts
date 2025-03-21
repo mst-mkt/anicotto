@@ -50,11 +50,11 @@ export const getWorkAllEpisodes = async (workId: Work['id']) => {
       .map((episode) => ({
         id: episode.annictId,
         title: episode.title,
-        numberText:
+        number_text:
           episode.numberText ?? (episode.number === null ? '不明' : `第${episode.number}話`),
-        satisfactionRate: episode.satisfactionRate ?? 0,
-        recordsCount: episode.recordsCount,
-        viewerDidTrack: episode.viewerDidTrack,
+        satisfaction_rate: episode.satisfactionRate ?? 0,
+        records_count: episode.recordsCount,
+        viewer_did_track: episode.viewerDidTrack,
       })) ?? []
   )
 }
@@ -102,11 +102,11 @@ export const getWorkLatestEpisode = async (workId: Work['id'], count = 24) => {
       .map((episode) => ({
         id: episode.annictId,
         title: episode.title,
-        numberText:
+        number_text:
           episode.numberText ?? (episode.number === null ? '不明' : `第${episode.number}話`),
-        satisfactionRate: episode.satisfactionRate ?? 0,
-        recordsCount: episode.recordsCount,
-        viewerDidTrack: episode.viewerDidTrack,
+        satisfaction_rate: episode.satisfactionRate ?? 0,
+        records_count: episode.recordsCount,
+        viewer_did_track: episode.viewerDidTrack,
       })) ?? []
   )
 }
@@ -117,6 +117,7 @@ export const getEpisodeWithInfo = async (episodeId: EpisodeType['id']) => {
       searchEpisodes(annictIds: [$episodeId]) {
         nodes {
           annictId
+          number
           numberText
           title
           satisfactionRate
@@ -125,10 +126,12 @@ export const getEpisodeWithInfo = async (episodeId: EpisodeType['id']) => {
           viewerDidTrack
           prevEpisode {
             annictId
+            number
             numberText
           }
           nextEpisode {
             annictId
+            number
             numberText
           }
           work {
@@ -162,27 +165,31 @@ export const getEpisodeWithInfo = async (episodeId: EpisodeType['id']) => {
   return {
     id: episode.annictId,
     title: episode.title,
-    numberText: episode.numberText,
-    satisfactionRate: episode.satisfactionRate,
-    recordsCount: episode.recordsCount,
-    recordCommentsCount: episode.recordCommentsCount,
-    viewerDidTrack: episode.viewerDidTrack,
+    number_text: episode.numberText ?? (episode.number === null ? '不明' : `第${episode.number}話`),
+    satisfaction_rate: episode.satisfactionRate,
+    records_count: episode.recordsCount,
+    record_comments_count: episode.recordCommentsCount,
+    viewer_did_track: episode.viewerDidTrack,
     work: {
       id: episode.work.annictId,
       title: episode.work.title,
     },
-    prevEpisode:
+    prev_episode:
       episode.prevEpisode !== null
         ? {
             id: episode.prevEpisode.annictId,
-            numberText: episode.prevEpisode.numberText,
+            number_text:
+              episode.prevEpisode.numberText ??
+              (episode.prevEpisode.number === null ? '不明' : `第${episode.prevEpisode.number}話`),
           }
         : null,
-    nextEpisode:
+    next_episode:
       episode.nextEpisode !== null
         ? {
             id: episode.nextEpisode.annictId,
-            numberText: episode.nextEpisode.numberText,
+            number_text:
+              episode.nextEpisode.numberText ??
+              (episode.nextEpisode.number === null ? '不明' : `第${episode.nextEpisode.number}話`),
           }
         : null,
   }

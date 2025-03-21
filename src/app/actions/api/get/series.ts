@@ -1,6 +1,9 @@
 'use server'
 
 import { graphql } from 'gql.tada'
+import { P, match } from 'ts-pattern'
+import { MEDIA_TEXT } from '../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
@@ -81,12 +84,18 @@ export const getWorkSeries = async (workId: Work['id']) => {
           .map(async (work) => ({
             id: work.annictId,
             title: work.title,
-            media: work.media,
-            seasonYear: work.seasonYear,
-            seasonName: work.seasonName,
-            watchersCount: work.watchersCount,
-            reviewsCount: work.reviewsCount,
-            episodesCount: work.episodesCount,
+            media_text: MEDIA_TEXT(work.media),
+            season_name_text: match([work.seasonYear, work.seasonName])
+              .with([P.nullish, P._], () => null)
+              .with([P.number, P.nullish], ([year]) => `${year}年`)
+              .with(
+                [P.number, P.string],
+                ([year, season]) => `${year}年${SEASON_NAME_TEXT(season)}`,
+              )
+              .exhaustive(),
+            watchers_count: work.watchersCount,
+            reviews_count: work.reviewsCount,
+            episodes_count: work.episodesCount,
             thumbnail: await getValidWorkImage(work.annictId.toString(), [
               work.image?.recommendedImageUrl,
               work.image?.facebookOgImageUrl,

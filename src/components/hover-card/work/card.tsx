@@ -2,8 +2,10 @@ import type { HoverCardContentProps } from '@radix-ui/react-hover-card'
 import { ClapperboardIcon, EyeIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC, ReactNode } from 'react'
+import type { ActivityWithThumbnailAndStatus } from '../../../app/actions/api/get/activities'
+import type { Library } from '../../../app/actions/api/get/libraries'
+import type { UserRecord } from '../../../app/actions/api/get/records'
 import type { WorkWithThumbnailAndStatus } from '../../../app/actions/api/get/works'
-import type { Status } from '../../../schemas/annict/common'
 import { Image } from '../../shared/image'
 import { AspectRatio } from '../../ui/aspect-ratio'
 import { Badge } from '../../ui/badge'
@@ -12,19 +14,9 @@ import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '
 type WorkHoverCardProps = {
   work:
     | WorkWithThumbnailAndStatus
-    | {
-        id: number
-        title: string
-        media_text: string
-        season_name_text?: string
-        episodes_count: number
-        watchers_count: number
-        reviews_count: number
-        thumbnail: string | null
-        status: {
-          kind: Status
-        }
-      }
+    | UserRecord['work']
+    | ActivityWithThumbnailAndStatus['work']
+    | Library['work']
   side?: HoverCardContentProps['side']
   children: ReactNode
 }

@@ -27,7 +27,7 @@ export const Episodes: FC<EpisodesProps> = async ({ workId }) => {
               variant="outline"
               className="sticky top-20 h-fit shrink-0 transition-colors group-hover:bg-anicotto-accent-50"
             >
-              {episode.numberText}
+              {episode.number_text}
             </Badge>
             <h3 className="w-fit shrink group-hover:underline">
               {episode.title === null ? (

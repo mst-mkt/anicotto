@@ -1,6 +1,9 @@
 'use server'
 
 import { graphql } from 'gql.tada'
+import { P, match } from 'ts-pattern'
+import { MEDIA_TEXT } from '../../../../constants/text/media'
+import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
@@ -39,6 +42,7 @@ export const getUserRecords = async (username: User['username'], after?: string)
             }
             episode {
               annictId
+              number
               numberText
               title
             }
@@ -74,13 +78,16 @@ export const getUserRecords = async (username: User['username'], after?: string)
       id: record.annictId,
       rating: record.ratingState,
       comment: record.comment,
-      updatedAt: `${record.updatedAt}`,
+      updated_at: `${record.updatedAt}`,
       work: {
         id: record.work.annictId,
         title: record.work.title,
-        media: record.work.media,
-        seasonYear: record.work.seasonYear,
-        seasonName: record.work.seasonName,
+        media_text: MEDIA_TEXT(record.work.media),
+        season_name_text: match([record.work.seasonYear, record.work.seasonName])
+          .with([P.nullish, P._], () => null)
+          .with([P.number, P.nullish], ([year]) => `${year}年`)
+          .with([P.number, P.string], ([year, season]) => `${year}年${SEASON_NAME_TEXT(season)}`)
+          .exhaustive(),
         thumbnail: await getValidWorkImage(record.work.annictId.toString(), [
           record.work.image?.recommendedImageUrl ?? null,
           record.work.image?.facebookOgImageUrl ?? null,
@@ -90,13 +97,15 @@ export const getUserRecords = async (username: User['username'], after?: string)
         status: {
           kind: getWorkStatusCache(record.work.annictId),
         },
-        episodesCount: record.work.episodesCount,
-        watchersCount: record.work.watchersCount,
-        reviewsCount: record.work.reviewsCount,
+        episodes_count: record.work.episodesCount,
+        watchers_count: record.work.watchersCount,
+        reviews_count: record.work.reviewsCount,
       },
       episode: {
         id: record.episode.annictId,
-        number: record.episode.numberText,
+        number_text:
+          record.episode.numberText ??
+          (record.episode.number === null ? '不明' : `第${record.episode.number}話`),
         title: record.episode.title,
       },
     })),

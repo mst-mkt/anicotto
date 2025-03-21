@@ -93,7 +93,7 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
               onCheckedChange={(checked) => handleCheckedChange(checked, `${episode.id}`)}
               checked={selected.includes(`${episode.id}`)}
             />
-            <Badge className="break-keep">{episode.numberText}</Badge>
+            <Badge className="break-keep">{episode.number_text}</Badge>
             {episode.title === null ? (
               <span className="min-w-0 shrink text-muted-foreground">タイトル不明</span>
             ) : (

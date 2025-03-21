@@ -24,8 +24,8 @@ export const generateMetadata = async ({ params }: EpisodePageProps) => {
   if (episode === null) return BASIC_METADATA
 
   return {
-    title: `${episode.numberText} - ${episode.title ?? 'タイトル不明'} | ${PROJECT_NAME}`,
-    description: `${episode.work.title} ${episode.numberText}「${episode.title ?? 'タイトル不明'}」のエピソードページ`,
+    title: `${episode.number_text} - ${episode.title ?? 'タイトル不明'} | ${PROJECT_NAME}`,
+    description: `${episode.work.title} ${episode.number_text}「${episode.title ?? 'タイトル不明'}」のエピソードページ`,
   }
 }
 

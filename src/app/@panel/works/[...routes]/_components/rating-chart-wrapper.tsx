@@ -10,7 +10,7 @@ type RatingChartProps = {
 
 export const RatingChart: FC<RatingChartProps> = async ({ workId }) => {
   const episodes = await getWorkLatestEpisode(workId, 24)
-  const hasRatings = episodes.filter((episode) => episode.satisfactionRate !== 0)
+  const hasRatings = episodes.filter((episode) => episode.satisfaction_rate !== 0)
 
   return <Chart ratings={hasRatings} />
 }

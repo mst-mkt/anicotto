@@ -35,7 +35,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
     )
   }
 
-  if (libraries.filter((lib) => lib.nextEpisode !== null).length === 0) {
+  if (libraries.filter((lib) => lib.next_episode !== null).length === 0) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
         <TriangleAlertIcon size={24} className="text-anicotto-accent" />
@@ -51,7 +51,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
       </SelectTrigger>
       <SelectContent className="[:has(>&)]:!max-w-[92svw] [:has(>&)]:!w-125 [:has(>&)]:!min-w-[40svw] w-full">
         {libraries
-          .filter((lib) => lib.nextEpisode !== null)
+          .filter((lib) => lib.next_episode !== null)
           .map((lib) => (
             <SelectItem
               key={lib.work.id}
