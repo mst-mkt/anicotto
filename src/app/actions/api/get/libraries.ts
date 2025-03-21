@@ -94,7 +94,7 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
           watchersCount: library.work.watchersCount,
           reviewsCount: library.work.reviewsCount,
           episodesCount: library.work.episodesCount,
-          image: await getValidWorkImage(library.work.annictId.toString(), [
+          thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
             library.work.image?.facebookOgImageUrl,
             library.work.image?.recommendedImageUrl,
             library.work.image?.twitterNormalAvatarUrl,
@@ -202,7 +202,7 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
           watchersCount: library.work.watchersCount,
           reviewsCount: library.work.reviewsCount,
           episodesCount: library.work.episodesCount,
-          image: await getValidWorkImage(library.work.annictId.toString(), [
+          thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
             library.work.image?.facebookOgImageUrl,
             library.work.image?.recommendedImageUrl,
             library.work.image?.twitterNormalAvatarUrl,
@@ -316,7 +316,7 @@ export const getUserLibraries = async (
           watchersCount: library.work.watchersCount,
           reviewsCount: library.work.reviewsCount,
           episodesCount: library.work.episodesCount,
-          image: await getValidWorkImage(library.work.annictId.toString(), [
+          thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
             library.work.image?.facebookOgImageUrl,
             library.work.image?.recommendedImageUrl,
             library.work.image?.twitterNormalAvatarUrl,

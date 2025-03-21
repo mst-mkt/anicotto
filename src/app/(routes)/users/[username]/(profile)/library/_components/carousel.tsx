@@ -68,13 +68,13 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
                 episodes_count: work.episodesCount,
                 watchers_count: work.watchersCount,
                 reviews_count: work.reviewsCount,
-                images: [work.image ?? ''],
+                thumbnail: work.thumbnail,
               }}
             >
               <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
                 <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md bg-muted">
                   <Image
-                    src={work.image}
+                    src={work.thumbnail}
                     alt={work.title}
                     width={256}
                     height={144}

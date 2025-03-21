@@ -44,7 +44,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
         <div key={id} className="flex gap-x-4">
           <div className="sticky top-20 aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-md bg-muted">
             <Image
-              src={work.image}
+              src={work.thumbnail}
               alt={work.title}
               width={128}
               height={128}
@@ -62,7 +62,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
                 work={{
                   id: work.id,
                   title: work.title,
-                  images: [work.image ?? ''],
+                  thumbnail: work.thumbnail,
                   media_text: MEDIA_TEXT(work.media),
                   season_name_text:
                     work.seasonName !== null && work.seasonYear !== null

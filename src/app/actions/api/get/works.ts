@@ -3,26 +3,43 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
-import type { Work } from '../../../../schemas/annict/works'
+import type { Work, WorkWithStatus } from '../../../../schemas/annict/works'
 import { getCurrentSeason } from '../../../../utils/get-season'
+
+export type WorkWithThumbnail = Work & {
+  thumbnail: string | null
+}
+
+export type WorkWithThumbnailAndStatus = WorkWithStatus & {
+  thumbnail: string | null
+}
 
 export const getCurrentSeasonWorks = async (count = 12) => {
   await auth()
 
   const currentSeason = getCurrentSeason()
 
-  const works = await annictApiClient.getWorks(
+  const worksResult = await annictApiClient.getWorks(
     { query: { filter_season: currentSeason, sort_watchers_count: 'desc', per_page: count } },
     { next: { tags: [CACHE_TAGS.WORKS_SEASON(currentSeason), CACHE_TAGS.WORKS_CURRENT_SEASON] } },
   )
 
-  if (works.isErr()) {
-    console.error('Failed to fetch current-season works:', works.error)
+  if (worksResult.isErr()) {
+    console.error('Failed to fetch current-season works:', worksResult.error)
     return null
   }
 
-  return works.value.works
+  const works = worksResult.value.works
+  const worksWithValidThumbnail = await Promise.all(
+    works.map(async (work) => ({
+      ...work,
+      thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+    })),
+  )
+
+  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
 }
 
 export const getMyWorks = async (status: Status, page = 1) => {
@@ -41,7 +58,15 @@ export const getMyWorks = async (status: Status, page = 1) => {
     return null
   }
 
-  return { data: worksResult.value.works, next_page: worksResult.value.next_page }
+  const works = worksResult.value.works
+  const worksWithValidThumbnail = await Promise.all(
+    works.map(async (work) => ({
+      ...work,
+      thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+    })),
+  )
+
+  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
 }
 
 export const searchWorks = async (
@@ -75,7 +100,15 @@ export const searchWorks = async (
     return null
   }
 
-  return { data: worksResult.value.works, next_page: worksResult.value.next_page }
+  const works = worksResult.value.works
+  const worksWithValidThumbnail = await Promise.all(
+    works.map(async (work) => ({
+      ...work,
+      thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+    })),
+  )
+
+  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
 }
 
 export const getWork = async (workId: Work['id']) => {
@@ -91,5 +124,16 @@ export const getWork = async (workId: Work['id']) => {
     return null
   }
 
-  return workResult.value.works.at(0) ?? null
+  const work = workResult.value.works.at(0)
+
+  if (work === undefined) {
+    return null
+  }
+
+  const workWithValidThumbnail = {
+    ...work,
+    thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+  }
+
+  return workWithValidThumbnail
 }

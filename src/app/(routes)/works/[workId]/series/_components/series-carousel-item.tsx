@@ -25,7 +25,7 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
           work.seasonName !== null && work.seasonYear !== null
             ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
             : undefined,
-        images: [work.image ?? ''],
+        thumbnail: work.thumbnail,
         episodes_count: work.episodesCount,
         watchers_count: work.watchersCount,
         reviews_count: work.reviewsCount,
@@ -34,7 +34,7 @@ export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) 
       <Link href={`/works/${work.id}`} className="flex flex-col gap-y-2">
         <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
           <Image
-            src={work.image}
+            src={work.thumbnail}
             alt={work.title}
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">

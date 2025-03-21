@@ -3,8 +3,15 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity } from '../../../../schemas/annict/activities'
 import type { User } from '../../../../schemas/annict/users'
+
+export type ActivityWithThumbnail = Activity & {
+  work: Activity['work'] & {
+    thumbnail: string | null
+  }
+}
 
 export const getFollowingActivities = async (page = 1) => {
   await auth()
@@ -19,7 +26,18 @@ export const getFollowingActivities = async (page = 1) => {
     return null
   }
 
-  return { data: activitiesResult.value.activities, next_page: activitiesResult.value.next_page }
+  const activities = activitiesResult.value.activities
+  const activitiesWithValidThumbnail = await Promise.all(
+    activities.map(async (activity) => ({
+      ...activity,
+      work: {
+        ...activity.work,
+        thumbnail: await getValidWorkImage(activity.work.id.toString(), activity.work.images),
+      },
+    })),
+  )
+
+  return { data: activitiesWithValidThumbnail, next_page: activitiesResult.value.next_page }
 }
 
 export const getUserActivities = async (username: User['username'], page = 1) => {
@@ -35,7 +53,18 @@ export const getUserActivities = async (username: User['username'], page = 1) =>
     return null
   }
 
-  return { data: activitiesResult.value.activities, next_page: activitiesResult.value.next_page }
+  const activities = activitiesResult.value.activities
+  const activitiesWithValidThumbnail = await Promise.all(
+    activities.map(async (activity) => ({
+      ...activity,
+      work: {
+        ...activity.work,
+        thumbnail: await getValidWorkImage(activity.work.id.toString(), activity.work.images),
+      },
+    })),
+  )
+
+  return { data: activitiesWithValidThumbnail, next_page: activitiesResult.value.next_page }
 }
 
 export const getUserActivityCountsPerDay = async (username: User['username']) => {

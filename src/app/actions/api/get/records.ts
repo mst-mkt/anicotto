@@ -80,7 +80,7 @@ export const getUserRecords = async (username: User['username'], after?: string)
           media: record.work.media,
           seasonYear: record.work.seasonYear,
           seasonName: record.work.seasonName,
-          image: await getValidWorkImage(record.work.annictId.toString(), [
+          thumbnail: await getValidWorkImage(record.work.annictId.toString(), [
             record.work.image?.recommendedImageUrl ?? null,
             record.work.image?.facebookOgImageUrl ?? null,
             record.work.image?.twitterNormalAvatarUrl ?? null,

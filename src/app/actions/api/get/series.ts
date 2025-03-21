@@ -79,7 +79,7 @@ export const getWorkSeries = async (workId: Work['id']) => {
               watchersCount: work.watchersCount,
               reviewsCount: work.reviewsCount,
               episodesCount: work.episodesCount,
-              image: await getValidWorkImage(work.annictId.toString(), [
+              thumbnail: await getValidWorkImage(work.annictId.toString(), [
                 work.image?.recommendedImageUrl,
                 work.image?.facebookOgImageUrl,
                 work.image?.twitterNormalAvatarUrl,

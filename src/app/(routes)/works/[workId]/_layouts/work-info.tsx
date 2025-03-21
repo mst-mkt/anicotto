@@ -6,7 +6,6 @@ import { Badge } from '../../../../../components/ui/badge'
 import { Separator } from '../../../../../components/ui/separator'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import { getWorkStatus } from '../../../../../lib/cache/status'
-import { getValidWorkImage } from '../../../../../lib/images/valid-url'
 import type { Work } from '../../../../../schemas/annict/works'
 import { getWork } from '../../../../actions/api/get/works'
 import { StatusSelect } from './status-select'
@@ -22,13 +21,11 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
     notFound()
   }
 
-  const images = await getValidWorkImage(work.id.toString(), work.images)
-
   return (
     <div className="flex items-center gap-x-4 overflow-hidden">
       <div className="relative aspect-square h-48 max-w-2/5 shrink-0 overflow-hidden rounded-lg border border-muted p-2">
         <Image
-          src={images}
+          src={work.thumbnail}
           alt={work.title}
           height={144}
           width={256}

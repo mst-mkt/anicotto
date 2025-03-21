@@ -25,7 +25,7 @@ export const WorkCard: FC<WorkCardProps> = async ({ work }) => (
       episodes_count: work.episodesCount,
       watchers_count: work.watchersCount,
       reviews_count: work.reviewsCount,
-      images: [work.image ?? ''],
+      thumbnail: work.thumbnail,
     }}
   >
     <Link
@@ -34,7 +34,7 @@ export const WorkCard: FC<WorkCardProps> = async ({ work }) => (
     >
       <div className="aspect-square h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
         <Image
-          src={work.image}
+          src={work.thumbnail}
           alt={work.title}
           height={128}
           width={128}

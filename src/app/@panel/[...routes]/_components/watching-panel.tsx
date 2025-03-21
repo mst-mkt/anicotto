@@ -14,7 +14,7 @@ export const WatchingPanel = async () => {
     <ScrollArea className="h-[64svh]">
       <div className="flex w-full flex-col gap-y-2 pr-2">
         {watchingWorks.data.map((work) => (
-          <WorkItem key={work.id} {...work} />
+          <WorkItem key={work.id} work={work} />
         ))}
       </div>
     </ScrollArea>
