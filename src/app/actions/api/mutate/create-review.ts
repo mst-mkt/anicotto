@@ -2,10 +2,10 @@
 
 import { err, ok } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
-import { annictApiClient } from '../../../lib/api/annict-rest/client'
-import { auth } from '../../../lib/auth'
-import { CACHE_TAGS } from '../../../lib/cache-tag'
-import { type Rating, ratingPicklist } from '../../../schemas/annict/common'
+import { annictApiClient } from '../../../../lib/api/annict-rest/client'
+import { auth } from '../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { type Rating, ratingPicklist } from '../../../../schemas/annict/common'
 
 const isRating = (value: unknown): value is Rating => {
   return ratingPicklist.options.includes(value as Rating)

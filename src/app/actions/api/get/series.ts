@@ -1,20 +1,21 @@
+'use server'
+
 import { graphql } from 'gql.tada'
-import { annictGraphqlClient } from '../../../../../lib/api/annict-graphql/client'
-import { CACHE_TAGS } from '../../../../../lib/cache-tag'
-import type { Work } from '../../../../../schemas/annict/works'
-import type { UnNullable, UnPromise } from '../../../../../types/util-types'
+import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { getValidWorkImage } from '../../../../lib/images/valid-url'
+import type { Work } from '../../../../schemas/annict/works'
 
 export const getWorkSeries = async (workId: Work['id']) => {
   const query = graphql(`
     query getWorkSeries($workId: Int!) {
-      searchWorks( annictIds: [$workId], first: 1) {
+      searchWorks(annictIds: [$workId], first: 1) {
         nodes {
           annictId
           seriesList (first: 50) {
             nodes {
               annictId
               name
-              nameEn
               works (orderBy: { field: SEASON, direction: DESC }) {
                 edges {
                   item {
@@ -56,22 +57,20 @@ export const getWorkSeries = async (workId: Work['id']) => {
   const [work] = data?.searchWorks?.nodes ?? []
 
   if (work === undefined || work === null) {
-    console.error(`[/works/${workId}/series] Failed to fetch work series:`, error)
+    console.error(`Failed to fetch series of work (${workId}):`, error)
     return null
   }
 
-  return (
+  return await Promise.all(
     work.seriesList?.nodes
       ?.filter((series) => series !== null)
-      .map((series) => ({
+      .map(async (series) => ({
         id: series.annictId,
         name: series.name,
-        nameEn: series.nameEn,
-        works:
+        works: await Promise.all(
           series.works?.edges
-            ?.flatMap((edge) => edge?.item)
-            ?.filter((work) => work !== null && work !== undefined)
-            .map((work) => ({
+            ?.flatMap((edge) => edge?.item ?? [])
+            .map(async (work) => ({
               id: work.annictId,
               title: work.title,
               media: work.media,
@@ -80,16 +79,16 @@ export const getWorkSeries = async (workId: Work['id']) => {
               watchersCount: work.watchersCount,
               reviewsCount: work.reviewsCount,
               episodesCount: work.episodesCount,
-              image: {
-                recommendedImageUrl: work.image?.recommendedImageUrl ?? null,
-                facebookOgImageUrl: work.image?.facebookOgImageUrl ?? null,
-                twitterNormalAvatarUrl: work.image?.twitterNormalAvatarUrl ?? null,
-                twitterAvatarUrl: work.image?.twitterAvatarUrl ?? null,
-                copyright: work.image?.copyright ?? null,
-              },
+              image: await getValidWorkImage(work.annictId.toString(), [
+                work.image?.recommendedImageUrl,
+                work.image?.facebookOgImageUrl,
+                work.image?.twitterNormalAvatarUrl,
+                work.image?.twitterAvatarUrl,
+              ]),
             })) ?? [],
-      })) ?? []
+        ),
+      })) ?? [],
   )
 }
 
-export type Series = UnNullable<UnPromise<ReturnType<typeof getWorkSeries>>>[number]
+export type WorkSeries = Awaited<ReturnType<typeof getWorkSeries>>

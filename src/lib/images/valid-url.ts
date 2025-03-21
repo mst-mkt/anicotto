@@ -15,7 +15,7 @@ const checkImage = async (url: string) => {
 
 export const getValidWorkImage = async (
   workId: string,
-  images: Work['images'] | (string | null)[],
+  images: Work['images'] | (string | null | undefined)[],
 ) => {
   if (workImageCache.has(workId)) {
     return workImageCache.get(workId) ?? null
@@ -35,7 +35,7 @@ export const getValidWorkImage = async (
         ]
   )
     .filter((url) => url !== '')
-    .filter((url) => url !== null)
+    .filter((url) => url !== null && url !== undefined)
     .map(proxiedImage)
 
   const validUrls = await (async () => {

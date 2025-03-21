@@ -1,9 +1,11 @@
+'use server'
+
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import type { Work } from '../../../../schemas/annict/works'
 
-export const getReviews = async (workId: Work['id'], per = 20, page = 1) => {
+export const getWorkReviews = async (workId: Work['id'], page = 1) => {
   await auth()
 
   const reviewsResult = await annictApiClient.getReviews(
@@ -12,7 +14,7 @@ export const getReviews = async (workId: Work['id'], per = 20, page = 1) => {
         filter_work_id: workId,
         filter_has_review_body: true,
         sort_likes_count: 'desc',
-        per_page: per,
+        per_page: 20,
         page,
       },
     },
@@ -20,9 +22,9 @@ export const getReviews = async (workId: Work['id'], per = 20, page = 1) => {
   )
 
   if (reviewsResult.isErr()) {
-    console.error(`[/works/${workId}] Failed to fetch reviews:`, reviewsResult.error)
+    console.error(`Failed to fetch reviews of work (${workId}):`, reviewsResult.error)
     return null
   }
 
-  return reviewsResult.value.reviews
+  return { data: reviewsResult.value.reviews, next_page: reviewsResult.value.next_page }
 }

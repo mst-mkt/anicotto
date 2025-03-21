@@ -1,11 +1,11 @@
 'use server'
 
 import { revalidateTag } from 'next/cache'
-import { annictApiClient } from '../../../lib/api/annict-rest/client'
-import { auth } from '../../../lib/auth'
-import { CACHE_TAGS } from '../../../lib/cache-tag'
-import type { Rating } from '../../../schemas/annict/common'
-import type { Episode } from '../../../schemas/annict/episodes'
+import { annictApiClient } from '../../../../lib/api/annict-rest/client'
+import { auth } from '../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import type { Rating } from '../../../../schemas/annict/common'
+import type { Episode } from '../../../../schemas/annict/episodes'
 
 export const createRecord = async (episodeId: Episode['id'], comment?: string, rating?: Rating) => {
   await auth()

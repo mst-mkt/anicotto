@@ -1,18 +1,17 @@
+'use server'
+
 import { graphql } from 'gql.tada'
-import { annictGraphqlClient } from '../../../../../../lib/api/annict-graphql/client'
-import { auth } from '../../../../../../lib/auth'
-import { CACHE_TAGS } from '../../../../../../lib/cache-tag'
-import { getValidWorkImage } from '../../../../../../lib/images/valid-url'
-import type { User } from '../../../../../../schemas/annict/users'
-import type { UnNullable, UnPromise } from '../../../../../../types/util-types'
+import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { getValidWorkImage } from '../../../../lib/images/valid-url'
+import type { User } from '../../../../schemas/annict/users'
+import type { UnNullable } from '../../../../types/util-types'
 
-export const getUserRecords = async (username: User['username']) => {
-  await auth()
-
+export const getUserRecords = async (username: User['username'], after?: string) => {
   const query = graphql(`
-    query getUserRecords($username: String!) {
+    query getUserRecords($username: String!, $after: String) {
       user(username: $username) {
-        records(first: 128, orderBy: { field: CREATED_AT, direction: DESC }) {
+        records(first: 128, after: $after, orderBy: { field: CREATED_AT, direction: DESC }) {
           nodes {
             annictId
             ratingState
@@ -48,7 +47,7 @@ export const getUserRecords = async (username: User['username']) => {
   const { data, error } = await annictGraphqlClient
     .query(
       query,
-      { username },
+      { username, after },
       {
         fetchOptions: {
           next: { tags: [CACHE_TAGS.USER(username), CACHE_TAGS.USER_RECORDS(username)] },
@@ -60,7 +59,7 @@ export const getUserRecords = async (username: User['username']) => {
   const records = data?.user?.records?.nodes ?? []
 
   if (records === undefined) {
-    console.error('[/users/[username]/records] Failed to fetch records:', error)
+    console.error(`Failed to fetch records of user (${username}):`, error)
     return null
   }
 
@@ -97,4 +96,4 @@ export const getUserRecords = async (username: User['username']) => {
   )
 }
 
-export type UserRecord = UnNullable<UnPromise<ReturnType<typeof getUserRecords>>>[number]
+export type UserRecord = UnNullable<Awaited<ReturnType<typeof getUserRecords>>>[number]
