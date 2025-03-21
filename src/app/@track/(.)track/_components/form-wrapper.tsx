@@ -9,13 +9,14 @@ import { useShareMisskey } from '../../../../hooks/share/useMisskeyShare'
 import { type Rating, ratingPicklist } from '../../../../schemas/annict/common'
 import { getEpisode } from '../../../actions/api/get/episodes'
 import { createRecord } from '../../../actions/api/mutate/create-record'
+import { shareRecordForMisskey } from '../../../actions/share/misskey'
 
 type TrackFormWrapperProps = ComponentProps<'form'>
 
 export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
-  const { shareRecord: shareMisskey } = useShareMisskey()
+  const { shareMisskey, recordMisskeyConfig } = useShareMisskey()
   const { shareRecord: shareDiscord } = useDiscordShare()
 
   const getFormData = (formData: FormData) => {
@@ -62,8 +63,15 @@ export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
 
     const episode = await getEpisode(episodeId)
 
+    if (shareMisskey) {
+      const result = await shareRecordForMisskey(episodeId, recordMisskeyConfig)
+
+      if (!result.success) {
+        toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+      }
+    }
+
     if (episode !== null) {
-      shareMisskey(episode)
       shareDiscord(episode)
     }
 

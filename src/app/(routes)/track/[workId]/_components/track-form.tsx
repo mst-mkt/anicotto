@@ -12,6 +12,10 @@ import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import type { LibraryWithEpisodes } from '../../../../actions/api/get/libraries'
 import { createMultipleRecords } from '../../../../actions/api/mutate/create-multiple-records'
+import {
+  shareMultipleRecordsForMisskey,
+  shareRecordForMisskey,
+} from '../../../../actions/share/misskey'
 
 type TrackFormProps = {
   episodes: LibraryWithEpisodes['work']['episodes']
@@ -21,8 +25,7 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
   const displayEpisodes = useMemo(() => episodes.slice(0, 64), [episodes])
   const [selected, setSelected] = useState(displayEpisodes.map(({ id }) => `${id}`))
   const [isPending, startTransition] = useTransition()
-  const { shareRecord: shareMisskey, shareMultipleRecords: shareMisskeyMultiple } =
-    useShareMisskey()
+  const { shareMisskey, multipleRecordsMisskeyConfig, recordMisskeyConfig } = useShareMisskey()
   const { shareRecord: shareDiscord, shareMultipleRecords: shareDiscordMultiple } =
     useDiscordShare()
 
@@ -58,14 +61,30 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
 
       if (result.data.length === 1) {
         const data = result.data[0]
-        shareMisskey({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
+
+        if (shareMisskey) {
+          const result = await shareRecordForMisskey(ids[0], recordMisskeyConfig)
+
+          if (!result.success) {
+            toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+          }
+        }
+
         shareDiscord({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
       } else {
         const length = result.data.length
         const from = result.data[0].episode
         const to = result.data[result.data.length - 1].episode
         const work = result.data[0].work
-        shareMisskeyMultiple(length, { from, to }, work)
+
+        if (shareMisskey) {
+          const result = await shareMultipleRecordsForMisskey(ids, multipleRecordsMisskeyConfig)
+
+          if (!result.success) {
+            toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+          }
+        }
+
         shareDiscordMultiple(length, { from, to }, work)
       }
     } else {

@@ -13,6 +13,7 @@ import { type Status, statusPicklist } from '../../../../../schemas/annict/commo
 import type { Work } from '../../../../../schemas/annict/works'
 import { cn } from '../../../../../utils/classnames'
 import { updateStatus as updateStatusAction } from '../../../../actions/api/mutate/update-status'
+import { shareStatusForMisskey } from '../../../../actions/share/misskey'
 
 type StatusSelectSelectProps = {
   work: Work
@@ -22,7 +23,7 @@ type StatusSelectSelectProps = {
 export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   const [updatingStatus, setUpdatingStatus] = useState<Status | null>(null)
   const [isUpdating, startTransition] = useTransition()
-  const { shareStatus: shareMisskey } = useShareMisskey()
+  const { shareMisskey, statusMisskeyConfig } = useShareMisskey()
   const { shareStatus: shareDiscord } = useDiscordShare()
 
   const updateStatus = useCallback(
@@ -35,7 +36,15 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
             <b className="font-bold">{work.title}</b> のステータスを更新しました
           </span>,
         )
-        shareMisskey(work, status)
+
+        if (shareMisskey) {
+          const result = await shareStatusForMisskey(work.id, status, statusMisskeyConfig)
+
+          if (!result.success) {
+            toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+          }
+        }
+
         shareDiscord(work, status)
       } else {
         toast.error(
@@ -47,7 +56,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
 
       setUpdatingStatus(null)
     },
-    [work, shareDiscord, shareMisskey],
+    [work, shareDiscord, shareMisskey, statusMisskeyConfig],
   )
 
   const handleClick = useCallback(
