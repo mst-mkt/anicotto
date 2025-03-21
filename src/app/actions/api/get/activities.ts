@@ -3,13 +3,24 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { withStatusActivities } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity } from '../../../../schemas/annict/activities'
+import type { Status } from '../../../../schemas/annict/common'
 import type { User } from '../../../../schemas/annict/users'
 
 export type ActivityWithThumbnail = Activity & {
   work: Activity['work'] & {
     thumbnail: string | null
+  }
+}
+
+export type ActivityWithThumbnailAndStatus = Activity & {
+  work: Activity['work'] & {
+    thumbnail: string | null
+    status: {
+      kind: Status
+    }
   }
 }
 
@@ -36,8 +47,9 @@ export const getFollowingActivities = async (page = 1) => {
       },
     })),
   )
+  const activitiesWithStatus = await withStatusActivities(activitiesWithValidThumbnail)
 
-  return { data: activitiesWithValidThumbnail, next_page: activitiesResult.value.next_page }
+  return { data: activitiesWithStatus, next_page: activitiesResult.value.next_page }
 }
 
 export const getUserActivities = async (username: User['username'], page = 1) => {
@@ -63,8 +75,9 @@ export const getUserActivities = async (username: User['username'], page = 1) =>
       },
     })),
   )
+  const activitiesWithStatus = await withStatusActivities(activitiesWithValidThumbnail)
 
-  return { data: activitiesWithValidThumbnail, next_page: activitiesResult.value.next_page }
+  return { data: activitiesWithStatus, next_page: activitiesResult.value.next_page }
 }
 
 export const getUserActivityCountsPerDay = async (username: User['username']) => {

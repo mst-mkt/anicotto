@@ -5,7 +5,7 @@ import { Image } from '../../../../../components/shared/image'
 import { Badge } from '../../../../../components/ui/badge'
 import { Separator } from '../../../../../components/ui/separator'
 import { Skeleton } from '../../../../../components/ui/skeleton'
-import { getWorkStatus } from '../../../../../lib/cache/status'
+import { getWorkStatusCache } from '../../../../../lib/cache/status'
 import type { Work } from '../../../../../schemas/annict/works'
 import { getWork } from '../../../../actions/api/get/works'
 import { StatusSelect } from './status-select'
@@ -15,7 +15,7 @@ type WorkInfoProps = {
 }
 
 export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
-  const [work, status] = await Promise.all([getWork(workId), getWorkStatus(workId)])
+  const [work, status] = await Promise.all([getWork(workId), getWorkStatusCache(workId)])
 
   if (work === null) {
     notFound()

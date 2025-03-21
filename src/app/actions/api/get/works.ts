@@ -3,6 +3,7 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { withStatusWork, withStatusWorks } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
 import type { Work, WorkWithStatus } from '../../../../schemas/annict/works'
@@ -39,7 +40,9 @@ export const getCurrentSeasonWorks = async (count = 12) => {
     })),
   )
 
-  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
+  const worksWithStatus = await withStatusWorks(worksWithValidThumbnail)
+
+  return { data: worksWithStatus, next_page: worksResult.value.next_page }
 }
 
 export const getMyWorks = async (status: Status, page = 1) => {
@@ -108,7 +111,9 @@ export const searchWorks = async (
     })),
   )
 
-  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
+  const worksWithStatus = await withStatusWorks(worksWithValidThumbnail)
+
+  return { data: worksWithStatus, next_page: worksResult.value.next_page }
 }
 
 export const getWork = async (workId: Work['id']) => {
@@ -135,5 +140,7 @@ export const getWork = async (workId: Work['id']) => {
     thumbnail: await getValidWorkImage(work.id.toString(), work.images),
   }
 
-  return workWithValidThumbnail
+  const workWithStatus = await withStatusWork(workWithValidThumbnail)
+
+  return workWithStatus
 }

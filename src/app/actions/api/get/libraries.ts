@@ -4,6 +4,7 @@ import { graphql } from 'gql.tada'
 import { match } from 'ts-pattern'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
 import type { User } from '../../../../schemas/annict/users'
@@ -65,43 +66,46 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
     },
   )
 
-  const libraries = data?.viewer?.libraryEntries?.nodes ?? []
+  const libraries = data?.viewer?.libraryEntries?.nodes?.filter((library) => library !== null)
 
   if (libraries === undefined || libraries === null) {
     console.error(`Failed to fetch libraries with status (${status}):`, error)
     return null
   }
 
+  await fetchAndSetWorkStatusCache(libraries.map((lib) => lib.work.annictId))
+
   return await Promise.all(
-    libraries
-      .filter((library) => library !== null)
-      .map(async (library) => ({
-        nextEpisode:
-          library.nextEpisode === null
-            ? null
-            : {
-                id: library.nextEpisode.annictId,
-                numberText: library.nextEpisode.numberText,
-                title: library.nextEpisode.title,
-                viewerDidTrack: library.nextEpisode.viewerDidTrack,
-              },
-        work: {
-          id: library.work.annictId,
-          title: library.work.title,
-          seasonName: library.work.seasonName,
-          seasonYear: library.work.seasonYear,
-          media: library.work.media,
-          watchersCount: library.work.watchersCount,
-          reviewsCount: library.work.reviewsCount,
-          episodesCount: library.work.episodesCount,
-          thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
-            library.work.image?.facebookOgImageUrl,
-            library.work.image?.recommendedImageUrl,
-            library.work.image?.twitterNormalAvatarUrl,
-            library.work.image?.twitterAvatarUrl,
-          ]),
+    libraries.map(async (library) => ({
+      nextEpisode:
+        library.nextEpisode === null
+          ? null
+          : {
+              id: library.nextEpisode.annictId,
+              numberText: library.nextEpisode.numberText,
+              title: library.nextEpisode.title,
+              viewerDidTrack: library.nextEpisode.viewerDidTrack,
+            },
+      work: {
+        id: library.work.annictId,
+        title: library.work.title,
+        seasonName: library.work.seasonName,
+        seasonYear: library.work.seasonYear,
+        media: library.work.media,
+        watchersCount: library.work.watchersCount,
+        reviewsCount: library.work.reviewsCount,
+        episodesCount: library.work.episodesCount,
+        thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
+          library.work.image?.facebookOgImageUrl,
+          library.work.image?.recommendedImageUrl,
+          library.work.image?.twitterNormalAvatarUrl,
+          library.work.image?.twitterAvatarUrl,
+        ]),
+        status: {
+          kind: getWorkStatusCache(library.work.annictId),
         },
-      })),
+      },
+    })),
   )
 }
 
@@ -173,54 +177,56 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
     )
     .toPromise()
 
-  const libraries = data?.viewer?.libraryEntries?.nodes ?? []
+  const libraries = data?.viewer?.libraryEntries?.nodes?.filter((library) => library !== null)
 
   if (libraries === undefined || libraries === null) {
     console.error(`Failed to fetch libraries with status (${status}):`, error)
     return null
   }
 
+  await fetchAndSetWorkStatusCache(libraries.map((lib) => lib.work.annictId))
+
   return await Promise.all(
-    libraries
-      .filter((library) => library !== null)
-      .map(async (library) => ({
-        nextEpisode:
-          library.nextEpisode === null
-            ? null
-            : {
-                id: library.nextEpisode.annictId,
-                numberText: library.nextEpisode.numberText,
-                title: library.nextEpisode.title,
-                viewerDidTrack: library.nextEpisode.viewerDidTrack,
-              },
-        work: {
-          id: library.work.annictId,
-          title: library.work.title,
-          seasonName: library.work.seasonName,
-          seasonYear: library.work.seasonYear,
-          media: library.work.media,
-          watchersCount: library.work.watchersCount,
-          reviewsCount: library.work.reviewsCount,
-          episodesCount: library.work.episodesCount,
-          thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
-            library.work.image?.facebookOgImageUrl,
-            library.work.image?.recommendedImageUrl,
-            library.work.image?.twitterNormalAvatarUrl,
-            library.work.image?.twitterAvatarUrl,
-          ]),
-          episodes:
-            library.work.episodes?.nodes
-              ?.filter((episode) => episode !== null)
-              .map((episode) => ({
-                id: episode.annictId,
-                numberText:
-                  episode.numberText ??
-                  (episode.number === null ? '不明' : `第${episode.number}話`),
-                title: episode.title,
-                viewerDidTrack: episode.viewerDidTrack,
-              })) ?? [],
+    libraries.map(async (library) => ({
+      nextEpisode:
+        library.nextEpisode === null
+          ? null
+          : {
+              id: library.nextEpisode.annictId,
+              numberText: library.nextEpisode.numberText,
+              title: library.nextEpisode.title,
+              viewerDidTrack: library.nextEpisode.viewerDidTrack,
+            },
+      work: {
+        id: library.work.annictId,
+        title: library.work.title,
+        seasonName: library.work.seasonName,
+        seasonYear: library.work.seasonYear,
+        media: library.work.media,
+        watchersCount: library.work.watchersCount,
+        reviewsCount: library.work.reviewsCount,
+        episodesCount: library.work.episodesCount,
+        thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
+          library.work.image?.facebookOgImageUrl,
+          library.work.image?.recommendedImageUrl,
+          library.work.image?.twitterNormalAvatarUrl,
+          library.work.image?.twitterAvatarUrl,
+        ]),
+        status: {
+          kind: getWorkStatusCache(library.work.annictId),
         },
-      })),
+        episodes:
+          library.work.episodes?.nodes
+            ?.filter((episode) => episode !== null)
+            .map((episode) => ({
+              id: episode.annictId,
+              numberText:
+                episode.numberText ?? (episode.number === null ? '不明' : `第${episode.number}話`),
+              title: episode.title,
+              viewerDidTrack: episode.viewerDidTrack,
+            })) ?? [],
+      },
+    })),
   )
 }
 
@@ -287,42 +293,45 @@ export const getUserLibraries = async (
     },
   )
 
-  const libraries = data?.user?.libraryEntries?.nodes ?? []
+  const libraries = data?.user?.libraryEntries?.nodes?.filter((library) => library !== null)
 
   if (libraries === undefined || libraries === null) {
     console.error(`Failed to fetch libraries with status (${status}):`, error)
     return null
   }
 
+  await fetchAndSetWorkStatusCache(libraries.map((lib) => lib.work.annictId))
+
   return await Promise.all(
-    libraries
-      .filter((library) => library !== null)
-      .map(async (library) => ({
-        nextEpisode:
-          library.nextEpisode === null
-            ? null
-            : {
-                id: library.nextEpisode.annictId,
-                numberText: library.nextEpisode.numberText,
-                title: library.nextEpisode.title,
-                viewerDidTrack: library.nextEpisode.viewerDidTrack,
-              },
-        work: {
-          id: library.work.annictId,
-          title: library.work.title,
-          seasonName: library.work.seasonName,
-          seasonYear: library.work.seasonYear,
-          media: library.work.media,
-          watchersCount: library.work.watchersCount,
-          reviewsCount: library.work.reviewsCount,
-          episodesCount: library.work.episodesCount,
-          thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
-            library.work.image?.facebookOgImageUrl,
-            library.work.image?.recommendedImageUrl,
-            library.work.image?.twitterNormalAvatarUrl,
-            library.work.image?.twitterAvatarUrl,
-          ]),
+    libraries.map(async (library) => ({
+      nextEpisode:
+        library.nextEpisode === null
+          ? null
+          : {
+              id: library.nextEpisode.annictId,
+              numberText: library.nextEpisode.numberText,
+              title: library.nextEpisode.title,
+              viewerDidTrack: library.nextEpisode.viewerDidTrack,
+            },
+      work: {
+        id: library.work.annictId,
+        title: library.work.title,
+        seasonName: library.work.seasonName,
+        seasonYear: library.work.seasonYear,
+        media: library.work.media,
+        watchersCount: library.work.watchersCount,
+        reviewsCount: library.work.reviewsCount,
+        episodesCount: library.work.episodesCount,
+        thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
+          library.work.image?.facebookOgImageUrl,
+          library.work.image?.recommendedImageUrl,
+          library.work.image?.twitterNormalAvatarUrl,
+          library.work.image?.twitterAvatarUrl,
+        ]),
+        status: {
+          kind: getWorkStatusCache(library.work.annictId),
         },
-      })),
+      },
+    })),
   )
 }

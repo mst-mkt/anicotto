@@ -5,6 +5,7 @@ import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Episode } from '../../../../schemas/annict/episodes'
 import type { User } from '../../../../schemas/annict/users'
@@ -59,43 +60,46 @@ export const getUserRecords = async (username: User['username'], after?: string)
     )
     .toPromise()
 
-  const records = data?.user?.records?.nodes ?? []
+  const records = data?.user?.records?.nodes?.filter((record) => record !== null)
 
   if (records === undefined) {
     console.error(`Failed to fetch records of user (${username}):`, error)
     return null
   }
 
+  await fetchAndSetWorkStatusCache(records.map((record) => record.work.annictId))
+
   return await Promise.all(
-    records
-      .filter((record) => record !== null)
-      .map(async (record) => ({
-        id: record.annictId,
-        rating: record.ratingState,
-        comment: record.comment,
-        updatedAt: `${record.updatedAt}`,
-        work: {
-          id: record.work.annictId,
-          title: record.work.title,
-          media: record.work.media,
-          seasonYear: record.work.seasonYear,
-          seasonName: record.work.seasonName,
-          thumbnail: await getValidWorkImage(record.work.annictId.toString(), [
-            record.work.image?.recommendedImageUrl ?? null,
-            record.work.image?.facebookOgImageUrl ?? null,
-            record.work.image?.twitterNormalAvatarUrl ?? null,
-            record.work.image?.twitterAvatarUrl ?? null,
-          ]),
-          episodesCount: record.work.episodesCount,
-          watchersCount: record.work.watchersCount,
-          reviewsCount: record.work.reviewsCount,
+    records.map(async (record) => ({
+      id: record.annictId,
+      rating: record.ratingState,
+      comment: record.comment,
+      updatedAt: `${record.updatedAt}`,
+      work: {
+        id: record.work.annictId,
+        title: record.work.title,
+        media: record.work.media,
+        seasonYear: record.work.seasonYear,
+        seasonName: record.work.seasonName,
+        thumbnail: await getValidWorkImage(record.work.annictId.toString(), [
+          record.work.image?.recommendedImageUrl ?? null,
+          record.work.image?.facebookOgImageUrl ?? null,
+          record.work.image?.twitterNormalAvatarUrl ?? null,
+          record.work.image?.twitterAvatarUrl ?? null,
+        ]),
+        status: {
+          kind: getWorkStatusCache(record.work.annictId),
         },
-        episode: {
-          id: record.episode.annictId,
-          number: record.episode.numberText,
-          title: record.episode.title,
-        },
-      })),
+        episodesCount: record.work.episodesCount,
+        watchersCount: record.work.watchersCount,
+        reviewsCount: record.work.reviewsCount,
+      },
+      episode: {
+        id: record.episode.annictId,
+        number: record.episode.numberText,
+        title: record.episode.title,
+      },
+    })),
   )
 }
 
