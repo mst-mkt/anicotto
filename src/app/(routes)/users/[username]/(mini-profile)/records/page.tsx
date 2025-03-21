@@ -1,7 +1,7 @@
 import { PenToolIcon } from 'lucide-react'
 import { type FC, Suspense } from 'react'
 import { PROJECT_NAME } from '../../../../../../constants/project'
-import { getUser } from '../../get-user'
+import { getUser } from '../../../../../actions/api/get/users'
 import { RecordList, RecordListSkeleton } from './_components/record-list'
 
 type UserRecordsPageProps = {

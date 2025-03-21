@@ -142,8 +142,8 @@ importers:
         specifier: 1.9.4
         version: 1.9.4
       '@mst-mkt/js-config':
-        specifier: npm:@jsr/mst-mkt__js-config@^0.1.0
-        version: '@jsr/mst-mkt__js-config@0.1.0'
+        specifier: npm:@jsr/mst-mkt__js-config@^0.1.2
+        version: '@jsr/mst-mkt__js-config@0.1.2'
       '@tailwindcss/postcss':
         specifier: ^4.0.9
         version: 4.0.9
@@ -430,8 +430,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@jsr/mst-mkt__js-config@0.1.0':
-    resolution: {integrity: sha512-e4mJ8oByV4dl8ZEIUOcFcmty+7JP51VbIemYwIoBlb1d5vcSkxn9pJuc/hXnmU7JMD09cB/9MEPXfGOIp5cNfw==, tarball: https://npm.jsr.io/~/11/@jsr/mst-mkt__js-config/0.1.0.tgz}
+  '@jsr/mst-mkt__js-config@0.1.2':
+    resolution: {integrity: sha512-xtDT8jKd56NeX+MGoXNerYDS5I1OOOhTphxHrzL0xU8KKxDp+Ycl3PfhasKLzkJ6SEiIIU+f/ZJOEhgc/hNzJQ==, tarball: https://npm.jsr.io/~/11/@jsr/mst-mkt__js-config/0.1.2.tgz}
 
   '@next/env@15.2.0':
     resolution: {integrity: sha512-eMgJu1RBXxxqqnuRJQh5RozhskoNUDHBFybvi+Z+yK9qzKeG7dadhv/Vp1YooSZmCnegf7JxWuapV77necLZNA==}
@@ -2278,7 +2278,7 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@jsr/mst-mkt__js-config@0.1.0': {}
+  '@jsr/mst-mkt__js-config@0.1.2': {}
 
   '@next/env@15.2.0': {}
 

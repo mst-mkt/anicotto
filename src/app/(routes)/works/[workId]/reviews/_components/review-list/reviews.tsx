@@ -2,7 +2,7 @@ import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import type { Work } from '../../../../../../../schemas/annict/works'
-import { getReviews } from '../../get-reviws'
+import { getWorkReviews } from '../../../../../../actions/api/get/reviews'
 import { ReviewItem } from './review-item'
 
 type ReviewsProps = {
@@ -10,7 +10,7 @@ type ReviewsProps = {
 }
 
 export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
-  const reviews = await getReviews(workId)
+  const reviews = await getWorkReviews(workId)
 
   if (reviews === null) {
     return (
@@ -21,7 +21,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
     )
   }
 
-  if (reviews.length === 0) {
+  if (reviews.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -32,7 +32,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
 
   return (
     <div className="flex flex-col gap-y-12">
-      {reviews.map((review) => (
+      {reviews.data.map((review) => (
         <ReviewItem key={review.id} review={review} />
       ))}
     </div>

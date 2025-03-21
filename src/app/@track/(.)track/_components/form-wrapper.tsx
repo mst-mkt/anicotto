@@ -7,8 +7,8 @@ import { toast } from 'sonner'
 import { useDiscordShare } from '../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../hooks/share/useMisskeyShare'
 import { type Rating, ratingPicklist } from '../../../../schemas/annict/common'
-import { createRecord } from '../../../actions/api/create-record'
-import { getEpisode } from '../get-episode'
+import { getEpisode } from '../../../actions/api/get/episodes'
+import { createRecord } from '../../../actions/api/mutate/create-record'
 
 type TrackFormWrapperProps = ComponentProps<'form'>
 

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import type { FC } from 'react'
 import { Alert, AlertDescription, AlertTitle } from '../../../../../components/ui/alert'
 import { Skeleton } from '../../../../../components/ui/skeleton'
-import { getLibraries } from '../get-libraries'
+import { getMyLibrariesWithEpisodes } from '../../../../actions/api/get/libraries'
 import { TrackForm } from './track-form'
 import { WorkSelect } from './work-select'
 
@@ -12,18 +12,18 @@ type MultiTrackProps = {
 }
 
 export const MultiTrack: FC<MultiTrackProps> = async ({ workId }) => {
-  const libraries = await getLibraries()
+  const libraries = await getMyLibrariesWithEpisodes('watching')
 
   const currentLibrary = libraries?.find((lib) => `${lib.work.id}` === workId)
   const currentEpisodes = currentLibrary?.work.episodes.filter(
-    ({ viewerDidTrack }) => !viewerDidTrack,
+    ({ viewer_did_track }) => !viewer_did_track,
   )
 
   const unavailable = currentEpisodes === undefined || currentEpisodes.length === 0
 
   if (unavailable) {
     const trackableLibrary = libraries?.find(
-      (lib) => lib.work.episodes.filter(({ viewerDidTrack }) => !viewerDidTrack).length > 0,
+      (lib) => lib.work.episodes.filter(({ viewer_did_track }) => !viewer_did_track).length > 0,
     )
     const trackableWorkId = trackableLibrary?.work.id
 

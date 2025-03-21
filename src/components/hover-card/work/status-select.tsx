@@ -3,7 +3,7 @@
 import { LoaderIcon } from 'lucide-react'
 import { type FC, useCallback, useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { updateStatus as updateStatusAction } from '../../../app/actions/api/update-status'
+import { updateStatus as updateStatusAction } from '../../../app/actions/api/mutate/update-status'
 import { STATUS_TEXT } from '../../../constants/text/status'
 import { type Status, statusPicklist } from '../../../schemas/annict/common'
 import type { Work } from '../../../schemas/annict/works'

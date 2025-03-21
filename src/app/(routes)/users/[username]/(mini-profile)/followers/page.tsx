@@ -1,9 +1,10 @@
 import { SearchIcon, UsersIcon } from 'lucide-react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { type FC, Suspense } from 'react'
 import { Button } from '../../../../../../components/ui/button'
 import { PROJECT_NAME } from '../../../../../../constants/project'
-import { getUser } from '../../get-user'
+import { getUser } from '../../../../../actions/api/get/users'
 import { FollowersList, FollowersListSkeleton } from './_components/followers-list'
 
 type FollowersPageProps = {
@@ -26,6 +27,10 @@ const FollowersPage: FC<FollowersPageProps> = async ({ params }) => {
   const { username } = await params
 
   const user = await getUser(username)
+
+  if (user === null) {
+    notFound()
+  }
 
   return (
     <div className="flex flex-col gap-y-8">

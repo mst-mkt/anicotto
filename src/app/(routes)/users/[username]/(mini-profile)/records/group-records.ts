@@ -1,4 +1,4 @@
-import type { UserRecord } from './get-records'
+import type { UserRecord } from '../../../../../actions/api/get/records'
 
 export type GroupedRecords = Omit<UserRecord, 'episode' | 'comment' | 'rating'> & {
   records: {

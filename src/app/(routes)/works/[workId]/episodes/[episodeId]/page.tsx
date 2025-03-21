@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import { type FC, Suspense } from 'react'
-import { PROJECT_NAME } from '../../../../../../constants/project'
+import { BASIC_METADATA, PROJECT_NAME } from '../../../../../../constants/project'
+import { getEpisodeWithInfo } from '../../../../../actions/api/get/episodes'
 import { EpisodeInfo, EpisodeInfoSkeleton } from './_components/episode-info'
-import { getEpisode } from './get-episode'
 
 type EpisodePageProps = {
   params: Promise<{
@@ -19,11 +19,13 @@ export const generateMetadata = async ({ params }: EpisodePageProps) => {
     notFound()
   }
 
-  const episode = await getEpisode(episodeId)
+  const episode = await getEpisodeWithInfo(episodeId)
+
+  if (episode === null) return BASIC_METADATA
 
   return {
-    title: `${episode.numberText} - ${episode.title ?? 'タイトル不明'} | ${PROJECT_NAME}`,
-    description: `${episode.work.title} ${episode.numberText}「${episode.title ?? 'タイトル不明'}」のエピソードページ`,
+    title: `${episode.number_text} - ${episode.title ?? 'タイトル不明'} | ${PROJECT_NAME}`,
+    description: `${episode.work.title} ${episode.number_text}「${episode.title ?? 'タイトル不明'}」のエピソードページ`,
   }
 }
 

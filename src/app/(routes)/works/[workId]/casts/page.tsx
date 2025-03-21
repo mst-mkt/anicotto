@@ -1,6 +1,6 @@
 import { type FC, Suspense } from 'react'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
-import { getWork } from '../_layouts/get-work'
+import { getWork } from '../../../../actions/api/get/works'
 import { Casts, CastsSkeleton } from './_components/cast-table'
 
 type WorkCastsPageProps = {

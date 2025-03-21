@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { type FC, Suspense } from 'react'
 import { Button } from '../../../../../../components/ui/button'
 import { PROJECT_NAME } from '../../../../../../constants/project'
-import { getUser } from '../../get-user'
+import { getUser } from '../../../../../actions/api/get/users'
 import { FollowingList, FollowingListSkeleton } from './_components/following-list'
 
 type FollowingPageProps = {

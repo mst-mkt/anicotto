@@ -12,11 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../../../../components/ui/select'
-import type { Library } from '../get-libraries'
+import type { LibraryWithEpisodes } from '../../../../actions/api/get/libraries'
 
 type WorkSelectProps = {
   selected: string
-  libraries: Library[] | null
+  libraries: LibraryWithEpisodes[] | null
 }
 
 export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
@@ -35,7 +35,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
     )
   }
 
-  if (libraries.filter((lib) => lib.nextEpisode !== null).length === 0) {
+  if (libraries.filter((lib) => lib.next_episode !== null).length === 0) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
         <TriangleAlertIcon size={24} className="text-anicotto-accent" />
@@ -51,7 +51,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
       </SelectTrigger>
       <SelectContent className="[:has(>&)]:!max-w-[92svw] [:has(>&)]:!w-125 [:has(>&)]:!min-w-[40svw] w-full">
         {libraries
-          .filter((lib) => lib.nextEpisode !== null)
+          .filter((lib) => lib.next_episode !== null)
           .map((lib) => (
             <SelectItem
               key={lib.work.id}
@@ -64,7 +64,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
                     <Image
                       height={128}
                       width={128}
-                      src={lib.work.image}
+                      src={lib.work.thumbnail}
                       fallback={
                         <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">
                           <ImageOffIcon size={24} />

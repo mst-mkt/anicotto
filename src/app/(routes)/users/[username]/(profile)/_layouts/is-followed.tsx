@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import type { User } from '../../../../../../schemas/annict/users'
-import { getIsFollowed, getMe } from '../../get-user'
+import { getIsFollowed } from '../../../../../actions/api/get/followers'
+import { getMe } from '../../../../../actions/api/get/users'
 
 type IsFollowedProps = {
   username: User['username']

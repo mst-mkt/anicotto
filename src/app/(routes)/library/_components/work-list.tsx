@@ -4,7 +4,7 @@ import { Badge } from '../../../../components/ui/badge'
 import { Skeleton } from '../../../../components/ui/skeleton'
 import { STATUS_TEXT } from '../../../../constants/text/status'
 import type { Status } from '../../../../schemas/annict/common'
-import { getWorks } from '../get-works'
+import { getMyWorks } from '../../../actions/api/get/works'
 import { WorkCard } from './work-card'
 
 type WorkListProps = {
@@ -12,20 +12,20 @@ type WorkListProps = {
 }
 
 export const WorkList: FC<WorkListProps> = async ({ status }) => {
-  const works = await getWorks(status)
+  const works = await getMyWorks(status)
 
   if (works === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
         <CloudAlertIcon size={40} className="text-anicotto-accent" />
-        <p>
+        <div>
           <Badge variant="secondary">{STATUS_TEXT(status)}</Badge> の作品の取得に失敗しました
-        </p>
+        </div>
       </div>
     )
   }
 
-  if (works.length === 0) {
+  if (works.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -38,7 +38,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
-      {works.map((work) => (
+      {works.data.map((work) => (
         <WorkCard key={work.id} work={work} />
       ))}
     </div>

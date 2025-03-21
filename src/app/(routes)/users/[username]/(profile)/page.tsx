@@ -1,6 +1,6 @@
 import { type FC, Suspense } from 'react'
 import { PROJECT_NAME } from '../../../../../constants/project'
-import { getUser } from '../get-user'
+import { getUser } from '../../../../actions/api/get/users'
 import { ActivityList, ActivityListSkeleton } from './_components/activity-list'
 
 type UserPageProps = {

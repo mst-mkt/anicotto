@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 import type { FC } from 'react'
-import { getEpisode } from '../../works/[workId]/episodes/[episodeId]/get-episode'
+import { getEpisodeWithInfo } from '../../../actions/api/get/episodes'
 
 type EpisodePageProps = {
   params: Promise<{
@@ -16,7 +16,11 @@ const EpisodePage: FC<EpisodePageProps> = async ({ params }) => {
     notFound()
   }
 
-  const episode = await getEpisode(episodeId)
+  const episode = await getEpisodeWithInfo(episodeId)
+
+  if (episode === null) {
+    notFound()
+  }
 
   redirect(`/works/${episode.work.id}/episodes/${episode.id}`)
 }

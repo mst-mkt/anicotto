@@ -7,16 +7,16 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '../../../../../components/ui/chart'
-import type { Episode } from '../get-episodes'
+import type { Episodes } from '../../../../actions/api/get/episodes'
 
 type RatingChartProps = {
-  ratings: Episode[]
+  ratings: Episodes
 }
 
 export const RatingChart: FC<RatingChartProps> = ({ ratings }) => (
   <ChartContainer
     config={{
-      satisfactionRate: {
+      satisfaction_rate: {
         label: '満足度',
         color: 'oklch(70% 0.2 20)',
       },
@@ -26,14 +26,14 @@ export const RatingChart: FC<RatingChartProps> = ({ ratings }) => (
     <LineChart data={ratings} accessibilityLayer={true}>
       <Line
         type="monotone"
-        dataKey="satisfactionRate"
+        dataKey="satisfaction_rate"
         stroke="oklch(70% 0.2 20)"
         strokeWidth={2}
         dot={false}
       />
       <CartesianGrid vertical={false} strokeDasharray="4 4" />
       <XAxis
-        dataKey="numberText"
+        dataKey="number_text"
         interval={Math.floor(ratings.length / 7)}
         tickMargin={8}
         padding={{ left: 10, right: 10 }}

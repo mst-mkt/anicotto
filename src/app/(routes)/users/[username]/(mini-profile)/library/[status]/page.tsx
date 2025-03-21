@@ -4,7 +4,7 @@ import { StatusIcon } from '../../../../../../../components/icon/status'
 import { PROJECT_NAME } from '../../../../../../../constants/project'
 import { STATUS_TEXT } from '../../../../../../../constants/text/status'
 import { type Status, statusPicklist } from '../../../../../../../schemas/annict/common'
-import { getUser } from '../../../get-user'
+import { getUser } from '../../../../../../actions/api/get/users'
 import { Tab } from './_components/tabs'
 import { WorkList, WorkListSkeleton } from './_components/work-list'
 

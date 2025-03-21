@@ -13,7 +13,7 @@ import {
   AlertDialogTrigger,
 } from '../../../../../../components/ui/alert-dialog'
 import { Button } from '../../../../../../components/ui/button'
-import { getIsFollowing } from '../../get-user'
+import { getIsFollowing } from '../../../../../actions/api/get/followings'
 
 type FollowButtonProps = {
   myUsername: string

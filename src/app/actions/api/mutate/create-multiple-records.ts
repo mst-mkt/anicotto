@@ -3,11 +3,11 @@
 import { Result } from 'neverthrow'
 import { revalidateTag } from 'next/cache'
 import type { InferOutput } from 'valibot'
-import { annictApiClient } from '../../../lib/api/annict-rest/client'
-import { auth } from '../../../lib/auth'
-import { CACHE_TAGS } from '../../../lib/cache-tag'
-import type { Episode } from '../../../schemas/annict/episodes'
-import type { createRecordResponseSchema } from '../../../schemas/annict/records/api'
+import { annictApiClient } from '../../../../lib/api/annict-rest/client'
+import { auth } from '../../../../lib/auth'
+import { CACHE_TAGS } from '../../../../lib/cache-tag'
+import type { Episode } from '../../../../schemas/annict/episodes'
+import type { createRecordResponseSchema } from '../../../../schemas/annict/records/api'
 
 export const createMultipleRecords = async (episodeIds: Episode['id'][]) => {
   if (episodeIds.length > 64) return { success: false, error: 'Too many episodes' } as const

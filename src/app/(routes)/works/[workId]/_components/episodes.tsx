@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { Badge } from '../../../../../components/ui/badge'
 import type { Work } from '../../../../../schemas/annict/works'
-import { getEpisodes } from '../get-episodes'
+import { getWorkAllEpisodes } from '../../../../actions/api/get/episodes'
 import { CollapseList } from './collapse-list'
 
 type EpisodesProps = {
@@ -10,7 +10,7 @@ type EpisodesProps = {
 }
 
 export const Episodes: FC<EpisodesProps> = async ({ workId }) => {
-  const episodes = await getEpisodes(workId)
+  const episodes = await getWorkAllEpisodes(workId)
 
   if (episodes === null || episodes.length === 0) return null
 

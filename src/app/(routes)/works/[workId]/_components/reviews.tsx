@@ -7,16 +7,16 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../../../../components/u
 import { Button } from '../../../../../components/ui/button'
 import type { Work } from '../../../../../schemas/annict/works'
 import { timeText } from '../../../../../utils/time-text'
-import { getReviews } from '../get-reviews'
+import { getWorkReviews } from '../../../../actions/api/get/reviews'
 
 type ReviewsProps = {
   workId: Work['id']
 }
 
 export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
-  const reviews = await getReviews(workId)
+  const reviews = await getWorkReviews(workId)
 
-  if (reviews === null || reviews.length === 0) {
+  if (reviews === null || reviews.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
         <OrigamiIcon size={32} className="text-anicotto-accent" />
@@ -33,7 +33,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
 
   return (
     <div className="flex w-full flex-col gap-y-8">
-      {reviews.map((review) => (
+      {reviews.data.map((review) => (
         <div key={review.id} className="flex gap-x-4">
           <UserHoverCard user={review.user}>
             <Link href={`/users/${review.user.username}`} className="sticky top-20 h-fit">

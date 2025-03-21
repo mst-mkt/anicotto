@@ -1,9 +1,10 @@
 import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import type { FC } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../components/ui/avatar'
 import type { User } from '../../../../../../schemas/annict/users'
-import { getUser } from '../../get-user'
+import { getUser } from '../../../../../actions/api/get/users'
 
 type MiniProfileProps = {
   username: User['username']
@@ -11,6 +12,10 @@ type MiniProfileProps = {
 
 export const MiniProfile: FC<MiniProfileProps> = async ({ username }) => {
   const user = await getUser(username)
+
+  if (user === null) {
+    notFound()
+  }
 
   return (
     <header className="flex h-10 items-center gap-x-2">

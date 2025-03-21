@@ -9,7 +9,7 @@ import {
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import type { Work } from '../../../../../schemas/annict/works'
-import { getWork } from '../get-work'
+import { getWork } from '../../../../actions/api/get/works'
 import { LinkItem } from './link-item'
 
 type LinksProps = {

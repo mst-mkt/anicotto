@@ -11,11 +11,9 @@ import {
   CarouselItem,
 } from '../../../../../../../components/ui/carousel'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
-import { MEDIA_TEXT } from '../../../../../../../constants/text/media'
-import { SEASON_NAME_TEXT } from '../../../../../../../constants/text/season'
 import { STATUS_TEXT } from '../../../../../../../constants/text/status'
 import type { Status } from '../../../../../../../schemas/annict/common'
-import { getLibrary } from '../get-library'
+import { getUserLibraries } from '../../../../../../actions/api/get/libraries'
 import { LibraryCarouselTitle, LibraryTitle } from './carousel-title'
 
 type LibraryCarouselProps = {
@@ -24,7 +22,7 @@ type LibraryCarouselProps = {
 }
 
 export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, username }) => {
-  const libraries = await getLibrary(username, status)
+  const libraries = await getUserLibraries(username, status)
 
   if (libraries === null) {
     return (
@@ -56,25 +54,11 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
       <CarouselContent>
         {libraries.map(({ work }) => (
           <CarouselItem key={work.id} className="basis-1/2 md:basis-1/3">
-            <WorkHoverCard
-              work={{
-                id: work.id,
-                title: work.title,
-                media_text: MEDIA_TEXT(work.media),
-                season_name_text:
-                  work.seasonName !== null && work.seasonYear !== null
-                    ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
-                    : undefined,
-                episodes_count: work.episodesCount,
-                watchers_count: work.watchersCount,
-                reviews_count: work.reviewsCount,
-                images: [work.image ?? ''],
-              }}
-            >
+            <WorkHoverCard work={work}>
               <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
                 <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md bg-muted">
                   <Image
-                    src={work.image}
+                    src={work.thumbnail}
                     alt={work.title}
                     width={256}
                     height={144}
@@ -90,12 +74,10 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
                   {work.title}
                 </h3>
                 <div className="flex gap-x-2 py-1">
-                  {work.seasonName !== null && work.seasonYear && (
-                    <Badge variant="secondary">
-                      {work.seasonYear}年{SEASON_NAME_TEXT(work.seasonName)}
-                    </Badge>
+                  {work.season_name_text !== null && (
+                    <Badge variant="secondary">{work.season_name_text}</Badge>
                   )}
-                  <Badge variant="secondary">{MEDIA_TEXT(work.media)}</Badge>
+                  <Badge variant="secondary">{work.media_text}</Badge>
                 </div>
               </Link>
             </WorkHoverCard>

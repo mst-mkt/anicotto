@@ -6,11 +6,9 @@ import { WorkHoverCard } from '../../../../../../../components/hover-card/work/c
 import { Image } from '../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../components/ui/badge'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
-import { MEDIA_TEXT } from '../../../../../../../constants/text/media'
-import { SEASON_NAME_TEXT } from '../../../../../../../constants/text/season'
 import type { User } from '../../../../../../../schemas/annict/users'
 import { timeText } from '../../../../../../../utils/time-text'
-import { getUserRecords } from '../get-records'
+import { getUserRecords } from '../../../../../../actions/api/get/records'
 import { groupRecords } from '../group-records'
 
 type RecordListProps = {
@@ -40,11 +38,11 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
 
   return (
     <div className="flex flex-col gap-y-8 py-8">
-      {groupRecords(records).map(({ id, records, work, updatedAt }) => (
+      {groupRecords(records).map(({ id, records, work, updated_at }) => (
         <div key={id} className="flex gap-x-4">
           <div className="sticky top-20 aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-md bg-muted">
             <Image
-              src={work.image}
+              src={work.thumbnail}
               alt={work.title}
               width={128}
               height={128}
@@ -58,21 +56,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
           </div>
           <div className="flex w-full min-w-0 flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
-              <WorkHoverCard
-                work={{
-                  id: work.id,
-                  title: work.title,
-                  images: [work.image ?? ''],
-                  media_text: MEDIA_TEXT(work.media),
-                  season_name_text:
-                    work.seasonName !== null && work.seasonYear !== null
-                      ? `${work.seasonYear}年${SEASON_NAME_TEXT(work.seasonName)}`
-                      : undefined,
-                  episodes_count: work.episodesCount,
-                  watchers_count: work.watchersCount,
-                  reviews_count: work.reviewsCount,
-                }}
-              >
+              <WorkHoverCard work={work}>
                 <Link
                   href={`/works/${work.id}`}
                   className="shrink grow truncate font-bold transition-colors hover:text-anicotto-accent-600 hover:underline"
@@ -81,10 +65,10 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
                 </Link>
               </WorkHoverCard>
               <time
-                dateTime={updatedAt}
+                dateTime={updated_at}
                 className="shrink-0 break-keep text-muted-foreground text-sm"
               >
-                {timeText(updatedAt)}
+                {timeText(updated_at)}
               </time>
             </div>
             {records.map(({ id, episode, rating, comment }) => (
@@ -94,7 +78,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
                   className="group flex items-center gap-x-2"
                 >
                   <Badge variant="secondary" className="shrink-0 break-keep">
-                    {episode.number}
+                    {episode.number_text}
                   </Badge>
                   {episode.title !== null ? (
                     <span className="min-w-0 grow truncate group-hover:underline">

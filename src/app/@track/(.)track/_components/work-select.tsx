@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../../../components/ui/select'
-import type { Library } from '../get-libraries'
+import type { Library } from '../../../actions/api/get/libraries'
 import { MultiTrackLink } from './link'
 
 type WorkSelectProps = {
@@ -21,14 +21,14 @@ type WorkSelectProps = {
 
 export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
   const librariesHasNext = libraries.filter(
-    (lib) => lib.nextEpisode !== null && !lib.nextEpisode.viewerDidTrack,
+    (lib) => lib.next_episode !== null && !lib.next_episode.viewer_did_track,
   )
   const [library, setLibrary] = useState(librariesHasNext.at(0))
 
   const handleSelect = useCallback(
     (value: string) => {
       const episode = Number.parseInt(value, 10)
-      const library = librariesHasNext.find((lib) => lib.nextEpisode?.id === episode)
+      const library = librariesHasNext.find((lib) => lib.next_episode?.id === episode)
       setLibrary(library)
     },
     [librariesHasNext.find],
@@ -38,7 +38,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
     <>
       <Select
         name="episode_id"
-        defaultValue={library?.nextEpisode?.id.toString()}
+        defaultValue={library?.next_episode?.id.toString()}
         onValueChange={handleSelect}
       >
         <SelectTrigger className="h-fit w-full cursor-pointer pl-2 [&>span]:block [&>span]:h-fit">
@@ -48,7 +48,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
           {librariesHasNext.map((lib) => (
             <SelectItem
               key={lib.work.id}
-              value={lib.nextEpisode?.id.toString() ?? ''}
+              value={lib.next_episode?.id.toString() ?? ''}
               className="[&>:last-child]:min-w-0"
             >
               <div className="flex cursor-pointer items-center gap-x-4 pr-4 text-left">
@@ -57,7 +57,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
                     <Image
                       height={128}
                       width={128}
-                      src={lib.work.image}
+                      src={lib.work.thumbnail}
                       fallback={
                         <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">
                           <ImageOffIcon size={24} />
@@ -72,10 +72,10 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
                   <h3 className="truncate font-bold">{lib.work.title}</h3>
                   <div className="flex w-full items-center gap-x-2 overflow-hidden break-keep">
                     <Badge variant="secondary" className="shrink-0 break-keep">
-                      {lib.nextEpisode?.numberText}
+                      {lib.next_episode?.number_text}
                     </Badge>
                     <span className="shrink truncate text-muted-foreground">
-                      {lib.nextEpisode?.title}
+                      {lib.next_episode?.title}
                     </span>
                   </div>
                 </div>

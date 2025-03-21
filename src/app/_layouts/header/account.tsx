@@ -10,7 +10,7 @@ import {
   DrawerTrigger,
 } from '../../../components/ui/drawer'
 import { Separator } from '../../../components/ui/separator'
-import { getMe } from '../get-me'
+import { getMe } from '../../actions/api/get/users'
 import { LogOutButton } from './logout-button'
 
 export const HeaderAccount = async () => {

@@ -5,11 +5,10 @@ import { Image } from '../../../../components/shared/image'
 import { AspectRatio } from '../../../../components/ui/aspect-ratio'
 import { Carousel, CarouselContent, CarouselItem } from '../../../../components/ui/carousel'
 import { Skeleton } from '../../../../components/ui/skeleton'
-import { getValidWorkImage } from '../../../../lib/images/valid-url'
-import { getWorks } from '../../get-works'
+import { getCurrentSeasonWorks } from '../../../actions/api/get/works'
 
 export const CurrentSeasonWork = async () => {
-  const works = await getWorks()
+  const works = await getCurrentSeasonWorks()
 
   if (works === null) {
     return (
@@ -23,13 +22,13 @@ export const CurrentSeasonWork = async () => {
   return (
     <Carousel opts={{ autoplay: true, wheel: true }}>
       <CarouselContent>
-        {works.map(async (work) => (
+        {works.data.map((work) => (
           <CarouselItem key={work.id} className="basis-1/2 md:basis-1/3">
             <WorkHoverCard work={work}>
               <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
                 <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
                   <Image
-                    src={await getValidWorkImage(work.id.toString(), work.images)}
+                    src={work.thumbnail}
                     alt={work.title}
                     className="h-full w-full object-cover"
                     height={144}
