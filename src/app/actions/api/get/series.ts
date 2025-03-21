@@ -91,4 +91,4 @@ export const getWorkSeries = async (workId: Work['id']) => {
   )
 }
 
-export type WorkSeries = Awaited<ReturnType<typeof getWorkSeries>>
+export type WorkSeries = NonNullable<Awaited<ReturnType<typeof getWorkSeries>>>

@@ -1,4 +1,5 @@
 import { BinocularsIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
+import { notFound } from 'next/navigation'
 import type { FC } from 'react'
 import { Image } from '../../../../../components/shared/image'
 import { Badge } from '../../../../../components/ui/badge'
@@ -7,7 +8,7 @@ import { Skeleton } from '../../../../../components/ui/skeleton'
 import { getWorkStatus } from '../../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../../lib/images/valid-url'
 import type { Work } from '../../../../../schemas/annict/works'
-import { getWork } from './get-work'
+import { getWork } from '../../../../actions/api/get/works'
 import { StatusSelect } from './status-select'
 
 type WorkInfoProps = {
@@ -16,6 +17,10 @@ type WorkInfoProps = {
 
 export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
   const [work, status] = await Promise.all([getWork(workId), getWorkStatus(workId)])
+
+  if (work === null) {
+    notFound()
+  }
 
   const images = await getValidWorkImage(work.id.toString(), work.images)
 

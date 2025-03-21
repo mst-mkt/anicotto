@@ -5,7 +5,7 @@ import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import type { Work } from '../../../../schemas/annict/works'
 
-export const fetWorkStaffs = async (workId: Work['id']) => {
+export const getWorkStaffs = async (workId: Work['id']) => {
   await auth()
 
   const staffsResult = await annictApiClient.getStaffs(

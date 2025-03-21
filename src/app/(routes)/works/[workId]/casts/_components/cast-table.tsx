@@ -11,14 +11,14 @@ import {
   TableRow,
 } from '../../../../../../components/ui/table'
 import type { Work } from '../../../../../../schemas/annict/works'
-import { getCasts } from '../get-casts'
+import { getWorkCasts } from '../../../../../actions/api/get/casts'
 
 type CastsProps = {
   workId: Work['id']
 }
 
 export const Casts: FC<CastsProps> = async ({ workId }) => {
-  const casts = await getCasts(workId)
+  const casts = await getWorkCasts(workId)
 
   if (casts === null) {
     return (

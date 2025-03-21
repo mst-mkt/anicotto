@@ -1,7 +1,7 @@
 import { type FC, Suspense } from 'react'
 import { Loading } from '../../../../../../components/shared/loading'
 import { PROJECT_NAME } from '../../../../../../constants/project'
-import { getUser } from '../../get-user'
+import { getUser } from '../../../../../actions/api/get/users'
 
 type UserRawPageProps = {
   params: Promise<{

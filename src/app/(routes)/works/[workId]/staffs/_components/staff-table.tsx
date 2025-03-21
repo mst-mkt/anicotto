@@ -11,14 +11,14 @@ import {
   TableRow,
 } from '../../../../../../components/ui/table'
 import type { Work } from '../../../../../../schemas/annict/works'
-import { getStaffs } from '../get-staffs'
+import { getWorkStaffs } from '../../../../../actions/api/get/staffs'
 
 type StaffTableProps = {
   workId: Work['id']
 }
 
 export const StaffTable: FC<StaffTableProps> = async ({ workId }) => {
-  const staffs = await getStaffs(workId)
+  const staffs = await getWorkStaffs(workId)
 
   if (staffs === null) {
     return (

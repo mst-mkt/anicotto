@@ -1,9 +1,9 @@
 import { type FC, Suspense } from 'react'
 import { Loading } from '../../../../components/shared/loading'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../constants/project'
+import { getWork } from '../../../actions/api/get/works'
 import { Episodes } from './_components/episodes'
 import { Reviews } from './_components/reviews'
-import { getWork } from './_layouts/get-work'
 
 type WorksPageProps = {
   params: Promise<{
@@ -15,11 +15,13 @@ export const generateMetadata = async ({ params }: WorksPageProps) => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
   if (Number.isNaN(workIdNumber)) return BASIC_METADATA
+
   const work = await getWork(workIdNumber)
+  if (work === null) return BASIC_METADATA
 
   return {
-    title: `${work?.title} | ${PROJECT_NAME}`,
-    description: `「${work?.title}」の作品ページ`,
+    title: `${work.title} | ${PROJECT_NAME}`,
+    description: `「${work.title}」の作品ページ`,
   }
 }
 

@@ -1,12 +1,13 @@
 import { LinkIcon } from 'lucide-react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { type FC, Suspense } from 'react'
 import { Image } from '../../../../../../components/shared/image'
 import { AspectRatio } from '../../../../../../components/ui/aspect-ratio'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../components/ui/avatar'
 import { Badge } from '../../../../../../components/ui/badge'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
-import { getMe, getUser } from '../../get-user'
+import { getMe, getUser } from '../../../../../actions/api/get/users'
 import { FollowButton } from './follow-button'
 import { IsFollowed } from './is-followed'
 
@@ -17,6 +18,10 @@ type ProfileProps = {
 export const Profile: FC<ProfileProps> = async ({ username }) => {
   const me = await getMe()
   const user = await getUser(username)
+
+  if (user === null) {
+    notFound()
+  }
 
   return (
     <div>

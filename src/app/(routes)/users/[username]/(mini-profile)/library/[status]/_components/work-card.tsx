@@ -6,10 +6,10 @@ import { Image } from '../../../../../../../../components/shared/image'
 import { Badge } from '../../../../../../../../components/ui/badge'
 import { MEDIA_TEXT } from '../../../../../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../../../../../constants/text/season'
-import type { Library } from '../get-library'
+import type { Library } from '../../../../../../../actions/api/get/libraries'
 
 type WorkCardProps = {
-  work: Library[number]['work']
+  work: Library['work']
 }
 
 export const WorkCard: FC<WorkCardProps> = async ({ work }) => (

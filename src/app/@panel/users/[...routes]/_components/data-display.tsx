@@ -1,15 +1,15 @@
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import type { User } from '../../../../../schemas/annict/users'
-import { getActivitiesPerAction } from '../get-activities'
-import { getUser } from '../get-user'
+import { getUserActivityCountsPerAction } from '../../../../actions/api/get/activities'
+import { getUser } from '../../../../actions/api/get/users'
 
 type DataDisplayProps = {
   username: User['username']
 }
 
 export const DataDisplay: FC<DataDisplayProps> = async ({ username }) => {
-  const activities = await getActivitiesPerAction(username)
+  const activities = await getUserActivityCountsPerAction(username)
   const user = await getUser(username)
 
   return (

@@ -5,14 +5,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../../compon
 import { Badge } from '../../../../../../../components/ui/badge'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import type { User } from '../../../../../../../schemas/annict/users'
-import { getFollowing } from '../get-following'
+import { getFollowings } from '../../../../../../actions/api/get/followings'
 
 type FollowingListProps = {
   username: User['username']
 }
 
 export const FollowingList: FC<FollowingListProps> = async ({ username }) => {
-  const followers = await getFollowing(username)
+  const followers = await getFollowings(username)
 
   if (followers === null) {
     return (
@@ -23,7 +23,7 @@ export const FollowingList: FC<FollowingListProps> = async ({ username }) => {
     )
   }
 
-  if (followers.length === 0) {
+  if (followers.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-8 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -34,7 +34,7 @@ export const FollowingList: FC<FollowingListProps> = async ({ username }) => {
 
   return (
     <ul className="flex flex-col gap-y-4">
-      {followers.map((follower) => (
+      {followers.data.map((follower) => (
         <li key={follower.id}>
           <Link
             href={`/users/${follower.username}`}

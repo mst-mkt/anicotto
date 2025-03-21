@@ -2,8 +2,8 @@ import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
+import { searchCharacters } from '../../../../actions/api/get/characters'
 import type { SearchOrder } from '../../search-params'
-import { searchCharacters } from './get-characters'
 
 type SearchCharactersProps = {
   query: string
@@ -11,7 +11,7 @@ type SearchCharactersProps = {
 }
 
 export const SearchCharacters: FC<SearchCharactersProps> = async ({ query, order }) => {
-  const characters = await searchCharacters(query, order)
+  const characters = await searchCharacters({ query, order })
 
   if (characters === null) {
     return (
@@ -22,7 +22,7 @@ export const SearchCharacters: FC<SearchCharactersProps> = async ({ query, order
     )
   }
 
-  if (characters.length === 0) {
+  if (characters.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -33,7 +33,7 @@ export const SearchCharacters: FC<SearchCharactersProps> = async ({ query, order
 
   return (
     <div className="flex flex-col gap-y-4">
-      {characters.map((character) => (
+      {characters.data.map((character) => (
         <Link
           href={`/characters/${character.id}`}
           key={character.id}

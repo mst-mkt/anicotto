@@ -2,7 +2,7 @@ import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../../components/ui/skeleton'
 import type { User } from '../../../../../../schemas/annict/users'
-import { getActivities } from '../get-activities'
+import { getUserActivities } from '../../../../../actions/api/get/activities'
 import { ActivityCard } from './activity-card'
 
 type ActivityListProps = {
@@ -10,7 +10,7 @@ type ActivityListProps = {
 }
 
 export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
-  const activities = await getActivities(username)
+  const activities = await getUserActivities(username)
 
   if (activities === null) {
     return (
@@ -21,7 +21,7 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
     )
   }
 
-  if (activities.length === 0) {
+  if (activities.data.length === 0) {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-y-4 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -32,7 +32,7 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
-      {activities.map((activity) => (
+      {activities.data.map((activity) => (
         <ActivityCard key={activity.id} activity={activity} />
       ))}
     </div>

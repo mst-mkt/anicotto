@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../../../components/ui/select'
-import type { Library } from '../get-libraries'
+import type { Library } from '../../../actions/api/get/libraries'
 import { MultiTrackLink } from './link'
 
 type WorkSelectProps = {

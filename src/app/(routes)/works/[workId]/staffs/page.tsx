@@ -1,6 +1,6 @@
 import { type FC, Suspense } from 'react'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
-import { getWork } from '../_layouts/get-work'
+import { getWork } from '../../../../actions/api/get/works'
 import { StaffTable, StaffTableSkeleton } from './_components/staff-table'
 
 type WorkStaffsPageProps = {
@@ -14,10 +14,11 @@ export const generateMetadata = async ({ params }: WorkStaffsPageProps) => {
   const workIdNumber = Number.parseInt(workId, 10)
   if (Number.isNaN(workIdNumber)) return BASIC_METADATA
   const work = await getWork(workIdNumber)
+  if (work === null) return BASIC_METADATA
 
   return {
-    title: `${work?.title} - スタッフ | ${PROJECT_NAME}`,
-    description: `「${work?.title}」のスタッフ一覧`,
+    title: `${work.title} - スタッフ | ${PROJECT_NAME}`,
+    description: `「${work.title}」のスタッフ一覧`,
   }
 }
 

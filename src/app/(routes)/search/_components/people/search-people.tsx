@@ -2,8 +2,8 @@ import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
+import { searchPeople } from '../../../../actions/api/get/people'
 import type { SearchOrder } from '../../search-params'
-import { searchPeople } from './get-people'
 
 type SearchPeopleProps = {
   query: string
@@ -11,7 +11,7 @@ type SearchPeopleProps = {
 }
 
 export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
-  const people = await searchPeople(query, order)
+  const people = await searchPeople({ query, order })
 
   if (people === null) {
     return (
@@ -22,7 +22,7 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
     )
   }
 
-  if (people.length === 0) {
+  if (people.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -33,7 +33,7 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      {people.map((person) => (
+      {people.data.map((person) => (
         <Link
           href={`/people/${person.id}`}
           key={person.id}

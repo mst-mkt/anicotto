@@ -15,7 +15,7 @@ import { MEDIA_TEXT } from '../../../../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../../../../constants/text/season'
 import { STATUS_TEXT } from '../../../../../../../constants/text/status'
 import type { Status } from '../../../../../../../schemas/annict/common'
-import { getLibrary } from '../get-library'
+import { getUserLibraries } from '../../../../../../actions/api/get/libraries'
 import { LibraryCarouselTitle, LibraryTitle } from './carousel-title'
 
 type LibraryCarouselProps = {
@@ -24,7 +24,7 @@ type LibraryCarouselProps = {
 }
 
 export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, username }) => {
-  const libraries = await getLibrary(username, status)
+  const libraries = await getUserLibraries(username, status)
 
   if (libraries === null) {
     return (

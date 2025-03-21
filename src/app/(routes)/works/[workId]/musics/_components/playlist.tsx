@@ -4,16 +4,16 @@ import { Alert, AlertDescription, AlertTitle } from '../../../../../../component
 import { Skeleton } from '../../../../../../components/ui/skeleton'
 import { spotifyApiClient } from '../../../../../../lib/api/spotify/client'
 import type { Work } from '../../../../../../schemas/annict/works'
-import { getWorkTitle } from '../get-work-title'
+import { getWork } from '../../../../../actions/api/get/works'
 
 type PlaylistProps = {
   workId: Work['id']
 }
 
 export const Playlist: FC<PlaylistProps> = async ({ workId }) => {
-  const title = await getWorkTitle(workId)
+  const work = await getWork(workId)
 
-  if (title === null) {
+  if (work === null) {
     return (
       <div className="flex flex-col items-center justify-center gap-y-4 py-12">
         <CloudAlertIcon size={40} className="text-anicotto-accent" />
@@ -26,7 +26,7 @@ export const Playlist: FC<PlaylistProps> = async ({ workId }) => {
     playlists: {
       items: [playlist],
     },
-  } = await spotifyApiClient.search(title, ['playlist'], 'JP', 1)
+  } = await spotifyApiClient.search(work.title, ['playlist'], 'JP', 1)
 
   return (
     <div className="flex flex-col gap-y-2">

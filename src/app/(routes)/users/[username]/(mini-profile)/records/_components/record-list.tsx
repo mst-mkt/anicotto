@@ -10,7 +10,7 @@ import { MEDIA_TEXT } from '../../../../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../../../../constants/text/season'
 import type { User } from '../../../../../../../schemas/annict/users'
 import { timeText } from '../../../../../../../utils/time-text'
-import { getUserRecords } from '../get-records'
+import { getUserRecords } from '../../../../../../actions/api/get/records'
 import { groupRecords } from '../group-records'
 
 type RecordListProps = {

@@ -2,8 +2,11 @@
 
 import { graphql } from 'gql.tada'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
+import { annictApiClient } from '../../../../lib/api/annict-rest/client'
+import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
+import type { Episode } from '../../../../schemas/annict/episodes'
 import type { User } from '../../../../schemas/annict/users'
 import type { UnNullable } from '../../../../types/util-types'
 
@@ -97,3 +100,21 @@ export const getUserRecords = async (username: User['username'], after?: string)
 }
 
 export type UserRecord = UnNullable<Awaited<ReturnType<typeof getUserRecords>>>[number]
+
+export const getEpisodeRecords = async (episodeId: Episode['id'], page = 1) => {
+  await auth()
+
+  const recordsResult = await annictApiClient.getRecords(
+    {
+      query: { filter_episode_id: episodeId, filter_has_record_comment: true, per_page: 24, page },
+    },
+    { next: { tags: [CACHE_TAGS.EPISODE(episodeId), CACHE_TAGS.EPISODE_RECORDS(episodeId)] } },
+  )
+
+  if (recordsResult.isErr()) {
+    console.error(`Failed to fetch records of episode (${episodeId}):`, recordsResult.error)
+    return null
+  }
+
+  return { data: recordsResult.value.records, next_page: recordsResult.value.next_page }
+}

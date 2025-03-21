@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from '../../../../../../components/ui/carousel'
 import type { Work } from '../../../../../../schemas/annict/works'
-import { getWorkSeries } from '../get-series'
+import { getWorkSeries } from '../../../../../actions/api/get/series'
 import { SeriesCarouselItem } from './series-carousel-item'
 
 type SeriesCarouselsProps = {

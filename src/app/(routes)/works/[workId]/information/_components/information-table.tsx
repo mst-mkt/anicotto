@@ -1,5 +1,5 @@
-import { CloudAlertIcon } from 'lucide-react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import type { FC } from 'react'
 import { Image } from '../../../../../../components/shared/image'
 import { Skeleton } from '../../../../../../components/ui/skeleton'
@@ -13,7 +13,7 @@ import {
 import { proxiedImage } from '../../../../../../lib/images/proxy'
 import type { Work } from '../../../../../../schemas/annict/works'
 import { isWithProtocol } from '../../../../../../utils/route-type'
-import { getWork } from '../get-work'
+import { getWork } from '../../../../../actions/api/get/works'
 
 type InformationTableProps = {
   workId: Work['id']
@@ -24,12 +24,7 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
   const work = await getWork(workId)
 
   if (work === null) {
-    return (
-      <div className="flex flex-col items-center gap-y-4 p-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
-        <p>情報の取得に失敗しました</p>
-      </div>
-    )
+    notFound()
   }
 
   return (

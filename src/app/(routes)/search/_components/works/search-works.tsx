@@ -1,8 +1,8 @@
 import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
+import { searchWorks } from '../../../../actions/api/get/works'
 import type { SearchOrder, SearchSort } from '../../search-params'
-import { searchWorks } from './get-works'
 import { WorkCard } from './work-card'
 
 type SearchWorksProps = {
@@ -13,7 +13,7 @@ type SearchWorksProps = {
 }
 
 export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order, season }) => {
-  const works = await searchWorks(query, sort, order, season)
+  const works = await searchWorks({ query, sort, order, season })
 
   if (works === null) {
     return (
@@ -24,7 +24,7 @@ export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order, se
     )
   }
 
-  if (works.length === 0) {
+  if (works.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
         <OrigamiIcon size={40} className="text-anicotto-accent" />
@@ -35,7 +35,7 @@ export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order, se
 
   return (
     <div className="flex flex-col gap-y-4">
-      {works.map((work) => (
+      {works.data.map((work) => (
         <WorkCard key={work.id} work={work} />
       ))}
     </div>

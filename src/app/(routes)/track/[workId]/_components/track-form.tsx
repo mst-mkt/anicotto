@@ -10,11 +10,11 @@ import { Checkbox } from '../../../../../components/ui/checkbox'
 import { Label } from '../../../../../components/ui/label'
 import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
-import { createMultipleRecords } from '../../../../actions/api/create-multiple-records'
-import type { Library } from '../get-libraries'
+import type { LibraryWithEpisodes } from '../../../../actions/api/get/libraries'
+import { createMultipleRecords } from '../../../../actions/api/mutate/create-multiple-records'
 
 type TrackFormProps = {
-  episodes: Library['work']['episodes']
+  episodes: LibraryWithEpisodes['work']['episodes']
 }
 
 export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {

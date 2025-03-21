@@ -1,7 +1,7 @@
 import { type FC, Suspense } from 'react'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
+import { getWork } from '../../../../actions/api/get/works'
 import { InformationTable, InformationTableSkeleton } from './_components/information-table'
-import { getWork } from './get-work'
 
 type WorkInformationPageProps = {
   params: Promise<{

@@ -1,10 +1,10 @@
 import { TriangleAlertIcon } from 'lucide-react'
 import { Skeleton } from '../../../../components/ui/skeleton'
-import { getLibraries } from '../get-libraries'
+import { getMyLibraries } from '../../../actions/api/get/libraries'
 import { WorkSelect as WorkSelectContent } from './work-select'
 
 export const WorkSelect = async () => {
-  const libraries = await getLibraries()
+  const libraries = await getMyLibraries('watching')
 
   if (libraries === null) {
     return (

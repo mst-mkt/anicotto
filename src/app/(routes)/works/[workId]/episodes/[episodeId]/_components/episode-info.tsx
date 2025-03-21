@@ -10,7 +10,7 @@ import {
   ThumbsDownIcon,
 } from 'lucide-react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { RatingBadge } from '../../../../../../../components/badge/rating'
@@ -24,7 +24,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../../../../../../../co
 import type { Episode } from '../../../../../../../schemas/annict/episodes'
 import type { Work } from '../../../../../../../schemas/annict/works'
 import { timeText } from '../../../../../../../utils/time-text'
-import { getEpisode } from '../get-episode'
+import { getEpisodeWithInfo } from '../../../../../../actions/api/get/episodes'
+import { getEpisodeRecords } from '../../../../../../actions/api/get/records'
 import { RecordForm } from './record-form'
 
 type EpisodeInfoProps = {
@@ -33,11 +34,17 @@ type EpisodeInfoProps = {
 }
 
 export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) => {
-  const episode = await getEpisode(episodeId)
+  const episode = await getEpisodeWithInfo(episodeId)
+
+  if (episode === null) {
+    notFound()
+  }
 
   if (episode.work.id !== workId) {
     redirect(`/works/${episode.work.id}/episodes/${episode.id}`)
   }
+
+  const records = await getEpisodeRecords(episodeId)
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -132,25 +139,14 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
       </div>
       <RecordForm episodeId={episode.id} tracked={episode.viewerDidTrack} />
       <div className="flex flex-col gap-y-8">
-        {episode.records.map((record) => (
+        {records?.data.map((record) => (
           <div key={record.id} className="flex gap-x-4">
-            <UserHoverCard
-              user={{
-                id: record.user.id,
-                username: record.user.username,
-                avatar_url: record.user.avatarUrl,
-                name: record.user.name,
-                description: record.user.description,
-                created_at: record.user.createdAt,
-                followers_count: record.user.followersCount,
-                followings_count: record.user.followingsCount,
-              }}
-            >
+            <UserHoverCard user={record.user}>
               <Link href={`/users/${record.user.username}`} className="sticky top-20 h-fit">
                 <Avatar className="h-10 w-10">
-                  {record.user.avatarUrl !== null && (
+                  {record.user.avatar_url !== null && (
                     <AvatarImage
-                      src={record.user.avatarUrl}
+                      src={record.user.avatar_url}
                       alt={`${record.user.username}のアバター`}
                     />
                   )}
@@ -160,18 +156,7 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
             </UserHoverCard>
             <div className="flex w-full min-w-0 flex-col gap-y-2">
               <header className="flex h-8 items-center justify-between gap-x-4">
-                <UserHoverCard
-                  user={{
-                    id: record.user.id,
-                    username: record.user.username,
-                    avatar_url: record.user.avatarUrl,
-                    name: record.user.name,
-                    description: record.user.description,
-                    created_at: record.user.createdAt,
-                    followers_count: record.user.followersCount,
-                    followings_count: record.user.followingsCount,
-                  }}
-                >
+                <UserHoverCard user={record.user}>
                   <Link
                     href={`/users/${record.user.username}`}
                     className="flex min-w-0 items-center gap-x-2 truncate"
@@ -183,14 +168,14 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
                   </Link>
                 </UserHoverCard>
                 <time
-                  dateTime={record.createdAt}
+                  dateTime={record.created_at}
                   className="shrink-0 break-keep text-muted-foreground text-sm"
                 >
-                  {timeText(record.createdAt)}
+                  {timeText(record.created_at)}
                 </time>
               </header>
               {record.comment !== null && <Markdown>{record.comment}</Markdown>}
-              {record.ratingState !== null && <RatingBadge rating={record.ratingState} />}
+              {record.rating_state !== null && <RatingBadge rating={record.rating_state} />}
             </div>
           </div>
         ))}

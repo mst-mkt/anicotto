@@ -5,7 +5,7 @@ import { Skeleton } from '../../../../../../../../components/ui/skeleton'
 import { STATUS_TEXT } from '../../../../../../../../constants/text/status'
 import type { Status } from '../../../../../../../../schemas/annict/common'
 import type { User } from '../../../../../../../../schemas/annict/users'
-import { getLibrary } from '../get-library'
+import { getUserLibraries } from '../../../../../../../actions/api/get/libraries'
 import { WorkCard } from './work-card'
 
 type WorkListProps = {
@@ -14,7 +14,7 @@ type WorkListProps = {
 }
 
 export const WorkList: FC<WorkListProps> = async ({ status, username }) => {
-  const libraries = await getLibrary(username, status)
+  const libraries = await getUserLibraries(username, status)
 
   if (libraries === null) {
     return (

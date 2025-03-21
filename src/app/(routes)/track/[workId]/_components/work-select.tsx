@@ -12,11 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../../../../components/ui/select'
-import type { Library } from '../get-libraries'
+import type { LibraryWithEpisodes } from '../../../../actions/api/get/libraries'
 
 type WorkSelectProps = {
   selected: string
-  libraries: Library[] | null
+  libraries: LibraryWithEpisodes[] | null
 }
 
 export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {

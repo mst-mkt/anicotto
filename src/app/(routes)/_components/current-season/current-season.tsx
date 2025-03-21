@@ -6,10 +6,10 @@ import { AspectRatio } from '../../../../components/ui/aspect-ratio'
 import { Carousel, CarouselContent, CarouselItem } from '../../../../components/ui/carousel'
 import { Skeleton } from '../../../../components/ui/skeleton'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
-import { getWorks } from '../../get-works'
+import { getCurrentSeasonWorks } from '../../../actions/api/get/works'
 
 export const CurrentSeasonWork = async () => {
-  const works = await getWorks()
+  const works = await getCurrentSeasonWorks()
 
   if (works === null) {
     return (

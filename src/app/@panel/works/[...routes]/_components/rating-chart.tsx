@@ -7,10 +7,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '../../../../../components/ui/chart'
-import type { Episode } from '../get-episodes'
+import type { Episodes } from '../../../../actions/api/get/episodes'
 
 type RatingChartProps = {
-  ratings: Episode[]
+  ratings: Episodes
 }
 
 export const RatingChart: FC<RatingChartProps> = ({ ratings }) => (

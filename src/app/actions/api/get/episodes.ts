@@ -2,8 +2,10 @@
 
 import { graphql } from 'gql.tada'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
+import { annictApiClient } from '../../../../lib/api/annict-rest/client'
+import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import type { Episode as EpisodeType } from '../../../../schemas/annict/episodes'
+import type { Episode, Episode as EpisodeType } from '../../../../schemas/annict/episodes'
 import type { Work } from '../../../../schemas/annict/works'
 import type { UnPromise } from '../../../../types/util-types'
 
@@ -109,7 +111,7 @@ export const getWorkLatestEpisode = async (workId: Work['id'], count = 24) => {
   )
 }
 
-export const getEpisode = async (episodeId: EpisodeType['id']) => {
+export const getEpisodeWithInfo = async (episodeId: EpisodeType['id']) => {
   const query = graphql(`
     query getEpisode($episodeId: Int!) {
       searchEpisodes(annictIds: [$episodeId]) {
@@ -186,4 +188,20 @@ export const getEpisode = async (episodeId: EpisodeType['id']) => {
   }
 }
 
-export type Episode = UnPromise<ReturnType<typeof getEpisode>>
+export type EpisodeWithInfo = UnPromise<ReturnType<typeof getEpisodeWithInfo>>
+
+export const getEpisode = async (episodeId: Episode['id']) => {
+  await auth()
+
+  const episodeResult = await annictApiClient.getEpisodes(
+    { query: { filter_ids: [episodeId], per_page: 1 } },
+    { next: { tags: [CACHE_TAGS.EPISODE(episodeId)] } },
+  )
+
+  if (episodeResult.isErr()) {
+    console.error(`Failed to fetch episode (${episodeId})`, episodeResult.error)
+    return null
+  }
+
+  return episodeResult.value.episodes.at(0) ?? null
+}

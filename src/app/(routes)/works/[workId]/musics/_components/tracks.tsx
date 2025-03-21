@@ -7,16 +7,16 @@ import { Skeleton } from '../../../../../../components/ui/skeleton'
 import { spotifyApiClient } from '../../../../../../lib/api/spotify/client'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
 import type { Work } from '../../../../../../schemas/annict/works'
-import { getWorkTitle } from '../get-work-title'
+import { getWork } from '../../../../../actions/api/get/works'
 
 type TracksProps = {
   workId: Work['id']
 }
 
 export const Tracks: FC<TracksProps> = async ({ workId }) => {
-  const title = await getWorkTitle(workId)
+  const work = await getWork(workId)
 
-  if (title === null) {
+  if (work === null) {
     return (
       <div className="flex flex-col items-center justify-center gap-y-4 py-12">
         <CloudAlertIcon size={40} className="text-anicotto-accent" />
@@ -27,7 +27,7 @@ export const Tracks: FC<TracksProps> = async ({ workId }) => {
 
   const {
     tracks: { items: tracks },
-  } = await spotifyApiClient.search(title, ['track'], 'JP', 16)
+  } = await spotifyApiClient.search(work.title, ['track'], 'JP', 16)
 
   return (
     <div className="flex flex-col gap-y-1">

@@ -12,7 +12,7 @@ import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import { type Status, statusPicklist } from '../../../../../schemas/annict/common'
 import type { Work } from '../../../../../schemas/annict/works'
 import { cn } from '../../../../../utils/classnames'
-import { updateStatus as updateStatusAction } from '../../../../actions/api/update-status'
+import { updateStatus as updateStatusAction } from '../../../../actions/api/mutate/update-status'
 
 type StatusSelectSelectProps = {
   work: Work

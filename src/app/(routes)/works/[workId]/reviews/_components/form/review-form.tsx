@@ -8,7 +8,7 @@ import { Button } from '../../../../../../../components/ui/button'
 import { Label } from '../../../../../../../components/ui/label'
 import { Textarea } from '../../../../../../../components/ui/textarea'
 import type { Work } from '../../../../../../../schemas/annict/works'
-import { createReview } from '../../../../../../actions/api/create-review'
+import { createReview } from '../../../../../../actions/api/mutate/create-review'
 import { RatingSelect } from './rating-select'
 
 type ReviewFormProps = {
