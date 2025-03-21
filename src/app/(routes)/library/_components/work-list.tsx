@@ -18,9 +18,9 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
         <CloudAlertIcon size={40} className="text-anicotto-accent" />
-        <p>
+        <div>
           <Badge variant="secondary">{STATUS_TEXT(status)}</Badge> の作品の取得に失敗しました
-        </p>
+        </div>
       </div>
     )
   }
