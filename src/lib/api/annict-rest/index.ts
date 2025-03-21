@@ -108,7 +108,6 @@ export class AnnictClient {
     const fetcher = async (
       params: Params,
       options?: RequestInit,
-      // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: for branching for error handling
     ): Promise<Result<Response, string>> => {
       if (this.accessToken === null) {
         return err('Access token is not set')

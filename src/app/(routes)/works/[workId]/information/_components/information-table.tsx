@@ -19,7 +19,6 @@ type InformationTableProps = {
   workId: Work['id']
 }
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: no complexity, just switching between displays
 export const InformationTable: FC<InformationTableProps> = async ({ workId }) => {
   const work = await getWork(workId)
 
