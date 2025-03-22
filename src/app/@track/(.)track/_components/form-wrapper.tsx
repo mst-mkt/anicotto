@@ -7,16 +7,17 @@ import { toast } from 'sonner'
 import { useDiscordShare } from '../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../hooks/share/useMisskeyShare'
 import { type Rating, ratingPicklist } from '../../../../schemas/annict/common'
-import { getEpisode } from '../../../actions/api/get/episodes'
 import { createRecord } from '../../../actions/api/mutate/create-record'
+import { shareRecordForDiscord } from '../../../actions/share/discord'
+import { shareRecordForMisskey } from '../../../actions/share/misskey'
 
 type TrackFormWrapperProps = ComponentProps<'form'>
 
 export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
-  const { shareRecord: shareMisskey } = useShareMisskey()
-  const { shareRecord: shareDiscord } = useDiscordShare()
+  const { shareMisskey, recordMisskeyConfig } = useShareMisskey()
+  const { shareDiscord, discordConfig } = useDiscordShare()
 
   const getFormData = (formData: FormData) => {
     const isRating = (value: unknown): value is Rating => {
@@ -60,11 +61,20 @@ export const TrackFormWrapper: FC<TrackFormWrapperProps> = (props) => {
       </p>,
     )
 
-    const episode = await getEpisode(episodeId)
+    if (shareMisskey) {
+      const result = await shareRecordForMisskey(episodeId, recordMisskeyConfig)
 
-    if (episode !== null) {
-      shareMisskey(episode)
-      shareDiscord(episode)
+      if (!result.success) {
+        toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+      }
+    }
+
+    if (shareDiscord) {
+      const result = await shareRecordForDiscord(episodeId, discordConfig)
+
+      if (!result.success) {
+        toast.error(`Discordへの共有に失敗しました: ${result.error}`)
+      }
     }
 
     formRef.current?.reset()

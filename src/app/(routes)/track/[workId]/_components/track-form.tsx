@@ -12,6 +12,14 @@ import { useDiscordShare } from '../../../../../hooks/share/useDiscordShare'
 import { useShareMisskey } from '../../../../../hooks/share/useMisskeyShare'
 import type { LibraryWithEpisodes } from '../../../../actions/api/get/libraries'
 import { createMultipleRecords } from '../../../../actions/api/mutate/create-multiple-records'
+import {
+  shareMultipleRecordsForDiscord,
+  shareRecordForDiscord,
+} from '../../../../actions/share/discord'
+import {
+  shareMultipleRecordsForMisskey,
+  shareRecordForMisskey,
+} from '../../../../actions/share/misskey'
 
 type TrackFormProps = {
   episodes: LibraryWithEpisodes['work']['episodes']
@@ -21,10 +29,8 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
   const displayEpisodes = useMemo(() => episodes.slice(0, 64), [episodes])
   const [selected, setSelected] = useState(displayEpisodes.map(({ id }) => `${id}`))
   const [isPending, startTransition] = useTransition()
-  const { shareRecord: shareMisskey, shareMultipleRecords: shareMisskeyMultiple } =
-    useShareMisskey()
-  const { shareRecord: shareDiscord, shareMultipleRecords: shareDiscordMultiple } =
-    useDiscordShare()
+  const { shareMisskey, multipleRecordsMisskeyConfig, recordMisskeyConfig } = useShareMisskey()
+  const { shareDiscord, discordConfig } = useDiscordShare()
 
   const currentAllCheckedState = useMemo(() => {
     if (selected.length === 0) return false
@@ -53,23 +59,34 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
     const ids = selected.map((id) => Number.parseInt(id, 10))
     const result = await createMultipleRecords(ids)
 
-    if (result.success) {
-      toast.success('記録しました')
-
-      if (result.data.length === 1) {
-        const data = result.data[0]
-        shareMisskey({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
-        shareDiscord({ ...data.episode, work: data.work, next_episode: null, prev_episode: null })
-      } else {
-        const length = result.data.length
-        const from = result.data[0].episode
-        const to = result.data[result.data.length - 1].episode
-        const work = result.data[0].work
-        shareMisskeyMultiple(length, { from, to }, work)
-        shareDiscordMultiple(length, { from, to }, work)
-      }
-    } else {
+    if (!result.success) {
       toast.error(`記録に失敗しました: ${result.error}`)
+      return
+    }
+
+    toast.success('記録しました')
+
+    if (shareMisskey) {
+      const result = await (() => {
+        if (ids.length === 1) return shareRecordForMisskey(ids[0], recordMisskeyConfig)
+
+        return shareMultipleRecordsForMisskey(ids, multipleRecordsMisskeyConfig)
+      })()
+
+      if (!result.success) {
+        toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+      }
+    }
+
+    if (shareDiscord) {
+      const result = await (() => {
+        if (ids.length === 1) return shareRecordForDiscord(ids[0], discordConfig)
+        return shareMultipleRecordsForDiscord(ids, discordConfig)
+      })()
+
+      if (!result.success) {
+        toast.error(`Discordへの共有に失敗しました: ${result.error}`)
+      }
     }
   }
 
