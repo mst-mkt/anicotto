@@ -13,6 +13,7 @@ import { type Status, statusPicklist } from '../../../../../schemas/annict/commo
 import type { Work } from '../../../../../schemas/annict/works'
 import { cn } from '../../../../../utils/classnames'
 import { updateStatus as updateStatusAction } from '../../../../actions/api/mutate/update-status'
+import { shareStatusForDiscord } from '../../../../actions/share/discord'
 import { shareStatusForMisskey } from '../../../../actions/share/misskey'
 
 type StatusSelectSelectProps = {
@@ -24,39 +25,45 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   const [updatingStatus, setUpdatingStatus] = useState<Status | null>(null)
   const [isUpdating, startTransition] = useTransition()
   const { shareMisskey, statusMisskeyConfig } = useShareMisskey()
-  const { shareStatus: shareDiscord } = useDiscordShare()
+  const { shareDiscord, discordConfig } = useDiscordShare()
 
   const updateStatus = useCallback(
     async (status: Status) => {
       const result = await updateStatusAction(work.id, status)
+      setUpdatingStatus(null)
 
-      if (result.success) {
-        toast.success(
-          <span>
-            <b className="font-bold">{work.title}</b> のステータスを更新しました
-          </span>,
-        )
-
-        if (shareMisskey) {
-          const result = await shareStatusForMisskey(work.id, status, statusMisskeyConfig)
-
-          if (!result.success) {
-            toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
-          }
-        }
-
-        shareDiscord(work, status)
-      } else {
+      if (!result.success) {
         toast.error(
           <span>
             <b className="font-bold">{work.title}</b> のステータスの更新に失敗しました
           </span>,
         )
+        return
       }
 
-      setUpdatingStatus(null)
+      toast.success(
+        <span>
+          <b className="font-bold">{work.title}</b> のステータスを更新しました
+        </span>,
+      )
+
+      if (shareMisskey) {
+        const result = await shareStatusForMisskey(work.id, status, statusMisskeyConfig)
+
+        if (!result.success) {
+          toast.error(`Misskeyへの共有に失敗しました: ${result.error}`)
+        }
+      }
+
+      if (shareDiscord) {
+        const result = await shareStatusForDiscord(work.id, status, discordConfig)
+
+        if (!result.success) {
+          toast.error(`Discordへの共有に失敗しました: ${result.error}`)
+        }
+      }
     },
-    [work, shareDiscord, shareMisskey, statusMisskeyConfig],
+    [work, shareDiscord, shareMisskey, statusMisskeyConfig, discordConfig],
   )
 
   const handleClick = useCallback(
