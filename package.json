@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "prepare": "lefthook install",
-    "dev": "next dev",
-    "dev:turbo": "next dev --turbopack",
-    "dev:https": "next dev --experimental-https",
+    "dev": "next dev --turbopack",
+    "dev:https": "next dev --experimental-https --turbopack",
     "build": "next build",
     "start": "next start",
     "check": "biome check ./src/",
