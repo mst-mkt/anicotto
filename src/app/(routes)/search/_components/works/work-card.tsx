@@ -4,10 +4,10 @@ import type { FC } from 'react'
 import { WorkHoverCard } from '../../../../../components/hover-card/work/card'
 import { Image } from '../../../../../components/shared/image'
 import { Badge } from '../../../../../components/ui/badge'
-import type { WorkWithThumbnailAndStatus } from '../../../../actions/api/get/works'
+import type { WorkWithThumbnail } from '../../../../actions/api/get/works'
 
 type WorkCardProps = {
-  work: WorkWithThumbnailAndStatus
+  work: WorkWithThumbnail
 }
 
 export const WorkCard: FC<WorkCardProps> = ({ work }) => (

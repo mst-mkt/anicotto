@@ -3,17 +3,12 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import { withStatusWork, withStatusWorks } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
-import type { Work, WorkWithStatus } from '../../../../schemas/annict/works'
+import type { Work } from '../../../../schemas/annict/works'
 import { getCurrentSeason } from '../../../../utils/get-season'
 
 export type WorkWithThumbnail = Work & {
-  thumbnail: string | null
-}
-
-export type WorkWithThumbnailAndStatus = WorkWithStatus & {
   thumbnail: string | null
 }
 
@@ -40,9 +35,7 @@ export const getCurrentSeasonWorks = async (count = 12) => {
     })),
   )
 
-  const worksWithStatus = await withStatusWorks(worksWithValidThumbnail)
-
-  return { data: worksWithStatus, next_page: worksResult.value.next_page }
+  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
 }
 
 export const getMyWorks = async (status: Status, page = 1) => {
@@ -111,9 +104,7 @@ export const searchWorks = async (
     })),
   )
 
-  const worksWithStatus = await withStatusWorks(worksWithValidThumbnail)
-
-  return { data: worksWithStatus, next_page: worksResult.value.next_page }
+  return { data: worksWithValidThumbnail, next_page: worksResult.value.next_page }
 }
 
 export const getWork = async (workId: Work['id']) => {
@@ -140,7 +131,21 @@ export const getWork = async (workId: Work['id']) => {
     thumbnail: await getValidWorkImage(work.id.toString(), work.images),
   }
 
-  const workWithStatus = await withStatusWork(workWithValidThumbnail)
+  return workWithValidThumbnail
+}
 
-  return workWithStatus
+export const getWorkStatus = async (workId: Work['id']) => {
+  await auth()
+
+  const statusResult = await annictApiClient.getMyWorks(
+    { query: { filter_ids: [workId] } },
+    { next: { tags: [CACHE_TAGS.WORK(workId), CACHE_TAGS.WORK_STATUS(workId)] } },
+  )
+
+  if (statusResult.isErr()) {
+    console.error(`[/works/${workId}] Failed to fetch status:`, statusResult.error)
+    return null
+  }
+
+  return statusResult.value.works.at(0)?.status.kind ?? 'no_select'
 }

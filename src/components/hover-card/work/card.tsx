@@ -2,21 +2,17 @@ import type { HoverCardContentProps } from '@radix-ui/react-hover-card'
 import { ClapperboardIcon, EyeIcon, ImageOffIcon, MessageCircleHeartIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC, ReactNode } from 'react'
-import type { ActivityWithThumbnailAndStatus } from '../../../app/actions/api/get/activities'
+import type { ActivityWithThumbnail } from '../../../app/actions/api/get/activities'
 import type { Library } from '../../../app/actions/api/get/libraries'
 import type { UserRecord } from '../../../app/actions/api/get/records'
-import type { WorkWithThumbnailAndStatus } from '../../../app/actions/api/get/works'
+import type { WorkWithThumbnail } from '../../../app/actions/api/get/works'
 import { Image } from '../../shared/image'
 import { AspectRatio } from '../../ui/aspect-ratio'
 import { Badge } from '../../ui/badge'
 import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '../../ui/hover-card'
 
 type WorkHoverCardProps = {
-  work:
-    | WorkWithThumbnailAndStatus
-    | UserRecord['work']
-    | ActivityWithThumbnailAndStatus['work']
-    | Library['work']
+  work: WorkWithThumbnail | UserRecord['work'] | ActivityWithThumbnail['work'] | Library['work']
   side?: HoverCardContentProps['side']
   children: ReactNode
 }

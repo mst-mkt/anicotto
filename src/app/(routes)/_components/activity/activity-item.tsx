@@ -12,10 +12,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/a
 import { Badge } from '../../../../components/ui/badge'
 import { ACTIVITY_TEXT } from '../../../../constants/text/activity'
 import { timeText } from '../../../../utils/time-text'
-import type { ActivityWithThumbnailAndStatus } from '../../../actions/api/get/activities'
+import type { ActivityWithThumbnail } from '../../../actions/api/get/activities'
 
 type ActivityItemProps = {
-  activity: ActivityWithThumbnailAndStatus
+  activity: ActivityWithThumbnail
 }
 
 export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (

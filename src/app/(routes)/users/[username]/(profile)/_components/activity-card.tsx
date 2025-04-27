@@ -5,11 +5,11 @@ import { ActionIcon } from '../../../../../../components/icon/action'
 import { Image } from '../../../../../../components/shared/image'
 import { ACTIVITY_TEXT } from '../../../../../../constants/text/activity'
 import { timeText } from '../../../../../../utils/time-text'
-import type { ActivityWithThumbnailAndStatus } from '../../../../../actions/api/get/activities'
+import type { ActivityWithThumbnail } from '../../../../../actions/api/get/activities'
 import { ActivityInfo } from './activity-info'
 
 type ActivityCardProps = {
-  activity: ActivityWithThumbnailAndStatus
+  activity: ActivityWithThumbnail
 }
 
 export const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (

@@ -3,10 +3,10 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { WorkHoverCard } from '../../../../components/hover-card/work/card'
 import { Image } from '../../../../components/shared/image'
-import type { WorkWithThumbnailAndStatus } from '../../../actions/api/get/works'
+import type { WorkWithThumbnail } from '../../../actions/api/get/works'
 
 type WorkItemProps = {
-  work: WorkWithThumbnailAndStatus
+  work: WorkWithThumbnail
 }
 
 export const WorkItem: FC<WorkItemProps> = ({ work }) => (

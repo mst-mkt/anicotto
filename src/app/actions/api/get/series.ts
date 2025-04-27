@@ -6,7 +6,6 @@ import { MEDIA_TEXT } from '../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Work } from '../../../../schemas/annict/works'
 
@@ -67,13 +66,6 @@ export const getWorkSeries = async (workId: Work['id']) => {
 
   const seriesList = work.seriesList?.nodes?.filter((series) => series !== null) ?? []
 
-  await fetchAndSetWorkStatusCache(
-    seriesList
-      .flatMap((series) => series?.works?.edges ?? [])
-      .flatMap((edge) => edge?.item ?? [])
-      .map((work) => work.annictId),
-  )
-
   return await Promise.all(
     seriesList.map(async (series) => ({
       id: series.annictId,
@@ -102,9 +94,6 @@ export const getWorkSeries = async (workId: Work['id']) => {
               work.image?.twitterNormalAvatarUrl,
               work.image?.twitterAvatarUrl,
             ]),
-            status: {
-              kind: getWorkStatusCache(work.annictId),
-            },
           })) ?? [],
       ),
     })),

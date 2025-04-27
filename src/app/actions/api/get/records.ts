@@ -8,7 +8,6 @@ import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Episode } from '../../../../schemas/annict/episodes'
 import type { User } from '../../../../schemas/annict/users'
@@ -71,8 +70,6 @@ export const getUserRecords = async (username: User['username'], after?: string)
     return null
   }
 
-  await fetchAndSetWorkStatusCache(records.map((record) => record.work.annictId))
-
   return await Promise.all(
     records.map(async (record) => ({
       id: record.annictId,
@@ -94,9 +91,6 @@ export const getUserRecords = async (username: User['username'], after?: string)
           record.work.image?.twitterNormalAvatarUrl ?? null,
           record.work.image?.twitterAvatarUrl ?? null,
         ]),
-        status: {
-          kind: getWorkStatusCache(record.work.annictId),
-        },
         episodes_count: record.work.episodesCount,
         watchers_count: record.work.watchersCount,
         reviews_count: record.work.reviewsCount,

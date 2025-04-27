@@ -6,7 +6,6 @@ import { MEDIA_TEXT } from '../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import { fetchAndSetWorkStatusCache, getWorkStatusCache } from '../../../../lib/cache/status'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
 import type { User } from '../../../../schemas/annict/users'
@@ -76,8 +75,6 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
     return null
   }
 
-  await fetchAndSetWorkStatusCache(libraries.map((lib) => lib.work.annictId))
-
   return await Promise.all(
     libraries.map(async (library) => ({
       next_episode:
@@ -111,9 +108,6 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
           library.work.image?.twitterNormalAvatarUrl,
           library.work.image?.twitterAvatarUrl,
         ]),
-        status: {
-          kind: getWorkStatusCache(library.work.annictId),
-        },
       },
     })),
   )
@@ -195,8 +189,6 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
     return null
   }
 
-  await fetchAndSetWorkStatusCache(libraries.map((lib) => lib.work.annictId))
-
   return await Promise.all(
     libraries.map(async (library) => ({
       next_episode:
@@ -230,9 +222,6 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
           library.work.image?.twitterNormalAvatarUrl,
           library.work.image?.twitterAvatarUrl,
         ]),
-        status: {
-          kind: getWorkStatusCache(library.work.annictId),
-        },
         episodes:
           library.work.episodes?.nodes
             ?.filter((episode) => episode !== null)
@@ -319,8 +308,6 @@ export const getUserLibraries = async (
     return null
   }
 
-  await fetchAndSetWorkStatusCache(libraries.map((lib) => lib.work.annictId))
-
   return await Promise.all(
     libraries.map(async (library) => ({
       next_episode:
@@ -354,9 +341,6 @@ export const getUserLibraries = async (
           library.work.image?.twitterNormalAvatarUrl,
           library.work.image?.twitterAvatarUrl,
         ]),
-        status: {
-          kind: getWorkStatusCache(library.work.annictId),
-        },
       },
     })),
   )
