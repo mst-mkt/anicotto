@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import { searchWorks } from '../../../../actions/api/get/works'
 import type { SearchOrder, SearchSort } from '../../search-params'
-import { WorkCard } from './work-card'
+import { SearchWorksScroller } from './search-works-scroller'
 
 type SearchWorksProps = {
   query: string
@@ -35,9 +35,7 @@ export const SearchWorks: FC<SearchWorksProps> = async ({ query, sort, order, se
 
   return (
     <div className="flex flex-col gap-y-4">
-      {works.data.map((work) => (
-        <WorkCard key={work.id} work={work} />
-      ))}
+      <SearchWorksScroller initialWorks={works.data} search={{ query, sort, order, season }} />
     </div>
   )
 }

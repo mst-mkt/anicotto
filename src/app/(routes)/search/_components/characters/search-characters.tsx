@@ -1,9 +1,9 @@
-import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
-import Link from 'next/link'
+import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import { searchCharacters } from '../../../../actions/api/get/characters'
 import type { SearchOrder } from '../../search-params'
+import { SearchCharactersScroller } from './search-characters-scroller'
 
 type SearchCharactersProps = {
   query: string
@@ -33,31 +33,7 @@ export const SearchCharacters: FC<SearchCharactersProps> = async ({ query, order
 
   return (
     <div className="flex flex-col gap-y-4">
-      {characters.data.map((character) => (
-        <Link
-          className="group rounded-lg border border-muted p-4 shadow-xs transition-colors hover:bg-muted"
-          href={`/characters/${character.id}`}
-          key={character.id}
-        >
-          <h2 className="font-bold text-lg transition-colors group-hover:text-anicotto-accent">
-            {character.name}
-          </h2>
-          <div className="flex items-center justify-end gap-x-4">
-            {character.series !== null && (
-              <p className="flex w-full min-w-0 shrink gap-x-1">
-                <span className="truncate">{character.series.name}</span>
-                <span className="shrink-0 self-end break-keep font-bold text-muted-foreground text-sm">
-                  シリーズ
-                </span>
-              </p>
-            )}
-            <div className="flex w-fit items-center gap-x-1 rounded-md bg-anicotto-accent/8 px-2 py-1 text-anicotto-accent">
-              <HeartIcon size={16} />
-              <span className="font-bold text-sm">{character.favorite_characters_count}</span>
-            </div>
-          </div>
-        </Link>
-      ))}
+      <SearchCharactersScroller initialCharacters={characters.data} search={{ query, order }} />
     </div>
   )
 }

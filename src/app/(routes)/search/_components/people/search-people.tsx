@@ -1,9 +1,9 @@
-import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
-import Link from 'next/link'
+import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import { searchPeople } from '../../../../actions/api/get/people'
 import type { SearchOrder } from '../../search-params'
+import { SearchPeopleScroller } from './search-people-scroller'
 
 type SearchPeopleProps = {
   query: string
@@ -33,21 +33,7 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      {people.data.map((person) => (
-        <Link
-          className="group flex flex-col rounded-lg border border-muted p-4 shadow-xs transition-colors hover:bg-muted"
-          href={`/people/${person.id}`}
-          key={person.id}
-        >
-          <h2 className="font-bold text-lg transition-colors group-hover:text-anicotto-accent">
-            {person.name}
-          </h2>
-          <div className="flex w-fit items-center gap-x-1 self-end rounded-md bg-anicotto-accent/8 px-2 py-1 text-anicotto-accent">
-            <HeartIcon size={16} />
-            <span className="font-bold text-sm">{person.favorite_people_count}</span>
-          </div>
-        </Link>
-      ))}
+      <SearchPeopleScroller initialPeople={people.data} search={{ query, order }} />
     </div>
   )
 }

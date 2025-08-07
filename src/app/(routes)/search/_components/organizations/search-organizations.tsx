@@ -1,9 +1,9 @@
-import { CloudAlertIcon, HeartIcon, OrigamiIcon } from 'lucide-react'
-import Link from 'next/link'
+import { CloudAlertIcon, OrigamiIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import { searchOrganizations } from '../../../../actions/api/get/organizations'
 import type { SearchOrder } from '../../search-params'
+import { SearchOrganizationsScroller } from './search-organizations-scroller'
 
 type SearchOrganizationsProps = {
   query: string
@@ -33,21 +33,10 @@ export const SearchOrganizations: FC<SearchOrganizationsProps> = async ({ query,
 
   return (
     <div className="flex flex-col gap-y-4">
-      {organizations.data.map((organization) => (
-        <Link
-          className="group flex flex-col rounded-lg border border-muted p-4 shadow-xs transition-colors hover:bg-muted"
-          href={`/organizations/${organization.id}`}
-          key={organization.id}
-        >
-          <h2 className="font-bold text-lg transition-colors group-hover:text-anicotto-accent">
-            {organization.name}
-          </h2>
-          <div className="flex w-fit items-center gap-x-1 self-end rounded-md bg-anicotto-accent/8 px-2 py-1 text-anicotto-accent">
-            <HeartIcon size={16} />
-            <span className="font-bold text-sm">{organization.favorite_organizations_count}</span>
-          </div>
-        </Link>
-      ))}
+      <SearchOrganizationsScroller
+        initialOrganizations={organizations.data}
+        search={{ query, order }}
+      />
     </div>
   )
 }
