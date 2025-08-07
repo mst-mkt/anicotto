@@ -1,7 +1,7 @@
 import { CloudAlertIcon } from 'lucide-react'
 import { Skeleton } from '../../../../components/ui/skeleton'
 import { getFollowingActivities } from '../../../actions/api/get/activities'
-import { ActivityItem } from './activity-item'
+import { ActivityScroller } from './activity-scroller'
 
 export const Activity = async () => {
   const activities = await getFollowingActivities()
@@ -17,9 +17,7 @@ export const Activity = async () => {
 
   return (
     <div className="flex flex-col gap-y-8">
-      {activities.data.map((activity) => (
-        <ActivityItem activity={activity} key={activity.id} />
-      ))}
+      <ActivityScroller initialActivities={activities.data} />
     </div>
   )
 }
