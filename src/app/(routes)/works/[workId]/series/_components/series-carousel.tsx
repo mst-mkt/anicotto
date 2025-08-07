@@ -20,19 +20,19 @@ export const SeriesCarousels: FC<SeriesCarouselsProps> = async ({ workId }) => {
   if (series === null || series.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-y-4 p-16">
-        <RatIcon size={48} className="text-anicotto-accent" />
+        <RatIcon className="text-anicotto-accent" size={48} />
         <span className="font-bold text-muted-foreground">関連作品がありません</span>
       </div>
     )
   }
 
   return series.map((series) => (
-    <div key={series.id} className="contents">
+    <div className="contents" key={series.id}>
       <hgroup className="flex items-center gap-x-2">
         <h2 className="font-bold text-lg">{series.name}</h2>
         <span className="font-bold text-muted-foreground">シリーズ</span>
       </hgroup>
-      <Carousel opts={{ wheel: true }} className="flex flex-col gap-y-8">
+      <Carousel className="flex flex-col gap-y-8" opts={{ wheel: true }}>
         <CarouselPrevious className="top-3/7 hidden cursor-pointer md:flex" />
         <CarouselNext className="top-3/7 hidden cursor-pointer md:flex" />
         <CarouselContent>

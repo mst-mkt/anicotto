@@ -47,7 +47,7 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
     }
   }
 
-  const handleCheckedChange = useCallback(async (checked: CheckedState, id: string) => {
+  const handleCheckedChange = useCallback((checked: CheckedState, id: string) => {
     if (checked) {
       setSelected((prev) => [...prev, id].toSorted())
     } else {
@@ -90,7 +90,7 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (selected.length > 64) {
       return toast.error('選択したエピソードが多すぎます。100話以下にしてください')
     }
@@ -100,15 +100,15 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
   return (
     <div className="flex flex-col gap-y-4 py-4">
       <Label className="flex cursor-pointer items-center gap-x-2 px-4">
-        <Checkbox onCheckedChange={handleAllCheckedChange} checked={currentAllCheckedState} />
+        <Checkbox checked={currentAllCheckedState} onCheckedChange={handleAllCheckedChange} />
         <span className="font-bold">未記録エピソード 全{episodes.length}話</span>
       </Label>
       <div className="flex flex-col gap-y-2 rounded-md border border-muted p-4">
         {displayEpisodes.slice(0, 100).map((episode) => (
-          <Label key={episode.id} className="flex cursor-pointer items-center gap-x-2">
+          <Label className="flex cursor-pointer items-center gap-x-2" key={episode.id}>
             <Checkbox
-              onCheckedChange={(checked) => handleCheckedChange(checked, `${episode.id}`)}
               checked={selected.includes(`${episode.id}`)}
+              onCheckedChange={(checked) => handleCheckedChange(checked, `${episode.id}`)}
             />
             <Badge className="break-keep">{episode.number_text}</Badge>
             {episode.title === null ? (
@@ -125,8 +125,8 @@ export const TrackForm: FC<TrackFormProps> = ({ episodes }) => {
         )}
       </div>
       <Button
-        disabled={selected.length === 0 || isPending}
         className="sticky bottom-24 cursor-pointer md:bottom-4"
+        disabled={selected.length === 0 || isPending}
         onClick={handleSubmit}
       >
         {isPending ? <LoaderIcon className="animate-spin" /> : <PenToolIcon />}

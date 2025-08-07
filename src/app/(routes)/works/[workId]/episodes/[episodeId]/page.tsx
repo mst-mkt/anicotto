@@ -40,7 +40,7 @@ const EpisodePage: FC<EpisodePageProps> = async ({ params }) => {
 
   return (
     <Suspense fallback={<EpisodeInfoSkeleton />}>
-      <EpisodeInfo workId={workId} episodeId={episodeId} />
+      <EpisodeInfo episodeId={episodeId} workId={workId} />
     </Suspense>
   )
 }

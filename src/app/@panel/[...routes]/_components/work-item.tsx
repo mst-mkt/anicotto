@@ -10,24 +10,24 @@ type WorkItemProps = {
 }
 
 export const WorkItem: FC<WorkItemProps> = ({ work }) => (
-  <WorkHoverCard work={work} side="left">
+  <WorkHoverCard side="left" work={work}>
     <div className="group relative">
       <Link
-        href={`/works/${work.id}`}
         className="flex items-center rounded-md transition-colors hover:bg-muted group-hover:pr-12"
+        href={`/works/${work.id}`}
       >
         <div className="aspect-square h-14 w-14 shrink-0 overflow-hidden rounded-md">
           <Image
-            width={128}
-            height={128}
-            src={work.thumbnail}
             alt={work.title}
+            className="h-full w-full object-cover"
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                 <ImageOffIcon size={20} />
               </div>
             }
-            className="h-full w-full object-cover"
+            height={128}
+            src={work.thumbnail}
+            width={128}
           />
         </div>
         <div className="px-3 py-2">
@@ -35,10 +35,10 @@ export const WorkItem: FC<WorkItemProps> = ({ work }) => (
         </div>
       </Link>
       <Link
-        href={`/track/${work.id}`}
         className="absolute top-2 right-2 hidden aspect-square h-10 items-center justify-center rounded-md border border-background-300 bg-background transition-colors hover:bg-muted group-hover:flex"
+        href={`/track/${work.id}`}
       >
-        <PenToolIcon size={16} className="text-muted-foreground" />
+        <PenToolIcon className="text-muted-foreground" size={16} />
       </Link>
     </div>
   </WorkHoverCard>

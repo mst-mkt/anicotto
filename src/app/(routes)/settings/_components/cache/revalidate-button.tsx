@@ -12,10 +12,10 @@ export const RevalidateButton = () => {
 
   return (
     <Button
-      onClick={revalidate}
-      disabled={isPending}
-      variant="destructive"
       className="w-fit cursor-pointer self-end"
+      disabled={isPending}
+      onClick={revalidate}
+      variant="destructive"
     >
       {isPending ? <LoaderIcon className="animate-spin" /> : <Trash2Icon />}
       キャッシュを再検証

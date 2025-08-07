@@ -1,4 +1,4 @@
-import { P, match } from 'ts-pattern'
+import { match, P } from 'ts-pattern'
 import type { introspection_types } from '../../types/graphql-env'
 
 export const SESONS = ['spring', 'summer', 'autumn', 'winter', 'all'] as const

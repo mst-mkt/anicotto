@@ -41,8 +41,8 @@ type TabTriggerProps = {
 }
 
 const TabTrigger: FC<TabTriggerProps> = ({ status }) => (
-  <TabsTrigger value={status} className="cursor-pointer gap-x-1">
-    <StatusIcon status={status} size={16} className="hidden md:block" />
+  <TabsTrigger className="cursor-pointer gap-x-1" value={status}>
+    <StatusIcon className="hidden md:block" size={16} status={status} />
     {STATUS_TEXT(status)}
   </TabsTrigger>
 )

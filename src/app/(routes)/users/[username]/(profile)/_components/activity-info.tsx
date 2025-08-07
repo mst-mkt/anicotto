@@ -14,8 +14,8 @@ import type {
 
 const CreateRecordInfo: FC<CreateRecordActivity> = (activity) => (
   <Link
-    href={`/works/${activity.work.id}/episodes/${activity.episode.id}`}
     className="group flex items-center gap-x-2"
+    href={`/works/${activity.work.id}/episodes/${activity.episode.id}`}
   >
     <Badge className="shrink-0 break-keep">{activity.episode.number_text}</Badge>
     <span className="shrink truncate transition-colors group-hover:text-anicotto-accent-600 group-hover:underline">
@@ -27,7 +27,7 @@ const CreateRecordInfo: FC<CreateRecordActivity> = (activity) => (
 const CreateMultipleRecordsInfo: FC<CreateMultipleRecordsActivity> = (activity) => (
   <div className="flex flex-col gap-y-2">
     {activity.multiple_records.map(({ record, episode }) => (
-      <div key={record.id} className="flex items-center gap-x-2 truncate">
+      <div className="flex items-center gap-x-2 truncate" key={record.id}>
         <Badge>{episode.number_text}</Badge>
         <span>{episode.title}</span>
       </div>

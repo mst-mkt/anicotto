@@ -9,7 +9,7 @@ export const WorkSelect = async () => {
   if (libraries === null) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
-        <TriangleAlertIcon size={24} className="text-anicotto-accent" />
+        <TriangleAlertIcon className="text-anicotto-accent" size={24} />
         <p>エピソード情報の取得に失敗しました</p>
       </div>
     )
@@ -18,7 +18,7 @@ export const WorkSelect = async () => {
   if (libraries.filter((lib) => lib.next_episode !== null).length === 0) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
-        <TriangleAlertIcon size={24} className="text-anicotto-accent" />
+        <TriangleAlertIcon className="text-anicotto-accent" size={24} />
         <p>視聴中の作品がありません</p>
       </div>
     )

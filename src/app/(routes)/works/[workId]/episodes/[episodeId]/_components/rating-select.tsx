@@ -9,7 +9,7 @@ import { cn } from '../../../../../../../utils/classnames'
 export const RatingSelect = () => (
   <Label className="flex flex-col gap-y-2">
     <span>評価</span>
-    <RadioGroup name="rating" className="flex gap-0 rounded-lg bg-background shadow-xs">
+    <RadioGroup className="flex gap-0 rounded-lg bg-background shadow-xs" name="rating">
       {ratingPicklist.options.map((rating) => (
         <Tooltip key={rating}>
           <TooltipTrigger asChild={true}>
@@ -31,8 +31,8 @@ export const RatingSelect = () => (
                   '!border-anicotto-rating-bad/12 bg-anicotto-rating-bad-pale/10 text-anicotto-rating-bad hover:bg-anicotto-rating-bad-pale/16',
               )}
             >
-              <RadioGroupItem value={rating} className="sr-only" />
-              <RatingIcon rating={rating} size={20} className="text-muted-foreground" />
+              <RadioGroupItem className="sr-only" value={rating} />
+              <RatingIcon className="text-muted-foreground" rating={rating} size={20} />
             </Label>
           </TooltipTrigger>
           <TooltipContent>{RATING_TEXT(rating)}</TooltipContent>

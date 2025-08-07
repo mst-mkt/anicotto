@@ -1,9 +1,9 @@
 import {
+  array,
   type BaseIssue,
   type BaseSchema,
-  type InferOutput,
-  array,
   custom,
+  type InferOutput,
   nullable,
   number,
   object,

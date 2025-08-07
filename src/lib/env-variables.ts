@@ -1,4 +1,4 @@
-import { url, minLength, object, pipe, safeParse, string } from 'valibot'
+import { minLength, object, pipe, safeParse, string, url } from 'valibot'
 
 const envVariablesSchema = object({
   // App

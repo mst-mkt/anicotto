@@ -22,18 +22,18 @@ type UserHoverCardProps = {
 }
 
 export const UserHoverCard: FC<UserHoverCardProps> = ({ user, children }) => (
-  <HoverCard openDelay={100} closeDelay={100}>
+  <HoverCard closeDelay={100} openDelay={100}>
     <HoverCardTrigger asChild={true}>{children}</HoverCardTrigger>
-    <HoverCardContent align="start" sideOffset={16} className="w-fit max-w-80 rounded-lg">
+    <HoverCardContent align="start" className="w-fit max-w-80 rounded-lg" sideOffset={16}>
       <div className="flex gap-x-4">
         <Link href={`/users/${user.username}`}>
           <Avatar className="h-12 w-12">
-            <AvatarImage src={user.avatar_url} alt={`${user.username} のアバター`} />
+            <AvatarImage alt={`${user.username} のアバター`} src={user.avatar_url} />
             <AvatarFallback>{user.name.slice(0, 1)}</AvatarFallback>
           </Avatar>
         </Link>
         <div className="flex flex-col gap-y-2">
-          <Link href={`/users/${user.username}`} className="flex items-center gap-x-2">
+          <Link className="flex items-center gap-x-2" href={`/users/${user.username}`}>
             <span className="font-bold">{user.name}</span>
             <span className="text-muted-foreground text-sm">@{user.username}</span>
           </Link>
@@ -42,8 +42,8 @@ export const UserHoverCard: FC<UserHoverCardProps> = ({ user, children }) => (
           )}
           <div className="flex gap-x-4">
             <Link
-              href={`/users/${user.username}/following`}
               className="group flex items-center gap-x-0.5 font-bold"
+              href={`/users/${user.username}/following`}
             >
               <span className="text-sm transition-colors group-hover:text-anicotto-accent">
                 {user.followings_count}
@@ -53,8 +53,8 @@ export const UserHoverCard: FC<UserHoverCardProps> = ({ user, children }) => (
               </span>
             </Link>
             <Link
-              href={`/users/${user.username}/followers`}
               className="group flex items-center gap-x-0.5 font-bold"
+              href={`/users/${user.username}/followers`}
             >
               <span className="text-sm transition-colors group-hover:text-anicotto-accent">
                 {user.followers_count}

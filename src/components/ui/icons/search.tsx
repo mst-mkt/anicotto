@@ -49,15 +49,18 @@ const SearchIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
         {...props}
       >
         <motion.svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={size ?? 28}
-          height={size ?? 28}
-          viewBox="0 0 24 24"
+          animate={controls}
+          className="pointer-events-none"
           fill="none"
+          height={size ?? 28}
           stroke="currentColor"
-          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeWidth="2"
+          transition={{
+            duration: 1,
+            bounce: 0.3,
+          }}
           variants={{
             normal: { x: 0, y: 0 },
             animate: {
@@ -65,12 +68,9 @@ const SearchIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
               y: [0, -4, 0, 0],
             },
           }}
-          transition={{
-            duration: 1,
-            bounce: 0.3,
-          }}
-          animate={controls}
-          className="pointer-events-none"
+          viewBox="0 0 24 24"
+          width={size ?? 28}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title>search icon by pqoqubbw/icons</title>
           <circle cx="11" cy="11" r="8" />

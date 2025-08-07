@@ -1,6 +1,6 @@
 import { BombIcon, CupSodaIcon, type LucideProps, MoonStarIcon, SparklesIcon } from 'lucide-react'
 import type { FC } from 'react'
-import { P, match } from 'ts-pattern'
+import { match, P } from 'ts-pattern'
 import type { Rating } from '../../schemas/annict/common'
 import type { introspection_types } from '../../types/graphql-env'
 

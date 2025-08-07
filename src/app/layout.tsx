@@ -31,7 +31,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, track, panel }) => (
     >
       <ThemeLoader />
       <Providers>
-        <TopLoader color="oklch(70% 0.2 20)" shadow={false} easing="ease-in-out" />
+        <TopLoader color="oklch(70% 0.2 20)" easing="ease-in-out" shadow={false} />
         <div
           className={cn(styles.layout, 'w-full bg-background pb-24 md:pb-0')}
           data-vaul-drawer-wrapper={true}

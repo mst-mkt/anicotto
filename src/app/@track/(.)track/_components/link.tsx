@@ -9,8 +9,8 @@ type MultiTrackLinkProps = {
 
 export const MultiTrackLink: FC<MultiTrackLinkProps> = ({ workId }) => (
   <Link
-    href={`/track/${workId}`}
     className="flex w-fit items-center justify-end gap-x-2 self-end text-anicotto-accent text-sm hover:underline"
+    href={`/track/${workId}`}
   >
     この作品をまとめて記録する
     <ChevronRightIcon size={16} />

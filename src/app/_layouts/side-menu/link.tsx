@@ -31,13 +31,13 @@ export const SidemenuLink: FC<SidemenuLinkProps> = (props) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Link href={props.href} className="flex items-center gap-x-4 p-4 lg:px-6">
-            <props.icon className="shrink-0 grow-0 text-foreground" size={20} ref={iconRef} />
+          <Link className="flex items-center gap-x-4 p-4 lg:px-6" href={props.href}>
+            <props.icon className="shrink-0 grow-0 text-foreground" ref={iconRef} size={20} />
             <span className="hidden shrink grow lg:block">{props.label}</span>
           </Link>
         </li>
       </TooltipTrigger>
-      <TooltipContent side="right" className="block lg:hidden">
+      <TooltipContent className="block lg:hidden" side="right">
         {props.label}
       </TooltipContent>
     </Tooltip>

@@ -1,6 +1,6 @@
 import { array, integer, maxValue, minValue, number, object, optional, pipe, string } from 'valibot'
-import { userSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
+import { userSchema } from '.'
 
 export const getUsersQuerySchema = object({
   filter_ids: optional(commaSeparatedString(userSchema.entries.id)),

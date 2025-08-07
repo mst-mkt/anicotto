@@ -38,7 +38,7 @@ export const RatingBadge: FC<RatingBadgeProps> = ({
           '!border-anicotto-rating-bad/12 bg-anicotto-rating-bad-pale/10 text-anicotto-rating-bad hover:bg-anicotto-rating-bad-pale/16',
       )}
     >
-      {showIcon && <RatingIcon size={16} rating={rating} />}
+      {showIcon && <RatingIcon rating={rating} size={16} />}
       {showTitle && <span className="font-normal opacity-75">{RATING_KIND_TEXT(kind)}</span>}
       {showRating && <span>{RATING_TEXT(rating)}</span>}
     </Badge>

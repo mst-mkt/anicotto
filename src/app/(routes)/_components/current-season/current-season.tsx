@@ -13,7 +13,7 @@ export const CurrentSeasonWork = async () => {
   if (works === null) {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-y-4 p-8">
-        <CloudAlertIcon size={40} className="text-muted-foreground" />
+        <CloudAlertIcon className="text-muted-foreground" size={40} />
         <p>作品情報が取得できませんでした</p>
       </div>
     )
@@ -23,21 +23,21 @@ export const CurrentSeasonWork = async () => {
     <Carousel opts={{ autoplay: true, wheel: true }}>
       <CarouselContent>
         {works.data.map((work) => (
-          <CarouselItem key={work.id} className="basis-1/2 md:basis-1/3">
+          <CarouselItem className="basis-1/2 md:basis-1/3" key={work.id}>
             <WorkHoverCard work={work}>
-              <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
-                <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
+              <Link className="group flex flex-col gap-y-2" href={`/works/${work.id}`}>
+                <AspectRatio className="overflow-hidden rounded-md" ratio={16 / 9}>
                   <Image
-                    src={work.thumbnail}
                     alt={work.title}
                     className="h-full w-full object-cover"
-                    height={144}
-                    width={256}
                     fallback={
                       <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                         <ImageOffIcon size={40} />
                       </div>
                     }
+                    height={144}
+                    src={work.thumbnail}
+                    width={256}
                   />
                 </AspectRatio>
                 <div className="flex w-full flex-col gap-y-2">
@@ -62,8 +62,8 @@ export const CurrentSeasonWorkSkeleton = () => (
   <div className="flex gap-x-4">
     {[...Array(3)].map((_, index) => (
       <div
-        key={index}
         className="flex basis-1/2 flex-col gap-y-2 last:hidden md:basis-1/3 md:last:flex"
+        key={index}
       >
         <Skeleton className="aspect-video" />
         <Skeleton className="h-[1lh] w-full" />

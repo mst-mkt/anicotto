@@ -23,11 +23,11 @@ export const CollapseList: FC<CollapseListProps> = ({ children, thumbnailCount, 
   }
 
   return (
-    <Collapsible className={className} open={open} onOpenChange={setOpen}>
+    <Collapsible className={className} onOpenChange={setOpen} open={open}>
       {children.slice(0, thumbnailCount)}
       {!open && (
         <CollapsibleTrigger asChild={true}>
-          <Button variant="ghost" className="mx-auto w-fit cursor-pointer rounded-full">
+          <Button className="mx-auto w-fit cursor-pointer rounded-full" variant="ghost">
             <ChevronDownIcon size={24} />
             <span>すべて表示する</span>
           </Button>

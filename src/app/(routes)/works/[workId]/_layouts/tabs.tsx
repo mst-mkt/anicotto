@@ -40,23 +40,23 @@ export const Tab: FC<TabProps> = ({ workId }) => {
     <div className="scrollbar-thin flex w-fit max-w-full scroll-p-1 overflow-x-auto rounded-lg bg-muted p-1 ring-2 ring-muted">
       {pages.map(([page, label]) => (
         <Link
-          key={page}
-          id={`tab-${page}`}
-          href={page === '' ? `/works/${workId}` : `/works/${workId}/${page}`}
           className={cn(
             'w-fit break-keep rounded-md px-3 py-2 font-bold text-muted-foreground text-sm transition-colors hover:text-foreground-300',
             path === page &&
               'cursor-default bg-background text-foreground shadow-xs hover:text-foreground',
           )}
+          href={page === '' ? `/works/${workId}` : `/works/${workId}/${page}`}
+          id={`tab-${page}`}
+          key={page}
         >
           {label}
         </Link>
       ))}
       <Link
+        className="flex w-fit items-center gap-x-1 break-keep rounded-md px-3 py-2 font-bold text-muted-foreground text-sm transition-colors hover:text-foreground-300"
         href={`https://annict.com/works/${workId}`}
         rel="noopener noreferrer"
         target="_blank"
-        className="flex w-fit items-center gap-x-1 break-keep rounded-md px-3 py-2 font-bold text-muted-foreground text-sm transition-colors hover:text-foreground-300"
       >
         Annict
         <ExternalLinkIcon size={16} />

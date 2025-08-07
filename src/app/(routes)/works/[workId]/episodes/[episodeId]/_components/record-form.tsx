@@ -4,7 +4,6 @@ import { CheckIcon, PenToolIcon } from 'lucide-react'
 import type { FC } from 'react'
 import { toast } from 'sonner'
 import { safeParse } from 'valibot'
-import {} from '../../../../../../../components/ui/alert-dialog'
 import { Badge } from '../../../../../../../components/ui/badge'
 import { Label } from '../../../../../../../components/ui/label'
 import { Textarea } from '../../../../../../../components/ui/textarea'
@@ -43,7 +42,7 @@ export const RecordForm: FC<RecordFormProps> = ({ episodeId, tracked = false }) 
   return (
     <form action={handleSubmit} className="flex flex-col gap-y-4 rounded-lg bg-muted p-4">
       <h2 className="flex items-center gap-x-2 py-1">
-        <PenToolIcon size={20} className="text-anicotto-accent" />
+        <PenToolIcon className="text-anicotto-accent" size={20} />
         <span className="grow font-bold text-sm">記録する</span>
         {tracked && (
           <Badge className="!border-anicotto-accent-100 gap-x-1 bg-anicotto-accent-50 text-anicotto-accent hover:bg-anicotto-accent-50">
@@ -55,7 +54,7 @@ export const RecordForm: FC<RecordFormProps> = ({ episodeId, tracked = false }) 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Label className="row-span-2 flex flex-col gap-y-2">
           <span>感想</span>
-          <Textarea name="comment" placeholder="感想を入力" className="h-full" />
+          <Textarea className="h-full" name="comment" placeholder="感想を入力" />
         </Label>
         <RatingSelect />
         <RecordSubmitButton />

@@ -1,7 +1,7 @@
 import { array, integer, maxValue, minValue, number, object, optional, pipe } from 'valibot'
-import { episodeSchema, episodeWithInfoSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
+import { episodeSchema, episodeWithInfoSchema } from '.'
 
 export const getEpisodesQuerySchema = object({
   filter_ids: optional(commaSeparatedString(episodeSchema.entries.id)),

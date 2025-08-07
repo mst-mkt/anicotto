@@ -9,9 +9,9 @@ import {
   optional,
   pipe,
 } from 'valibot'
-import { characterSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { seriesSchema } from '../series'
+import { characterSchema } from '.'
 
 export const getCharactersQuerySchema = object({
   filter_ids: optional(commaSeparatedString(characterSchema.entries.id)),

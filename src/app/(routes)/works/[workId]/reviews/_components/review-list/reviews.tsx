@@ -15,7 +15,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
   if (reviews === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <p>レビューの取得に失敗しました</p>
       </div>
     )
@@ -24,7 +24,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
   if (reviews.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <OrigamiIcon className="text-anicotto-accent" size={40} />
         <p>レビューが見当たりません</p>
       </div>
     )
@@ -42,7 +42,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
 export const ReviewsSkeleton = () => (
   <div className="flex flex-col gap-y-12">
     {[...Array(3)].map((_, index) => (
-      <div key={`skeleton-${index}`} className="flex gap-x-4">
+      <div className="flex gap-x-4" key={`skeleton-${index}`}>
         <div className="sticky top-20">
           <Skeleton className="aspect-square h-10 w-10 rounded-full" />
         </div>
@@ -53,7 +53,7 @@ export const ReviewsSkeleton = () => (
           </div>
           <div className="flex w-full flex-col gap-y-2">
             {[...Array(5)].map((_, line) => (
-              <Skeleton key={`skeleton-${index}-${line}`} className="h-[1lh] w-full text-sm" />
+              <Skeleton className="h-[1lh] w-full text-sm" key={`skeleton-${index}-${line}`} />
             ))}
           </div>
         </div>

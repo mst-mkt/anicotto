@@ -28,7 +28,7 @@ const MultiTrackPage: FC<MultiTrackPageProps> = async ({ params }) => {
   return (
     <div className="flex flex-col gap-y-4">
       <h1 className="flex items-center gap-x-2">
-        <BookCopyIcon size={24} className="text-anicotto-accent" />
+        <BookCopyIcon className="text-anicotto-accent" size={24} />
         <span className="font-bold text-lg">複数の記録をする</span>
       </h1>
       <Suspense fallback={<MultiTrackSkeleton />}>

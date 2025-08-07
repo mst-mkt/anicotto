@@ -15,9 +15,9 @@ export const ThemeButton = () => {
 
   return (
     <button
-      type="button"
-      onClick={toggleTheme}
       className="grid aspect-square h-8 cursor-pointer place-items-center rounded-md outline-none transition-colors hover:bg-background-500/16"
+      onClick={toggleTheme}
+      type="button"
     >
       {match(theme)
         .with('dark', () => <MoonIcon size={20} />)

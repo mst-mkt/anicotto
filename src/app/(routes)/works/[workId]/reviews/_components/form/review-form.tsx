@@ -28,21 +28,21 @@ export const ReviewForm: FC<ReviewFormProps> = ({ workId }) => {
   }
 
   return (
-    <form ref={formRef} action={submitAction} className="grid grid-cols-4 gap-4">
-      <input type="hidden" name="workId" value={workId} readOnly={true} className="sr-only" />
-      <RatingSelect name="overall" label="全体の評価" className="col-span-4" />
+    <form action={submitAction} className="grid grid-cols-4 gap-4" ref={formRef}>
+      <input className="sr-only" name="workId" readOnly={true} type="hidden" value={workId} />
+      <RatingSelect className="col-span-4" label="全体の評価" name="overall" />
       <RatingSelect
-        name="character"
-        label="キャラクター"
-        showItemLabel={false}
         className="col-span-2"
+        label="キャラクター"
+        name="character"
+        showItemLabel={false}
       />
-      <RatingSelect name="story" label="ストーリー" showItemLabel={false} className="col-span-2" />
-      <RatingSelect name="animation" label="映像" showItemLabel={false} className="col-span-2" />
-      <RatingSelect name="music" label="音楽" showItemLabel={false} className="col-span-2" />
+      <RatingSelect className="col-span-2" label="ストーリー" name="story" showItemLabel={false} />
+      <RatingSelect className="col-span-2" label="映像" name="animation" showItemLabel={false} />
+      <RatingSelect className="col-span-2" label="音楽" name="music" showItemLabel={false} />
       <div className="col-span-4 flex flex-col gap-y-2">
         <Label htmlFor="review-body">レビュー</Label>
-        <Textarea id="review-body" name="body" required={true} placeholder="レビューを書く" />
+        <Textarea id="review-body" name="body" placeholder="レビューを書く" required={true} />
       </div>
       <SubmitButton />
     </form>
@@ -54,9 +54,9 @@ const SubmitButton = () => {
 
   return (
     <Button
-      type="submit"
       className="col-span-4 w-fit cursor-pointer justify-self-end"
       disabled={pending}
+      type="submit"
     >
       {pending ? <LoaderIcon className="animate-spin" /> : <SendIcon />}
       <span>{pending ? '送信中...' : '投稿する'}</span>

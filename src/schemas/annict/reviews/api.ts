@@ -9,10 +9,10 @@ import {
   optional,
   pipe,
 } from 'valibot'
-import { reviewSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { userSchema } from '../users'
 import { workSchema } from '../works'
+import { reviewSchema } from '.'
 
 export const getReviewsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(reviewSchema.entries.id)),

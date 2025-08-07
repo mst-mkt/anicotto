@@ -18,7 +18,7 @@ const NotFound = () => {
           .with('users', () => 'ユーザーが見つかりませんでした')
           .otherwise(() => 'ページが見つかりませんでした')}
       </p>
-      <Button variant="outline" asChild={true}>
+      <Button asChild={true} variant="outline">
         <Link href="/">
           <HomeIcon />
           トップへ戻る

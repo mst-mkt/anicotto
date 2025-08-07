@@ -40,13 +40,13 @@ const UserLibraryLayout: FC<UserLibraryLayoutProps> = async ({ params }) => {
   return (
     <div className="flex flex-col gap-y-4">
       <h1 className="flex items-center gap-x-2 font-bold text-lg">
-        <StatusIcon status={status} className="text-anicotto-accent" size={24} />「
+        <StatusIcon className="text-anicotto-accent" size={24} status={status} />「
         {STATUS_TEXT(status)}
         」のライブラリ
       </h1>
       <Tab username={username} />
       <Suspense fallback={<WorkListSkeleton />}>
-        <WorkList username={username} status={status} />
+        <WorkList status={status} username={username} />
       </Suspense>
     </div>
   )

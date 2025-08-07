@@ -13,21 +13,21 @@ type WorkCardProps = {
 export const WorkCard: FC<WorkCardProps> = ({ work }) => (
   <WorkHoverCard work={work}>
     <Link
-      href={`/works/${work.id}`}
       className="group flex items-center rounded-lg border border-muted p-2 shadow-xs transition-colors hover:bg-muted"
+      href={`/works/${work.id}`}
     >
       <div className="aspect-square h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
         <Image
-          src={work.thumbnail}
           alt={work.title}
-          height={128}
-          width={128}
+          className="h-full w-full object-cover"
           fallback={
             <div className="flex h-full w-full items-center justify-center bg-muted">
               <ImageOffIcon className="text-muted-foreground" size={24} />
             </div>
           }
-          className="h-full w-full object-cover"
+          height={128}
+          src={work.thumbnail}
+          width={128}
         />
       </div>
       <div className="flex flex-col gap-y-1 p-4">

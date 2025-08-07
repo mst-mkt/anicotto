@@ -23,7 +23,7 @@ export const Casts: FC<CastsProps> = async ({ workId }) => {
   if (casts === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <p>キャストの取得に失敗しました</p>
       </div>
     )
@@ -32,7 +32,7 @@ export const Casts: FC<CastsProps> = async ({ workId }) => {
   if (casts.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <CherryIcon size={40} className="text-anicotto-accent" />
+        <CherryIcon className="text-anicotto-accent" size={40} />
         <p>キャストが見当たりません</p>
       </div>
     )
@@ -61,16 +61,16 @@ export const Casts: FC<CastsProps> = async ({ workId }) => {
           <TableRow key={cast.id}>
             <TableCell>
               <Link
-                href={`/characters/${cast.character.id}`}
                 className="py-4 transition-colors hover:text-anicotto-accent"
+                href={`/characters/${cast.character.id}`}
               >
                 {cast.character.name}
               </Link>
             </TableCell>
             <TableCell>
               <Link
-                href={`/people/${cast.person.id}`}
                 className="py-4 transition-colors hover:text-anicotto-accent"
+                href={`/people/${cast.person.id}`}
               >
                 {cast.person.name}
               </Link>

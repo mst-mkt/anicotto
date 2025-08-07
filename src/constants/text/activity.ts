@@ -1,4 +1,4 @@
-import { P, match } from 'ts-pattern'
+import { match, P } from 'ts-pattern'
 import type { Action } from '../../schemas/annict/common'
 
 export const ACTIVITY_TEXT = (action: Action) => {

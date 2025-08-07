@@ -19,7 +19,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   }
 
   return (
-    <Provider storageKey="anicotto:theme" attribute="class">
+    <Provider attribute="class" storageKey="anicotto:theme">
       {children}
     </Provider>
   )

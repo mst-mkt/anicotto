@@ -58,7 +58,7 @@ export const Links: FC<LinksProps> = async ({ workId }) => {
           href={`https://www.pixiv.net/tags/${work.twitter_hashtag}`}
           icon={Paintbrush2Icon}
         >
-          <HashIcon size={16} className="text-muted-foreground" />
+          <HashIcon className="text-muted-foreground" size={16} />
           {work.twitter_hashtag} のイラスト
         </LinkItem>
       )}

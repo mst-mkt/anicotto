@@ -9,11 +9,11 @@ import {
   optional,
   pipe,
 } from 'valibot'
-import { recordSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { episodeSchema } from '../episodes'
 import { userSchema } from '../users'
 import { workSchema } from '../works'
+import { recordSchema } from '.'
 
 export const getRecordsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(recordSchema.entries.id)),

@@ -24,27 +24,27 @@ export const LibraryCarouselTitle: FC<LibraryCarouselTitleProps> = ({ status, it
   return (
     <div className="flex items-center justify-between gap-x-4">
       <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
-        <StatusIcon status={status} className="text-anicotto-accent" size={24} />
+        <StatusIcon className="text-anicotto-accent" size={24} status={status} />
         {STATUS_TEXT(status)}
       </h2>
       <Separator className="shrink" />
       {itemCount > basis && (
         <div className="flex items-center gap-x-2">
           <Button
-            variant="outline"
-            size="icon"
+            className="h-8 w-8 cursor-pointer rounded-full"
             disabled={!canScrollPrev}
             onClick={scrollPrev}
-            className="h-8 w-8 cursor-pointer rounded-full"
+            size="icon"
+            variant="outline"
           >
             <ChevronLeft size={32} />
           </Button>
           <Button
-            variant="outline"
-            size="icon"
+            className="h-8 w-8 cursor-pointer rounded-full"
             disabled={!canScrollNext}
             onClick={scrollNext}
-            className="h-8 w-8 cursor-pointer rounded-full"
+            size="icon"
+            variant="outline"
           >
             <ChevronRight size={24} />
           </Button>
@@ -57,7 +57,7 @@ export const LibraryCarouselTitle: FC<LibraryCarouselTitleProps> = ({ status, it
 export const LibraryTitle: FC<Omit<LibraryCarouselTitleProps, 'itemCount'>> = ({ status }) => (
   <div className="flex items-center gap-x-4">
     <h2 className="flex w-fit items-center gap-x-2 break-keep font-bold">
-      <StatusIcon status={status} className="text-anicotto-accent" size={24} />
+      <StatusIcon className="text-anicotto-accent" size={24} status={status} />
       {STATUS_TEXT(status)}
     </h2>
     <Separator className="shrink" />

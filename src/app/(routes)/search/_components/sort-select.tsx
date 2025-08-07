@@ -52,26 +52,26 @@ export const SortSelect = () => {
       <SelectTrigger className="w-fit shrink-0 cursor-pointer gap-x-2 justify-self-start">
         <div className="flex w-fit items-center gap-x-2">
           {isPending ? (
-            <LoaderIcon size={16} className="animate-spin text-muted-foreground" />
+            <LoaderIcon className="animate-spin text-muted-foreground" size={16} />
           ) : (
             match([sort, order])
               .with(['id', 'asc'], () => (
-                <ClockArrowUpIcon size={16} className="text-muted-foreground" />
+                <ClockArrowUpIcon className="text-muted-foreground" size={16} />
               ))
               .with(['id', 'desc'], () => (
-                <ClockArrowDownIcon size={16} className="text-muted-foreground" />
+                <ClockArrowDownIcon className="text-muted-foreground" size={16} />
               ))
               .with(['season', 'asc'], () => (
-                <CalendarArrowUpIcon size={16} className="text-muted-foreground" />
+                <CalendarArrowUpIcon className="text-muted-foreground" size={16} />
               ))
               .with(['season', 'desc'], () => (
-                <CalendarArrowDownIcon size={16} className="text-muted-foreground" />
+                <CalendarArrowDownIcon className="text-muted-foreground" size={16} />
               ))
               .with(['watchers', 'asc'], () => (
-                <ArrowDownNarrowWideIcon size={16} className="text-muted-foreground" />
+                <ArrowDownNarrowWideIcon className="text-muted-foreground" size={16} />
               ))
               .with(['watchers', 'desc'], () => (
-                <ArrowUpNarrowWideIcon size={16} className="text-muted-foreground" />
+                <ArrowUpNarrowWideIcon className="text-muted-foreground" size={16} />
               ))
               .exhaustive()
           )}
@@ -91,17 +91,17 @@ export const SortSelect = () => {
         <SelectGroup>
           <SelectLabel>作成順</SelectLabel>
           <SelectItem
-            value="id:asc"
             className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+            value="id:asc"
           >
-            <ClockArrowUpIcon size={16} className="text-muted-foreground" />
+            <ClockArrowUpIcon className="text-muted-foreground" size={16} />
             古い順
           </SelectItem>
           <SelectItem
-            value="id:desc"
             className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+            value="id:desc"
           >
-            <ClockArrowDownIcon size={16} className="text-muted-foreground" />
+            <ClockArrowDownIcon className="text-muted-foreground" size={16} />
             新しい順
           </SelectItem>
         </SelectGroup>
@@ -111,17 +111,17 @@ export const SortSelect = () => {
             <SelectGroup>
               <SelectLabel>放送時期</SelectLabel>
               <SelectItem
-                value="season:asc"
                 className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+                value="season:asc"
               >
-                <CalendarArrowUpIcon size={16} className="text-muted-foreground" />
+                <CalendarArrowUpIcon className="text-muted-foreground" size={16} />
                 古い順
               </SelectItem>
               <SelectItem
-                value="season:desc"
                 className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+                value="season:desc"
               >
-                <CalendarArrowDownIcon size={16} className="text-muted-foreground" />
+                <CalendarArrowDownIcon className="text-muted-foreground" size={16} />
                 新しい順
               </SelectItem>
             </SelectGroup>
@@ -129,17 +129,17 @@ export const SortSelect = () => {
             <SelectGroup>
               <SelectLabel>視聴者数</SelectLabel>
               <SelectItem
-                value="watchers:asc"
                 className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+                value="watchers:asc"
               >
-                <ArrowDownNarrowWideIcon size={16} className="text-muted-foreground" />
+                <ArrowDownNarrowWideIcon className="text-muted-foreground" size={16} />
                 少ない順
               </SelectItem>
               <SelectItem
-                value="watchers:desc"
                 className="cursor-pointer pr-8 [&>span]:flex [&>span]:items-center [&>span]:gap-x-2"
+                value="watchers:desc"
               >
-                <ArrowUpNarrowWideIcon size={16} className="text-muted-foreground" />
+                <ArrowUpNarrowWideIcon className="text-muted-foreground" size={16} />
                 多い順
               </SelectItem>
             </SelectGroup>

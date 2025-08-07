@@ -26,8 +26,11 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
   return (
     <div>
       <header className="relative">
-        <AspectRatio ratio={3} className="overflow-hidden rounded-lg">
+        <AspectRatio className="overflow-hidden rounded-lg" ratio={3}>
           <Image
+            alt={`${user.name}のバナー`}
+            className="h-full w-full object-cover blur-xs brightness-75"
+            fallback={<div className="h-full w-full bg-anicotto-accent object-cover" />}
             fill={true}
             sizes="100%"
             src={
@@ -35,27 +38,24 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
                 ? undefined
                 : proxiedImage(user.background_image_url)
             }
-            fallback={<div className="h-full w-full bg-anicotto-accent object-cover" />}
-            alt={`${user.name}のバナー`}
-            className="h-full w-full object-cover blur-xs brightness-75"
           />
         </AspectRatio>
         <Suspense>
           <IsFollowed
-            username={user.username}
             className="absolute top-4 left-4 rounded-sm bg-black/16 px-2 py-1 font-bold text-sm text-white"
+            username={user.username}
           />
         </Suspense>
       </header>
       <div className="-mt-2 flex items-center gap-x-4">
         <Avatar className="h-24 w-24 outline-4 outline-background">
-          <AvatarImage src={user.avatar_url} alt={`${user.name}のアバター`} />
+          <AvatarImage alt={`${user.name}のアバター`} src={user.avatar_url} />
           <AvatarFallback>{user.name.slice(0, 1)}</AvatarFallback>
         </Avatar>
         <div className="flex min-w-0 grow flex-col gap-y-1 pt-4">
           <hgroup className="flex items-center gap-x-2">
             <h1 className="shrink truncate font-bold text-lg">{user.name}</h1>
-            <Badge variant="outline" className="rounded-sm px-1 py-0.5">
+            <Badge className="rounded-sm px-1 py-0.5" variant="outline">
               @{user.username}
             </Badge>
           </hgroup>
@@ -63,15 +63,15 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
           <div className="flex h-5 items-center gap-x-1">
             {user.url !== null && user.url !== '' && (
               <Link
-                href={user.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-anicotto-accent"
+                href={user.url}
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 <LinkIcon size={16} />
               </Link>
             )}
-            <time dateTime={user.created_at} className="text-muted-foreground text-xs">
+            <time className="text-muted-foreground text-xs" dateTime={user.created_at}>
               {new Date(user.created_at).toLocaleDateString('ja-JP', {
                 year: 'numeric',
                 month: 'short',
@@ -83,28 +83,28 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
         </div>
         {me !== null && user.id !== me.id && (
           <Suspense>
-            <FollowButton username={user.username} myUsername={me.username} />
+            <FollowButton myUsername={me.username} username={user.username} />
           </Suspense>
         )}
       </div>
       <div className="flex gap-x-4 truncate py-4 text-sm">
         <Link
-          href={`/users/${user.username}/following`}
           className="flex items-center gap-x-1 hover:underline"
+          href={`/users/${user.username}/following`}
         >
           <span className="text-muted-foreground text-sm">フォロー</span>
           <span>{user.followings_count}</span>
         </Link>
         <Link
-          href={`/users/${user.username}/followers`}
           className="flex items-center gap-x-1 hover:underline"
+          href={`/users/${user.username}/followers`}
         >
           <span className="text-muted-foreground text-sm">フォロワー</span>
           <span>{user.followers_count}</span>
         </Link>
         <Link
-          href={`/users/${user.username}/records`}
           className="flex items-center gap-x-1 hover:underline"
+          href={`/users/${user.username}/records`}
         >
           <span className="text-muted-foreground text-sm">記録した数</span>
           <span>{user.records_count}</span>

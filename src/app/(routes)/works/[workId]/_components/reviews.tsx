@@ -19,7 +19,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
   if (reviews === null || reviews.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <OrigamiIcon size={32} className="text-anicotto-accent" />
+        <OrigamiIcon className="text-anicotto-accent" size={32} />
         <p className="text-muted-foreground">レビューが見当たりません</p>
         <Button asChild={true} size="sm" variant="secondary">
           <Link href={`/works/${workId}/reviews`}>
@@ -34,11 +34,11 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
   return (
     <div className="flex w-full flex-col gap-y-8">
       {reviews.data.map((review) => (
-        <div key={review.id} className="flex gap-x-4">
+        <div className="flex gap-x-4" key={review.id}>
           <UserHoverCard user={review.user}>
-            <Link href={`/users/${review.user.username}`} className="sticky top-20 h-fit">
+            <Link className="sticky top-20 h-fit" href={`/users/${review.user.username}`}>
               <Avatar className="h-fit">
-                <AvatarImage src={review.user.avatar_url} alt={`${review.user.name}のアバター`} />
+                <AvatarImage alt={`${review.user.name}のアバター`} src={review.user.avatar_url} />
                 <AvatarFallback>{review.user.name.slice(0, 1)}</AvatarFallback>
               </Avatar>
             </Link>
@@ -52,7 +52,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
                 <HeartIcon size={20} />
                 <span>{review.likes_count}</span>
               </div>
-              <time dateTime={review.created_at} className="text-muted-foreground text-sm">
+              <time className="text-muted-foreground text-sm" dateTime={review.created_at}>
                 {timeText(review.created_at)}
               </time>
             </div>

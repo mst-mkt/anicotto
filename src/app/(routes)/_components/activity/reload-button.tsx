@@ -13,13 +13,13 @@ export const ReloadActivityButton = () => {
 
   return (
     <Button
-      onClick={handleClick}
-      variant="ghost"
-      size="icon"
       className="cursor-pointer"
       disabled={isPending}
+      onClick={handleClick}
+      size="icon"
+      variant="ghost"
     >
-      {isPending ? <LoaderIcon size={24} className="animate-spin" /> : <RotateCwIcon size={24} />}
+      {isPending ? <LoaderIcon className="animate-spin" size={24} /> : <RotateCwIcon size={24} />}
     </Button>
   )
 }

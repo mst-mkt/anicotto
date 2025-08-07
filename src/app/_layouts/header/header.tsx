@@ -17,7 +17,7 @@ export const Header: FC<HeaderProps> = ({ className }) => (
     )}
   >
     <div className="col-start-2 flex w-full items-center justify-between gap-x-4 py-4 font-bold text-2xl">
-      <Link href="/" className="transition-colors hover:text-anicotto-accent">
+      <Link className="transition-colors hover:text-anicotto-accent" href="/">
         {PROJECT_NAME}
       </Link>
       <div className="flex items-center gap-x-2">

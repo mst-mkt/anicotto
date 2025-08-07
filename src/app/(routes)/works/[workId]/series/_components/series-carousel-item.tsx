@@ -13,21 +13,21 @@ type SeriesCarouselItemProps = {
 }
 
 export const SeriesCarouselItem: FC<SeriesCarouselItemProps> = async ({ work }) => (
-  <CarouselItem key={work.id} className="group shrink-0 basis-1/2 md:basis-1/3">
+  <CarouselItem className="group shrink-0 basis-1/2 md:basis-1/3" key={work.id}>
     <WorkHoverCard work={work}>
-      <Link href={`/works/${work.id}`} className="flex flex-col gap-y-2">
-        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md">
+      <Link className="flex flex-col gap-y-2" href={`/works/${work.id}`}>
+        <AspectRatio className="overflow-hidden rounded-md" ratio={16 / 9}>
           <Image
-            src={work.thumbnail}
             alt={work.title}
+            className="h-full w-full object-cover"
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                 <ImageOffIcon size={48} />
               </div>
             }
             height={144}
+            src={work.thumbnail}
             width={256}
-            className="h-full w-full object-cover"
           />
         </AspectRatio>
         <div className="flex gap-x-2">

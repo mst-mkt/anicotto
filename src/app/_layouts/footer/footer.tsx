@@ -20,8 +20,8 @@ export const Footer: FC<FooterProps> = ({ className }) => (
     <div className="flex gap-x-1">
       {[...Array(3)].map((_, index) => (
         <span
-          key={index}
           className="block h-3 w-2 bg-anicotto-accent"
+          key={index}
           style={{
             clipPath: 'polygon(50% 0, 100% 0, 50% 100%, 0 100%)',
           }}
@@ -33,12 +33,12 @@ export const Footer: FC<FooterProps> = ({ className }) => (
       <p className="text-foreground-300 text-sm">{PROJECT_DESCRIPTION}</p>
     </hgroup>
     <div className="flex gap-x-6">
-      <FooterLink icon={GithubIcon} href={PROJECT_LINKS.github} label="GitHub" />
-      <FooterLink icon={HomeIcon} href={PROJECT_LINKS.annict} label="Annict" />
+      <FooterLink href={PROJECT_LINKS.github} icon={GithubIcon} label="GitHub" />
+      <FooterLink href={PROJECT_LINKS.annict} icon={HomeIcon} label="Annict" />
     </div>
     <p className="flex gap-x-2 text-foreground-300 text-sm">
       &copy; {new Date().getFullYear()}
-      <Link href={`https://github.com/${PROJECT_OWNER}`} className="hover:underline">
+      <Link className="hover:underline" href={`https://github.com/${PROJECT_OWNER}`}>
         {PROJECT_OWNER}
       </Link>
     </p>

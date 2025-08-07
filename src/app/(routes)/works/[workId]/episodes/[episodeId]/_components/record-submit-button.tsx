@@ -8,7 +8,7 @@ export const RecordSubmitButton = () => {
   const { pending } = useFormStatus()
 
   return (
-    <Button type="submit" disabled={pending} className="cursor-pointer">
+    <Button className="cursor-pointer" disabled={pending} type="submit">
       {pending ? <LoaderIcon className="animate-spin" /> : <PenToolIcon />}
       投稿する
     </Button>

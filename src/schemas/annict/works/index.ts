@@ -1,6 +1,6 @@
 import {
-  type InferOutput,
   boolean,
+  type InferOutput,
   integer,
   minValue,
   number,
@@ -9,7 +9,7 @@ import {
   pipe,
   string,
 } from 'valibot'
-import { type Status, mediaPicklist, mediaTextPicklist, numericString } from '../common'
+import { mediaPicklist, mediaTextPicklist, numericString, type Status } from '../common'
 
 export const workSchema = object({
   id: pipe(number(), integer()),

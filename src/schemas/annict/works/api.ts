@@ -1,11 +1,11 @@
 import { array, integer, maxValue, minValue, number, object, optional, pipe } from 'valibot'
-import { workSchema } from '.'
 import {
   commaSeparatedString,
   orderPicklist,
   paginationInfoSchema,
   statusPicklist,
 } from '../common'
+import { workSchema } from '.'
 
 export const getWorksQuerySchema = object({
   filter_ids: optional(commaSeparatedString(workSchema.entries.id)),

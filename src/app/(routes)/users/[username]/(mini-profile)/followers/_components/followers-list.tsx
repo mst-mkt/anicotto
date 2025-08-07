@@ -17,7 +17,7 @@ export const FollowersList: FC<FollowersListProps> = async ({ username }) => {
   if (followers === null) {
     return (
       <div className="flex flex-col items-center gap-y-8 py-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <p>フォロワーを取得できませんでした</p>
       </div>
     )
@@ -26,7 +26,7 @@ export const FollowersList: FC<FollowersListProps> = async ({ username }) => {
   if (followers.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-8 py-16">
-        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <OrigamiIcon className="text-anicotto-accent" size={40} />
         <p>フォロワーがいません</p>
       </div>
     )
@@ -37,17 +37,17 @@ export const FollowersList: FC<FollowersListProps> = async ({ username }) => {
       {followers.data.map((follower) => (
         <li key={follower.id}>
           <Link
-            href={`/users/${follower.username}`}
             className="flex items-center gap-x-4 rounded-lg border border-muted p-4 transition-colors hover:bg-muted"
+            href={`/users/${follower.username}`}
           >
             <Avatar className="h-12 w-12">
-              <AvatarImage src={follower.avatar_url} alt={`${follower.name}のアバター`} />
+              <AvatarImage alt={`${follower.name}のアバター`} src={follower.avatar_url} />
               <AvatarFallback>{follower.name.slice(0, 1)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-y-1">
               <hgroup className="flex items-center gap-x-2">
                 <h2 className="font-bold">{follower.name}</h2>
-                <Badge variant="outline" className="rounded-sm px-1 py-0.5">
+                <Badge className="rounded-sm px-1 py-0.5" variant="outline">
                   @{follower.username}
                 </Badge>
               </hgroup>
@@ -72,7 +72,7 @@ export const FollowersList: FC<FollowersListProps> = async ({ username }) => {
 export const FollowersListSkeleton = () => (
   <ul className="flex flex-col gap-y-4">
     {[...Array(8)].map((_, index) => (
-      <li key={index} className="flex items-center gap-x-4 rounded-lg border border-muted p-4">
+      <li className="flex items-center gap-x-4 rounded-lg border border-muted p-4" key={index}>
         <Skeleton className="h-12 w-12 rounded-full" />
         <div className="flex w-full flex-col gap-y-1">
           <Skeleton className="h-[1lh] w-1/2" />

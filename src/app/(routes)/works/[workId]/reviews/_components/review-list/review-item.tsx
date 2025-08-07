@@ -14,12 +14,12 @@ type ReviewItemProps = {
 export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
   <div className="flex w-full gap-x-4">
     <UserHoverCard user={review.user}>
-      <Link href={`/users/${review.user.username}`} className="sticky top-20 h-fit">
+      <Link className="sticky top-20 h-fit" href={`/users/${review.user.username}`}>
         <Avatar className="h-fit">
           <AvatarImage
-            src={review.user.avatar_url}
             alt={`${review.user.name}のアバター`}
             className="aspect-square"
+            src={review.user.avatar_url}
           />
           <AvatarFallback>{review.user.name.slice(0, 1)}</AvatarFallback>
         </Avatar>
@@ -29,16 +29,16 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
       <div className="flex w-full items-center justify-between gap-x-2">
         <UserHoverCard user={review.user}>
           <Link
-            href={`/users/${review.user.username}`}
             className="flex max-w-full gap-x-2 truncate transition-colors hover:text-anicotto-accent"
+            href={`/users/${review.user.username}`}
           >
             <span className="shrink truncate font-bold">{review.user.name}</span>
             <span className="text-muted-foreground">@{review.user.username}</span>
           </Link>
         </UserHoverCard>
         <time
-          dateTime={review.created_at}
           className="hidden shrink text-muted-foreground text-sm md:block"
+          dateTime={review.created_at}
         >
           {timeText(review.created_at)}
         </time>

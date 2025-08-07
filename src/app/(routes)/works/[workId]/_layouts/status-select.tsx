@@ -67,7 +67,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
   )
 
   const handleClick = useCallback(
-    async (status: Status) => {
+    (status: Status) => {
       setUpdatingStatus(status)
       startTransition(() => updateStatus(status))
     },
@@ -81,19 +81,19 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
           <Tooltip key={option}>
             <TooltipTrigger asChild={true}>
               <button
-                type="button"
-                onClick={() => handleClick(option)}
-                disabled={isUpdating}
                 className={cn(
                   'cursor-pointer rounded-full bg-background-100 p-1.5 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground data-[state=closed]:bg-transparent',
                   option === status &&
                     'bg-background-900 text-foreground-900 data-[state=closed]:bg-background-800',
                 )}
+                disabled={isUpdating}
+                onClick={() => handleClick(option)}
+                type="button"
               >
                 {updatingStatus === option ? (
-                  <LoaderIcon size={16} className="animate-spin" />
+                  <LoaderIcon className="animate-spin" size={16} />
                 ) : (
-                  <StatusIcon status={option} size={16} />
+                  <StatusIcon size={16} status={option} />
                 )}
               </button>
             </TooltipTrigger>
@@ -101,7 +101,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ work, status }) => {
           </Tooltip>
         ))}
       </div>
-      <Separator orientation="vertical" className="hidden h-1/2 sm:block" />
+      <Separator className="hidden h-1/2 sm:block" orientation="vertical" />
       <p className="hidden truncate text-muted-foreground text-sm sm:block">
         {STATUS_TEXT(status)}
       </p>

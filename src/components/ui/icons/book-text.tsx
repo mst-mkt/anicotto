@@ -50,6 +50,13 @@ const BookTextIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
       >
         <motion.svg
           animate={controls}
+          className="pointer-events-none"
+          fill="none"
+          height={size ?? 28}
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           variants={{
             animate: {
               scale: [1, 1.04, 1],
@@ -67,16 +74,9 @@ const BookTextIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
               y: 0,
             },
           }}
-          xmlns="http://www.w3.org/2000/svg"
-          width={size ?? 28}
-          height={size ?? 28}
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="pointer-events-none"
+          width={size ?? 28}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title>book text icon by pqoqubbw/icons</title>
           <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />

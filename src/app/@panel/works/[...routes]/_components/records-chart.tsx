@@ -15,28 +15,28 @@ type RecordsChartProps = {
 
 export const RecordsChart: FC<RecordsChartProps> = ({ records }) => (
   <ChartContainer
+    className="h-32 w-full"
     config={{
       records_count: {
         label: '記録数',
         color: 'oklch(70% 0.2 20)',
       },
     }}
-    className="h-32 w-full"
   >
-    <LineChart data={records} accessibilityLayer={true}>
+    <LineChart accessibilityLayer={true} data={records}>
       <Line
-        type="monotone"
         dataKey="records_count"
+        dot={false}
         stroke="oklch(70% 0.2 20)"
         strokeWidth={2}
-        dot={false}
+        type="monotone"
       />
-      <CartesianGrid vertical={false} strokeDasharray="4 4" />
+      <CartesianGrid strokeDasharray="4 4" vertical={false} />
       <XAxis
         dataKey="number_text"
         interval={Math.floor(records.length / 7)}
-        tickMargin={8}
         padding={{ left: 10, right: 10 }}
+        tickMargin={8}
       />
       <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
     </LineChart>

@@ -67,16 +67,16 @@ const EarthIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
         {...props}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={size ?? 28}
-          height={size ?? 28}
-          viewBox="0 0 24 24"
+          className="pointer-events-none"
           fill="none"
+          height={size ?? 28}
           stroke="currentColor"
-          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="pointer-events-none"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width={size ?? 28}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title>earth icon by pqoqubbw/icons</title>
           <motion.path
@@ -131,12 +131,12 @@ const EarthIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
             }}
           />
           <motion.circle
+            animate={controls}
             cx="12"
             cy="12"
             r="10"
             transition={circleTransition}
             variants={circleVariants}
-            animate={controls}
           />
         </svg>
       </div>

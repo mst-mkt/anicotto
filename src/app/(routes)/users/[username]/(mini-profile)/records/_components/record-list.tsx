@@ -21,7 +21,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
   if (records === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
-        <CloudAlertIcon size={40} className="text-muted-foreground" />
+        <CloudAlertIcon className="text-muted-foreground" size={40} />
         <p>記録の取得に失敗しました</p>
       </div>
     )
@@ -30,7 +30,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
   if (records.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
-        <ScrollTextIcon size={40} className="text-muted-foreground" />
+        <ScrollTextIcon className="text-muted-foreground" size={40} />
         <p>記録がありません</p>
       </div>
     )
@@ -39,45 +39,45 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
   return (
     <div className="flex flex-col gap-y-8 py-8">
       {groupRecords(records).map(({ id, records, work, updated_at }) => (
-        <div key={id} className="flex gap-x-4">
+        <div className="flex gap-x-4" key={id}>
           <div className="sticky top-20 aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-md bg-muted">
             <Image
-              src={work.thumbnail}
               alt={work.title}
-              width={128}
-              height={128}
+              className="h-full w-full object-cover"
               fallback={
                 <div className="flex h-full w-full items-center justify-center bg-muted">
-                  <ImageOffIcon size={24} className="text-muted-foreground" />
+                  <ImageOffIcon className="text-muted-foreground" size={24} />
                 </div>
               }
-              className="h-full w-full object-cover"
+              height={128}
+              src={work.thumbnail}
+              width={128}
             />
           </div>
           <div className="flex w-full min-w-0 flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
               <WorkHoverCard work={work}>
                 <Link
-                  href={`/works/${work.id}`}
                   className="shrink grow truncate font-bold transition-colors hover:text-anicotto-accent-600 hover:underline"
+                  href={`/works/${work.id}`}
                 >
                   {work.title}
                 </Link>
               </WorkHoverCard>
               <time
-                dateTime={updated_at}
                 className="shrink-0 break-keep text-muted-foreground text-sm"
+                dateTime={updated_at}
               >
                 {timeText(updated_at)}
               </time>
             </div>
             {records.map(({ id, episode, rating, comment }) => (
-              <div key={id} className="flex flex-col gap-y-2">
+              <div className="flex flex-col gap-y-2" key={id}>
                 <Link
-                  href={`/works/${work.id}/episodes/${episode.id}`}
                   className="group flex items-center gap-x-2"
+                  href={`/works/${work.id}/episodes/${episode.id}`}
                 >
-                  <Badge variant="secondary" className="shrink-0 break-keep">
+                  <Badge className="shrink-0 break-keep" variant="secondary">
                     {episode.number_text}
                   </Badge>
                   {episode.title !== null ? (
@@ -106,7 +106,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
 export const RecordListSkeleton = () => (
   <div className="flex flex-col gap-y-8 py-8">
     {[...Array(8)].map((_, i) => (
-      <div key={i} className="flex gap-x-4">
+      <div className="flex gap-x-4" key={i}>
         <Skeleton className="aspect-square h-16 w-16 shrink-0" />
         <div className="flex w-full flex-col gap-y-4">
           <div className="flex items-center justify-between gap-x-2">

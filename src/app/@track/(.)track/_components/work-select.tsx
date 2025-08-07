@@ -37,8 +37,8 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
   return (
     <>
       <Select
-        name="episode_id"
         defaultValue={library?.next_episode?.id.toString()}
+        name="episode_id"
         onValueChange={handleSelect}
       >
         <SelectTrigger className="h-fit w-full cursor-pointer pl-2 [&>span]:block [&>span]:h-fit">
@@ -47,31 +47,31 @@ export const WorkSelect: FC<WorkSelectProps> = ({ libraries }) => {
         <SelectContent className="max-w-[92svw]">
           {librariesHasNext.map((lib) => (
             <SelectItem
+              className="[&>:last-child]:min-w-0"
               key={lib.work.id}
               value={lib.next_episode?.id.toString() ?? ''}
-              className="[&>:last-child]:min-w-0"
             >
               <div className="flex cursor-pointer items-center gap-x-4 pr-4 text-left">
                 <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md">
                   <AspectRatio ratio={1}>
                     <Image
-                      height={128}
-                      width={128}
-                      src={lib.work.thumbnail}
+                      alt={lib.work.title}
+                      className="h-full w-full object-cover"
                       fallback={
                         <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">
                           <ImageOffIcon size={24} />
                         </div>
                       }
-                      alt={lib.work.title}
-                      className="h-full w-full object-cover"
+                      height={128}
+                      src={lib.work.thumbnail}
+                      width={128}
                     />
                   </AspectRatio>
                 </div>
                 <div className="flex min-w-0 flex-col gap-y-1">
                   <h3 className="truncate font-bold">{lib.work.title}</h3>
                   <div className="flex w-full items-center gap-x-2 overflow-hidden break-keep">
-                    <Badge variant="secondary" className="shrink-0 break-keep">
+                    <Badge className="shrink-0 break-keep" variant="secondary">
                       {lib.next_episode?.number_text}
                     </Badge>
                     <span className="shrink truncate text-muted-foreground">

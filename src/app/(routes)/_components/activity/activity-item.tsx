@@ -21,25 +21,25 @@ type ActivityItemProps = {
 export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
   <div className="flex gap-x-4">
     <UserHoverCard user={activity.user}>
-      <Link href={`/users/${activity.user.username}`} className="sticky top-20 h-fit">
+      <Link className="sticky top-20 h-fit" href={`/users/${activity.user.username}`}>
         <Avatar className="z-0 h-12 w-12">
-          <AvatarImage src={activity.user.avatar_url} alt={activity.user.username} />
+          <AvatarImage alt={activity.user.username} src={activity.user.avatar_url} />
           <AvatarFallback>{activity.user.name.slice(0, 1)}</AvatarFallback>
         </Avatar>
       </Link>
     </UserHoverCard>
     <div className="flex w-full flex-col">
       <div className="flex h-12 items-center gap-x-2">
-        <ActionIcon action={activity.action} size={24} className="text-muted-foreground" />
+        <ActionIcon action={activity.action} className="text-muted-foreground" size={24} />
         <UserHoverCard user={activity.user}>
-          <Link href={`/users/${activity.user.username}`} className="hover:underline">
+          <Link className="hover:underline" href={`/users/${activity.user.username}`}>
             {activity.user.name}
           </Link>
         </UserHoverCard>
         <p className="shrink grow truncate text-sm">が{ACTIVITY_TEXT(activity.action)}</p>
         <time
-          dateTime={activity.created_at}
           className="hidden shrink-0 grow-0 text-muted-foreground text-sm md:block"
+          dateTime={activity.created_at}
         >
           {timeText(activity.created_at)}
         </time>
@@ -47,23 +47,23 @@ export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
       <div className="flex items-center gap-x-4 rounded-lg border border-muted p-2">
         <div className="relative aspect-square h-24 shrink-0 grow-0 overflow-hidden rounded-md md:aspect-video">
           <Image
-            src={activity.work.thumbnail}
+            alt={activity.work.title}
+            className="h-full w-full object-cover"
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                 <ImageOffIcon size={40} />
               </div>
             }
             height={256}
+            src={activity.work.thumbnail}
             width={256}
-            alt={activity.work.title}
-            className="h-full w-full object-cover"
           />
         </div>
         <div className="flex flex-col gap-y-2">
           <WorkHoverCard work={activity.work}>
             <Link
-              href={`/works/${activity.work.id}`}
               className="transition-colors hover:text-anicotto-accent"
+              href={`/works/${activity.work.id}`}
             >
               <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
             </Link>
@@ -71,8 +71,8 @@ export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
           {match(activity)
             .with({ action: 'create_record' }, ({ episode }) => (
               <Link
-                href={`/works/${activity.work.id}/episodes/${episode.id}`}
                 className="group flex items-center gap-x-2"
+                href={`/works/${activity.work.id}/episodes/${episode.id}`}
               >
                 <Badge className="shrink-0 grow-0 group-hover:bg-primary/80">
                   {episode.number_text}
@@ -86,8 +86,8 @@ export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
             ))
             .with({ action: 'create_review' }, ({ review }) => (
               <Link
-                href={`/works/${activity.work.id}/reviews`}
                 className="group flex items-center gap-x-2"
+                href={`/works/${activity.work.id}/reviews`}
               >
                 <RatingBadge rating={review.rating_overall_state} />
                 {review.body.trim() !== '' && (

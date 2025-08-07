@@ -20,7 +20,7 @@ export const WorkPanel: FC<WorkPanelProps> = async ({ workId }) => (
   >
     <div className="flex flex-col gap-y-4">
       <h3 className="flex items-center gap-x-2 font-bold @3xs:text-lg">
-        <StarIcon size={24} className="text-anicotto-accent" />
+        <StarIcon className="text-anicotto-accent" size={24} />
         各エピソードの満足度
       </h3>
       <Suspense fallback={<RatingChartSkeleton />}>
@@ -29,7 +29,7 @@ export const WorkPanel: FC<WorkPanelProps> = async ({ workId }) => (
     </div>
     <div className="flex flex-col gap-y-4">
       <h3 className="flex items-center gap-x-2 font-bold @3xs:text-lg">
-        <PenToolIcon size={24} className="text-anicotto-accent" />
+        <PenToolIcon className="text-anicotto-accent" size={24} />
         各エピソードの記録数
       </h3>
       <Suspense fallback={<RecordsChartSkeleton />}>

@@ -17,7 +17,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
   if (works === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <div>
           <Badge variant="secondary">{STATUS_TEXT(status)}</Badge> の作品の取得に失敗しました
         </div>
@@ -28,7 +28,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
   if (works.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
-        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <OrigamiIcon className="text-anicotto-accent" size={40} />
         <div>
           <Badge variant="secondary">{STATUS_TEXT(status)}</Badge> の作品が見当たりません
         </div>
@@ -48,7 +48,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
 export const WorkListSkeleton = () => (
   <div className="flex flex-col gap-y-4 py-4">
     {[...Array(8)].map((_, index) => (
-      <div key={index} className="flex items-center rounded-lg border border-muted p-2 shadow-xs">
+      <div className="flex items-center rounded-lg border border-muted p-2 shadow-xs" key={index}>
         <Skeleton className="h-24 w-24 shrink-0" />
         <div className="flex w-full flex-col gap-y-1 p-4">
           <Skeleton className="h-[1lh] w-full" />

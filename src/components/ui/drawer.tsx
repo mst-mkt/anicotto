@@ -4,8 +4,8 @@ import {
   type ComponentProps,
   type ComponentPropsWithoutRef,
   type ComponentRef,
-  type HTMLAttributes,
   forwardRef,
+  type HTMLAttributes,
 } from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 import { cn } from '../../utils/classnames'
@@ -29,8 +29,8 @@ const DrawerOverlay = forwardRef<
   ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
-    ref={ref}
     className={cn('fixed inset-0 z-50 bg-black/80', className)}
+    ref={ref}
     {...props}
   />
 ))
@@ -43,11 +43,11 @@ const DrawerContent = forwardRef<
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
-      ref={ref}
       className={cn(
         'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background',
         className,
       )}
+      ref={ref}
       {...props}
     >
       <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
@@ -72,8 +72,8 @@ const DrawerTitle = forwardRef<
   ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Title
-    ref={ref}
     className={cn('font-semibold text-lg leading-none tracking-tight', className)}
+    ref={ref}
     {...props}
   />
 ))
@@ -84,8 +84,8 @@ const DrawerDescription = forwardRef<
   ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Description
-    ref={ref}
     className={cn('text-muted-foreground text-sm', className)}
+    ref={ref}
     {...props}
   />
 ))

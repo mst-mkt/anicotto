@@ -1,4 +1,4 @@
-import { type InferOutput, boolean, integer, number, object, pipe, string } from 'valibot'
+import { boolean, type InferOutput, integer, number, object, pipe, string } from 'valibot'
 import { channelSchema } from '../common'
 import { episodeSchema } from '../episodes'
 import { workSchema } from '../works'

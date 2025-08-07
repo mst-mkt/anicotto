@@ -58,10 +58,10 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
             <Tooltip>
               <TooltipTrigger>
                 <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-fit w-fit rounded-full p-2"
                   asChild={true}
+                  className="h-fit w-fit rounded-full p-2"
+                  size="icon"
+                  variant="outline"
                 >
                   <Link href={`/works/${episode.work.id}/episodes/${episode.prev_episode.id}`}>
                     <ChevronLeftIcon size={20} />
@@ -74,10 +74,10 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
           <Tooltip>
             <TooltipTrigger>
               <Button
-                variant="outline"
-                size="icon"
-                className="h-fit w-fit rounded-full p-2"
                 asChild={true}
+                className="h-fit w-fit rounded-full p-2"
+                size="icon"
+                variant="outline"
               >
                 <Link href={`/works/${episode.work.id}`}>
                   <LibraryBigIcon size={20} />
@@ -90,10 +90,10 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
             <Tooltip>
               <TooltipTrigger>
                 <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-fit w-fit rounded-full p-2"
                   asChild={true}
+                  className="h-fit w-fit rounded-full p-2"
+                  size="icon"
+                  variant="outline"
                 >
                   <Link href={`/works/${episode.work.id}/episodes/${episode.next_episode.id}`}>
                     <ChevronRightIcon size={20} />
@@ -110,29 +110,29 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
         {episode.satisfaction_rate !== null && (
           <div className="flex items-center gap-x-2 text-sm">
             {match(episode.satisfaction_rate)
-              .with(100, () => <StarsIcon size={20} className="text-anicotto-accent" />)
+              .with(100, () => <StarsIcon className="text-anicotto-accent" size={20} />)
               .when(
                 (rate) => rate >= 80,
-                () => <StarIcon size={20} className="text-anicotto-accent" />,
+                () => <StarIcon className="text-anicotto-accent" size={20} />,
               )
               .when(
                 (rate) => rate >= 60,
-                () => <StarHalfIcon size={20} className="text-anicotto-accent" />,
+                () => <StarHalfIcon className="text-anicotto-accent" size={20} />,
               )
               .otherwise(() => (
-                <ThumbsDownIcon size={20} className="text-anicotto-accent" />
+                <ThumbsDownIcon className="text-anicotto-accent" size={20} />
               ))}
             <span>満足度</span>
             <b>{episode.satisfaction_rate}</b>
           </div>
         )}
         <div className="flex items-center gap-x-2 text-sm">
-          <PenToolIcon size={20} className="text-anicotto-accent" />
+          <PenToolIcon className="text-anicotto-accent" size={20} />
           <span>記録</span>
           <b>{episode.records_count}</b>
         </div>
         <div className="flex items-center gap-x-2 text-sm">
-          <MessageCircleHeartIcon size={20} className="text-anicotto-accent" />
+          <MessageCircleHeartIcon className="text-anicotto-accent" size={20} />
           <span>感想</span>
           <b>{episode.record_comments_count}</b>
         </div>
@@ -140,14 +140,14 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
       <RecordForm episodeId={episode.id} tracked={episode.viewer_did_track} />
       <div className="flex flex-col gap-y-8">
         {records?.data.map((record) => (
-          <div key={record.id} className="flex gap-x-4">
+          <div className="flex gap-x-4" key={record.id}>
             <UserHoverCard user={record.user}>
-              <Link href={`/users/${record.user.username}`} className="sticky top-20 h-fit">
+              <Link className="sticky top-20 h-fit" href={`/users/${record.user.username}`}>
                 <Avatar className="h-10 w-10">
                   {record.user.avatar_url !== null && (
                     <AvatarImage
-                      src={record.user.avatar_url}
                       alt={`${record.user.username}のアバター`}
+                      src={record.user.avatar_url}
                     />
                   )}
                   <AvatarFallback>{record.user.name.slice(0, 1)}</AvatarFallback>
@@ -158,8 +158,8 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
               <header className="flex h-8 items-center justify-between gap-x-4">
                 <UserHoverCard user={record.user}>
                   <Link
-                    href={`/users/${record.user.username}`}
                     className="flex min-w-0 items-center gap-x-2 truncate"
+                    href={`/users/${record.user.username}`}
                   >
                     <span className="min-w-0 truncate font-bold">{record.user.name}</span>
                     <span className="min-w-0 shrink-0 text-muted-foreground">
@@ -168,8 +168,8 @@ export const EpisodeInfo: FC<EpisodeInfoProps> = async ({ workId, episodeId }) =
                   </Link>
                 </UserHoverCard>
                 <time
-                  dateTime={record.created_at}
                   className="shrink-0 break-keep text-muted-foreground text-sm"
+                  dateTime={record.created_at}
                 >
                   {timeText(record.created_at)}
                 </time>

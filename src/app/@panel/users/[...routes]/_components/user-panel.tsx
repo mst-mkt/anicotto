@@ -18,7 +18,7 @@ export const UserPanel: FC<UserPanelProps> = async ({ username }) => (
     )}
   >
     <h3 className="flex items-center gap-x-2 font-bold @3xs:text-lg">
-      <FlameIcon size={24} className="text-anicotto-accent" />
+      <FlameIcon className="text-anicotto-accent" size={24} />
       直近のアクティビティ
     </h3>
     <Suspense fallback={<ActivityChartSkeleton />}>

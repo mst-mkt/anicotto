@@ -27,8 +27,8 @@ export const FollowButton: FC<FollowButtonProps> = async ({ username, myUsername
     <AlertDialog>
       <AlertDialogTrigger asChild={true}>
         <Button
-          variant={isFollowing ? 'outline' : 'default'}
           className="aspect-square rounded-full px-2 md:aspect-auto md:px-4"
+          variant={isFollowing ? 'outline' : 'default'}
         >
           {isFollowing ? <UserCheckIcon /> : <UserPlusIcon />}
           <span className="hidden md:block">{isFollowing ? 'フォロー中' : 'フォローする'}</span>
@@ -46,8 +46,8 @@ export const FollowButton: FC<FollowButtonProps> = async ({ username, myUsername
           <AlertDialogAction asChild={true}>
             <Link
               href={`https://annict.com/@${username}`}
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               開く
               <ExternalLinkIcon />

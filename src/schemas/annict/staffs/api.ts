@@ -1,9 +1,9 @@
 import { array, integer, maxValue, minValue, number, object, optional, pipe } from 'valibot'
-import { staffSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { organizationSchema } from '../organizations'
 import { personSchema } from '../people'
 import { workSchema } from '../works'
+import { staffSchema } from '.'
 
 export const getStaffsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(staffSchema.entries.id)),

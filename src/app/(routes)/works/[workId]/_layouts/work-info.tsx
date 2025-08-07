@@ -24,16 +24,16 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
     <div className="flex items-center gap-x-4 overflow-hidden">
       <div className="relative aspect-square h-48 max-w-2/5 shrink-0 overflow-hidden rounded-lg border border-muted p-2">
         <Image
-          src={work.thumbnail}
           alt={work.title}
-          height={144}
-          width={256}
+          className="h-full w-full rounded-sm object-cover"
           fallback={
             <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
               <ImageOffIcon size={40} />
             </div>
           }
-          className="h-full w-full rounded-sm object-cover"
+          height={144}
+          src={work.thumbnail}
+          width={256}
         />
       </div>
       <div className="flex grow flex-col justify-center gap-y-1">
@@ -46,18 +46,18 @@ export const WorkInfo: FC<WorkInfoProps> = async ({ workId }) => {
         </div>
         <div className="flex items-center gap-x-2 py-3">
           <div className="contents text-sm">
-            <BinocularsIcon size={20} className="text-muted-foreground" />
+            <BinocularsIcon className="text-muted-foreground" size={20} />
             <span>{work.watchers_count}</span>
             <span className="hidden text-xs md:inline">人が視聴中</span>
           </div>
           <Separator orientation="vertical" />
           <div className="contents text-sm">
-            <MessageCircleHeartIcon size={20} className="text-muted-foreground" />
+            <MessageCircleHeartIcon className="text-muted-foreground" size={20} />
             <span>{work.reviews_count}</span>
             <span className="hidden text-xs md:inline">件のレビュー</span>
           </div>
         </div>
-        {status !== null && <StatusSelect work={work} status={status} />}
+        {status !== null && <StatusSelect status={status} work={work} />}
       </div>
     </div>
   )

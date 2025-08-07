@@ -67,22 +67,22 @@ const TelescopeIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
         {...props}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={size ?? 28}
-          height={size ?? 28}
-          viewBox="0 0 24 24"
+          className="pointer-events-none"
           fill="none"
+          height={size ?? 28}
           stroke="currentColor"
-          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="pointer-events-none"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width={size ?? 28}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title>telescope icon by pqoqubbw/icons</title>
           <motion.g
-            variants={scopeVariants}
             animate={controls}
             style={{ transformOrigin: '12px 13px' }}
+            variants={scopeVariants}
           >
             <path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44" />
             <path d="m13.56 11.747 4.332-.924" />

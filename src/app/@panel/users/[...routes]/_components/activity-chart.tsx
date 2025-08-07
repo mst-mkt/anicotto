@@ -17,32 +17,31 @@ type ActivityChartProps = {
 
 export const ActivityChart: FC<ActivityChartProps> = ({ activities }) => (
   <ChartContainer
+    className="h-40 w-full"
     config={{
       activities: {
         label: 'アクティビティ',
         color: 'oklch(70% 0.2 20)',
       },
     }}
-    className="h-40 w-full"
   >
-    <LineChart data={activities} accessibilityLayer={true}>
+    <LineChart accessibilityLayer={true} data={activities}>
       <Line
-        type="monotone"
         dataKey="activities"
+        dot={false}
         stroke="oklch(70% 0.2 20)"
         strokeWidth={2}
-        dot={false}
+        type="monotone"
       />
-      <CartesianGrid vertical={false} strokeDasharray="4 4" />
+      <CartesianGrid strokeDasharray="4 4" vertical={false} />
       <XAxis
         dataKey="date"
         interval={6}
-        tickMargin={8}
-        reversed={true}
         padding={{
           left: 10,
           right: 10,
         }}
+        reversed={true}
         tickFormatter={(value: string) => {
           const currentDate = new Date()
           const date = new Date(value)
@@ -51,10 +50,12 @@ export const ActivityChart: FC<ActivityChartProps> = ({ activities }) => (
           const day = date.getDate()
           return currentMonth === month ? `${day}日` : `${month}月${day}日`
         }}
+        tickMargin={8}
       />
       <ChartTooltip
         content={
           <ChartTooltipContent
+            indicator="line"
             labelFormatter={(label: string) =>
               new Date(label).toLocaleDateString('ja-JP', {
                 year: 'numeric',
@@ -62,7 +63,6 @@ export const ActivityChart: FC<ActivityChartProps> = ({ activities }) => (
                 day: 'numeric',
               })
             }
-            indicator="line"
           />
         }
       />

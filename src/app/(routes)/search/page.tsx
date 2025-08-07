@@ -36,7 +36,7 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
   return (
     <div className="flex flex-col gap-y-8">
       <h1 className="flex items-center gap-x-2 font-bold text-lg">
-        <SearchIcon size={24} className="text-anicotto-accent" />
+        <SearchIcon className="text-anicotto-accent" size={24} />
         検索
       </h1>
       <SearchTabs />
@@ -45,26 +45,26 @@ const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
         .with('works', () => (
           <Suspense fallback={<SearchWorksSkeleton />}>
             <SearchWorks
-              query={query}
-              sort={sort ?? 'watchers'}
               order={order}
+              query={query}
               season={season === 'all' ? undefined : `${season.year}-${season.season}`}
+              sort={sort ?? 'watchers'}
             />
           </Suspense>
         ))
         .with('characters', () => (
           <Suspense fallback={<SearchCharactersSkeleton />}>
-            <SearchCharacters query={query} order={order} />
+            <SearchCharacters order={order} query={query} />
           </Suspense>
         ))
         .with('people', () => (
           <Suspense fallback={<SearchPeopleSkeleton />}>
-            <SearchPeople query={query} order={order} />
+            <SearchPeople order={order} query={query} />
           </Suspense>
         ))
         .with('organizations', () => (
           <Suspense fallback={<SearchOrganizationsSkeleton />}>
-            <SearchOrganizations query={query} order={order} />
+            <SearchOrganizations order={order} query={query} />
           </Suspense>
         ))
         .exhaustive()}

@@ -29,7 +29,7 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
   if (libraries === null) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
-        <TriangleAlertIcon size={24} className="text-anicotto-accent" />
+        <TriangleAlertIcon className="text-anicotto-accent" size={24} />
         <p>エピソード情報の取得に失敗しました</p>
       </div>
     )
@@ -38,14 +38,14 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
   if (libraries.filter((lib) => lib.next_episode !== null).length === 0) {
     return (
       <div className="flex items-center justify-center gap-x-2 rounded-md border border-muted p-6">
-        <TriangleAlertIcon size={24} className="text-anicotto-accent" />
+        <TriangleAlertIcon className="text-anicotto-accent" size={24} />
         <p>視聴中の作品がありません</p>
       </div>
     )
   }
 
   return (
-    <Select name="episode_id" defaultValue={selected} onValueChange={handleSelect}>
+    <Select defaultValue={selected} name="episode_id" onValueChange={handleSelect}>
       <SelectTrigger className="h-fit w-full cursor-pointer pl-2 *:block *:h-fit *:min-h-16">
         <SelectValue />
       </SelectTrigger>
@@ -54,24 +54,24 @@ export const WorkSelect: FC<WorkSelectProps> = ({ selected, libraries }) => {
           .filter((lib) => lib.next_episode !== null)
           .map((lib) => (
             <SelectItem
+              className="[&>:last-child]:min-w-0"
               key={lib.work.id}
               value={lib.work.id.toString()}
-              className="[&>:last-child]:min-w-0"
             >
               <div className="flex min-w-0 cursor-pointer items-center gap-x-4 pr-4 text-left">
                 <div className="h-16 w-16 min-w-0 shrink-0 overflow-hidden rounded-md">
                   <AspectRatio ratio={1}>
                     <Image
-                      height={128}
-                      width={128}
-                      src={lib.work.thumbnail}
+                      alt={lib.work.title}
+                      className="h-full w-full object-cover"
                       fallback={
                         <div className="flex h-full w-full items-center justify-center rounded-sm bg-muted text-muted-foreground">
                           <ImageOffIcon size={24} />
                         </div>
                       }
-                      alt={lib.work.title}
-                      className="h-full w-full object-cover"
+                      height={128}
+                      src={lib.work.thumbnail}
+                      width={128}
                     />
                   </AspectRatio>
                 </div>

@@ -32,30 +32,30 @@ export const DiscordShareConfig = () => {
           <Label className="flex flex-col items-center justify-between gap-x-4 gap-y-2 md:flex-row">
             <span>Webhook URL</span>
             <Input
-              type="url"
-              value={discordWebhookUrl}
+              className="w-full shrink-0 grow-0 md:w-1/2"
               onChange={({ currentTarget }) => setDiscordWebhookUrl(currentTarget.value)}
               placeholder="https://discord.com/api/webhooks/..."
-              className="w-full shrink-0 grow-0 md:w-1/2"
+              type="url"
+              value={discordWebhookUrl}
             />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-x-4 gap-y-2 md:flex-row">
             <span>Webhook ユーザー名</span>
             <Input
-              value={discordWebhookUsername}
+              className="w-full shrink-0 grow-0 md:w-1/2"
               onChange={({ currentTarget }) => setDiscordWebhookUsername(currentTarget.value)}
               placeholder="Anicotto"
-              className="w-full shrink-0 grow-0 md:w-1/2"
+              value={discordWebhookUsername}
             />
           </Label>
           <Label className="flex flex-col items-center justify-between gap-x-4 gap-y-2 md:flex-row">
             <span>Webhook アバターURL</span>
             <Input
-              type="url"
-              value={discordWebhookAvatarUrl}
+              className="w-full shrink-0 grow-0 md:w-1/2"
               onChange={({ currentTarget }) => setDiscordWebhookAvatarUrl(currentTarget.value)}
               placeholder="https://example.com/avatar.png"
-              className="w-full shrink-0 grow-0 md:w-1/2"
+              type="url"
+              value={discordWebhookAvatarUrl}
             />
           </Label>
         </div>

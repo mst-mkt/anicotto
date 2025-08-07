@@ -69,10 +69,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
             <TableCell className="break-all">
               {isWithProtocol(work.official_site_url) && (
                 <Link
+                  className="line-clamp-3 text-anicotto-accent"
                   href={work.official_site_url}
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="line-clamp-3 text-anicotto-accent"
                 >
                   {work.official_site_url}
                 </Link>
@@ -86,10 +86,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
             <TableCell className="break-all">
               {isWithProtocol(work.wikipedia_url) && (
                 <Link
+                  className="line-clamp-3 text-anicotto-accent"
                   href={work.wikipedia_url}
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="line-clamp-3 text-anicotto-accent"
                 >
                   {work.wikipedia_url}
                 </Link>
@@ -102,10 +102,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
             <TableHead className="break-keep">Twitter</TableHead>
             <TableCell className="break-all">
               <Link
+                className="line-clamp-3 text-anicotto-accent"
                 href={`https://twitter.com/${work.twitter_username}`}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="line-clamp-3 text-anicotto-accent"
               >
                 @{work.twitter_username}
               </Link>
@@ -117,10 +117,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
             <TableHead className="break-keep">Twitter ハッシュタグ</TableHead>
             <TableCell className="break-all">
               <Link
+                className="line-clamp-3 text-anicotto-accent"
                 href={`https://twitter.com/hashtag/${work.twitter_hashtag}`}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="line-clamp-3 text-anicotto-accent"
               >
                 #{work.twitter_hashtag}
               </Link>
@@ -131,10 +131,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
           <TableHead className="break-keep">Annict公式ページ</TableHead>
           <TableCell className="break-all">
             <Link
+              className="line-clamp-3 text-anicotto-accent"
               href={`https://annict.com/works/${work.id}`}
               rel="noopener noreferrer"
               target="_blank"
-              className="line-clamp-3 text-anicotto-accent"
             >
               https://annict.com/works/{work.id}
             </Link>
@@ -145,10 +145,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
             <TableHead className="break-keep">しょぼいカレンダー</TableHead>
             <TableCell className="break-all">
               <Link
+                className="line-clamp-3 text-anicotto-accent"
                 href={`http://cal.syoboi.jp/tid/${work.syobocal_tid}`}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="line-clamp-3 text-anicotto-accent"
               >
                 {work.syobocal_tid}
               </Link>
@@ -160,10 +160,10 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
             <TableHead className="break-keep">MyAnimeList</TableHead>
             <TableCell className="break-all">
               <Link
+                className="line-clamp-3 text-anicotto-accent"
                 href={`https://myanimelist.net/anime/${work.mal_anime_id}`}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="line-clamp-3 text-anicotto-accent"
               >
                 {work.mal_anime_id}
               </Link>
@@ -175,12 +175,12 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
           <TableCell className="break-all">
             {work.images.facebook.og_image_url !== '' ? (
               <Image
-                src={proxiedImage(work.images.facebook.og_image_url)}
                 alt={`${work.title} のOGP画像`}
+                className="max-h-32 max-w-full"
                 fallback={<span className="text-muted-foreground">画像が見つかりません</span>}
                 height={144}
+                src={proxiedImage(work.images.facebook.og_image_url)}
                 width={256}
-                className="max-h-32 max-w-full"
               />
             ) : (
               <span className="text-muted-foreground">未設定</span>
@@ -192,12 +192,12 @@ export const InformationTable: FC<InformationTableProps> = async ({ workId }) =>
           <TableCell className="break-all">
             {work.images.twitter.image_url !== '' ? (
               <Image
-                src={proxiedImage(work.images.twitter.image_url)}
                 alt={`${work.title} の Twitter カード画像`}
+                className="max-h-32 max-w-full"
                 fallback={<span className="text-muted-foreground">画像が見つかりません</span>}
                 height={144}
+                src={proxiedImage(work.images.twitter.image_url)}
                 width={256}
-                className="max-h-32 max-w-full"
               />
             ) : (
               <span className="text-muted-foreground">未設定</span>

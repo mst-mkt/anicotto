@@ -63,19 +63,19 @@ const MoonIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
         {...props}
       >
         <motion.svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={size ?? 28}
-          height={size ?? 28}
-          viewBox="0 0 24 24"
+          animate={controls}
+          className="pointer-events-none"
           fill="none"
+          height={size ?? 28}
           stroke="currentColor"
-          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          variants={svgVariants}
-          animate={controls}
+          strokeWidth="2"
           transition={svgTransition}
-          className="pointer-events-none"
+          variants={svgVariants}
+          viewBox="0 0 24 24"
+          width={size ?? 28}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title>moon icon by pqoqubbw/icons</title>
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />

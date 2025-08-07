@@ -28,14 +28,14 @@ export const Tab: FC<TabProps> = ({ username }) => {
         .filter((status) => status !== 'no_select')
         .map((status) => (
           <Link
-            key={status}
-            id={`tab-${status}`}
-            href={`/users/${username}/library/${status}`}
             className={cn(
               'w-fit break-keep rounded-md px-3 py-2 font-bold text-muted-foreground text-sm transition-colors hover:text-foreground-300',
               status === currentStatus &&
                 'cursor-default bg-background text-foreground shadow-xs hover:text-foreground',
             )}
+            href={`/users/${username}/library/${status}`}
+            id={`tab-${status}`}
+            key={status}
           >
             {STATUS_TEXT(status)}
           </Link>

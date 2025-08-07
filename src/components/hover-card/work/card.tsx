@@ -18,32 +18,32 @@ type WorkHoverCardProps = {
 }
 
 export const WorkHoverCard: FC<WorkHoverCardProps> = ({ work, side, children }) => (
-  <HoverCard openDelay={100} closeDelay={100}>
+  <HoverCard closeDelay={100} openDelay={100}>
     <HoverCardTrigger asChild={true}>{children}</HoverCardTrigger>
     <HoverCardPortal>
       <HoverCardContent
         align="start"
+        className="flex w-64 flex-col gap-y-3 rounded-lg"
         side={side}
         sideOffset={16}
-        className="flex w-64 flex-col gap-y-3 rounded-lg"
       >
-        <AspectRatio ratio={16 / 9} className="w-full overflow-hidden rounded-md">
+        <AspectRatio className="w-full overflow-hidden rounded-md" ratio={16 / 9}>
           <Image
-            src={work.thumbnail}
             alt={work.title}
-            height={144}
-            width={256}
+            className="h-full w-full object-cover"
             fallback={
               <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                 <ImageOffIcon size={40} />
               </div>
             }
-            className="h-full w-full object-cover"
+            height={144}
+            src={work.thumbnail}
+            width={256}
           />
         </AspectRatio>
         <Link
-          href={`/works/${work.id}`}
           className="line-clamp-2 font-bold transition-colors hover:text-anicotto-accent"
+          href={`/works/${work.id}`}
         >
           {work.title}
         </Link>
@@ -53,22 +53,22 @@ export const WorkHoverCard: FC<WorkHoverCardProps> = ({ work, side, children }) 
         </div>
         <div className="flex gap-x-2 text-muted-foreground text-sm">
           <Link
-            href={`/works/${work.id}`}
             className="flex items-center gap-x-1 transition-colors hover:text-anicotto-accent"
+            href={`/works/${work.id}`}
           >
             <ClapperboardIcon size={16} />
             {work.episodes_count}話
           </Link>
           <Link
-            href={`/works/${work.id}`}
             className="flex items-center gap-x-1 transition-colors hover:text-anicotto-accent"
+            href={`/works/${work.id}`}
           >
             <EyeIcon size={16} />
             {work.watchers_count}
           </Link>
           <Link
-            href={`/works/${work.id}/reviews`}
             className="flex items-center gap-x-1 transition-colors hover:text-anicotto-accent"
+            href={`/works/${work.id}/reviews`}
           >
             <MessageCircleHeartIcon size={16} />
             {work.reviews_count}

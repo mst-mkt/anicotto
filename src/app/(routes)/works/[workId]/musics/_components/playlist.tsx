@@ -16,7 +16,7 @@ export const Playlist: FC<PlaylistProps> = async ({ workId }) => {
   if (work === null) {
     return (
       <div className="flex flex-col items-center justify-center gap-y-4 py-12">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <span className="text-muted-foreground">楽曲情報を取得できませんでした</span>
       </div>
     )
@@ -33,11 +33,11 @@ export const Playlist: FC<PlaylistProps> = async ({ workId }) => {
       <div className="relative h-88 w-full">
         <div className="absolute h-88 w-full animate-pulse rounded-xl bg-muted" />
         <iframe
-          src={`https://open.spotify.com/embed/playlist/${playlist.id}`}
-          width="100%"
-          height="352"
           className="absolute"
+          height="352"
+          src={`https://open.spotify.com/embed/playlist/${playlist.id}`}
           title={playlist.name}
+          width="100%"
         />
       </div>
       <Alert>

@@ -10,13 +10,13 @@ type LinkItemProps = {
 
 export const LinkItem: FC<LinkItemProps> = ({ icon: Icon, href, children }) => (
   <Link
+    className="flex items-center gap-x-2 rounded-lg bg-muted px-4 py-3 transition-[filter] hover:brightness-95"
     href={href}
-    target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center gap-x-2 rounded-lg bg-muted px-4 py-3 transition-[filter] hover:brightness-95 "
+    target="_blank"
   >
-    <Icon size={20} className="text-anicotto-accent" />
+    <Icon className="text-anicotto-accent" size={20} />
     <span className="flex grow items-center text-sm">{children}</span>
-    <ExternalLinkIcon size={16} className="text-muted-foreground" />
+    <ExternalLinkIcon className="text-muted-foreground" size={16} />
   </Link>
 )

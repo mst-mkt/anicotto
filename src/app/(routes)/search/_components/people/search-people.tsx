@@ -16,7 +16,7 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
   if (people === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <p>人物の検索に失敗しました</p>
       </div>
     )
@@ -25,7 +25,7 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
   if (people.data.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 py-16">
-        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <OrigamiIcon className="text-anicotto-accent" size={40} />
         <p>人物の検索結果が見当たりませんでした</p>
       </div>
     )
@@ -35,9 +35,9 @@ export const SearchPeople: FC<SearchPeopleProps> = async ({ query, order }) => {
     <div className="flex flex-col gap-y-4">
       {people.data.map((person) => (
         <Link
+          className="group flex flex-col rounded-lg border border-muted p-4 shadow-xs transition-colors hover:bg-muted"
           href={`/people/${person.id}`}
           key={person.id}
-          className="group flex flex-col rounded-lg border border-muted p-4 shadow-xs transition-colors hover:bg-muted"
         >
           <h2 className="font-bold text-lg transition-colors group-hover:text-anicotto-accent">
             {person.name}
@@ -56,8 +56,8 @@ export const SearchPeopleSkeleton = () => (
   <div className="flex flex-col gap-y-4">
     {[...Array(8)].map((_, index) => (
       <div
-        key={index}
         className="flex flex-col gap-y-1 rounded-lg border border-muted p-4 shadow-xs"
+        key={index}
       >
         <Skeleton className="h-[1lh] w-2/3 text-lg" />
         <Skeleton className="h-[1lh] w-1/3" />

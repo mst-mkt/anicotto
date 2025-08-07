@@ -29,7 +29,7 @@ export const BackDialog: FC<BackDialogProps> = (props) => {
   const isMobile = useMediaQuery('(max-width: 48rem)')
 
   return isMobile ? (
-    <Drawer open={true} onOpenChange={(open) => !open && router.back()}>
+    <Drawer onOpenChange={(open) => !open && router.back()} open={true}>
       <DrawerContent className="max-h-[92svh]">
         <div className="overflow-y-auto">
           <DrawerHeader className="text-center sm:text-center">
@@ -41,7 +41,7 @@ export const BackDialog: FC<BackDialogProps> = (props) => {
       </DrawerContent>
     </Drawer>
   ) : (
-    <Dialog open={true} onOpenChange={(open) => !open && router.back()}>
+    <Dialog onOpenChange={(open) => !open && router.back()} open={true}>
       <DialogContent className="w-[92svw] max-w-[800px]">
         <DialogHeader>
           <DialogTitle>{props.title}</DialogTitle>

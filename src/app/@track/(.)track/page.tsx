@@ -4,10 +4,10 @@ import { TrackFormContent } from './_components/form-content'
 import { TrackFormWrapper } from './_components/form-wrapper'
 
 const TrackModal = () => (
-  <BackDialog title="記録する" description="アニメの視聴記録を作成します">
+  <BackDialog description="アニメの視聴記録を作成します" title="記録する">
     <TrackFormWrapper className="flex w-full flex-col gap-y-4 [@media(display-mode:standalone)]:pb-4">
       <TrackFormContent />
-      <FormButton type="submit" className="cursor-pointer" />
+      <FormButton className="cursor-pointer" type="submit" />
     </TrackFormWrapper>
   </BackDialog>
 )

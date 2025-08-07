@@ -6,7 +6,7 @@ import { MisskeyShareConfig } from './_components/share/misskey'
 const SettingsPage = () => (
   <div className="flex flex-col gap-y-8">
     <h1 className="flex items-center gap-x-4 font-bold text-lg">
-      <SettingsIcon size={24} className="text-anicotto-accent" />
+      <SettingsIcon className="text-anicotto-accent" size={24} />
       設定
     </h1>
     <section className="flex flex-col gap-y-8">

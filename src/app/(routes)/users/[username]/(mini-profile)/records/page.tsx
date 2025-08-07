@@ -28,7 +28,7 @@ const UserRecordsPage: FC<UserRecordsPageProps> = async ({ params }) => {
   return (
     <div>
       <h1 className="flex items-center gap-x-2 font-bold text-lg">
-        <PenToolIcon size={24} className="text-anicotto-accent" />
+        <PenToolIcon className="text-anicotto-accent" size={24} />
         {user?.name}の記録
       </h1>
       <Suspense fallback={<RecordListSkeleton />}>

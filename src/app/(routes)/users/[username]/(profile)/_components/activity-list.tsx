@@ -15,7 +15,7 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
   if (activities === null) {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-y-4 py-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <p>アクテビティが取得できませんでした</p>
       </div>
     )
@@ -24,7 +24,7 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
   if (activities.data.length === 0) {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-y-4 py-16">
-        <OrigamiIcon size={40} className="text-anicotto-accent" />
+        <OrigamiIcon className="text-anicotto-accent" size={40} />
         <p>アクテビティがありません</p>
       </div>
     )
@@ -33,7 +33,7 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
   return (
     <div className="flex flex-col gap-y-4 py-4">
       {activities.data.map((activity) => (
-        <ActivityCard key={activity.id} activity={activity} />
+        <ActivityCard activity={activity} key={activity.id} />
       ))}
     </div>
   )

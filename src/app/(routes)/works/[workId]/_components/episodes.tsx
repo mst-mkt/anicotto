@@ -15,17 +15,17 @@ export const Episodes: FC<EpisodesProps> = async ({ workId }) => {
   if (episodes === null || episodes.length === 0) return null
 
   return (
-    <CollapseList thumbnailCount={16} className="flex flex-col gap-y-4">
+    <CollapseList className="flex flex-col gap-y-4" thumbnailCount={16}>
       {episodes.map((episode) => (
         <Link
-          key={episode.id}
-          href={`/works/${workId}/episodes/${episode.id}`}
           className="group relative"
+          href={`/works/${workId}/episodes/${episode.id}`}
+          key={episode.id}
         >
           <hgroup className="flex items-start gap-x-2">
             <Badge
-              variant="outline"
               className="sticky top-20 h-fit shrink-0 transition-colors group-hover:bg-anicotto-accent-50"
+              variant="outline"
             >
               {episode.number_text}
             </Badge>

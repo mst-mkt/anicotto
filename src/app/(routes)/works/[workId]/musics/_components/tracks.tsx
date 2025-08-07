@@ -19,7 +19,7 @@ export const Tracks: FC<TracksProps> = async ({ workId }) => {
   if (work === null) {
     return (
       <div className="flex flex-col items-center justify-center gap-y-4 py-12">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <span className="text-muted-foreground">楽曲情報を取得できませんでした</span>
       </div>
     )
@@ -33,33 +33,33 @@ export const Tracks: FC<TracksProps> = async ({ workId }) => {
     <div className="flex flex-col gap-y-1">
       {tracks.map((track) => (
         <Link
-          key={track.id}
-          href={track.external_urls.spotify}
           className="group flex items-center gap-x-4 p-2"
+          href={track.external_urls.spotify}
+          key={track.id}
         >
           <div className="aspect-square h-18 w-18 shrink-0 grow-0 overflow-hidden rounded-md">
             <Image
-              src={
-                track.album.images[0].url !== undefined
-                  ? proxiedImage(track.album.images[0].url)
-                  : null
-              }
               alt={track.album.name}
-              height={64}
-              width={64}
+              className="h-full w-full object-cover"
               fallback={
                 <div className="flex h-full w-full items-center justify-center bg-muted object-cover text-muted-foreground">
                   <ImageOffIcon size={24} />
                 </div>
               }
-              className="h-full w-full object-cover"
+              height={64}
+              src={
+                track.album.images[0].url !== undefined
+                  ? proxiedImage(track.album.images[0].url)
+                  : null
+              }
+              width={64}
             />
           </div>
           <div className="flex min-w-0 grow flex-col justify-center gap-y-1 transition-colors">
             <h3 className="truncate font-bold group-hover:text-anicotto-accent">{track.name}</h3>
             <div className="flex h-[22px] flex-wrap gap-x-1 overflow-hidden">
               {track.artists.map((artist) => (
-                <Badge key={artist.id} variant="outline" className="break-keep">
+                <Badge className="break-keep" key={artist.id} variant="outline">
                   {artist.name}
                 </Badge>
               ))}
@@ -77,7 +77,7 @@ export const Tracks: FC<TracksProps> = async ({ workId }) => {
 export const TracksSkeleton = () => (
   <div className="flex flex-col gap-y-1">
     {[...Array(16)].map((_, index) => (
-      <div key={index} className="group flex items-center gap-x-4 p-2">
+      <div className="group flex items-center gap-x-4 p-2" key={index}>
         <Skeleton className="aspect-square h-18 w-18" />
         <div className="flex min-w-0 grow flex-col justify-center gap-y-1 transition-colors">
           <Skeleton className="h-[1lh] w-2/3" />

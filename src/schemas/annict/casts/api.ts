@@ -1,7 +1,7 @@
 import { array, integer, maxValue, minValue, number, object, optional, pipe } from 'valibot'
-import { castSchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
+import { castSchema } from '.'
 
 export const getCastsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(castSchema.entries.id)),

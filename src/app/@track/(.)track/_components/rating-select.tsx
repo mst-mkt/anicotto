@@ -10,7 +10,7 @@ import { cn } from '../../../../utils/classnames'
 export const RatingSelect = () => (
   <div className="flex flex-col gap-y-2">
     <Label htmlFor="rating">評価</Label>
-    <RadioGroup id="rating" name="rating" className="flex gap-0 rounded-lg shadow-xs">
+    <RadioGroup className="flex gap-0 rounded-lg shadow-xs" id="rating" name="rating">
       {ratingPicklist.options.map((rating) => (
         <Tooltip key={rating}>
           <TooltipTrigger asChild={true}>
@@ -32,8 +32,8 @@ export const RatingSelect = () => (
                   'has-[[data-state=checked]]:!border-anicotto-rating-bad has-[[data-state=checked]]:bg-anicotto-rating-bad/4 has-[[data-state=checked]]:font-bold has-[[data-state=checked]]:text-anicotto-rating-bad has-[[data-state=checked]]:[&>svg]:text-anicotto-rating-bad',
               )}
             >
-              <RadioGroupItem value={rating} className="sr-only" />
-              <RatingIcon rating={rating} size={20} className="text-muted-foreground" />
+              <RadioGroupItem className="sr-only" value={rating} />
+              <RatingIcon className="text-muted-foreground" rating={rating} size={20} />
               <span className="break-keep">{RATING_TEXT(rating)}</span>
             </Label>
           </TooltipTrigger>

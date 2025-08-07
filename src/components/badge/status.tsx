@@ -27,7 +27,7 @@ export const StatusBadge: FC<StatusBadgeProps> = ({ status, ...props }) => (
       props.className,
     )}
   >
-    <StatusIcon status={status} size={16} />
+    <StatusIcon size={16} status={status} />
     {STATUS_TEXT(status)}
   </Badge>
 )

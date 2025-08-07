@@ -19,16 +19,16 @@ export const MiniProfile: FC<MiniProfileProps> = async ({ username }) => {
 
   return (
     <header className="flex h-10 items-center gap-x-2">
-      <Link href={`/users/${user.username}`} className="contents">
+      <Link className="contents" href={`/users/${user.username}`}>
         <div className="cursor-pointer rounded-full p-2 transition-colors hover:bg-muted">
           <ChevronLeftIcon size={20} />
         </div>
         <div className="flex min-w-0 gap-x-2 rounded-lg px-2 py-1 transition-colors hover:bg-muted">
           <Avatar className="h-8 w-8">
             <AvatarImage
-              src={user.avatar_url}
               alt={`${user.username}のアバター`}
               className="h-8 w-8"
+              src={user.avatar_url}
             />
             <AvatarFallback>{user.name.slice(0, 1)}</AvatarFallback>
           </Avatar>

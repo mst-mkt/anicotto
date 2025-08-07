@@ -1,5 +1,5 @@
-import { type Result, err, ok } from 'neverthrow'
-import { type BaseIssue, type BaseSchema, type InferOutput, getDotPath, safeParse } from 'valibot'
+import { err, ok, type Result } from 'neverthrow'
+import { type BaseIssue, type BaseSchema, getDotPath, type InferOutput, safeParse } from 'valibot'
 
 type ValibotIssue = BaseIssue<unknown>
 // biome-ignore lint/suspicious/noExplicitAny: Any is needed to receive any schema

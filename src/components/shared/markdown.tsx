@@ -16,7 +16,7 @@ export const Markdown: FC<MarkdownProps> = ({ children, className }) => (
       className,
     )}
   >
-    <ReactMarkdown skipHtml={false} remarkPlugins={[remarkGfm, remarkBreaks]}>
+    <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} skipHtml={false}>
       {children}
     </ReactMarkdown>
   </div>

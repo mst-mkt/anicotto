@@ -22,12 +22,12 @@ const LoginPage = async () => {
       <h1 className="font-bold text-xl">Annictにログイン</h1>
       <p className="text-muted-foreground">
         アプリを使用するためには、
-        <Link href="https://annict.com" className="font-bold text-anicotto-accent hover:underline">
+        <Link className="font-bold text-anicotto-accent hover:underline" href="https://annict.com">
           Annict
         </Link>
         にログインする必要があります。
       </p>
-      <Button type="submit" className="w-fit cursor-pointer">
+      <Button className="w-fit cursor-pointer" type="submit">
         <LogInIcon size={16} />
         ログイン
       </Button>

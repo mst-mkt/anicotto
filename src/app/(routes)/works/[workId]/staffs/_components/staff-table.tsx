@@ -23,7 +23,7 @@ export const StaffTable: FC<StaffTableProps> = async ({ workId }) => {
   if (staffs === null) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <CloudAlertIcon size={40} className="text-anicotto-accent" />
+        <CloudAlertIcon className="text-anicotto-accent" size={40} />
         <p>スタッフの取得に失敗しました</p>
       </div>
     )
@@ -32,7 +32,7 @@ export const StaffTable: FC<StaffTableProps> = async ({ workId }) => {
   if (staffs.length === 0) {
     return (
       <div className="flex flex-col items-center gap-y-4 p-16">
-        <PopcornIcon size={40} className="text-anicotto-accent" />
+        <PopcornIcon className="text-anicotto-accent" size={40} />
         <p>スタッフが見当たりません</p>
       </div>
     )
@@ -70,16 +70,16 @@ export const StaffTable: FC<StaffTableProps> = async ({ workId }) => {
             <TableCell>
               {staff.organization !== undefined ? (
                 <Link
-                  href={`/organizations/${staff.organization.id}`}
                   className="py-4 transition-colors hover:text-anicotto-accent"
+                  href={`/organizations/${staff.organization.id}`}
                 >
                   {staff.name}
                 </Link>
               ) : (
                 staff.person !== undefined && (
                   <Link
-                    href={`/people/${staff.person.id}`}
                     className="py-4 transition-colors hover:text-anicotto-accent"
+                    href={`/people/${staff.person.id}`}
                   >
                     {staff.name}
                   </Link>

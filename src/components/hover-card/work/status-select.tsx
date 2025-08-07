@@ -8,8 +8,8 @@ import { STATUS_TEXT } from '../../../constants/text/status'
 import { type Status, statusPicklist } from '../../../schemas/annict/common'
 import type { Work } from '../../../schemas/annict/works'
 import { cn } from '../../../utils/classnames'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../..//ui/tooltip'
 import { StatusIcon } from '../../icon/status'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../..//ui/tooltip'
 
 type StatusSelectSelectProps = {
   id: Work['id']
@@ -49,7 +49,7 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ id, title, status })
   )
 
   const handleClick = useCallback(
-    async (status: Status) => {
+    (status: Status) => {
       setUpdatingStatus(status)
       startTransition(() => updateStatus(status))
     },
@@ -62,19 +62,19 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ id, title, status })
         <Tooltip key={option}>
           <TooltipTrigger asChild={true}>
             <button
-              type="button"
-              onClick={() => handleClick(option)}
-              disabled={isUpdating}
               className={cn(
                 'cursor-pointer rounded-full bg-background-100 p-1.5 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground data-[state=closed]:bg-transparent',
                 option === status &&
                   'bg-background-900 text-foreground-900 data-[state=closed]:bg-background-800',
               )}
+              disabled={isUpdating}
+              onClick={() => handleClick(option)}
+              type="button"
             >
               {updatingStatus === option ? (
-                <LoaderIcon size={16} className="animate-spin" />
+                <LoaderIcon className="animate-spin" size={16} />
               ) : (
-                <StatusIcon status={option} size={16} />
+                <StatusIcon size={16} status={option} />
               )}
             </button>
           </TooltipTrigger>

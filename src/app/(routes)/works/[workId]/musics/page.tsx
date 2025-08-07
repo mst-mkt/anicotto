@@ -33,14 +33,14 @@ const WorkMusicsPage: FC<WorkMusicsPageProps> = async ({ params }) => {
   return (
     <div className="flex flex-col gap-y-8">
       <h2 className="flex items-center gap-x-2 font-bold text-lg">
-        <Disc3Icon size={24} className="text-anicotto-accent" />
+        <Disc3Icon className="text-anicotto-accent" size={24} />
         プレイリスト
       </h2>
       <Suspense fallback={<PlaylistSkeleton />}>
         <Playlist workId={workId} />
       </Suspense>
       <h2 className="flex items-center gap-x-2 font-bold text-lg">
-        <MusicIcon size={24} className="text-anicotto-accent" />
+        <MusicIcon className="text-anicotto-accent" size={24} />
         関連楽曲
       </h2>
       <Suspense fallback={<TracksSkeleton />}>

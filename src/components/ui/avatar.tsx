@@ -7,8 +7,8 @@ import { cn } from '../../utils/classnames'
 const Avatar = forwardRef<ComponentRef<typeof Root>, ComponentPropsWithoutRef<typeof Root>>(
   ({ className, ...props }, ref) => (
     <Root
-      ref={ref}
       className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
+      ref={ref}
       {...props}
     />
   ),
@@ -17,7 +17,7 @@ Avatar.displayName = Root.displayName
 
 const AvatarImage = forwardRef<ComponentRef<typeof Image>, ComponentPropsWithoutRef<typeof Image>>(
   ({ className, ...props }, ref) => (
-    <Image ref={ref} className={cn('aspect-square h-full w-full', className)} {...props} />
+    <Image className={cn('aspect-square h-full w-full', className)} ref={ref} {...props} />
   ),
 )
 AvatarImage.displayName = Image.displayName
@@ -27,11 +27,11 @@ const AvatarFallback = forwardRef<
   ComponentPropsWithoutRef<typeof Fallback>
 >(({ className, ...props }, ref) => (
   <Fallback
-    ref={ref}
     className={cn(
       'flex h-full w-full items-center justify-center rounded-full bg-muted',
       className,
     )}
+    ref={ref}
     {...props}
   />
 ))

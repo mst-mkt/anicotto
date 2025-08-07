@@ -6,10 +6,10 @@ import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import {
   type ComponentProps,
-  type HTMLAttributes,
-  type KeyboardEvent,
   createContext,
   forwardRef,
+  type HTMLAttributes,
+  type KeyboardEvent,
   useCallback,
   useContext,
   useEffect,
@@ -137,10 +137,10 @@ const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Car
         }}
       >
         <section
-          ref={ref}
-          onKeyDownCapture={handleKeyDown}
-          className={cn('relative', className)}
           aria-roledescription="carousel"
+          className={cn('relative', className)}
+          onKeyDownCapture={handleKeyDown}
+          ref={ref}
           {...props}
         >
           {children}
@@ -156,14 +156,14 @@ const CarouselContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
     const { carouselRef, orientation } = useCarousel()
 
     return (
-      <div ref={carouselRef} className="overflow-hidden">
+      <div className="overflow-hidden" ref={carouselRef}>
         <div
-          ref={ref}
           className={cn(
             'flex',
             orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
             className,
           )}
+          ref={ref}
           {...props}
         />
       </div>
@@ -178,14 +178,14 @@ const CarouselItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
     return (
       <div
-        ref={ref}
-        role="group"
         aria-roledescription="slide"
         className={cn(
           'min-w-0 shrink-0 grow-0 basis-full',
           orientation === 'horizontal' ? 'pl-4' : 'pt-4',
           className,
         )}
+        ref={ref}
+        role="group"
         {...props}
       />
     )
@@ -199,9 +199,6 @@ const CarouselPrevious = forwardRef<HTMLButtonElement, ComponentProps<typeof But
 
     return (
       <Button
-        ref={ref}
-        variant={variant}
-        size={size}
         className={cn(
           'absolute h-8 w-8 rounded-full',
           orientation === 'horizontal'
@@ -211,6 +208,9 @@ const CarouselPrevious = forwardRef<HTMLButtonElement, ComponentProps<typeof But
         )}
         disabled={!canScrollPrev}
         onClick={scrollPrev}
+        ref={ref}
+        size={size}
+        variant={variant}
         {...props}
       >
         <ArrowLeft className="h-4 w-4" />
@@ -227,9 +227,6 @@ const CarouselNext = forwardRef<HTMLButtonElement, ComponentProps<typeof Button>
 
     return (
       <Button
-        ref={ref}
-        variant={variant}
-        size={size}
         className={cn(
           'absolute h-8 w-8 rounded-full',
           orientation === 'horizontal'
@@ -239,6 +236,9 @@ const CarouselNext = forwardRef<HTMLButtonElement, ComponentProps<typeof Button>
         )}
         disabled={!canScrollNext}
         onClick={scrollNext}
+        ref={ref}
+        size={size}
+        variant={variant}
         {...props}
       >
         <ArrowRight className="h-4 w-4" />

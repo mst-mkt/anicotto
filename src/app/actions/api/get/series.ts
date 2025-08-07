@@ -1,7 +1,7 @@
 'use server'
 
 import { graphql } from 'gql.tada'
-import { P, match } from 'ts-pattern'
+import { match, P } from 'ts-pattern'
 import { MEDIA_TEXT } from '../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'

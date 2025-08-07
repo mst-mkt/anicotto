@@ -36,7 +36,7 @@ export const MultiTrack: FC<MultiTrackProps> = async ({ workId }) => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <WorkSelect selected={workId} libraries={libraries} />
+      <WorkSelect libraries={libraries} selected={workId} />
       {currentEpisodes.length > 32 && (
         <Alert>
           <InfoIcon className="h-4 w-4" />
@@ -65,7 +65,7 @@ export const MultiTrackSkeleton = () => (
     <Skeleton className="h-[1lh] w-full" />
     <div className="flex flex-col gap-y-2 rounded-lg border border-muted p-4">
       {[...Array(8)].map((_, i) => (
-        <Skeleton key={i} className="h-[1lh] w-full" />
+        <Skeleton className="h-[1lh] w-full" key={i} />
       ))}
     </div>
   </div>

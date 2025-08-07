@@ -29,7 +29,7 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
       <div>
         <LibraryTitle status={status} />
         <div className="flex w-full flex-col items-center justify-center gap-y-4 p-8">
-          <CloudAlertIcon size={40} className="text-muted-foreground" />
+          <CloudAlertIcon className="text-muted-foreground" size={40} />
           <p>「{STATUS_TEXT(status)}」のライブラリが取得できませんでした</p>
         </div>
       </div>
@@ -41,7 +41,7 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
       <div>
         <LibraryTitle status={status} />
         <div className="flex w-full flex-col items-center justify-center gap-y-6 py-12">
-          <OrigamiIcon size={40} className="text-muted-foreground" />
+          <OrigamiIcon className="text-muted-foreground" size={40} />
           <p>ライブラリに「{STATUS_TEXT(status)}」の作品はありません</p>
         </div>
       </div>
@@ -49,25 +49,25 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
   }
 
   return (
-    <Carousel opts={{ wheel: true }} className="flex flex-col gap-y-4">
-      <LibraryCarouselTitle status={status} itemCount={libraries.length} />
+    <Carousel className="flex flex-col gap-y-4" opts={{ wheel: true }}>
+      <LibraryCarouselTitle itemCount={libraries.length} status={status} />
       <CarouselContent>
         {libraries.map(({ work }) => (
-          <CarouselItem key={work.id} className="basis-1/2 md:basis-1/3">
+          <CarouselItem className="basis-1/2 md:basis-1/3" key={work.id}>
             <WorkHoverCard work={work}>
-              <Link href={`/works/${work.id}`} className="group flex flex-col gap-y-2">
-                <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md bg-muted">
+              <Link className="group flex flex-col gap-y-2" href={`/works/${work.id}`}>
+                <AspectRatio className="overflow-hidden rounded-md bg-muted" ratio={16 / 9}>
                   <Image
-                    src={work.thumbnail}
                     alt={work.title}
-                    width={256}
-                    height={144}
+                    className="h-full w-full object-cover"
                     fallback={
                       <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
                         <ImageOffIcon size={40} />
                       </div>
                     }
-                    className="h-full w-full object-cover"
+                    height={144}
+                    src={work.thumbnail}
+                    width={256}
                   />
                 </AspectRatio>
                 <h3 className="line-clamp-2 font-bold text-sm transition-colors group-hover:text-anicotto-accent-600">
@@ -86,8 +86,8 @@ export const LibraryCarousel: FC<LibraryCarouselProps> = async ({ status, userna
         {libraries.length > 4 && (
           <CarouselItem className="basis-1/2 md:basis-1/3">
             <Link
-              href={`/users/${username}/library/${status}`}
               className="flex h-full flex-col items-center justify-center gap-y-4 rounded-md border border-muted-foreground bg-muted text-muted-foreground transition-colors hover:bg-background-100"
+              href={`/users/${username}/library/${status}`}
             >
               <PackageSearchIcon size={40} />
               すべて見る
@@ -105,8 +105,8 @@ export const LibraryCarouselSkeleton: FC<Pick<LibraryCarouselProps, 'status'>> =
     <div className="flex w-full gap-x-4">
       {[...Array(3)].map((_, i) => (
         <div
-          key={i}
           className="flex shrink basis-1/2 flex-col gap-y-2 last:hidden md:basis-1/3 md:last:flex"
+          key={i}
         >
           <Skeleton className="aspect-video" />
           <Skeleton className="h-[1lh] w-2/3" />

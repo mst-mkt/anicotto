@@ -1,4 +1,4 @@
-import { type Result, err, ok } from 'neverthrow'
+import { err, ok, type Result } from 'neverthrow'
 import type { BaseIssue, BaseSchema, InferInput, InferOutput } from 'valibot'
 import {
   getActivitiesQuerySchema,
@@ -62,7 +62,7 @@ import {
   getWorksQuerySchema,
   getWorksResponseSchema,
 } from '../../../schemas/annict/works/api'
-import { type ParsePathParam, generatePath, generateUrlWithQuery, validate } from './utils'
+import { generatePath, generateUrlWithQuery, type ParsePathParam, validate } from './utils'
 
 // biome-ignore lint/suspicious/noExplicitAny: Any is needed to receive any schema
 type ValibotSchema = BaseSchema<any, any, BaseIssue<unknown>>

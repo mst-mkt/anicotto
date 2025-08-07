@@ -16,10 +16,10 @@ const IndexPage = () => (
     <div className="flex flex-col gap-y-4">
       <hgroup className="flex items-center justify-between gap-x-4">
         <h2 className="flex items-center gap-x-2 font-bold text-lg">
-          <SeasonIcon season={getCurrentSeason()} size={24} className="text-anicotto-accent" />
+          <SeasonIcon className="text-anicotto-accent" season={getCurrentSeason()} size={24} />
           今季アニメ
         </h2>
-        <Button variant="ghost" size="sm" asChild={true}>
+        <Button asChild={true} size="sm" variant="ghost">
           <Link href={`/search?season=${getCurrentSeason()}`}>
             もっと見る
             <ChevronRightIcon size={16} />
@@ -32,7 +32,7 @@ const IndexPage = () => (
     </div>
     <div className="flex flex-col gap-y-8">
       <hgroup className="flex items-center gap-x-2">
-        <FlameIcon size={24} className="text-anicotto-accent" />
+        <FlameIcon className="text-anicotto-accent" size={24} />
         <h2 className="shrink grow font-bold text-lg">アクテビティ</h2>
         <ReloadActivityButton />
       </hgroup>

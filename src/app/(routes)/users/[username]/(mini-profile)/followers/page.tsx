@@ -35,13 +35,13 @@ const FollowersPage: FC<FollowersPageProps> = async ({ params }) => {
   return (
     <div className="flex flex-col gap-y-8">
       <h1 className="flex items-center gap-x-2 font-bold text-lg">
-        <UsersIcon size={24} className="text-anicotto-accent" />
+        <UsersIcon className="text-anicotto-accent" size={24} />
         {user?.name}のフォロワー
       </h1>
       <Suspense fallback={<FollowersListSkeleton />}>
         <FollowersList username={username} />
       </Suspense>
-      <Button variant="secondary" asChild={true} className="w-fit self-center">
+      <Button asChild={true} className="w-fit self-center" variant="secondary">
         <Link href={`/users/${username}/following`}>
           <SearchIcon />
           フォローを見る

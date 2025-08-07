@@ -9,9 +9,9 @@ import {
   optional,
   pipe,
 } from 'valibot'
-import { activitySchema, baseActivitySchema } from '.'
 import { commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { userSchema } from '../users'
+import { activitySchema, baseActivitySchema } from '.'
 
 export const getActivitiesQuerySchema = object({
   filter_user_id: optional(userSchema.entries.id),

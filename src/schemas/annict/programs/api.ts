@@ -10,9 +10,9 @@ import {
   pipe,
   string,
 } from 'valibot'
-import { programSchema } from '.'
 import { channelSchema, commaSeparatedString, orderPicklist, paginationInfoSchema } from '../common'
 import { workSchema } from '../works'
+import { programSchema } from '.'
 
 export const getMyProgramsQuerySchema = object({
   filter_ids: optional(commaSeparatedString(programSchema.entries.id)),

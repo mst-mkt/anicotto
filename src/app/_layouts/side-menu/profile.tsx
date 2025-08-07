@@ -29,7 +29,7 @@ export const SidemenuProfile = async () => {
           <TooltipTrigger asChild={true}>
             <div className="flex cursor-pointer items-center justify-between gap-x-2 p-2">
               <Avatar className="h-12 w-12 shrink-0">
-                <AvatarImage src={profile.avatar_url} alt={profile.name} loading="lazy" />
+                <AvatarImage alt={profile.name} loading="lazy" src={profile.avatar_url} />
                 <AvatarFallback className="bg-anicotto-accent-300 text-white">
                   {profile.name.slice(0, 1)}
                 </AvatarFallback>
@@ -43,7 +43,7 @@ export const SidemenuProfile = async () => {
               </div>
             </div>
           </TooltipTrigger>
-          <TooltipContent side="right" className="block lg:hidden">
+          <TooltipContent className="block lg:hidden" side="right">
             {profile.name}
           </TooltipContent>
         </Tooltip>

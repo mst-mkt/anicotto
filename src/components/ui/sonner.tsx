@@ -11,11 +11,11 @@ export const Toaster: FC<ToasterProps> = (props) => {
 
   return (
     <Sonner
-      theme={theme === 'dark' ? 'dark' : 'light'}
-      richColors={true}
       mobileOffset={{
         bottom: showBottomMenu ? '92px' : '24px',
       }}
+      richColors={true}
+      theme={theme === 'dark' ? 'dark' : 'light'}
       {...props}
     />
   )

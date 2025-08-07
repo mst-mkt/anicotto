@@ -25,21 +25,21 @@ export const SearchForm = () => {
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-2">
       <Input
-        value={search}
+        autoFocus={true}
+        className="col-span-2 w-full"
         onChange={(e) => setSearch(e.currentTarget.value)}
         onKeyDown={(e) => e.key === 'Enter' && setSearchInstantly(search)}
         placeholder="検索するキーワードを入力"
-        autoFocus={true}
-        className="col-span-2 w-full"
+        value={search}
       />
       <div className="flex gap-x-2">
         <SortSelect />
         <SeasonSelect />
       </div>
       <Button
-        onClick={() => setSearchInstantly(search)}
-        disabled={isPending || search.trim() === ''}
         className="w-fit justify-self-end"
+        disabled={isPending || search.trim() === ''}
+        onClick={() => setSearchInstantly(search)}
       >
         {isPending ? <LoaderIcon className="animate-spin" /> : <SearchIcon />}
         検索

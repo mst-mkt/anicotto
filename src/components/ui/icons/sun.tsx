@@ -57,16 +57,16 @@ const SunIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
         {...props}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={size ?? 28}
-          height={size ?? 28}
-          viewBox="0 0 24 24"
+          className="pointer-events-none"
           fill="none"
+          height={size ?? 28}
           stroke="currentColor"
-          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="pointer-events-none"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width={size ?? 28}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <title>sun icon by pqoqubbw/icons</title>
           <circle cx="12" cy="12" r="4" />
@@ -81,11 +81,11 @@ const SunIcon = forwardRef<PqoqubbwIconHandle, PqoqubbwIconProps>(
             'm4.93 4.93 1.41 1.41',
           ].map((d, index) => (
             <motion.path
-              key={d}
-              d={d}
               animate={controls}
-              variants={pathVariants}
               custom={index + 1}
+              d={d}
+              key={d}
+              variants={pathVariants}
             />
           ))}
         </svg>

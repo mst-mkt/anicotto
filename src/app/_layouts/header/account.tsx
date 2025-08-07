@@ -33,8 +33,8 @@ export const HeaderAccount = async () => {
         <div className="flex flex-col gap-y-2 p-[4svw]">
           <DrawerClose asChild={true}>
             <Link
-              href={`/users/${me.username}`}
               className="flex items-center gap-x-2 rounded-md p-2 transition-colors active:bg-muted"
+              href={`/users/${me.username}`}
             >
               <UserCircleIcon size={20} />
               プロフィール
@@ -42,8 +42,8 @@ export const HeaderAccount = async () => {
           </DrawerClose>
           <DrawerClose asChild={true}>
             <Link
-              href={`https://annict.com/@${me.username}`}
               className="flex items-center gap-x-2 rounded-md p-2 transition-colors active:bg-muted"
+              href={`https://annict.com/@${me.username}`}
             >
               <ExternalLinkIcon size={20} />
               Annict プロフィール
@@ -52,8 +52,8 @@ export const HeaderAccount = async () => {
           <Separator />
           <DrawerClose asChild={true}>
             <Link
-              href="/settings"
               className="flex items-center gap-x-2 rounded-md p-2 transition-colors active:bg-muted"
+              href="/settings"
             >
               <SettingsIcon size={20} />
               設定

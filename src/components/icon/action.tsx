@@ -5,7 +5,7 @@ import {
   PenToolIcon,
 } from 'lucide-react'
 import type { FC } from 'react'
-import { P, match } from 'ts-pattern'
+import { match, P } from 'ts-pattern'
 import type { Action } from '../../schemas/annict/common'
 
 type ActionIconProps = {
