@@ -101,6 +101,12 @@ export const useInfiniteScroll = <T>({
     return () => abortControllerRef.current?.abort()
   }, [])
 
+  useEffect(() => {
+    setData(initialData)
+    setCurrentPage(initialPage)
+    setNextPage(initialPage + 1)
+  }, [initialData])
+
   const retry = useCallback(() => {
     setError(null)
     loadMore()
