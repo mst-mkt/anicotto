@@ -106,6 +106,7 @@ export const LibraryCarouselSkeleton: FC<Pick<LibraryCarouselProps, 'status'>> =
       {[...Array(3)].map((_, i) => (
         <div
           className="flex shrink basis-1/2 flex-col gap-y-2 last:hidden md:basis-1/3 md:last:flex"
+          // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
           key={i}
         >
           <Skeleton className="aspect-video" />

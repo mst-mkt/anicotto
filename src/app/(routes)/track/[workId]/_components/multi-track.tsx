@@ -65,6 +65,7 @@ export const MultiTrackSkeleton = () => (
     <Skeleton className="h-[1lh] w-full" />
     <div className="flex flex-col gap-y-2 rounded-lg border border-muted p-4">
       {[...Array(8)].map((_, i) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
         <Skeleton className="h-[1lh] w-full" key={i} />
       ))}
     </div>

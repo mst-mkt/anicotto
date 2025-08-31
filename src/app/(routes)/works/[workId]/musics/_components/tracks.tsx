@@ -77,6 +77,7 @@ export const Tracks: FC<TracksProps> = async ({ workId }) => {
 export const TracksSkeleton = () => (
   <div className="flex flex-col gap-y-1">
     {[...Array(16)].map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
       <div className="group flex items-center gap-x-4 p-2" key={index}>
         <Skeleton className="aspect-square h-18 w-18" />
         <div className="flex min-w-0 grow flex-col justify-center gap-y-1 transition-colors">

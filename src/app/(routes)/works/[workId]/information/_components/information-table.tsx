@@ -229,6 +229,7 @@ export const InformationTableSkeleton = () => (
   <Table>
     <TableBody>
       {[...Array(15)].map((_, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
         <TableRow key={index}>
           <TableHead className="break-keep">
             <Skeleton className="h-[1lh] w-32" />

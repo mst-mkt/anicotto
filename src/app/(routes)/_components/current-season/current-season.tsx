@@ -63,6 +63,7 @@ export const CurrentSeasonWorkSkeleton = () => (
     {[...Array(3)].map((_, index) => (
       <div
         className="flex basis-1/2 flex-col gap-y-2 last:hidden md:basis-1/3 md:last:flex"
+        // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
         key={index}
       >
         <Skeleton className="aspect-video" />

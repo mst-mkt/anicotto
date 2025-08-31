@@ -67,6 +67,7 @@ export const SearchCharactersSkeleton = () => (
     {[...Array(8)].map((_, index) => (
       <div
         className="flex flex-col gap-y-1 rounded-lg border border-muted p-4 shadow-xs"
+        // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
         key={index}
       >
         <Skeleton className="h-[1lh] w-1/2 text-lg" />

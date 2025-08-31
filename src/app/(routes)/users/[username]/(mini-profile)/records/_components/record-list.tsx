@@ -106,6 +106,7 @@ export const RecordList: FC<RecordListProps> = async ({ username }) => {
 export const RecordListSkeleton = () => (
   <div className="flex flex-col gap-y-8 py-8">
     {[...Array(8)].map((_, i) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
       <div className="flex gap-x-4" key={i}>
         <Skeleton className="aspect-square h-16 w-16 shrink-0" />
         <div className="flex w-full flex-col gap-y-4">

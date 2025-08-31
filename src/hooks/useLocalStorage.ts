@@ -45,7 +45,6 @@ export function useLocalStorage<T>(
   }
 
   const subscribe = (callback: () => void): (() => void) => {
-    // biome-ignore lint/suspicious/noEmptyBlockStatements: with SSR, there's no need to unsubscribe
     if (!isClient) return () => {}
 
     const handleStorageChange = (e: StorageEvent) => {

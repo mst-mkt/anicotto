@@ -42,9 +42,7 @@
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
 
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    "@radix-ui/*"
-  ],
+  "typescript.preferences.autoImportFileExcludePatterns": ["@radix-ui/*"],
 
   "cSpell.ignoreWords": [
     // project
@@ -80,6 +78,6 @@
     "pseudoelements",
     "nocompatible",
     "sidemenu",
-    "misskey",
+    "misskey"
   ]
 }

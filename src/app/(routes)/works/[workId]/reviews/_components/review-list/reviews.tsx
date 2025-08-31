@@ -42,6 +42,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
 export const ReviewsSkeleton = () => (
   <div className="flex flex-col gap-y-12">
     {[...Array(3)].map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
       <div className="flex gap-x-4" key={`skeleton-${index}`}>
         <div className="sticky top-20">
           <Skeleton className="aspect-square h-10 w-10 rounded-full" />
@@ -53,6 +54,7 @@ export const ReviewsSkeleton = () => (
           </div>
           <div className="flex w-full flex-col gap-y-2">
             {[...Array(5)].map((_, line) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
               <Skeleton className="h-[1lh] w-full text-sm" key={`skeleton-${index}-${line}`} />
             ))}
           </div>

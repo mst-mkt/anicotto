@@ -27,6 +27,7 @@ export const Activity = async () => {
 export const ActivitySkeleton = () => (
   <div className="flex flex-col gap-y-8">
     {[...Array(8)].map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
       <div className="flex gap-x-4" key={index}>
         <Skeleton className="h-12 w-12 shrink-0 rounded-full" />
         <div className="flex w-full flex-col">
