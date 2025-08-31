@@ -40,7 +40,6 @@ export const useInfiniteScroll = <T>({
 
   const triggerRef = useRef<HTMLDivElement>(null)
   const isLoadingRef = useRef(false)
-  const fetchDataRef = useRef(fetchData)
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const loadMore = useCallback(async () => {
@@ -54,7 +53,7 @@ export const useInfiniteScroll = <T>({
     setError(null)
 
     try {
-      const response = await fetchDataRef.current(nextPage, abortControllerRef.current.signal)
+      const response = await fetchData(nextPage, abortControllerRef.current.signal)
 
       if (response && response.data.length > 0) {
         setData((prev) => [...prev, ...response.data])
@@ -72,7 +71,7 @@ export const useInfiniteScroll = <T>({
       isLoadingRef.current = false
       setIsLoading(false)
     }
-  }, [nextPage])
+  }, [nextPage, fetchData])
 
   useEffect(() => {
     const currentTrigger = triggerRef.current
@@ -105,7 +104,7 @@ export const useInfiniteScroll = <T>({
     setData(initialData)
     setCurrentPage(initialPage)
     setNextPage(initialPage + 1)
-  }, [initialData])
+  }, [initialData, initialPage])
 
   const retry = useCallback(() => {
     setError(null)
@@ -126,7 +125,7 @@ export const useInfiniteScroll = <T>({
     if (isLoading) return 'loading'
     if (error !== null) return 'error'
     return 'success'
-  }, [isLoading, error, data.length])
+  }, [isLoading, error])
 
   return {
     data,
