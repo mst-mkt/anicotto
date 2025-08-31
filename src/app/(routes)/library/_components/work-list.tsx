@@ -5,7 +5,7 @@ import { Skeleton } from '../../../../components/ui/skeleton'
 import { STATUS_TEXT } from '../../../../constants/text/status'
 import type { Status } from '../../../../schemas/annict/common'
 import { getMyWorks } from '../../../actions/api/get/works'
-import { WorkCard } from './work-card'
+import { WorkListScroller } from './work-list-scroller'
 
 type WorkListProps = {
   status: Status
@@ -38,9 +38,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
-      {works.data.map((work) => (
-        <WorkCard key={work.id} work={work} />
-      ))}
+      <WorkListScroller initialWorks={works.data} status={status} />
     </div>
   )
 }
