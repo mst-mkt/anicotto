@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { Skeleton } from '../../../../../../../components/ui/skeleton'
 import type { Work } from '../../../../../../../schemas/annict/works'
 import { getWorkReviews } from '../../../../../../actions/api/get/reviews'
-import { ReviewItem } from './review-item'
+import { ReviewsScroller } from './reviews-scroller'
 
 type ReviewsProps = {
   workId: Work['id']
@@ -32,9 +32,7 @@ export const Reviews: FC<ReviewsProps> = async ({ workId }) => {
 
   return (
     <div className="flex flex-col gap-y-12">
-      {reviews.data.map((review) => (
-        <ReviewItem key={review.id} review={review} />
-      ))}
+      <ReviewsScroller initialReviews={reviews.data} workId={workId} />
     </div>
   )
 }
