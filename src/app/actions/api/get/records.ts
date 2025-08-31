@@ -46,6 +46,9 @@ export const getUserRecords = async (username: User['username'], after?: string)
               title
             }
           }
+          pageInfo {
+            endCursor
+          }
         }
       }
     }
@@ -70,7 +73,10 @@ export const getUserRecords = async (username: User['username'], after?: string)
     return null
   }
 
-  return await Promise.all(
+  const endCursor = data?.user?.records?.pageInfo?.endCursor ?? null
+  console.log('endCursor', endCursor)
+
+  const recordsData = await Promise.all(
     records.map(async (record) => ({
       id: record.annictId,
       rating: record.ratingState,
@@ -104,9 +110,11 @@ export const getUserRecords = async (username: User['username'], after?: string)
       },
     })),
   )
+
+  return { data: recordsData, endCursor }
 }
 
-export type UserRecord = UnNullable<Awaited<ReturnType<typeof getUserRecords>>>[number]
+export type UserRecord = UnNullable<Awaited<ReturnType<typeof getUserRecords>>>['data'][number]
 
 export const getEpisodeRecords = async (episodeId: Episode['id'], page = 1) => {
   await auth()
