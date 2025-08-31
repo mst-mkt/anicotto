@@ -1,11 +1,14 @@
 'use client'
 
 import { Loader2Icon, RotateCwIcon } from 'lucide-react'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { Button } from '../../../../components/ui/button'
 import { useInfiniteScroll } from '../../../../hooks/useInfiniteScroll'
-import { ActivityWithThumbnail, getFollowingActivities } from '../../../actions/api/get/activities'
+import {
+  type ActivityWithThumbnail,
+  getFollowingActivities,
+} from '../../../actions/api/get/activities'
 import { ActivityItem } from './activity-item'
 
 type ActivityScrollerProps = {

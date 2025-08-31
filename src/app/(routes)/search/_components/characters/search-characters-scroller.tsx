@@ -2,13 +2,13 @@
 
 import { HeartIcon, Loader2Icon, RotateCwIcon } from 'lucide-react'
 import Link from 'next/link'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { Button } from '../../../../../components/ui/button'
 import { useInfiniteScroll } from '../../../../../hooks/useInfiniteScroll'
-import { CharacterWithSeries } from '../../../../../schemas/annict/characters'
+import type { CharacterWithSeries } from '../../../../../schemas/annict/characters'
 import { searchCharacters } from '../../../../actions/api/get/characters'
-import { SearchOrder } from '../../search-params'
+import type { SearchOrder } from '../../search-params'
 
 type SearchCharactersScrollerProps = {
   initialCharacters: CharacterWithSeries[]

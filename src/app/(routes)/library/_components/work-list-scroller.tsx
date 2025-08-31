@@ -1,12 +1,12 @@
 'use client'
 
 import { Loader2Icon, RotateCwIcon } from 'lucide-react'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { Button } from '../../../../components/ui/button'
 import { useInfiniteScroll } from '../../../../hooks/useInfiniteScroll'
 import type { Status } from '../../../../schemas/annict/common'
-import { getMyWorks, WorkWithThumbnail } from '../../../actions/api/get/works'
+import { getMyWorks, type WorkWithThumbnail } from '../../../actions/api/get/works'
 import { WorkCard } from './work-card'
 
 type WorkListScrollerProps = {

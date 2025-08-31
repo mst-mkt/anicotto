@@ -2,13 +2,13 @@
 
 import { HeartIcon, Loader2Icon, RotateCwIcon } from 'lucide-react'
 import Link from 'next/link'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { match } from 'ts-pattern'
 import { Button } from '../../../../../components/ui/button'
 import { useInfiniteScroll } from '../../../../../hooks/useInfiniteScroll'
-import { PersonWithPrefecture } from '../../../../../schemas/annict/people'
+import type { PersonWithPrefecture } from '../../../../../schemas/annict/people'
 import { searchPeople } from '../../../../actions/api/get/people'
-import { SearchOrder } from '../../search-params'
+import type { SearchOrder } from '../../search-params'
 
 type SearchPeopleScrollerProps = {
   initialPeople: PersonWithPrefecture[]
