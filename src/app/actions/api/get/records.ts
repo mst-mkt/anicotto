@@ -74,7 +74,6 @@ export const getUserRecords = async (username: User['username'], after?: string)
   }
 
   const endCursor = data?.user?.records?.pageInfo?.endCursor ?? null
-  console.log('endCursor', endCursor)
 
   const recordsData = await Promise.all(
     records.map(async (record) => ({
