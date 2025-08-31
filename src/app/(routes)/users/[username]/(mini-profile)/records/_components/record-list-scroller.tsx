@@ -109,7 +109,7 @@ export const RecordListScroller: FC<RecordListScrollerProps> = ({
         ))
         .with('error', () => (
           <div className="flex flex-col gap-y-2 w-full items-center justify-center py-4">
-            <p className="text-muted-foreground">レビューの取得に失敗しました</p>
+            <p className="text-muted-foreground">記録の取得に失敗しました</p>
             <Button onClick={retry}>
               <RotateCwIcon />
               リトライ
