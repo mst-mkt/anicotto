@@ -102,6 +102,7 @@ export const CastsSkeleton = () => (
     </TableHeader>
     <TableBody>
       {[...Array(5)].map((_, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
         <TableRow key={index}>
           <TableCell>
             <Skeleton className="h-[1lh] w-32" />

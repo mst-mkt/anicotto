@@ -13,7 +13,7 @@ export const searchSearchParams = {
       if (value === 'all') return value
 
       const [year, season] = value.split('-')
-      const yearNumber = Number.parseInt(year)
+      const yearNumber = Number.parseInt(year, 10)
 
       if (Number.isNaN(yearNumber)) {
         return null

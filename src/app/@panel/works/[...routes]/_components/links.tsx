@@ -69,6 +69,7 @@ export const Links: FC<LinksProps> = async ({ workId }) => {
 export const LinksSkeleton = () => (
   <div className="flex flex-col gap-y-2">
     {[...Array(6)].map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
       <Skeleton className="h-11 w-full" key={index} />
     ))}
   </div>

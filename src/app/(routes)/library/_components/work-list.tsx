@@ -46,6 +46,7 @@ export const WorkList: FC<WorkListProps> = async ({ status }) => {
 export const WorkListSkeleton = () => (
   <div className="flex flex-col gap-y-4 py-4">
     {[...Array(8)].map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: this is keys of static array
       <div className="flex items-center rounded-lg border border-muted p-2 shadow-xs" key={index}>
         <Skeleton className="h-24 w-24 shrink-0" />
         <div className="flex w-full flex-col gap-y-1 p-4">
