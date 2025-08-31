@@ -1,16 +1,44 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": [
-    "./node_modules/@mst-mkt/js-config/packages/biome/config.json",
-    "./node_modules/@mst-mkt/js-config/packages/biome/next.json"
-  ],
+
   "files": {
-    "includes": ["./src/**/*", "!src/**/*.d.ts"]
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.json",
+      "**/*.jsonc",
+      "!src/**/*.d.ts",
+      "!src/components/ui/**/*"
+    ]
   },
+
   "linter": {
+    "enabled": true,
     "rules": {
-      "suspicious": { "noArrayIndexKey": "off" }
+      "recommended": true
     },
-    "includes": ["!src/components/ui/**/*"]
+    "domains": {
+      "next": "recommended",
+      "tailwind": "recommended"
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "lineWidth": 100,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "recommended": true
+    }
+  },
+
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded",
+      "quoteStyle": "single"
+    }
   }
 }
