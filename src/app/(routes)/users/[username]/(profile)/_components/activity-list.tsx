@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { Skeleton } from '../../../../../../components/ui/skeleton'
 import type { User } from '../../../../../../schemas/annict/users'
 import { getUserActivities } from '../../../../../actions/api/get/activities'
-import { ActivityCard } from './activity-card'
+import { ActivityListScroller } from './activity-list-scroller'
 
 type ActivityListProps = {
   username: User['username']
@@ -32,9 +32,7 @@ export const ActivityList: FC<ActivityListProps> = async ({ username }) => {
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
-      {activities.data.map((activity) => (
-        <ActivityCard activity={activity} key={activity.id} />
-      ))}
+      <ActivityListScroller initialActivities={activities.data} username={username} />
     </div>
   )
 }
