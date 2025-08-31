@@ -1,13 +1,13 @@
 import { type RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-export type InfinityScrollResponse<T> = {
+export type InfiniteScrollResponse<T> = {
   next_page: number | null
   data: T[]
 } | null
 
 type UseInfiniteScrollOptions<T> = {
   initialData: T[]
-  fetchData: (page: number, signal?: AbortSignal) => Promise<InfinityScrollResponse<T>>
+  fetchData: (page: number, signal?: AbortSignal) => Promise<InfiniteScrollResponse<T>>
   initialPage?: number
   rootMargin?: number
   threshold?: number | number[]
