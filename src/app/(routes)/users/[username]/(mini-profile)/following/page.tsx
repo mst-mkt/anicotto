@@ -7,13 +7,9 @@ import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../../../../actions/api/get/users'
 import { FollowingList, FollowingListSkeleton } from './_components/following-list'
 
-type FollowingPageProps = {
-  params: Promise<{
-    username: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: FollowingPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/users/[username]/following'>): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 
@@ -23,7 +19,7 @@ export const generateMetadata = async ({ params }: FollowingPageProps): Promise<
   }
 }
 
-const FollowingPage: FC<FollowingPageProps> = async ({ params }) => {
+const FollowingPage: FC<PageProps<'/users/[username]/following'>> = async ({ params }) => {
   const { username } = await params
 
   const user = await getUser(username)

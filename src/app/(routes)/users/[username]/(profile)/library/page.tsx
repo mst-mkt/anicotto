@@ -4,13 +4,9 @@ import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../../../../actions/api/get/users'
 import { LibraryCarousel, LibraryCarouselSkeleton } from './_components/carousel'
 
-type UserLibraryPageProps = {
-  params: Promise<{
-    username: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: UserLibraryPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/users/[username]/library'>): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 
@@ -20,7 +16,7 @@ export const generateMetadata = async ({ params }: UserLibraryPageProps): Promis
   }
 }
 
-const UserLibraryPage: FC<UserLibraryPageProps> = async ({ params }) => {
+const UserLibraryPage: FC<PageProps<'/users/[username]/library'>> = async ({ params }) => {
   const { username } = await params
 
   return (

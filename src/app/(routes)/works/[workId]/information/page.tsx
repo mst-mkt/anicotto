@@ -4,13 +4,9 @@ import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../../../../actions/api/get/works'
 import { InformationTable, InformationTableSkeleton } from './_components/information-table'
 
-type WorkInformationPageProps = {
-  params: Promise<{
-    workId: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: WorkInformationPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/works/[workId]/information'>): Promise<Metadata> => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
   if (Number.isNaN(workIdNumber)) return BASIC_METADATA
@@ -22,7 +18,7 @@ export const generateMetadata = async ({ params }: WorkInformationPageProps): Pr
   }
 }
 
-const WorkInformationPage: FC<WorkInformationPageProps> = async ({ params }) => {
+const WorkInformationPage: FC<PageProps<'/works/[workId]/information'>> = async ({ params }) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   if (Number.isNaN(workId)) return null

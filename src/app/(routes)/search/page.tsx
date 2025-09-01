@@ -1,6 +1,5 @@
 import { SearchIcon } from 'lucide-react'
 import type { Metadata } from 'next'
-import type { SearchParams } from 'nuqs/server'
 import { type FC, Suspense } from 'react'
 import { match } from 'ts-pattern'
 import { PROJECT_NAME } from '../../../constants/project'
@@ -18,11 +17,9 @@ import { SearchTabs } from './_components/tabs'
 import { SearchWorks, SearchWorksSkeleton } from './_components/works/search-works'
 import { loadSearchParams } from './search-params'
 
-type SearchPageProps = {
-  searchParams: Promise<SearchParams>
-}
-
-export const generateMetadata = async ({ searchParams }: SearchPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  searchParams,
+}: PageProps<'/search'>): Promise<Metadata> => {
   const { q: query } = await loadSearchParams(searchParams)
 
   return {
@@ -31,7 +28,7 @@ export const generateMetadata = async ({ searchParams }: SearchPageProps): Promi
   }
 }
 
-const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
+const SearchPage: FC<PageProps<'/search'>> = async ({ searchParams }) => {
   const { q: query, r: resource, sort, order, season } = await loadSearchParams(searchParams)
 
   return (

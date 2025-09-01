@@ -5,13 +5,9 @@ import { getWork } from '../../../../actions/api/get/works'
 import { ReviewForm } from './_components/form/review-form'
 import { Reviews, ReviewsSkeleton } from './_components/review-list/reviews'
 
-type WorkReviewsPageProps = {
-  params: Promise<{
-    workId: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: WorkReviewsPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/works/[workId]/reviews'>): Promise<Metadata> => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
   if (Number.isNaN(workIdNumber)) return BASIC_METADATA
@@ -24,7 +20,7 @@ export const generateMetadata = async ({ params }: WorkReviewsPageProps): Promis
   }
 }
 
-const WorkReviewsPage: FC<WorkReviewsPageProps> = async ({ params }) => {
+const WorkReviewsPage: FC<PageProps<'/works/[workId]/reviews'>> = async ({ params }) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   if (Number.isNaN(workId)) return null

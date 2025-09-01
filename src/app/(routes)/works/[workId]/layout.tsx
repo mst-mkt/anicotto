@@ -1,15 +1,8 @@
-import { type FC, type ReactNode, Suspense } from 'react'
+import { type FC, Suspense } from 'react'
 import { Tab } from './_layouts/tabs'
 import { WorkInfo, WorkInfoSkeleton } from './_layouts/work-info'
 
-type WorksLayoutProps = {
-  children: ReactNode
-  params: Promise<{
-    workId: string
-  }>
-}
-
-const WorksLayout: FC<WorksLayoutProps> = async ({ children, params }) => {
+const WorksLayout: FC<LayoutProps<'/works/[workId]'>> = async ({ children, params }) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   if (Number.isNaN(workId)) return null

@@ -4,13 +4,9 @@ import { Loading } from '../../../../../../components/shared/loading'
 import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../../../../actions/api/get/users'
 
-type UserRawPageProps = {
-  params: Promise<{
-    username: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: UserRawPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/users/[username]/raw'>): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 
@@ -20,7 +16,7 @@ export const generateMetadata = async ({ params }: UserRawPageProps): Promise<Me
   }
 }
 
-const UserRawPage: FC<UserRawPageProps> = async ({ params }) => {
+const UserRawPage: FC<PageProps<'/users/[username]/raw'>> = async ({ params }) => {
   const { username } = await params
 
   return (

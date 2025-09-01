@@ -13,14 +13,9 @@ const isStatus = (status: string): status is Exclude<Status, 'no_select'> => {
   return status !== 'no_select' && statusPicklist.options.includes(status as Status)
 }
 
-type UserLibraryLayoutProps = {
-  params: Promise<{
-    username: string
-    status: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: UserLibraryLayoutProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/users/[username]/library/[status]'>): Promise<Metadata> => {
   const { username, status } = await params
 
   if (!isStatus(status)) redirect(`/users/${username}/library`)
@@ -33,7 +28,9 @@ export const generateMetadata = async ({ params }: UserLibraryLayoutProps): Prom
   }
 }
 
-const UserLibraryLayout: FC<UserLibraryLayoutProps> = async ({ params }) => {
+const UserLibraryLayout: FC<PageProps<'/users/[username]/library/[status]'>> = async ({
+  params,
+}) => {
   const { username, status } = await params
 
   if (!isStatus(status)) redirect(`/users/${username}/library`)

@@ -1,15 +1,8 @@
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { Profile } from './_layouts/profile'
 import { Tab } from './_layouts/tabs'
 
-type UserProfileLayoutProps = {
-  children: ReactNode
-  params: Promise<{
-    username: string
-  }>
-}
-
-const UserProfileLayout: FC<UserProfileLayoutProps> = async ({ params, children }) => {
+const UserProfileLayout: FC<LayoutProps<'/users/[username]'>> = async ({ params, children }) => {
   const { username } = await params
 
   return (

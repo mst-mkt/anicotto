@@ -1,14 +1,10 @@
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { MiniProfile } from './_layouts/mini-profile'
 
-type UserMiniProfileLayoutProps = {
-  children: ReactNode
-  params: Promise<{
-    username: string
-  }>
-}
-
-const UserMiniProfileLayout: FC<UserMiniProfileLayoutProps> = async ({ children, params }) => {
+const UserMiniProfileLayout: FC<LayoutProps<'/users/[username]'>> = async ({
+  children,
+  params,
+}) => {
   const { username } = await params
 
   return (

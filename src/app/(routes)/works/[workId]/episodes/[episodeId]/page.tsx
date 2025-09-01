@@ -5,14 +5,9 @@ import { BASIC_METADATA, PROJECT_NAME } from '../../../../../../constants/projec
 import { getEpisodeWithInfo } from '../../../../../actions/api/get/episodes'
 import { EpisodeInfo, EpisodeInfoSkeleton } from './_components/episode-info'
 
-type EpisodePageProps = {
-  params: Promise<{
-    workId: string
-    episodeId: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: EpisodePageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/works/[workId]/episodes/[episodeId]'>): Promise<Metadata> => {
   const { episodeId: episodeIdString } = await params
   const episodeId = Number.parseInt(episodeIdString, 10)
 
@@ -30,7 +25,7 @@ export const generateMetadata = async ({ params }: EpisodePageProps): Promise<Me
   }
 }
 
-const EpisodePage: FC<EpisodePageProps> = async ({ params }) => {
+const EpisodePage: FC<PageProps<'/works/[workId]/episodes/[episodeId]'>> = async ({ params }) => {
   const { workId: workIdString, episodeId: episodeIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   const episodeId = Number.parseInt(episodeIdString, 10)

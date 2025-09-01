@@ -5,13 +5,9 @@ import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../../../../actions/api/get/works'
 import { SeriesCarousels } from './_components/series-carousel'
 
-type WorkSeriesPageProps = {
-  params: Promise<{
-    workId: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: WorkSeriesPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/works/[workId]/series'>): Promise<Metadata> => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
   if (Number.isNaN(workIdNumber)) return BASIC_METADATA
@@ -25,7 +21,7 @@ export const generateMetadata = async ({ params }: WorkSeriesPageProps): Promise
   }
 }
 
-const WorkSeriesPage: FC<WorkSeriesPageProps> = async ({ params }) => {
+const WorkSeriesPage: FC<PageProps<'/works/[workId]/series'>> = async ({ params }) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
 

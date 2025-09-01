@@ -4,13 +4,9 @@ import { PROJECT_NAME } from '../../../../../constants/project'
 import { getUser } from '../../../../actions/api/get/users'
 import { ActivityList, ActivityListSkeleton } from './_components/activity-list'
 
-type UserPageProps = {
-  params: Promise<{
-    username: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: UserPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/users/[username]'>): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 
@@ -20,7 +16,7 @@ export const generateMetadata = async ({ params }: UserPageProps): Promise<Metad
   }
 }
 
-const UserPage: FC<UserPageProps> = async ({ params }) => {
+const UserPage: FC<PageProps<'/users/[username]'>> = async ({ params }) => {
   const { username } = await params
 
   return (

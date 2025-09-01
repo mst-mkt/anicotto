@@ -1,5 +1,5 @@
 import TopLoader from 'nextjs-toploader'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { Toaster } from '../components/ui/sonner'
 import { BASIC_METADATA } from '../constants/project'
 import { ThemeLoader } from '../lib/theme/loader'
@@ -15,13 +15,7 @@ import { Providers } from './providers'
 
 export const metadata: Metadata = BASIC_METADATA
 
-type RootLayoutProps = {
-  children: ReactNode
-  track: ReactNode
-  panel: ReactNode
-}
-
-const RootLayout: FC<RootLayoutProps> = ({ children, track, panel }) => (
+const RootLayout: FC<LayoutProps<'/'>> = ({ children, track, panel }) => (
   <html lang="ja" suppressHydrationWarning={true}>
     <body
       className={cn(

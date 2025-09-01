@@ -1,6 +1,5 @@
 import { BookImageIcon } from 'lucide-react'
 import type { Metadata } from 'next'
-import type { SearchParams } from 'nuqs/server'
 import { type FC, Suspense } from 'react'
 import { TabsContent } from '../../../components/ui/tabs'
 import { PROJECT_NAME } from '../../../constants/project'
@@ -14,11 +13,7 @@ export const metadata: Metadata = {
   description: 'ステータスを設定した作品の一覧',
 }
 
-type LibraryPageProps = {
-  searchParams: Promise<SearchParams>
-}
-
-const LibraryPage: FC<LibraryPageProps> = async ({ searchParams }) => {
+const LibraryPage: FC<PageProps<'/library'>> = async ({ searchParams }) => {
   const { status } = await loadSearchParams(searchParams)
 
   return (

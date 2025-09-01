@@ -5,13 +5,9 @@ import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../../../../actions/api/get/users'
 import { RecordList, RecordListSkeleton } from './_components/record-list'
 
-type UserRecordsPageProps = {
-  params: Promise<{
-    username: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: UserRecordsPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/users/[username]/records'>): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 
@@ -21,7 +17,7 @@ export const generateMetadata = async ({ params }: UserRecordsPageProps): Promis
   }
 }
 
-const UserRecordsPage: FC<UserRecordsPageProps> = async ({ params }) => {
+const UserRecordsPage: FC<PageProps<'/users/[username]/records'>> = async ({ params }) => {
   const { username } = await params
 
   const user = await getUser(username)

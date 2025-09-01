@@ -6,13 +6,9 @@ import { getWork } from '../../../../actions/api/get/works'
 import { Playlist, PlaylistSkeleton } from './_components/playlist'
 import { Tracks, TracksSkeleton } from './_components/tracks'
 
-type WorkMusicsPageProps = {
-  params: Promise<{
-    workId: string
-  }>
-}
-
-export const generateMetadata = async ({ params }: WorkMusicsPageProps): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/works/[workId]/musics'>): Promise<Metadata> => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   if (Number.isNaN(workId)) return BASIC_METADATA
@@ -26,7 +22,7 @@ export const generateMetadata = async ({ params }: WorkMusicsPageProps): Promise
   }
 }
 
-const WorkMusicsPage: FC<WorkMusicsPageProps> = async ({ params }) => {
+const WorkMusicsPage: FC<PageProps<'/works/[workId]/musics'>> = async ({ params }) => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   if (Number.isNaN(workId)) return null
