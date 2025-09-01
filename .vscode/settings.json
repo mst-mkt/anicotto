@@ -3,9 +3,7 @@
   "editor.defaultFormatter": "biomejs.biome",
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit",
-    "source.fixAll.eslint": "never"
+    "source.fixAll.biome": "explicit"
   },
   "editor.quickSuggestions": {
     "strings": "on"
@@ -47,7 +45,12 @@
   "cSpell.ignoreWords": [
     // project
     "anicotto",
+
+    // external services
     "annict",
+    "jikan",
+    "misskey",
+    "syobocal",
 
     // author
     "mst-mkt",
@@ -74,10 +77,8 @@
     "oklch",
     "followee",
     "picklist",
-    "syobocal",
     "pseudoelements",
     "nocompatible",
-    "sidemenu",
-    "misskey"
+    "sidemenu"
   ]
 }
