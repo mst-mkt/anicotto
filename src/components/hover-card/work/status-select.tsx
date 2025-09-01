@@ -84,3 +84,16 @@ export const StatusSelect: FC<StatusSelectSelectProps> = ({ id, title, status })
     </div>
   )
 }
+
+export const StatusSelectSkeleton = () => (
+  <div className="mx-auto flex w-fit gap-x-0.5 rounded-full border border-muted p-1 relative overflow-hidden">
+    {statusPicklist.options.map((option) => (
+      <div key={option} className="rounded-full p-1.5">
+        <StatusIcon size={16} status={option} />
+      </div>
+    ))}
+    <div className="h-full w-full absolute top-0 left-0 flex items-center justify-center bg-background/80">
+      <LoaderIcon className="animate-spin" size={16} />
+    </div>
+  </div>
+)
