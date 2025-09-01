@@ -10,7 +10,8 @@
     "start": "next start",
     "check": "biome check ./src/",
     "fix": "biome check --write ./src/",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "typegen": "next typegen"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
