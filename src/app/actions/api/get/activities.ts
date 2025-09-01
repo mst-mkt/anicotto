@@ -3,7 +3,7 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import { getValidWorkImage } from '../../../../lib/images/valid-url'
+import { getImagesFromWork, getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Activity } from '../../../../schemas/annict/activities'
 import type { User } from '../../../../schemas/annict/users'
 
@@ -32,7 +32,11 @@ export const getFollowingActivities = async (page = 1) => {
       ...activity,
       work: {
         ...activity.work,
-        thumbnail: await getValidWorkImage(activity.work.id.toString(), activity.work.images),
+        thumbnail: await getValidWorkImage(
+          activity.work.images.facebook.og_image_url,
+          getImagesFromWork(activity.work),
+          activity.work.mal_anime_id,
+        ),
       },
     })),
   )
@@ -59,7 +63,11 @@ export const getUserActivities = async (username: User['username'], page = 1) =>
       ...activity,
       work: {
         ...activity.work,
-        thumbnail: await getValidWorkImage(activity.work.id.toString(), activity.work.images),
+        thumbnail: await getValidWorkImage(
+          activity.work.images.facebook.og_image_url,
+          getImagesFromWork(activity.work),
+          activity.work.mal_anime_id,
+        ),
       },
     })),
   )

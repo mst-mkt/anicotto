@@ -5,6 +5,7 @@ import { match, P } from 'ts-pattern'
 import { MEDIA_TEXT } from '../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
+import { annictToMal } from '../../../../lib/api/id'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Work } from '../../../../schemas/annict/works'
@@ -23,6 +24,7 @@ export const getWorkSeries = async (workId: Work['id']) => {
                 edges {
                   item {
                     annictId
+                    malAnimeId
                     title
                     media
                     seasonYear
@@ -88,12 +90,15 @@ export const getWorkSeries = async (workId: Work['id']) => {
             watchers_count: work.watchersCount,
             reviews_count: work.reviewsCount,
             episodes_count: work.episodesCount,
-            thumbnail: await getValidWorkImage(work.annictId.toString(), [
-              work.image?.recommendedImageUrl,
-              work.image?.facebookOgImageUrl,
-              work.image?.twitterNormalAvatarUrl,
-              work.image?.twitterAvatarUrl,
-            ]),
+            thumbnail: await getValidWorkImage(
+              work.image?.facebookOgImageUrl ?? null,
+              [
+                work.image?.recommendedImageUrl ?? null,
+                work.image?.twitterNormalAvatarUrl ?? null,
+                work.image?.twitterAvatarUrl ?? null,
+              ],
+              work.malAnimeId ?? annictToMal(work.annictId)?.toString() ?? null,
+            ),
           })) ?? [],
       ),
     })),

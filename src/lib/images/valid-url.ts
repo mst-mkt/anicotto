@@ -1,51 +1,69 @@
+import 'server-only'
+
 import type { Work } from '../../schemas/annict/works'
+import { jikanApiClient } from '../api/jikan/index'
 import { proxiedImage } from './proxy'
 
-const workImageCache = new Map<string, string | null>()
+const httpRegex = /^http:\/\//
 
 const checkImage = async (url: string) => {
   try {
     const res = await fetch(url, { method: 'HEAD' })
-    if (res.ok) return url
+    if (res.ok) return true
   } catch {
-    return null
+    return false
   }
-  return null
+  return false
 }
 
 export const getValidWorkImage = async (
-  workId: string,
-  images: Work['images'] | (string | null | undefined)[],
+  primaryImage: string | null,
+  images: (string | null)[],
+  malId: string | null,
 ) => {
-  if (workImageCache.has(workId)) {
-    return workImageCache.get(workId) ?? null
+  // 1st. check annictWork.images.facebook.og_image_url
+  const ogpImage = primaryImage?.replace(httpRegex, 'https://') ?? ''
+
+  if (ogpImage !== '') {
+    const isValid = await checkImage(ogpImage)
+    if (isValid) return proxiedImage(ogpImage)
   }
 
-  const urls = (
-    Array.isArray(images)
-      ? images
-      : [
-          images.recommended_url,
-          images.facebook.og_image_url,
-          images.twitter.image_url,
-          images.twitter.normal_avatar_url,
-          images.twitter.original_avatar_url,
-          images.twitter.mini_avatar_url,
-          images.twitter.bigger_avatar_url,
-        ]
-  )
-    .filter((url) => url !== '')
-    .filter((url) => url !== null && url !== undefined)
-    .map(proxiedImage)
+  // 2nd. check malWork.images.webp.image_url
+  if (malId !== '' && malId !== null) {
+    try {
+      const { data } = await jikanApiClient.GET('/anime/{id}', {
+        params: { path: { id: Number.parseInt(malId, 10) } },
+        cache: 'force-cache',
+        next: { revalidate: 60 * 60 * 24 * 30 },
+      })
 
-  const validUrls = await (async () => {
-    for (const url of urls) {
-      const validUrl = await checkImage(url)
-      if (validUrl) return validUrl
+      const malImage = data?.data?.images?.webp?.image_url?.replace(httpRegex, 'https://')
+
+      if (typeof malImage === 'string' && malImage !== '') {
+        return proxiedImage(malImage)
+      }
+    } catch (error) {
+      console.error(`Failed to fetch MAL image for ID ${malId}:`, error)
     }
-    return null
-  })()
+  }
 
-  workImageCache.set(workId, validUrls)
-  return validUrls
+  // 3rd. check annictWork.images other properties
+  const urls = images.map((url) => url?.replace(httpRegex, 'https://') ?? '')
+
+  for (const url of urls) {
+    if (url !== '') {
+      const isValid = await checkImage(url)
+      if (isValid) return proxiedImage(url)
+    }
+  }
+
+  return null
 }
+
+export const getImagesFromWork = (work: Work) => [
+  work.images.recommended_url,
+  work.images.twitter.image_url,
+  work.images.twitter.normal_avatar_url,
+  work.images.twitter.original_avatar_url,
+]

@@ -5,6 +5,7 @@ import { match, P } from 'ts-pattern'
 import { MEDIA_TEXT } from '../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
+import { annictToMal } from '../../../../lib/api/id'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
@@ -27,6 +28,7 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
             }
             work {
               annictId
+              malAnimeId
               title
               seasonName
               seasonYear
@@ -102,12 +104,15 @@ export const getMyLibraries = async (status: Exclude<Status, 'no_select'>) => {
         watchers_count: library.work.watchersCount,
         reviews_count: library.work.reviewsCount,
         episodes_count: library.work.episodesCount,
-        thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
-          library.work.image?.facebookOgImageUrl,
-          library.work.image?.recommendedImageUrl,
-          library.work.image?.twitterNormalAvatarUrl,
-          library.work.image?.twitterAvatarUrl,
-        ]),
+        thumbnail: await getValidWorkImage(
+          library.work.image?.facebookOgImageUrl ?? null,
+          [
+            library.work.image?.recommendedImageUrl ?? null,
+            library.work.image?.twitterNormalAvatarUrl ?? null,
+            library.work.image?.twitterAvatarUrl ?? null,
+          ],
+          library.work.malAnimeId ?? annictToMal(library.work.annictId)?.toString() ?? null,
+        ),
       },
     })),
   )
@@ -130,6 +135,7 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
             }
             work {
               annictId
+              malAnimeId
               title
               seasonName
               seasonYear
@@ -216,12 +222,15 @@ export const getMyLibrariesWithEpisodes = async (status: Exclude<Status, 'no_sel
         watchers_count: library.work.watchersCount,
         reviews_count: library.work.reviewsCount,
         episodes_count: library.work.episodesCount,
-        thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
-          library.work.image?.facebookOgImageUrl,
-          library.work.image?.recommendedImageUrl,
-          library.work.image?.twitterNormalAvatarUrl,
-          library.work.image?.twitterAvatarUrl,
-        ]),
+        thumbnail: await getValidWorkImage(
+          library.work.image?.facebookOgImageUrl ?? null,
+          [
+            library.work.image?.recommendedImageUrl ?? null,
+            library.work.image?.twitterNormalAvatarUrl ?? null,
+            library.work.image?.twitterAvatarUrl ?? null,
+          ],
+          library.work.malAnimeId ?? annictToMal(library.work.annictId)?.toString() ?? null,
+        ),
         episodes:
           library.work.episodes?.nodes
             ?.filter((episode) => episode !== null)
@@ -259,6 +268,7 @@ export const getUserLibraries = async (
             }
             work {
               annictId
+              malAnimeId
               title
               seasonName
               seasonYear
@@ -335,12 +345,15 @@ export const getUserLibraries = async (
         watchers_count: library.work.watchersCount,
         reviews_count: library.work.reviewsCount,
         episodes_count: library.work.episodesCount,
-        thumbnail: await getValidWorkImage(library.work.annictId.toString(), [
-          library.work.image?.facebookOgImageUrl,
-          library.work.image?.recommendedImageUrl,
-          library.work.image?.twitterNormalAvatarUrl,
-          library.work.image?.twitterAvatarUrl,
-        ]),
+        thumbnail: await getValidWorkImage(
+          library.work.image?.facebookOgImageUrl ?? null,
+          [
+            library.work.image?.recommendedImageUrl ?? null,
+            library.work.image?.twitterNormalAvatarUrl ?? null,
+            library.work.image?.twitterAvatarUrl ?? null,
+          ],
+          library.work.malAnimeId ?? annictToMal(library.work.annictId)?.toString() ?? null,
+        ),
       },
     })),
   )

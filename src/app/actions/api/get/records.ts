@@ -6,6 +6,7 @@ import { MEDIA_TEXT } from '../../../../constants/text/media'
 import { SEASON_NAME_TEXT } from '../../../../constants/text/season'
 import { annictGraphqlClient } from '../../../../lib/api/annict-graphql/client'
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
+import { annictToMal } from '../../../../lib/api/id'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
 import { getValidWorkImage } from '../../../../lib/images/valid-url'
@@ -25,6 +26,7 @@ export const getUserRecords = async (username: User['username'], after?: string)
             updatedAt
             work {
               annictId
+              malAnimeId
               title
               media
               seasonYear
@@ -90,12 +92,15 @@ export const getUserRecords = async (username: User['username'], after?: string)
           .with([P.number, P.nullish], ([year]) => `${year}年`)
           .with([P.number, P.string], ([year, season]) => `${year}年${SEASON_NAME_TEXT(season)}`)
           .exhaustive(),
-        thumbnail: await getValidWorkImage(record.work.annictId.toString(), [
-          record.work.image?.recommendedImageUrl ?? null,
+        thumbnail: await getValidWorkImage(
           record.work.image?.facebookOgImageUrl ?? null,
-          record.work.image?.twitterNormalAvatarUrl ?? null,
-          record.work.image?.twitterAvatarUrl ?? null,
-        ]),
+          [
+            record.work.image?.recommendedImageUrl ?? null,
+            record.work.image?.twitterNormalAvatarUrl ?? null,
+            record.work.image?.twitterAvatarUrl ?? null,
+          ],
+          record.work.malAnimeId ?? annictToMal(record.work.annictId)?.toString() ?? null,
+        ),
         episodes_count: record.work.episodesCount,
         watchers_count: record.work.watchersCount,
         reviews_count: record.work.reviewsCount,

@@ -3,7 +3,7 @@
 import { annictApiClient } from '../../../../lib/api/annict-rest/client'
 import { auth } from '../../../../lib/auth'
 import { CACHE_TAGS } from '../../../../lib/cache-tag'
-import { getValidWorkImage } from '../../../../lib/images/valid-url'
+import { getImagesFromWork, getValidWorkImage } from '../../../../lib/images/valid-url'
 import type { Status } from '../../../../schemas/annict/common'
 import type { Work } from '../../../../schemas/annict/works'
 import { getCurrentSeason } from '../../../../utils/get-season'
@@ -31,7 +31,11 @@ export const getCurrentSeasonWorks = async (count = 12) => {
   const worksWithValidThumbnail = await Promise.all(
     works.map(async (work) => ({
       ...work,
-      thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+      thumbnail: await getValidWorkImage(
+        work.images.facebook.og_image_url,
+        getImagesFromWork(work),
+        work.mal_anime_id,
+      ),
     })),
   )
 
@@ -58,7 +62,11 @@ export const getMyWorks = async (status: Status, page = 1) => {
   const worksWithValidThumbnail = await Promise.all(
     works.map(async (work) => ({
       ...work,
-      thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+      thumbnail: await getValidWorkImage(
+        work.images.facebook.og_image_url,
+        getImagesFromWork(work),
+        work.mal_anime_id,
+      ),
     })),
   )
 
@@ -100,7 +108,11 @@ export const searchWorks = async (
   const worksWithValidThumbnail = await Promise.all(
     works.map(async (work) => ({
       ...work,
-      thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+      thumbnail: await getValidWorkImage(
+        work.images.facebook.og_image_url,
+        getImagesFromWork(work),
+        work.mal_anime_id,
+      ),
     })),
   )
 
@@ -128,7 +140,11 @@ export const getWork = async (workId: Work['id']) => {
 
   const workWithValidThumbnail = {
     ...work,
-    thumbnail: await getValidWorkImage(work.id.toString(), work.images),
+    thumbnail: await getValidWorkImage(
+      work.images.facebook.og_image_url,
+      getImagesFromWork(work),
+      work.mal_anime_id,
+    ),
   }
 
   return workWithValidThumbnail
