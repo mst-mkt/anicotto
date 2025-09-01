@@ -71,7 +71,7 @@ export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
                 {records.map(({ record, episode }) => (
                   <Fragment key={record.id}>
                     <div className="flex items-start gap-x-2">
-                      <Badge className="sticky top-46 h-fit shrink-0" variant="outline">
+                      <Badge className="sticky top-48 h-fit shrink-0" variant="outline">
                         {episode.number_text}
                       </Badge>
                       <Link
