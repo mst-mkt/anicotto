@@ -1,21 +1,31 @@
-import { ImageOffIcon } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import type { FC } from 'react'
+import { type FC, Fragment } from 'react'
 import { match } from 'ts-pattern'
 import { RatingBadge } from '../../../../components/badge/rating'
 import { StatusBadge } from '../../../../components/badge/status'
 import { UserHoverCard } from '../../../../components/hover-card/user/card'
-import { WorkHoverCard } from '../../../../components/hover-card/work/card'
 import { ActionIcon } from '../../../../components/icon/action'
-import { Image } from '../../../../components/shared/image'
+import { Markdown } from '../../../../components/shared/markdown'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'
 import { Badge } from '../../../../components/ui/badge'
 import { ACTIVITY_TEXT } from '../../../../constants/text/activity'
+import type { Activity } from '../../../../schemas/annict/activities'
 import { timeText } from '../../../../utils/time-text'
-import type { ActivityWithThumbnail } from '../../../actions/api/get/activities'
+import type { GroupedActivity } from '../../group-activity'
+import { ActivityCard } from './activity-card'
+
+const convertActionType = (action: GroupedActivity['action']) => {
+  return match(action)
+    .returnType<Activity['action']>()
+    .with('create_records', () => 'create_record')
+    .with('create_reviews', () => 'create_review')
+    .with('create_status', () => 'create_status')
+    .exhaustive()
+}
 
 type ActivityItemProps = {
-  activity: ActivityWithThumbnail
+  activity: GroupedActivity
 }
 
 export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
@@ -30,13 +40,19 @@ export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
     </UserHoverCard>
     <div className="flex w-full flex-col">
       <div className="flex h-12 items-center gap-x-2">
-        <ActionIcon action={activity.action} className="text-muted-foreground" size={24} />
+        <ActionIcon
+          action={convertActionType(activity.action)}
+          className="text-muted-foreground"
+          size={24}
+        />
         <UserHoverCard user={activity.user}>
           <Link className="hover:underline" href={`/users/${activity.user.username}`}>
             {activity.user.name}
           </Link>
         </UserHoverCard>
-        <p className="shrink grow truncate text-sm">が{ACTIVITY_TEXT(activity.action)}</p>
+        <p className="shrink grow truncate text-sm">
+          が{ACTIVITY_TEXT(convertActionType(activity.action))}
+        </p>
         <time
           className="hidden shrink-0 grow-0 text-muted-foreground text-sm md:block"
           dateTime={activity.created_at}
@@ -44,62 +60,132 @@ export const ActivityItem: FC<ActivityItemProps> = ({ activity }) => (
           {timeText(activity.created_at)}
         </time>
       </div>
-      <div className="flex items-center gap-x-4 rounded-lg border border-muted p-2">
-        <div className="relative aspect-square h-24 shrink-0 grow-0 overflow-hidden rounded-md md:aspect-video">
-          <Image
-            alt={activity.work.title}
-            className="h-full w-full object-cover"
-            fallback={
-              <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-                <ImageOffIcon size={40} />
-              </div>
-            }
-            height={256}
-            src={activity.work.thumbnail}
-            width={256}
-          />
-        </div>
-        <div className="flex flex-col gap-y-2">
-          <WorkHoverCard work={activity.work}>
-            <Link
-              className="transition-colors hover:text-anicotto-accent"
-              href={`/works/${activity.work.id}`}
-            >
-              <h3 className="line-clamp-2 font-bold">{activity.work.title}</h3>
-            </Link>
-          </WorkHoverCard>
-          {match(activity)
-            .with({ action: 'create_record' }, ({ episode }) => (
-              <Link
-                className="group flex items-center gap-x-2"
-                href={`/works/${activity.work.id}/episodes/${episode.id}`}
+      <div className="flex flex-col gap-y-2">
+        {match(activity)
+          .with({ action: 'create_records' }, (activity) =>
+            activity.works.map(({ work, records }) => (
+              <ActivityCard
+                key={`records-${work.id}-${activity.id}-${records.at(0)?.record.id}`}
+                work={work}
               >
-                <Badge className="shrink-0 grow-0 group-hover:bg-primary/80">
-                  {episode.number_text}
-                </Badge>
-                {episode.title !== null && (
-                  <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent">
-                    {episode.title}
-                  </span>
-                )}
-              </Link>
-            ))
-            .with({ action: 'create_review' }, ({ review }) => (
-              <Link
-                className="group flex items-center gap-x-2"
-                href={`/works/${activity.work.id}/reviews`}
+                {records.map(({ record, episode }) => (
+                  <Fragment key={record.id}>
+                    <div className="flex items-start gap-x-2">
+                      <Badge className="sticky top-46 h-fit shrink-0" variant="outline">
+                        {episode.number_text}
+                      </Badge>
+                      <Link
+                        href={`/works/${work.id}/episodes/${episode.id}`}
+                        className="w-fit shrink  text-sm hover:text-anicotto-accent transition-colors"
+                      >
+                        {episode.title === null || episode.title.trim() === '' ? (
+                          <span className="text-muted-foreground">タイトル不明</span>
+                        ) : (
+                          episode.title
+                        )}
+                      </Link>
+                      <div className="shrink grow self-center">
+                        <div className="h-[1px] bg-muted" />
+                      </div>
+                    </div>
+                    {record.comment !== null && (
+                      <div className="text-sm flex flex-wrap justify-between items-center gap-1.5">
+                        <p className="text-muted-foreground">{record.comment}</p>
+                        {record.rating_state !== null && (
+                          <RatingBadge rating={record.rating_state} />
+                        )}
+                      </div>
+                    )}
+                  </Fragment>
+                ))}
+              </ActivityCard>
+            )),
+          )
+          .with({ action: 'create_reviews' }, (activity) =>
+            activity.works.map(({ work, reviews }) => (
+              <ActivityCard
+                key={`reviews-${work.id}-${activity.id}-${reviews.at(0)?.id}`}
+                work={work}
               >
-                <RatingBadge rating={review.rating_overall_state} />
-                {review.body.trim() !== '' && (
-                  <span className="line-clamp-1 shrink transition-colors group-hover:text-anicotto-accent">
-                    {review.body}
-                  </span>
-                )}
-              </Link>
-            ))
-            .with({ action: 'create_status' }, ({ status }) => <StatusBadge status={status.kind} />)
-            .otherwise(() => null)}
-        </div>
+                {reviews.map((review, reviewIndex) => (
+                  <Fragment key={review.id}>
+                    {reviewIndex !== 0 && (
+                      <div className="w-full border-b border-dashed mt-2 border-muted" />
+                    )}
+                    <div className="flex flex-col gap-y-2">
+                      {review.body.trim() !== '' && (
+                        <Markdown className="text-sm">{review.body}</Markdown>
+                      )}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {review.rating_overall_state !== null && (
+                          <RatingBadge
+                            rating={review.rating_overall_state}
+                            showIcon={false}
+                            showRating={true}
+                            showTitle={true}
+                            kind="overall"
+                          />
+                        )}
+                        {review.rating_animation_state !== null && (
+                          <RatingBadge
+                            rating={review.rating_animation_state}
+                            showIcon={false}
+                            showRating={true}
+                            showTitle={true}
+                            kind="animation"
+                          />
+                        )}
+                        {review.rating_character_state !== null && (
+                          <RatingBadge
+                            rating={review.rating_character_state}
+                            showIcon={false}
+                            showRating={true}
+                            showTitle={true}
+                            kind="character"
+                          />
+                        )}
+                        {review.rating_music_state !== null && (
+                          <RatingBadge
+                            rating={review.rating_music_state}
+                            showIcon={false}
+                            showRating={true}
+                            showTitle={true}
+                            kind="music"
+                          />
+                        )}
+                        {review.rating_story_state !== null && (
+                          <RatingBadge
+                            rating={review.rating_story_state}
+                            showIcon={false}
+                            showRating={true}
+                            showTitle={true}
+                            kind="story"
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </Fragment>
+                ))}
+              </ActivityCard>
+            )),
+          )
+          .with({ action: 'create_status' }, (activity) =>
+            activity.works.map(({ work, status }) => (
+              <ActivityCard key={`status-${work.id}-${activity.id}`} work={work}>
+                <div className="flex items-center gap-x-4 justify-between">
+                  <StatusBadge status={status} />
+                  <Link
+                    className="flex items-center hover:text-anicotto-accent-600 transition-colors font-bold text-anicotto-accent text-sm"
+                    href={`/works/${work.id}`}
+                  >
+                    この作品を見る
+                    <ChevronRight size={20} />
+                  </Link>
+                </div>
+              </ActivityCard>
+            )),
+          )
+          .exhaustive()}
       </div>
     </div>
   </div>
