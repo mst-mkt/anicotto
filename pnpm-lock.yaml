@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@kawaiioverflow/arm':
+        specifier: ^0.211.0
+        version: 0.211.0
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -466,6 +469,10 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+
+  '@kawaiioverflow/arm@0.211.0':
+    resolution: {integrity: sha512-a4Ae5l0mx74JSxkBk/jYdobJGrtP5hFTV06jCDxefSscr6BFTyXEukRCaspJJNS/L5OVgEY7Chv8kLI60zKo2g==}
+    engines: {node: '>=18.0.0'}
 
   '@next/env@15.5.2':
     resolution: {integrity: sha512-Qe06ew4zt12LeO6N7j8/nULSOe3fMXE4dM6xgpBQNvdzyK1sv5y4oAP3bq4LamrvGCZtmRYnW8URFCeX5nFgGg==}
@@ -2399,6 +2406,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@kawaiioverflow/arm@0.211.0': {}
 
   '@next/env@15.5.2': {}
 
