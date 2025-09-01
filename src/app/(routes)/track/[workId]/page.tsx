@@ -1,4 +1,5 @@
 import { BookCopyIcon } from 'lucide-react'
+import type { Metadata } from 'next'
 import { type FC, Suspense } from 'react'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../constants/project'
 import { getWork } from '../../../actions/api/get/works'
@@ -10,7 +11,7 @@ type MultiTrackPageProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: MultiTrackPageProps) => {
+export const generateMetadata = async ({ params }: MultiTrackPageProps): Promise<Metadata> => {
   const { workId } = await params
   const workIdNumber = Number.parseInt(workId, 10)
   if (Number.isNaN(workIdNumber)) return BASIC_METADATA

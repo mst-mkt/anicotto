@@ -4,6 +4,7 @@ import { Toaster } from '../components/ui/sonner'
 import { BASIC_METADATA } from '../constants/project'
 import { ThemeLoader } from '../lib/theme/loader'
 import '../styles/globals.css'
+import type { Metadata } from 'next'
 import { cn } from '../utils/classnames'
 import { Footer } from './_layouts/footer/footer'
 import { Header } from './_layouts/header/header'
@@ -12,7 +13,7 @@ import { Sidemenu } from './_layouts/side-menu/sidemenu'
 import styles from './layout.module.css'
 import { Providers } from './providers'
 
-export const metadata = BASIC_METADATA
+export const metadata: Metadata = BASIC_METADATA
 
 type RootLayoutProps = {
   children: ReactNode

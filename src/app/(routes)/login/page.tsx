@@ -7,10 +7,10 @@ import { PROJECT_NAME } from '../../../constants/project'
 import { auth } from '../../../lib/auth'
 import { loginAction } from '../../actions/auth/login'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: `ログイン | ${PROJECT_NAME}`,
   description: 'Annictにログインしてアプリを使用する',
-} satisfies Metadata
+}
 
 const LoginPage = async () => {
   const session = await auth()

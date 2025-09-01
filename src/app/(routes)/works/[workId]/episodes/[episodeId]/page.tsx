@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { type FC, Suspense } from 'react'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../../constants/project'
@@ -11,7 +12,7 @@ type EpisodePageProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: EpisodePageProps) => {
+export const generateMetadata = async ({ params }: EpisodePageProps): Promise<Metadata> => {
   const { episodeId: episodeIdString } = await params
   const episodeId = Number.parseInt(episodeIdString, 10)
 

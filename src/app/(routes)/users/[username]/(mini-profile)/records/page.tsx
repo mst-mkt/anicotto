@@ -1,4 +1,5 @@
 import { PenToolIcon } from 'lucide-react'
+import type { Metadata } from 'next'
 import { type FC, Suspense } from 'react'
 import { PROJECT_NAME } from '../../../../../../constants/project'
 import { getUser } from '../../../../../actions/api/get/users'
@@ -10,7 +11,7 @@ type UserRecordsPageProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: UserRecordsPageProps) => {
+export const generateMetadata = async ({ params }: UserRecordsPageProps): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 

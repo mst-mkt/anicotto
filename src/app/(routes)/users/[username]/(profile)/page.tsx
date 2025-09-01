@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { type FC, Suspense } from 'react'
 import { PROJECT_NAME } from '../../../../../constants/project'
 import { getUser } from '../../../../actions/api/get/users'
@@ -9,7 +10,7 @@ type UserPageProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: UserPageProps) => {
+export const generateMetadata = async ({ params }: UserPageProps): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { type FC, Suspense } from 'react'
 import { StatusIcon } from '../../../../../../../components/icon/status'
@@ -19,7 +20,7 @@ type UserLibraryLayoutProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: UserLibraryLayoutProps) => {
+export const generateMetadata = async ({ params }: UserLibraryLayoutProps): Promise<Metadata> => {
   const { username, status } = await params
 
   if (!isStatus(status)) redirect(`/users/${username}/library`)

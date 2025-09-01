@@ -1,4 +1,5 @@
 import { SearchIcon, UsersIcon } from 'lucide-react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { type FC, Suspense } from 'react'
@@ -13,7 +14,7 @@ type FollowersPageProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: FollowersPageProps) => {
+export const generateMetadata = async ({ params }: FollowersPageProps): Promise<Metadata> => {
   const { username } = await params
   const user = await getUser(username)
 

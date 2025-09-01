@@ -1,4 +1,5 @@
 import { Disc3Icon, MusicIcon } from 'lucide-react'
+import type { Metadata } from 'next'
 import { type FC, Suspense } from 'react'
 import { BASIC_METADATA, PROJECT_NAME } from '../../../../../constants/project'
 import { getWork } from '../../../../actions/api/get/works'
@@ -11,7 +12,7 @@ type WorkMusicsPageProps = {
   }>
 }
 
-export const generateMetadata = async ({ params }: WorkMusicsPageProps) => {
+export const generateMetadata = async ({ params }: WorkMusicsPageProps): Promise<Metadata> => {
   const { workId: workIdString } = await params
   const workId = Number.parseInt(workIdString, 10)
   if (Number.isNaN(workId)) return BASIC_METADATA
