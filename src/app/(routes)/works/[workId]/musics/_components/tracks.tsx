@@ -7,6 +7,7 @@ import { Skeleton } from '../../../../../../components/ui/skeleton'
 import { spotifyApiClient } from '../../../../../../lib/api/spotify/client'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
 import type { Work } from '../../../../../../schemas/annict/works'
+import { isWithProtocol } from '../../../../../../utils/route-type'
 import { getWork } from '../../../../../actions/api/get/works'
 
 type TracksProps = {
@@ -31,45 +32,50 @@ export const Tracks: FC<TracksProps> = async ({ workId }) => {
 
   return (
     <div className="flex flex-col gap-y-1">
-      {tracks.map((track) => (
-        <Link
-          className="group flex items-center gap-x-4 p-2"
-          href={track.external_urls.spotify}
-          key={track.id}
-        >
-          <div className="aspect-square h-18 w-18 shrink-0 grow-0 overflow-hidden rounded-md">
-            <Image
-              alt={track.album.name}
-              className="h-full w-full object-cover"
-              fallback={
-                <div className="flex h-full w-full items-center justify-center bg-muted object-cover text-muted-foreground">
-                  <ImageOffIcon size={24} />
+      {tracks.map(
+        (track) =>
+          isWithProtocol(track.external_urls.spotify) && (
+            <Link
+              className="group flex items-center gap-x-4 p-2"
+              href={track.external_urls.spotify}
+              key={track.id}
+            >
+              <div className="aspect-square h-18 w-18 shrink-0 grow-0 overflow-hidden rounded-md">
+                <Image
+                  alt={track.album.name}
+                  className="h-full w-full object-cover"
+                  fallback={
+                    <div className="flex h-full w-full items-center justify-center bg-muted object-cover text-muted-foreground">
+                      <ImageOffIcon size={24} />
+                    </div>
+                  }
+                  height={64}
+                  src={
+                    track.album.images[0].url !== undefined
+                      ? proxiedImage(track.album.images[0].url)
+                      : null
+                  }
+                  width={64}
+                />
+              </div>
+              <div className="flex min-w-0 grow flex-col justify-center gap-y-1 transition-colors">
+                <h3 className="truncate font-bold group-hover:text-anicotto-accent">
+                  {track.name}
+                </h3>
+                <div className="flex h-[22px] flex-wrap gap-x-1 overflow-hidden">
+                  {track.artists.map((artist) => (
+                    <Badge className="break-keep" key={artist.id} variant="outline">
+                      {artist.name}
+                    </Badge>
+                  ))}
                 </div>
-              }
-              height={64}
-              src={
-                track.album.images[0].url !== undefined
-                  ? proxiedImage(track.album.images[0].url)
-                  : null
-              }
-              width={64}
-            />
-          </div>
-          <div className="flex min-w-0 grow flex-col justify-center gap-y-1 transition-colors">
-            <h3 className="truncate font-bold group-hover:text-anicotto-accent">{track.name}</h3>
-            <div className="flex h-[22px] flex-wrap gap-x-1 overflow-hidden">
-              {track.artists.map((artist) => (
-                <Badge className="break-keep" key={artist.id} variant="outline">
-                  {artist.name}
-                </Badge>
-              ))}
-            </div>
-          </div>
-          <div className="h-fit w-fit rounded-md p-2 transition-colors hover:bg-muted">
-            <ExternalLinkIcon size={16} />
-          </div>
-        </Link>
-      ))}
+              </div>
+              <div className="h-fit w-fit rounded-md p-2 transition-colors hover:bg-muted">
+                <ExternalLinkIcon size={16} />
+              </div>
+            </Link>
+          ),
+      )}
     </div>
   )
 }

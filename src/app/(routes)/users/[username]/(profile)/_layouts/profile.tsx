@@ -7,6 +7,7 @@ import { AspectRatio } from '../../../../../../components/ui/aspect-ratio'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../../../../components/ui/avatar'
 import { Badge } from '../../../../../../components/ui/badge'
 import { proxiedImage } from '../../../../../../lib/images/proxy'
+import { isWithProtocol } from '../../../../../../utils/route-type'
 import { getMe, getUser } from '../../../../../actions/api/get/users'
 import { FollowButton } from './follow-button'
 import { IsFollowed } from './is-followed'
@@ -61,7 +62,7 @@ export const Profile: FC<ProfileProps> = async ({ username }) => {
           </hgroup>
           <p className="truncate text-sm">{user.description}</p>
           <div className="flex h-5 items-center gap-x-1">
-            {user.url !== null && user.url !== '' && (
+            {user.url !== null && isWithProtocol(user.url) && (
               <Link
                 className="text-anicotto-accent"
                 href={user.url}

@@ -9,6 +9,7 @@ import {
 import type { FC } from 'react'
 import { Skeleton } from '../../../../../components/ui/skeleton'
 import type { Work } from '../../../../../schemas/annict/works'
+import { isWithProtocol } from '../../../../../utils/route-type'
 import { getWork } from '../../../../actions/api/get/works'
 import { LinkItem } from './link-item'
 
@@ -23,7 +24,7 @@ export const Links: FC<LinksProps> = async ({ workId }) => {
 
   return (
     <div className="flex flex-col gap-y-2">
-      {work.official_site_url !== '' && (
+      {isWithProtocol(work.official_site_url) && (
         <LinkItem href={work.official_site_url} icon={EarthIcon}>
           公式サイト
         </LinkItem>
@@ -38,7 +39,7 @@ export const Links: FC<LinksProps> = async ({ workId }) => {
           関連ツイート
         </LinkItem>
       )}
-      {work.wikipedia_url !== '' && (
+      {isWithProtocol(work.wikipedia_url) && (
         <LinkItem href={work.wikipedia_url} icon={EarthIcon}>
           Wikipedia
         </LinkItem>

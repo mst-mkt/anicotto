@@ -1,10 +1,11 @@
 import { ExternalLinkIcon, type LucideIcon } from 'lucide-react'
+import type { Route } from 'next'
 import Link from 'next/link'
 import type { FC, ReactNode } from 'react'
 
 type LinkItemProps = {
   icon: LucideIcon
-  href: string
+  href: Route
   children: ReactNode
 }
 
