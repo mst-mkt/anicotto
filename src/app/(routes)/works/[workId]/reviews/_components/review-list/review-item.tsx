@@ -52,6 +52,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
               showIcon={false}
               showRating={true}
               showTitle={true}
+              kind="overall"
             />
           )}
           {review.rating_animation_state !== null && (
@@ -60,6 +61,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
               showIcon={false}
               showRating={true}
               showTitle={true}
+              kind="animation"
             />
           )}
           {review.rating_character_state !== null && (
@@ -68,6 +70,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
               showIcon={false}
               showRating={true}
               showTitle={true}
+              kind="character"
             />
           )}
           {review.rating_music_state !== null && (
@@ -76,6 +79,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
               showIcon={false}
               showRating={true}
               showTitle={true}
+              kind="music"
             />
           )}
           {review.rating_story_state !== null && (
@@ -84,6 +88,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ review }) => (
               showIcon={false}
               showRating={true}
               showTitle={true}
+              kind="story"
             />
           )}
         </div>
