@@ -1,10 +1,10 @@
 import { ImageOffIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC, ReactNode } from 'react'
-import { WorkHoverCard } from '../../../../../../components/hover-card/work/card'
-import { Image } from '../../../../../../components/shared/image'
-import { Badge } from '../../../../../../components/ui/badge'
-import type { WorkWithThumbnail } from '../../../../../actions/api/get/works'
+import { WorkHoverCard } from '../../../../components/hover-card/work/card'
+import { Image } from '../../../../components/shared/image'
+import { Badge } from '../../../../components/ui/badge'
+import type { WorkWithThumbnail } from '../../../actions/api/get/works'
 
 type ActivityCardProps = {
   work: WorkWithThumbnail

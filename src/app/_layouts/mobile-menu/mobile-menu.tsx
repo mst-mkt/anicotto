@@ -2,7 +2,7 @@ import { BookTextIcon, HomeIcon, PenToolIcon, SearchIcon, TelescopeIcon } from '
 import Link from 'next/link'
 
 export const BottomMenu = () => (
-  <div className="fixed bottom-0 left-0 flex w-full justify-between rounded-t-xl border border-muted border-b-0 bg-background/64 p-2 backdrop-blur-lg md:hidden [@media(display-mode:standalone)]:pb-4">
+  <div className="fixed bottom-0 z-50 left-0 flex w-full justify-between rounded-t-xl border border-muted border-b-0 bg-background/64 p-2 backdrop-blur-lg md:hidden [@media(display-mode:standalone)]:pb-4">
     <Link
       className="flex w-full shrink flex-col items-center gap-y-2 rounded-lg p-2 text-muted-foreground transition-colors active:bg-background-400/10 active:text-foreground"
       href="/"

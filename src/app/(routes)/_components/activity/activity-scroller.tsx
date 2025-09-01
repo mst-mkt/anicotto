@@ -9,6 +9,7 @@ import {
   type ActivityWithThumbnail,
   getFollowingActivities,
 } from '../../../actions/api/get/activities'
+import { groupActivity } from '../../group-activity'
 import { ActivityItem } from './activity-item'
 
 type ActivityScrollerProps = {
@@ -29,7 +30,7 @@ export const ActivityScroller: FC<ActivityScrollerProps> = ({ initialActivities 
 
   return (
     <>
-      {activities.map((activity) => (
+      {groupActivity(activities).map((activity) => (
         <ActivityItem activity={activity} key={activity.id} />
       ))}
       {match(status)

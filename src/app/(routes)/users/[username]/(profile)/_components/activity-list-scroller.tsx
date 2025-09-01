@@ -10,7 +10,8 @@ import {
   type ActivityWithThumbnail,
   getUserActivities,
 } from '../../../../../actions/api/get/activities'
-import { ActivityCard } from './activity-card'
+import { groupActivity } from '../../../../group-activity'
+import { ActivityItem } from './activity-item'
 
 type ActivityListScrollerProps = {
   initialActivities: ActivityWithThumbnail[]
@@ -34,8 +35,8 @@ export const ActivityListScroller: FC<ActivityListScrollerProps> = ({
 
   return (
     <>
-      {activities.map((activity) => (
-        <ActivityCard activity={activity} key={activity.id} />
+      {groupActivity(activities).map((activity) => (
+        <ActivityItem key={activity.id} activity={activity} />
       ))}
       {match(status)
         .with('loading', () => (
