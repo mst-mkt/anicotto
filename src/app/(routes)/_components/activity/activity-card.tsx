@@ -13,9 +13,9 @@ type ActivityCardProps = {
 
 export const ActivityCard: FC<ActivityCardProps> = ({ work, children }) => (
   <div className="rounded-xl border border-muted flex flex-col">
-    <div className="sticky flex flex-col top-16 z-20">
+    <div className="has-[+div>:nth-child(3)]:sticky flex flex-col top-16 z-20">
       <div className="flex items-center gap-x-4 bg-background rounded-xl p-3 pb-0">
-        <div className="relative aspect-square h-27 shrink-0 grow-0 overflow-hidden rounded-md md:aspect-video">
+        <div className="relative aspect-video h-20 md:h-27 shrink-0 grow-0 overflow-hidden rounded-md">
           <Image
             alt={work.title}
             className="h-full w-full object-cover"
@@ -35,7 +35,7 @@ export const ActivityCard: FC<ActivityCardProps> = ({ work, children }) => (
               className="transition-colors hover:text-anicotto-accent"
               href={`/works/${work.id}`}
             >
-              <h3 className="line-clamp-2 font-bold">{work.title}</h3>
+              <h3 className="line-clamp-2 font-bold text-sm md:text-base">{work.title}</h3>
             </Link>
           </WorkHoverCard>
           <div className="flex gap-x-2">
