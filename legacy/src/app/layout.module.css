@@ -1,0 +1,49 @@
+.layout {
+  display: grid;
+  grid-template:
+    'header header header' auto
+    'side-menu main panel' 1fr
+    'side-menu footer panel' auto / 1fr clamp(40svw, 500px, 92svw) 1fr;
+  column-gap: 4svw;
+  min-height: 100svh;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sideMenu {
+  grid-area: side-menu;
+  justify-self: end;
+}
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.panel {
+  grid-area: panel;
+}
+
+@media screen and (width < 64rem) {
+  .panel {
+    display: none;
+  }
+}
+
+@media screen and (width < 48rem) {
+  .layout {
+    grid-template:
+      'header header header' auto
+      '. main .' 1fr
+      '. footer .' auto / 0 92svw 0;
+  }
+
+  .sideMenu {
+    display: none;
+  }
+}

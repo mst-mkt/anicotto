@@ -1,0 +1,84 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.eol": "\n",
+
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "typescript.preferences.autoImportFileExcludePatterns": ["@radix-ui/*"],
+
+  "cSpell.ignoreWords": [
+    // project
+    "anicotto",
+
+    // external services
+    "annict",
+    "jikan",
+    "misskey",
+    "syobocal",
+
+    // author
+    "mst-mkt",
+
+    // libraries
+    "lefthook",
+    "biomejs",
+    "nextjs",
+    "vercel",
+    "pathpida",
+    "urql",
+    "embla",
+    "embla-carousel",
+    "embla-carousel-autoplay",
+    "neverthrow",
+    "nuqs",
+    "nextjs-toploader",
+    "sonner",
+    "valibot",
+    "pqoqubbw",
+    "shadcn",
+
+    // others
+    "oklch",
+    "followee",
+    "picklist",
+    "pseudoelements",
+    "nocompatible",
+    "sidemenu"
+  ]
+}

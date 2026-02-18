@@ -1,0 +1,145 @@
+@import './tailwind.css';
+
+* {
+  @apply border-border;
+}
+body {
+  @apply font-sans antialiased bg-background text-foreground;
+}
+
+:root {
+  /* anicotto color palette */
+
+  /* anicotto-accent: oklch(70% 0.2 20) */
+  --anicotto-accent: 70% 0.2 20;
+  /* anicotto-rating-great: oklch(74.5% 0.15 175) */
+  --anicotto-rating-great: 74.5% 0.15 175;
+  /* anicotto-rating-good: oklch(60.35% 0.17 260) */
+  --anicotto-rating-good: 60.35% 0.17 260;
+  /* anicotto-rating-average: oklch(77% 0.14 58.1) */
+  --anicotto-rating-average: 77% 0.14 58.1;
+  /* anicotto-rating-bad: oklch(64% 0.19 22.8) */
+  --anicotto-rating-bad: 64% 0.19 22.8;
+
+  /* anicotto-status-wanna_watch: oklch(67% 0.18 27.9) */
+  --anicotto-status-wanna_watch: 67% 0.18 27.9;
+  /* anicotto-status-watching: oklch(75% 0.13 190.5) */
+  --anicotto-status-watching: 75% 0.13 190.5;
+  /* anicotto-status-watched: oklch(65.26% 0.21 138.6) */
+  --anicotto-status-watched: 65.26% 0.21 138.6;
+  /* anicotto-status-on_hold: oklch(58% 0.18 330) */
+  --anicotto-status-on_hold: 58% 0.18 330;
+  /* anicotto-status-stop_watching: oklch(64% 0 0) */
+  --anicotto-status-stop_watching: 64% 0 0;
+
+  /* shadcn/ui variables */
+
+  /* background: oklch(100% 0 0) */
+  --background: 100% 0 0;
+  /* foreground: oklch(14.5% 0 0) */
+  --foreground: 14.5% 0 0;
+  /* card: oklch(100% 0 0) */
+  --card: 100% 0 0;
+  /* card-foreground: oklch(14.5% 0 0) */
+  --card-foreground: 14.5% 0 0;
+  /* popover: oklch(100% 0 0) */
+  --popover: 100% 0 0;
+  /* popover-foreground: oklch(14.5% 0 0) */
+  --popover-foreground: 14.5% 0 0;
+  /* primary: oklch(20.4% 0 0) */
+  --primary: 20.4% 0 0;
+  /* primary-foreground: oklch(98.5% 0 0) */
+  --primary-foreground: 98.5% 0 0;
+  /* secondary: oklch(97% 0 0) */
+  --secondary: 97% 0 0;
+  /* secondary-foreground: oklch(20.4% 0 0) */
+  --secondary-foreground: 20.4% 0 0;
+  /* muted: oklch(97% 0 0) */
+  --muted: 97% 0 0;
+  /* muted-foreground: oklch(55.6% 0 0) */
+  --muted-foreground: 55.6% 0 0;
+  /* accent: oklch(97% 0 0) */
+  --accent: 97% 0 0;
+  /* accent-foreground: oklch(20.4% 0 0) */
+  --accent-foreground: 20.4% 0 0;
+  /* destructive: oklch(63.7% 0.21 25.3) */
+  --destructive: 63.7% 0.21 25.3;
+  /* destructive-foreground: oklch(98.5% 0 0) */
+  --destructive-foreground: 98.5% 0 0;
+  /* border: oklch(92.2% 0 0) */
+  --border: 92.2% 0 0;
+  /* input: oklch(92.2% 0 0) */
+  --input: 92.2% 0 0;
+  /* ring: oklch(14.5% 0 0) */
+  --ring: 14.5% 0 0;
+  /* chart-1: oklch(67.7% 0.16 35.2) */
+  --chart-1: 67.7% 0.16 35.2;
+  /* chart-2: oklch(63.1% 0.1 183) */
+  --chart-2: 63.1% 0.1 183;
+  /* chart-3: oklch(37.9% 0.04 226) */
+  --chart-3: 37.9% 0.04 226;
+  /* chart-4: oklch(83.4% 0.12 88.1) */
+  --chart-4: 83.4% 0.12 88.1;
+  /* chart-5: oklch(78.3% 0.13 58.7) */
+  --chart-5: 78.3% 0.13 58.7;
+  /* radius */
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* anicotto color palette */
+
+  /* anicotto-accent: oklch(70% 0.2 20) */
+  --anicotto-accent: 70% 0.2 20;
+
+  /* shadcn/ui variables */
+
+  /* background: oklch(14.5% 0 0) */
+  --background: 14.5% 0 0;
+  /* foreground: oklch(98.5% 0 0) */
+  --foreground: 98.5% 0 0;
+  /* card: oklch(14.5% 0 0) */
+  --card: 14.5% 0 0;
+  /* card-foreground: oklch(98.5% 0 0) */
+  --card-foreground: 98.5% 0 0;
+  /* popover: oklch(14.5% 0 0) */
+  --popover: 14.5% 0 0;
+  /* popover-foreground: oklch(98.5% 0 0) */
+  --popover-foreground: 98.5% 0 0;
+  /* primary: oklch(98.5% 0 0) */
+  --primary: 98.5% 0 0;
+  /* primary-foreground: oklch(20.4% 0 0) */
+  --primary-foreground: 20.4% 0 0;
+  /* secondary: oklch(26.9% 0 0) */
+  --secondary: 26.9% 0 0;
+  /* secondary-foreground: oklch(98.5% 0 0) */
+  --secondary-foreground: 98.5% 0 0;
+  /* muted: oklch(26.9% 0 0) */
+  --muted: 26.9% 0 0;
+  /* muted-foreground: oklch(71.5% 0 0) */
+  --muted-foreground: 71.5% 0 0;
+  /* accent: oklch(26.9% 0 0) */
+  --accent: 26.9% 0 0;
+  /* accent-foreground: oklch(98.5% 0 0) */
+  --accent-foreground: 98.5% 0 0;
+  /* destructive: oklch(39.6% 0.13 25.7) */
+  --destructive: 39.6% 0.13 25.7;
+  /* destructive-foreground: oklch(98.5% 0 0) */
+  --destructive-foreground: 98.5% 0 0;
+  /* border: oklch(26.9% 0 0) */
+  --border: 26.9% 0 0;
+  /* input: oklch(26.9% 0 0) */
+  --input: 26.9% 0 0;
+  /* ring: oklch(87% 0 0) */
+  --ring: 87% 0 0;
+  /* chart-1: oklch(52.9% 0.19 262) */
+  --chart-1: 52.9% 0.19 262;
+  /* chart-2: oklch(69.8% 0.13 165) */
+  --chart-2: 69.8% 0.13 165;
+  /* chart-3: oklch(72.3% 0.15 60.6) */
+  --chart-3: 72.3% 0.15 60.6;
+  /* chart-4: oklch(61.9% 0.2 313) */
+  --chart-4: 61.9% 0.2 313;
+  /* chart-5: oklch(61.2% 0.21 6.39) */
+  --chart-5: 61.2% 0.21 6.39;
+}
