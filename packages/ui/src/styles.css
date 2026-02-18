@@ -1,0 +1,4 @@
+/* INFO: Tailwind Intellisense Entrypoint */
+/* INFO: This package does not bundle CSS */
+@import "tailwindcss";
+@import "@anicotto/design-tokens/theme.css";

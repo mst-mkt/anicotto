@@ -1,0 +1,24 @@
+{
+  "name": "@anicotto/utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./classname": {
+      "types": "./dist/classname.d.mts",
+      "import": "./dist/classname.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@anicotto/tsconfig": "workspace:*",
+    "tailwind-merge": "^3.4.1",
+    "tailwind-variants": "^3.2.2",
+    "tsdown": "^0.20.3",
+    "typescript": "^5.9.3"
+  }
+}
