@@ -1,0 +1,23 @@
+{
+  "name": "@anicotto/design-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./theme.css": "./dist/tailwind-theme.css",
+    "./tokens.css": "./dist/index.css"
+  },
+  "scripts": {
+    "dev": "tz build --watch",
+    "build": "tz build",
+    "lint": "tz check"
+  },
+  "devDependencies": {
+    "@terrazzo/cli": "^0.10.5",
+    "@terrazzo/plugin-css": "^0.10.4",
+    "@terrazzo/plugin-tailwind": "^0.3.3",
+    "tailwindcss": "^4.2.0"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.2.0"
+  }
+}

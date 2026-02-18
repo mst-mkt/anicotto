@@ -1,0 +1,43 @@
+{
+  // TODO: 現在のトークンは仮のもの。後程更新する
+  "color": {
+    "$type": "color",
+    "gray": {
+      "50": { "$value": { "colorSpace": "oklch", "components": [0.98, 0.005, 250] } },
+      "100": { "$value": { "colorSpace": "oklch", "components": [0.96, 0.005, 250] } },
+      "200": { "$value": { "colorSpace": "oklch", "components": [0.90, 0.005, 250] } },
+      "300": { "$value": { "colorSpace": "oklch", "components": [0.80, 0.01, 250] } },
+      "400": { "$value": { "colorSpace": "oklch", "components": [0.65, 0.01, 250] } },
+      "500": { "$value": { "colorSpace": "oklch", "components": [0.55, 0.01, 250] } },
+      "600": { "$value": { "colorSpace": "oklch", "components": [0.45, 0.01, 250] } },
+      "700": { "$value": { "colorSpace": "oklch", "components": [0.37, 0.01, 250] } },
+      "800": { "$value": { "colorSpace": "oklch", "components": [0.28, 0.01, 250] } },
+      "900": { "$value": { "colorSpace": "oklch", "components": [0.21, 0.015, 250] } },
+      "950": { "$value": { "colorSpace": "oklch", "components": [0.15, 0.015, 250] } }
+    },
+    "primary": {
+      "50": { "$value": { "colorSpace": "oklch", "components": [0.97, 0.02, 250] } },
+      "500": { "$value": { "colorSpace": "oklch", "components": [0.55, 0.20, 250] } },
+      "600": { "$value": { "colorSpace": "oklch", "components": [0.48, 0.20, 250] } },
+      "900": { "$value": { "colorSpace": "oklch", "components": [0.25, 0.10, 250] } }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "1": { "$value": "0.25rem" },
+    "2": { "$value": "0.5rem" },
+    "3": { "$value": "0.75rem" },
+    "4": { "$value": "1rem" },
+    "6": { "$value": "1.5rem" },
+    "8": { "$value": "2rem" },
+    "12": { "$value": "3rem" },
+    "16": { "$value": "4rem" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": { "$value": "0.25rem" },
+    "md": { "$value": "0.5rem" },
+    "lg": { "$value": "1rem" },
+    "full": { "$value": "9999px" }
+  }
+}
