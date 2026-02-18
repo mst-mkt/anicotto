@@ -1,0 +1,14 @@
+{
+  "name": "anicotto",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.30.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {
+    "turbo": "^2.8.10"
+  }
+}
