@@ -1,0 +1,12 @@
+{
+  "extends": "@anicotto/tsconfig/library.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "noEmit": true
+  },
+  "include": [
+    "./config/**/*.ts",
+    "../../packages/*/src/**/*.stories.ts",
+    "../../packages/*/src/**/*.stories.tsx"
+  ]
+}

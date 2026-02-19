@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@anicotto/design-tokens/theme.css";
+
+/* apps/web */
+@source "../../web/**/*.tsx";
+/* packages/ui */
+@source "../../../packages/ui/src/**/*.tsx";

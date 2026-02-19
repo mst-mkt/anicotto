@@ -1,0 +1,26 @@
+{
+  "name": "@anicotto/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006 --no-open --config-dir config",
+    "build": "storybook build --config-dir config"
+  },
+  "devDependencies": {
+    "@anicotto/design-tokens": "workspace:*",
+    "@anicotto/tsconfig": "workspace:*",
+    "@anicotto/ui": "workspace:*",
+    "@storybook/addon-a11y": "^10.2.10",
+    "@storybook/addon-docs": "^10.2.10",
+    "@storybook/react-vite": "^10.2.10",
+    "@tailwindcss/vite": "^4.2.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "storybook": "^10.2.10",
+    "tailwindcss": "^4.2.0",
+    "vite": "^7.3.1"
+  }
+}
