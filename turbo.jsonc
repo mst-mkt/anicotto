@@ -5,6 +5,10 @@
       "persistent": true,
       "cache": false
     },
+    "generate": {
+      "dependsOn": ["^build"],
+      "outputs": ["src/**/*.generated.ts"]
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "dist/**"]
