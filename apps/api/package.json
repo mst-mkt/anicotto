@@ -13,7 +13,7 @@
   "devDependencies": {
     "@anicotto/tsconfig": "workspace:*",
     "@cloudflare/workers-types": "^4.20260218.0",
-    "typescript": "^5.9.3",
+    "typescript": "catalog:",
     "wrangler": "^4.66.0"
   }
 }

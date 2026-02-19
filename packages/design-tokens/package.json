@@ -15,9 +15,9 @@
     "@terrazzo/cli": "^0.10.5",
     "@terrazzo/plugin-css": "^0.10.4",
     "@terrazzo/plugin-tailwind": "^0.3.3",
-    "tailwindcss": "^4.2.0"
+    "tailwindcss": "catalog:"
   },
   "peerDependencies": {
-    "tailwindcss": "^4.2.0"
+    "tailwindcss": "catalog:"
   }
 }
