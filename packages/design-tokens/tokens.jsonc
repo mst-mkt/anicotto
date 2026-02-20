@@ -5,8 +5,8 @@
     "gray": {
       "50": { "$value": { "colorSpace": "oklch", "components": [0.98, 0.005, 250] } },
       "100": { "$value": { "colorSpace": "oklch", "components": [0.96, 0.005, 250] } },
-      "200": { "$value": { "colorSpace": "oklch", "components": [0.90, 0.005, 250] } },
-      "300": { "$value": { "colorSpace": "oklch", "components": [0.80, 0.01, 250] } },
+      "200": { "$value": { "colorSpace": "oklch", "components": [0.9, 0.005, 250] } },
+      "300": { "$value": { "colorSpace": "oklch", "components": [0.8, 0.01, 250] } },
       "400": { "$value": { "colorSpace": "oklch", "components": [0.65, 0.01, 250] } },
       "500": { "$value": { "colorSpace": "oklch", "components": [0.55, 0.01, 250] } },
       "600": { "$value": { "colorSpace": "oklch", "components": [0.45, 0.01, 250] } },
@@ -17,9 +17,9 @@
     },
     "primary": {
       "50": { "$value": { "colorSpace": "oklch", "components": [0.97, 0.02, 250] } },
-      "500": { "$value": { "colorSpace": "oklch", "components": [0.55, 0.20, 250] } },
-      "600": { "$value": { "colorSpace": "oklch", "components": [0.48, 0.20, 250] } },
-      "900": { "$value": { "colorSpace": "oklch", "components": [0.25, 0.10, 250] } }
+      "500": { "$value": { "colorSpace": "oklch", "components": [0.55, 0.2, 250] } },
+      "600": { "$value": { "colorSpace": "oklch", "components": [0.48, 0.2, 250] } },
+      "900": { "$value": { "colorSpace": "oklch", "components": [0.25, 0.1, 250] } }
     }
   },
   "spacing": {

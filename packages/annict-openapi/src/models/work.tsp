@@ -138,6 +138,7 @@ model WorkStatus {
 @doc("視聴ステータス付き作品")
 model WorkWithStatus {
   ...Work;
+
   @doc("視聴ステータス")
   status: WorkStatus;
 }

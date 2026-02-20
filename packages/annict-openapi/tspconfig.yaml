@@ -1,10 +1,10 @@
 emit:
-  - "@typespec/openapi3"
+  - '@typespec/openapi3'
 
-output-dir: "{cwd}/dist"
+output-dir: '{cwd}/dist'
 
 options:
-  "@typespec/openapi3":
-    emitter-output-dir: "{output-dir}/openapi"
+  '@typespec/openapi3':
+    emitter-output-dir: '{output-dir}/openapi'
     openapi-versions:
       - 3.1.0

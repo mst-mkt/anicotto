@@ -19,13 +19,13 @@
     "fix:lint": { "cache": false },
     "fix:fmt": { "cache": false },
     "typecheck": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build"]
     },
 
     // tasks of root package.json
     "//#check:lint": {},
     "//#check:fmt": {},
     "//#fix:lint": { "cache": false },
-    "//#fix:fmt": { "cache": false },
-  },
+    "//#fix:fmt": { "cache": false }
+  }
 }

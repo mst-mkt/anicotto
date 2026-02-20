@@ -20,13 +20,16 @@ alias SortOrder = "asc" | "desc";
 @doc("ページネーション用クエリパラメータ")
 model PaginationQuery {
   @doc("ページ番号")
-  @TypeSpec.Http.query page?: int32;
+  @TypeSpec.Http.query
+  page?: int32;
 
   @doc("1ページあたりの件数 (デフォルト: 25, 最大: 50)")
-  @TypeSpec.Http.query per_page?: int32;
+  @TypeSpec.Http.query
+  per_page?: int32;
 
   @doc("レスポンスに含めるフィールドをカンマ区切りで指定")
-  @TypeSpec.Http.query fields?: string;
+  @TypeSpec.Http.query
+  fields?: string;
 }
 
 @doc("視聴ステータス")

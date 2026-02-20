@@ -5,7 +5,7 @@ import "./routes/works.tsp";
 
 using TypeSpec.Http;
 
-@service(#{ title:  "Anniiiiiiiiiiiict REST API" })
+@service(#{ title: "Annict REST API" })
 @server("https://api.annict.com")
 @useAuth(BearerAuth)
 @route("/v1")

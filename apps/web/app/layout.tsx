@@ -1,8 +1,9 @@
-import type { FC, ReactNode } from "react"
-import "./globals.css"
+import type { FC, ReactNode } from 'react'
+
+import './globals.css'
 
 type RootLayoutProps = {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => (

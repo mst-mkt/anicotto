@@ -31,6 +31,12 @@
           "stylesheet": "./apps/storybook/config/preview.css"
         }
       }
+    },
+    {
+      "files": ["**/*.json", "**/*.jsonc"],
+      "options": {
+        "trailingComma": "none"
+      }
     }
   ]
 }

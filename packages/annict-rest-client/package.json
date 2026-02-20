@@ -21,8 +21,8 @@
     "@types/node": "catalog:",
     "openapi-fetch": "catalog:",
     "openapi-typescript": "catalog:",
-    "tsx": "catalog:",
     "tsdown": "catalog:",
+    "tsx": "catalog:",
     "typescript": "catalog:"
   }
 }

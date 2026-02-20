@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@anicotto/design-tokens/theme.css";
+@import 'tailwindcss';
+@import '@anicotto/design-tokens/theme.css';
 
 /* apps/web */
 @source "../../web/**/*.tsx";

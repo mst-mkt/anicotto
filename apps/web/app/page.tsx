@@ -1,7 +1,11 @@
-import { Button } from "@anicotto/ui"
+import { Button } from '@anicotto/ui'
 
 const Page = () => {
-  return <div><Button>Button</Button></div>
+  return (
+    <div>
+      <Button>Button</Button>
+    </div>
+  )
 }
 
 export default Page
