@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/lefthook/schema.json",
+  "pre-commit": {
+    "jobs": [
+      {
+        "name": "check",
+        "run": "pnpm check"
+      }
+    ]
+  }
+}
