@@ -9,8 +9,8 @@
   "scripts": {
     "build": "tsp compile ./src/",
     "dev": "tsp compile ./src/ --watch",
-    "check:format": "tsp format -c ./src/",
-    "fix:format": "tsp format ./src/"
+    "check:fmt": "tsp format -c ./src/",
+    "fix:fmt": "tsp format ./src/"
   },
   "devDependencies": {
     "@typespec/compiler": "^1.9.0",

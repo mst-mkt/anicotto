@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": ["legacy/**"],
+
+  "semi": false,
+  "singleQuote": true,
+
+  "experimentalSortImports": {},
+  "experimentalSortPackageJson": {
+    "sortScripts": false
+  },
+  "experimentalTailwindcss": {
+    "attributes": ["className"],
+    "functions": ["classnames", "variants"],
+    "stylesheet": "./apps/web/app/globals.css"
+  },
+
+  "overrides": [
+    {
+      "files": ["packages/ui/**"],
+      "options": {
+        "experimentalTailwindcss": {
+          "stylesheet": "./packages/ui/src/styles.css"
+        }
+      }
+    },
+    {
+      "files": ["apps/storybook/**"],
+      "options": {
+        "experimentalTailwindcss": {
+          "stylesheet": "./apps/storybook/config/preview.css"
+        }
+      }
+    }
+  ]
+}

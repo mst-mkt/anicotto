@@ -6,9 +6,18 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "check": "turbo check:lint check:fmt",
+    "check:lint": "oxlint --type-aware",
+    "check:fmt": "oxfmt --check",
+    "fix": "turbo fix:lint fix:fmt",
+    "fix:lint": "oxlint --type-aware --fix",
+    "fix:fmt": "oxfmt",
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "oxlint-tsgolint": "catalog:",
     "turbo": "^2.8.10"
   }
 }

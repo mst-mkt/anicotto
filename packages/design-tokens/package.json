@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "tz build --watch",
     "build": "tz build",
-    "lint": "tz check"
+    "check:lint": "tz lint"
   },
   "devDependencies": {
     "@terrazzo/cli": "^0.10.5",
