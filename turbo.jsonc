@@ -12,7 +12,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**"]
+      "outputs": [".next/**", "dist/**", "storybook-static/**"]
     },
     "check:lint": {},
     "check:fmt": {},
