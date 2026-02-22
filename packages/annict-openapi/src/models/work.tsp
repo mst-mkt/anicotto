@@ -1,41 +1,34 @@
-import "./common.tsp";
+import "./enums.tsp";
 
 namespace Annict.Models;
 
 @doc("Facebook用画像情報")
 model WorkFacebookImages {
-  @doc("OGP画像URL")
-  @example("http://shirobako-anime.com/images/ogp.jpg")
+  @doc("`official_site_url` のページで取得できる `og:image` のURL")
   og_image_url: string;
 }
 
 @doc("Twitter用画像情報")
 model WorkTwitterImages {
-  @doc("ミニアバター画像URL")
-  @example("https://twitter.com/shirobako_anime/profile_image?size=mini")
+  @doc("Twitterアカウントのアバター画像 (mini)")
   mini_avatar_url: string;
 
-  @doc("通常アバター画像URL")
-  @example("https://twitter.com/shirobako_anime/profile_image?size=normal")
+  @doc("Twitterアカウントのアバター画像 (normal)")
   normal_avatar_url: string;
 
-  @doc("大きいアバター画像URL")
-  @example("https://twitter.com/shirobako_anime/profile_image?size=bigger")
+  @doc("Twitterアカウントのアバター画像 (bigger)")
   bigger_avatar_url: string;
 
-  @doc("オリジナルアバター画像URL")
-  @example("https://twitter.com/shirobako_anime/profile_image?size=original")
+  @doc("Twitterアカウントのアバター画像 (original)")
   original_avatar_url: string;
 
-  @doc("画像URL")
-  @example("")
+  @doc("`official_site_url` のページで取得できる `twitter:image` のURL")
   image_url: string;
 }
 
 @doc("作品の画像情報")
 model WorkImages {
-  @doc("推奨画像URL")
-  @example("http://shirobako-anime.com/images/ogp.jpg")
+  @doc("最高解像度の画像URL")
   recommended_url: string;
 
   @doc("Facebook用画像")
@@ -47,91 +40,73 @@ model WorkImages {
 
 @doc("作品")
 model Work {
-  @doc("作品ID")
-  @example(4168)
+  @doc("作品のID")
   id: int32;
 
-  @doc("作品タイトル")
-  @example("SHIROBAKO")
+  @doc("作品のタイトル")
   title: string;
 
-  @doc("作品タイトル (かな)")
-  @example("しろばこ")
+  @doc("作品タイトルの読み仮名")
   title_kana: string;
 
   @doc("作品タイトル (英語)")
-  @example("SHIROBAKO")
   title_en?: string;
 
-  @doc("メディア種別")
+  @doc("リリース媒体")
   media: Media;
 
-  @doc("メディア種別 (表示用)")
+  @doc("リリース媒体 (表記用)")
   media_text: MediaText;
 
-  @doc("リリース時期 (例: 2014-autumn)")
-  @example("2014-autumn")
+  @doc("リリース時期")
   season_name?: string;
 
-  @doc("リリース時期 (表示用)")
-  @example("2014年秋")
+  @doc("リリース時期 (表記用)")
   season_name_text?: string;
 
   @doc("リリース日")
-  @example("2014-10-09")
   released_on: string;
 
-  @doc("リリース日 (大まかな日付)")
-  @example("")
+  @doc("未確定な大体のリリース日")
   released_on_about: string;
 
-  @doc("公式サイトURL")
-  @example("http://shirobako-anime.com")
+  @doc("公式サイトのURL")
   official_site_url: string;
 
   @doc("WikipediaのURL")
-  @example("http://ja.wikipedia.org/wiki/SHIROBAKO")
   wikipedia_url: string;
 
-  @doc("Twitterユーザー名")
-  @example("shirobako_anime")
+  @doc("公式Twitterアカウントのusername")
   twitter_username: string;
 
-  @doc("Twitterハッシュタグ")
-  @example("musani")
+  @doc("Twitterの作品に関するハッシュタグ")
   twitter_hashtag: string;
 
   @doc("しょぼいカレンダーのタイトルID")
-  @example("3524")
   syobocal_tid: string;
 
   @doc("MyAnimeListの作品ID")
-  @example("25835")
   mal_anime_id: string;
 
   @doc("画像情報")
   images: WorkImages;
 
   @doc("エピソード数")
-  @example(24)
   episodes_count: int32;
 
-  @doc("視聴者数")
-  @example(1254)
+  @doc("見てる / 見たい / 見た人の数")
   watchers_count: int32;
 
   @doc("レビュー数")
-  @example(10)
   reviews_count: int32;
 
-  @doc("エピソードが存在しないかどうか")
-  @example(false)
+  @doc("エピソードが存在しない作品かどうか")
   no_episodes: boolean;
 }
 
 @doc("視聴ステータス")
 model WorkStatus {
-  @doc("ステータス種別")
+  @doc("ステータスの種類")
   kind: StatusKind;
 }
 
