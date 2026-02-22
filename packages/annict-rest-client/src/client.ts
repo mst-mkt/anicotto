@@ -1,8 +1,7 @@
 import createClient, { type ClientOptions } from 'openapi-fetch'
 
+import { BASE_URL } from './constants'
 import type { paths } from './schema.generated'
-
-const BASE_URL = 'https://api.annict.com'
 
 export const createAnnictClient = (
   token: string,
