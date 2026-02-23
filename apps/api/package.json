@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "generate:cf-types": "wrangler types --env-interface CloudflareBindings",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anicotto/annict-rest-client": "workspace:*",
+    "@anicotto/utils": "workspace:*",
     "hono": "^4.11.10"
   },
   "devDependencies": {
     "@anicotto/tsconfig": "workspace:*",
-    "@cloudflare/workers-types": "^4.20260218.0",
     "typescript": "catalog:",
     "wrangler": "^4.66.0"
   }
