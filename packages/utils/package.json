@@ -7,11 +7,16 @@
     "./classname": {
       "types": "./dist/classname.d.mts",
       "import": "./dist/classname.mjs"
+    },
+    "./result": {
+      "types": "./dist/result.d.mts",
+      "import": "./dist/result.mjs"
     }
   },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -19,6 +24,7 @@
     "tailwind-merge": "^3.4.1",
     "tailwind-variants": "^3.2.2",
     "tsdown": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^4.0.18"
   }
 }

@@ -18,6 +18,9 @@
     "check:fmt": {},
     "fix:lint": { "cache": false },
     "fix:fmt": { "cache": false },
+    "test": {
+      "dependsOn": ["^build"]
+    },
     "typecheck": {
       "dependsOn": ["^build"]
     },
