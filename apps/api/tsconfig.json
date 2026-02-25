@@ -1,5 +1,6 @@
 {
   "extends": "@anicotto/tsconfig/cloudflare-workers.json",
   "include": ["./src/**/*.ts", "./worker-configuration.d.ts"],
-  "exclude": ["./node_modules"]
+  "exclude": ["./node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

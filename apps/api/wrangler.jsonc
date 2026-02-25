@@ -1,6 +1,15 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "anicotto-api",
+  "name": "anicotto",
   "main": "./src/index.ts",
-  "compatibility_date": "2026-01-01"
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "anicotto",
+      "database_id": "85b6ff0b-9ff7-44cf-b718-02158d67fb76",
+      "migrations_dir": "./src/db/migrations"
+    }
+  ]
 }

@@ -13,6 +13,7 @@
     "@anicotto/design-tokens": "workspace:*",
     "@anicotto/ui": "workspace:*",
     "@anicotto/utils": "workspace:*",
+    "better-auth": "catalog:",
     "next": "^16.1.6",
     "react": "catalog:",
     "react-dom": "catalog:"

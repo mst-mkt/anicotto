@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["legacy/**", "worker-configuration.d.ts"],
+  "ignorePatterns": ["legacy/**", "worker-configuration.d.ts", "**/migrations/**"],
 
   "semi": false,
   "singleQuote": true,

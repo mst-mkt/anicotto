@@ -1,0 +1,4 @@
+{
+  "extends": "@anicotto/tsconfig/node.json",
+  "include": ["./drizzle.config.ts", "./drizzle.remote.config.ts"]
+}
