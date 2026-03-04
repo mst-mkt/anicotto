@@ -1,0 +1,42 @@
+{
+  "ignorePaths": [
+    "**/node_modules",
+    "**/dist",
+    "**/storybook-static",
+    "**/pnpm-lock.yaml",
+    "**/worker-configuration.d.ts",
+    "**/migrations",
+    "legacy"
+  ],
+  "ignoreWords": [
+    // services
+    "anicotto",
+    "annict",
+    "anilist",
+    "misskey",
+    "syoboiCalendar",
+    "syobocal",
+    "pixiv",
+
+    // libraries
+    "vite",
+    "libsql",
+    "oxlint",
+    "oxfmt",
+    "tsgolint",
+    "tsdown",
+    "valibot",
+    "vitest",
+    "turbopack",
+    "kawaiioverflow",
+    "miniflare",
+    "nuqs",
+    "typespec",
+
+    // words
+    "picklist",
+    "usecase",
+    "oklch",
+    "autodocs"
+  ]
+}

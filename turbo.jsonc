@@ -29,6 +29,7 @@
     // tasks of root package.json
     "//#check:lint": {},
     "//#check:fmt": {},
+    "//#check:spell": {},
     "//#fix:lint": { "cache": false },
     "//#fix:fmt": { "cache": false }
   }

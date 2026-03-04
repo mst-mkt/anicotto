@@ -5,15 +5,17 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
-    "check": "turbo check:lint check:fmt",
+    "check": "turbo check:lint check:fmt check:spell",
     "check:lint": "oxlint --type-aware",
     "check:fmt": "oxfmt --check",
+    "check:spell": "cspell \"**\"",
     "fix": "turbo fix:lint fix:fmt",
     "fix:lint": "oxlint --type-aware --fix",
     "fix:fmt": "oxfmt",
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {
+    "cspell": "^9.7.0",
     "lefthook": "^2.1.1",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
