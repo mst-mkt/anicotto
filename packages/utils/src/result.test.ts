@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest'
 import {
   type Result,
   andThen,
+  collect,
   err,
   fromPromise,
   isErr,
@@ -84,7 +85,7 @@ describe('match', () => {
 
     const result = match(
       input,
-      (v) => `value: ${v}`,
+      (v: number) => `value: ${v}`,
       (e) => `error: ${e}`,
     )
 
@@ -153,6 +154,27 @@ describe('andThen', () => {
     const result = andThen(input, parsePositive)
 
     expect(result).toBe(input)
+  })
+})
+
+describe('collect', () => {
+  test('all Ok -> Ok with values', () => {
+    const results = [ok(1), ok(2), ok(3)]
+    expect(collect(results)).toStrictEqual(ok([1, 2, 3]))
+  })
+
+  test('empty array -> Ok([])', () => {
+    expect(collect([])).toStrictEqual(ok([]))
+  })
+
+  test('first Err -> that Err', () => {
+    const results: Result<number, string>[] = [ok(1), err('bad'), ok(3)]
+    expect(collect(results)).toStrictEqual(err('bad'))
+  })
+
+  test('multiple Errs -> first Err', () => {
+    const results: Result<number, string>[] = [err('first'), err('second')]
+    expect(collect(results)).toStrictEqual(err('first'))
   })
 })
 

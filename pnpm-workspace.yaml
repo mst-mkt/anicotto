@@ -19,6 +19,7 @@ catalog:
   react-dom: ^19.2.4
   storybook: ^10.2.10
   tailwindcss: ^4.2.0
+  ts-pattern: ^5.9.0
   tsdown: ^0.20.3
   tsx: ^4.19.0
   typescript: ^5.9.3

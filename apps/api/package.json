@@ -15,10 +15,14 @@
   },
   "dependencies": {
     "@anicotto/annict-rest-client": "workspace:*",
+    "@anicotto/domain": "workspace:*",
     "@anicotto/utils": "workspace:*",
+    "@hono/standard-validator": "^0.2.2",
+    "@kawaiioverflow/arm": "^0.228.0",
     "better-auth": "catalog:",
     "drizzle-orm": "^0.45.1",
     "hono": "^4.11.10",
+    "ts-pattern": "catalog:",
     "valibot": "catalog:"
   },
   "devDependencies": {

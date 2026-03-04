@@ -54,6 +54,9 @@ catalogs:
     tailwindcss:
       specifier: ^4.2.0
       version: 4.2.0
+    ts-pattern:
+      specifier: ^5.9.0
+      version: 5.9.0
     tsdown:
       specifier: ^0.20.3
       version: 0.20.3
@@ -105,9 +108,18 @@ importers:
       '@anicotto/annict-rest-client':
         specifier: workspace:*
         version: link:../../packages/annict-rest-client
+      '@anicotto/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
       '@anicotto/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@hono/standard-validator':
+        specifier: ^0.2.2
+        version: 0.2.2(@standard-schema/spec@1.1.0)(hono@4.11.10)
+      '@kawaiioverflow/arm':
+        specifier: ^0.228.0
+        version: 0.228.0
       better-auth:
         specifier: 'catalog:'
         version: 1.4.19(drizzle-kit@0.31.9)(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260218.0)(@libsql/client@0.17.0)(@opentelemetry/api@1.9.0)(kysely@0.28.11))(next@16.1.6(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(vitest@4.0.18(@opentelemetry/api@1.9.0)(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))
@@ -117,6 +129,9 @@ importers:
       hono:
         specifier: ^4.11.10
         version: 4.11.10
+      ts-pattern:
+        specifier: 'catalog:'
+        version: 5.9.0
       valibot:
         specifier: 'catalog:'
         version: 1.2.0(typescript@5.9.3)
@@ -287,6 +302,22 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.2.0
+
+  packages/domain:
+    dependencies:
+      valibot:
+        specifier: 'catalog:'
+        version: 1.2.0(typescript@5.9.3)
+    devDependencies:
+      '@anicotto/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.20.3(typescript@5.9.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
 
   packages/tsconfig: {}
 
@@ -1036,6 +1067,12 @@ packages:
     peerDependencies:
       hono: ^4
 
+  '@hono/standard-validator@0.2.2':
+    resolution: {integrity: sha512-mJ7W84Bt/rSvoIl63Ynew+UZOHAzzRAoAXb3JaWuxAkM/Lzg+ZHTCUiz77KOtn2e623WNN8LkD57Dk0szqUrIw==}
+    peerDependencies:
+      '@standard-schema/spec': ^1.0.0
+      hono: '>=3.9.0'
+
   '@humanwhocodes/momoa@3.3.10':
     resolution: {integrity: sha512-KWiFQpSAqEIyrTXko3hFNLeQvSK8zXlJQzhhxsyVn58WFRYXST99b3Nqnu+ttOtjds2Pl2grUHGpe2NzhPynuQ==}
     engines: {node: '>=18'}
@@ -1358,6 +1395,10 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@kawaiioverflow/arm@0.228.0':
+    resolution: {integrity: sha512-cxGrIhoG3ppwid7v97w/sKrQrgaKQC8N/hcOK9XK8nVaJQgq7L/rIGr5JS5QLEEKW/C1+zcNa3WDiO5p/eIjKg==}
+    engines: {node: '>=18.0.0'}
 
   '@libsql/client@0.17.0':
     resolution: {integrity: sha512-TLjSU9Otdpq0SpKHl1tD1Nc9MKhrsZbCFGot3EbCxRa8m1E5R1mMwoOjKMMM31IyF7fr+hPNHLpYfwbMKNusmg==}
@@ -3864,6 +3905,9 @@ packages:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
 
+  ts-pattern@5.9.0:
+    resolution: {integrity: sha512-6s5V71mX8qBUmlgbrfL33xDUwO0fq48rxAu2LBE11WBeGdpCPOsXksQbZJHvHwhrd3QjUusd3mAOM5Gg0mFBLg==}
+
   tsconfig-paths@4.2.0:
     resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
     engines: {node: '>=6'}
@@ -4694,6 +4738,11 @@ snapshots:
     dependencies:
       hono: 4.11.10
 
+  '@hono/standard-validator@0.2.2(@standard-schema/spec@1.1.0)(hono@4.11.10)':
+    dependencies:
+      '@standard-schema/spec': 1.1.0
+      hono: 4.11.10
+
   '@humanwhocodes/momoa@3.3.10': {}
 
   '@img/colour@1.0.0': {}
@@ -4946,6 +4995,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@kawaiioverflow/arm@0.228.0': {}
 
   '@libsql/client@0.17.0':
     dependencies:
@@ -7102,6 +7153,8 @@ snapshots:
   tree-kill@1.2.2: {}
 
   ts-dedent@2.2.0: {}
+
+  ts-pattern@5.9.0: {}
 
   tsconfig-paths@4.2.0:
     dependencies:

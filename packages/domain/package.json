@@ -1,0 +1,37 @@
+{
+  "name": "@anicotto/domain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./work": {
+      "types": "./dist/work.d.mts",
+      "import": "./dist/work.mjs"
+    },
+    "./media": {
+      "types": "./dist/media.d.mts",
+      "import": "./dist/media.mjs"
+    },
+    "./season": {
+      "types": "./dist/season.d.mts",
+      "import": "./dist/season.mjs"
+    },
+    "./pagination": {
+      "types": "./dist/pagination.d.mts",
+      "import": "./dist/pagination.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "valibot": "catalog:"
+  },
+  "devDependencies": {
+    "@anicotto/tsconfig": "workspace:*",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  }
+}
