@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://www.schemastore.org/pnpm-workspace.json
+
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+catalogMode: strict
+savePrefix: ''
+
+catalog:
+  vite-plus: 0.2.5
+  wrangler: 4.112.0
